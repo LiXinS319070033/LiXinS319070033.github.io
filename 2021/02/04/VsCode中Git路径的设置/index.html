@@ -29,10 +29,10 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://lixins319070033.github.io/2021/02/04/VsCode%E4%B8%ADGit%E8%B7%AF%E5%BE%84%E7%9A%84%E8%AE%BE%E7%BD%AE/11.png">
 <meta property="og:image" content="https://lixins319070033.github.io/2021/02/04/VsCode%E4%B8%ADGit%E8%B7%AF%E5%BE%84%E7%9A%84%E8%AE%BE%E7%BD%AE/1.png">
-<meta property="og:image" content="https://lixins319070033.github.io/2021/02/04/VsCode%E4%B8%ADGit%E8%B7%AF%E5%BE%84%E7%9A%84%E8%AE%BE%E7%BD%AE/3.png">
 <meta property="og:image" content="https://lixins319070033.github.io/2021/02/04/VsCode%E4%B8%ADGit%E8%B7%AF%E5%BE%84%E7%9A%84%E8%AE%BE%E7%BD%AE/2.png">
+<meta property="og:image" content="https://lixins319070033.github.io/2021/02/04/VsCode%E4%B8%ADGit%E8%B7%AF%E5%BE%84%E7%9A%84%E8%AE%BE%E7%BD%AE/3.png">
 <meta property="article:published_time" content="2021-02-04T07:47:13.000Z">
-<meta property="article:modified_time" content="2021-02-04T08:02:54.734Z">
+<meta property="article:modified_time" content="2021-02-04T09:35:56.814Z">
 <meta property="article:author" content="Nice">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://lixins319070033.github.io/2021/02/04/VsCode%E4%B8%ADGit%E8%B7%AF%E5%BE%84%E7%9A%84%E8%AE%BE%E7%BD%AE/11.png">
@@ -283,7 +283,7 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count word-count">179</span>Reading time: <span class="post-count reading-time">1 min</span></span>
+                        <span>Word count: <span class="post-count word-count">222</span>Reading time: <span class="post-count reading-time">1 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -414,10 +414,11 @@ height:50vh;
     <article class="article-entry">
         <h1 id="VsCode中git路径的设置（window系统）"><a href="#VsCode中git路径的设置（window系统）" class="headerlink" title="VsCode中git路径的设置（window系统）"></a>VsCode中git路径的设置（window系统）</h1><p>首先电脑里已经安装好了git并已经把git添加到环境变量中去了（这有部分在之前的帖子中有讲过）</p>
 <h2 id="找到你的电脑里的git路径"><a href="#找到你的电脑里的git路径" class="headerlink" title="找到你的电脑里的git路径"></a>找到你的电脑里的git路径</h2><p>先找到你的git安装目录，然后找到里面的cmd文件夹里面的git.exe文件，将这个文件完整的绝对路径复制下来。</p>
-<h2 id="在VsCode中配置git"><a href="#在VsCode中配置git" class="headerlink" title="在VsCode中配置git"></a>在VsCode中配置git</h2><p>依次点击 文件=》首选项=》设置=》在最上面的输入框里输入gitpath=》点击在settings.json中编辑=》将文件里面的”git.path”后面设置为自己的git.exe路径，例如我的是”git.path”: “D:\Git\installation\Git\cmd\git.exe”，保存即可。完成</p>
+<h2 id="在VsCode中配置git"><a href="#在VsCode中配置git" class="headerlink" title="在VsCode中配置git"></a>在VsCode中配置git</h2><p>依次点击 文件=》首选项=》设置=》在最上面的输入框里输入gitpath=》点击在settings.json中编辑=》将文件里面的”git.path”后面设置为自己的git.exe路径，例如我的是”git.path”: “D:\\Git\\installation\\Git\\cmd\\git.exe”，保存即可（这里注意在字符串里要用两个反斜杠，因为要考虑转义字符，其实用这种形式也行”git.path”: “D:/Git/installation/Git/cmd/git.exe”）。完成</p>
 <p><img src="/2021/02/04/VsCode%E4%B8%ADGit%E8%B7%AF%E5%BE%84%E7%9A%84%E8%AE%BE%E7%BD%AE/11.png" alt="11"></p>
 <p><img src="/2021/02/04/VsCode%E4%B8%ADGit%E8%B7%AF%E5%BE%84%E7%9A%84%E8%AE%BE%E7%BD%AE/1.png" alt="1"></p>
-<p><img src="/2021/02/04/VsCode%E4%B8%ADGit%E8%B7%AF%E5%BE%84%E7%9A%84%E8%AE%BE%E7%BD%AE/3.png" alt="3"><img src="/2021/02/04/VsCode%E4%B8%ADGit%E8%B7%AF%E5%BE%84%E7%9A%84%E8%AE%BE%E7%BD%AE/2.png" alt="2"></p>
+<p><img src="/2021/02/04/VsCode%E4%B8%ADGit%E8%B7%AF%E5%BE%84%E7%9A%84%E8%AE%BE%E7%BD%AE/2.png" alt="2"></p>
+<p><img src="/2021/02/04/VsCode%E4%B8%ADGit%E8%B7%AF%E5%BE%84%E7%9A%84%E8%AE%BE%E7%BD%AE/3.png" alt="3"></p>
 
     </article>
     <!-- license  -->
@@ -426,7 +427,7 @@ height:50vh;
             <p>Author：<a href="https://lixins319070033.github.io">Nice</a>
             <p>原文链接：<a href="https://lixins319070033.github.io/2021/02/04/VsCode%E4%B8%ADGit%E8%B7%AF%E5%BE%84%E7%9A%84%E8%AE%BE%E7%BD%AE/">https://lixins319070033.github.io/2021/02/04/VsCode%E4%B8%ADGit%E8%B7%AF%E5%BE%84%E7%9A%84%E8%AE%BE%E7%BD%AE/</a>
             <p>发表日期：<a href="https://lixins319070033.github.io/2021/02/04/VsCode%E4%B8%ADGit%E8%B7%AF%E5%BE%84%E7%9A%84%E8%AE%BE%E7%BD%AE/">February 4th 2021, 3:47:13 pm</a>
-            <p>更新日期：<a href="https://lixins319070033.github.io/2021/02/04/VsCode%E4%B8%ADGit%E8%B7%AF%E5%BE%84%E7%9A%84%E8%AE%BE%E7%BD%AE/">February 4th 2021, 4:02:54 pm</a>
+            <p>更新日期：<a href="https://lixins319070033.github.io/2021/02/04/VsCode%E4%B8%ADGit%E8%B7%AF%E5%BE%84%E7%9A%84%E8%AE%BE%E7%BD%AE/">February 4th 2021, 5:35:56 pm</a>
             <p>版权声明：本文采用<a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
