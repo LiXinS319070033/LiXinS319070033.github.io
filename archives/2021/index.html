@@ -354,6 +354,138 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2021/02/09/%E4%BD%BF%E7%94%A8swiper%E6%8F%92%E4%BB%B6%E6%97%B6%EF%BC%8C%E6%8A%A5%E9%94%99did-you-register-the-component-correctly-For-recursive-components-make-sure-to-provide-the-name-option/" >
+            
+                <span>使用swiper插件时，报错did you register the component correctly? For recursive components, make sure to provide the name option</span>
+        </a>
+        <div class="abstract-content">
+            使用swiper插件时，报错did you register the component correctly? For recursive components, make sure to provide the “name” option（在学习慕课网小米商城的项目5-8_首页轮播功能实现课程时）
+原因：虽然已经安装了vue-awesome-swiper，但是当前的vue-awesome-swiper版本太高了
+解决方案：
+1234&#x2F;&#x2F; 卸载当前版本的vue-awesome-swipernpm uninstall vue-awesome-swiper&#x2F;&#...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/02/09</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2021/02/09/%E4%BD%BF%E7%94%A8swiper%E6%8F%92%E4%BB%B6%E6%97%B6%EF%BC%8C%E6%8A%A5%E9%94%99Can-t-resolve-swiper-dist-css-swiper-css-in/" >
+            
+                <span>使用swiper插件时，报错Can&#39;t resolve &#39;swiper/dist/css/swiper.css&#39; in</span>
+        </a>
+        <div class="abstract-content">
+            使用swiper插件时，报错Can’t resolve ‘swiper/dist/css/swiper.css’ in（在学习慕课网小米商城的项目5-8_首页轮播功能实现课程时）
+原因：即使安装了swiper插件依然会出现这个问题，原因是安装的swiper版本太高了
+解决方案：
+1234&#x2F;&#x2F; 先卸载掉当前版本的swipernpm uninstall swiper&#x2F;&#x2F; 再安装指定版本的swiper降低一下版本就可以了cnpm install swiper swiper@3.4.2 --save-dev
+
+
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/02/09</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2021/02/09/%E4%BD%BF%E7%94%A8sass%E6%97%B6%EF%BC%8C%E6%8A%A5%E9%94%99TypeError-this-getResolve-is-not-a-function-at-Object-loader/" >
+            
+                <span>使用sass时，报错TypeError: this.getResolve is not a function at Object.loader</span>
+        </a>
+        <div class="abstract-content">
+            使用sass时，报错TypeError: this.getResolve is not a function at Object.loader（在学习慕课网小米商城的项目5-1NavHeader组件(1)课程时）
+原因：最开始在项目前期安装的sass的版本有问题，后来安装视频里的版本之后成功了。
+切记：只更换sass-loader的版本不更换node-sass版本是不行的，必须两者都更换版本
+解决方案：
+123456789&#x2F;&#x2F; 卸载当前node-sass版本   npm uninstall node-sass&#x2F;&#x2F; 安装指定node-sass版本  ...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/02/09</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2021/02/09/Vue%E9%A1%B9%E7%9B%AE%E6%B5%8F%E8%A7%88%E5%99%A8%E5%86%85Console%E4%B8%AD%E6%98%BE%E7%A4%BA-HMR-Waiting-for-update-signal-from-WDS%E2%80%A6%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" >
+            
+                <span>Vue项目浏览器内Console中显示[HMR] Waiting for update signal from WDS…的解决方案</span>
+        </a>
+        <div class="abstract-content">
+            Vue项目浏览器内Console中显示[HMR] Waiting for update signal from WDS…的解决方案解决方案： 在文件夹内依次找到node_modules -&gt; webpack -&gt; hot  **-&gt; **log.js，打开log.js文件，按照下面的样子注释这段话
+1234567891011module.exports &#x3D; function(level, msg)&#123;    &#x2F;&#x2F; if (shouldLog(level)) &#123;        &#x2F;&#x2F; if (level &...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/02/09</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2021/02/09/Vue-cli%E6%90%AD%E5%BB%BA%E5%A5%BD%E9%BB%98%E8%AE%A4%E9%A1%B9%E7%9B%AE%E5%90%8E%E4%BD%BF%E7%94%A8%E8%B7%AF%E7%94%B1%E5%8A%9F%E8%83%BD%EF%BC%8C%E6%8A%A5%E9%94%99Can%E2%80%99t%20resolve%20%E2%80%98vue-router%E2%80%99%20in/" >
+            
+                <span>Vue-cli搭建好默认项目后使用路由功能，报错Can’t resolve ‘vue-router’ in</span>
+        </a>
+        <div class="abstract-content">
+            Vue-cli搭建好默认项目后使用路由功能，报错Can’t resolve ‘vue-router’ in原因：缺少vue-router插件的原因，resolve的意思是找不到这个插件
+解决方案：在命令行中运行下面命令安装插件，再重启项目即可解决
+1cnpm install vue-router
+
+
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/02/09</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2021/02/05/%E8%BF%90%E8%A1%8Cvue%E9%A1%B9%E7%9B%AE%E6%97%B6%E6%8A%A5%E9%94%99The-template-root-requires-exactly-one-element/" >
             
                 <span>运行vue项目时报错The template root requires exactly one element</span>
@@ -468,132 +600,6 @@
             <!-- date  -->
             <div class="abstract-date">
                 <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/02/04</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2021/02/04/vscode%E3%80%81sublime%E6%80%8E%E4%B9%88%E5%9C%A8%E7%A9%BA%E7%99%BD%E8%84%9A%E6%9C%AC%E4%B8%AD%E5%BF%AB%E9%80%9F%E7%94%9F%E6%88%90html5%E6%A0%87%E5%87%86%E6%A8%A1%E6%9D%BF%E6%A0%BC%E5%BC%8F/" >
-            
-                <span>vscode、sublime怎么在空白脚本中快速生成html5标准模板格式</span>
-        </a>
-        <div class="abstract-content">
-            vscode、sublime怎么在空白脚本中快速生成html5标准模板格式vscode中在新建的html空白脚本中先输入一个感叹号！然后点击Tab键直接生成html5标准模板格式
-sublime中只需要输入html点击回车即可实现
-
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/02/04</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2021/02/04/%EF%BC%88tinypng%E5%9B%BE%E7%89%87%E5%8E%8B%E7%BC%A9%EF%BC%89%E8%A7%A3%E5%86%B3CSDN%E4%B8%8A%E4%BC%A0%E4%B8%8D%E4%BA%86%E8%BF%87%E5%A4%A7%E7%9A%84%E5%9B%BE%E7%89%87%E9%97%AE%E9%A2%98/" >
-            
-                <span>（tinypng图片压缩）解决CSDN上传不了过大的图片问题</span>
-        </a>
-        <div class="abstract-content">
-            （tinypng图片压缩）解决CSDN上传不了过大的图片问题tinypng图片压缩
-通过tinypng实现图片大小的压缩，非常简单一看就会用。
-
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/02/04</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2021/02/04/better-scroll%E6%BB%9A%E5%8A%A8%E5%A4%B1%E6%95%88%EF%BC%88%E5%8E%BB%E5%93%AA%E7%BD%91%E5%84%BF%E9%A1%B9%E7%9B%AE%E7%A7%BB%E5%8A%A8%E7%AB%AF%EF%BC%89/" >
-            
-                <span>better-scroll滚动失效（去哪网儿项目移动端）</span>
-        </a>
-        <div class="abstract-content">
-            better-scroll滚动失效（去哪网儿项目移动端）之前在效仿做去哪网儿移动端的vue项目的时候有个使用better-scroll的环节，第一次使用的时候还是可以滚动的，刷新页面后却发现滚动失效了，寻找了好多方法，最终发现原因
-先说解决方法：我按照视频的讲解，在生命周期函数mounted里面使用的better-scroll命令，将mounted换成updated就可以了。
-解释：
-先说一下better-scroll的工作原理（盗的网上的图），根据图像，父元素也就是绿色的wrpper是有固定高度的，父元素的第一个子元素，也就是黄的的content的高度随着内容的大小而撑开，只有当con...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/02/04</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2021/02/04/VsCode%E4%B8%ADGit%E8%B7%AF%E5%BE%84%E7%9A%84%E8%AE%BE%E7%BD%AE/" >
-            
-                <span>VsCode中git路径的设置（window系统）</span>
-        </a>
-        <div class="abstract-content">
-            VsCode中git路径的设置（window系统）首先电脑里已经安装好了git并已经把git添加到环境变量中去了（这有部分在之前的帖子中有讲过）
-找到你的电脑里的git路径先找到你的git安装目录，然后找到里面的cmd文件夹里面的git.exe文件，将这个文件完整的绝对路径复制下来。
-在VsCode中配置git依次点击 文件=》首选项=》设置=》在最上面的输入框里输入gitpath=》点击在settings.json中编辑=》将文件里面的”git.path”后面设置为自己的git.exe路径，例如我的是”git.path”: “D:\\Git\\installation\\Git\\cm...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/02/04</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2021/02/02/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8FRegExp%E8%A1%A5%E5%85%85%E4%B8%80/" >
-            
-                <span>正则表达式RegExp补充一</span>
-        </a>
-        <div class="abstract-content">
-            正则表达式中的?=、?!、?&lt;=、?&lt;!、?:12345678&#x2F;&#x2F;前瞻?&#x3D;exp1(?&#x3D;exp2) &#x2F;&#x2F;匹配到后面是exp2的exp1&#x2F;&#x2F;负前瞻?!exp1(?!exp2) &#x2F;&#x2F;匹配到后面不是exp2的exp1&#x2F;&#x2F;后顾?&lt;&#x3D;(?&lt;&#x3D;exp2)exp1 &#x2F;&#x2F;匹配到前面是exp2的exp1&#x2F;&#x2F;负后顾(?&lt;!exp2)exp1 &#x2F;&#x2F;匹配到前面不是exp2的exp1
-
-...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/02/02</span>
             </div>
             <!-- tags  -->
             
@@ -1049,9 +1055,80 @@ sublime中只需要输入html点击回车即可实现
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 28
+        Total : 33
         </div>
         <!-- search  -->
         
@@ -1064,6 +1141,36 @@ sublime中只需要输入html点击回车即可实现
     
     <div class="archive-year"> 2021 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/09</span><a class="archive-post-title" href= "/2021/02/09/%E4%BD%BF%E7%94%A8sass%E6%97%B6%EF%BC%8C%E6%8A%A5%E9%94%99TypeError-this-getResolve-is-not-a-function-at-Object-loader/" >使用sass时，报错TypeError: this.getResolve is not a function at Object.loader</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/09</span><a class="archive-post-title" href= "/2021/02/09/%E4%BD%BF%E7%94%A8swiper%E6%8F%92%E4%BB%B6%E6%97%B6%EF%BC%8C%E6%8A%A5%E9%94%99Can-t-resolve-swiper-dist-css-swiper-css-in/" >使用swiper插件时，报错Can't resolve 'swiper/dist/css/swiper.css' in</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/09</span><a class="archive-post-title" href= "/2021/02/09/%E4%BD%BF%E7%94%A8swiper%E6%8F%92%E4%BB%B6%E6%97%B6%EF%BC%8C%E6%8A%A5%E9%94%99did-you-register-the-component-correctly-For-recursive-components-make-sure-to-provide-the-name-option/" >使用swiper插件时，报错did you register the component correctly? For recursive components, make sure to provide the name option</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/09</span><a class="archive-post-title" href= "/2021/02/09/Vue-cli%E6%90%AD%E5%BB%BA%E5%A5%BD%E9%BB%98%E8%AE%A4%E9%A1%B9%E7%9B%AE%E5%90%8E%E4%BD%BF%E7%94%A8%E8%B7%AF%E7%94%B1%E5%8A%9F%E8%83%BD%EF%BC%8C%E6%8A%A5%E9%94%99Can%E2%80%99t%20resolve%20%E2%80%98vue-router%E2%80%99%20in/" >Vue-cli搭建好默认项目后使用路由功能，报错Can’t resolve ‘vue-router’ in</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/09</span><a class="archive-post-title" href= "/2021/02/09/Vue%E9%A1%B9%E7%9B%AE%E6%B5%8F%E8%A7%88%E5%99%A8%E5%86%85Console%E4%B8%AD%E6%98%BE%E7%A4%BA-HMR-Waiting-for-update-signal-from-WDS%E2%80%A6%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" >Vue项目浏览器内Console中显示[HMR] Waiting for update signal from WDS…的解决方案</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/05</span><a class="archive-post-title" href= "/2021/02/05/VScode%E5%88%9D%E6%AC%A1%E4%BD%BF%E7%94%A8%E6%97%B6%E5%A6%82%E4%BD%95%E8%BF%90%E8%A1%8Chtml%E6%96%87%E4%BB%B6%E5%88%B0%E6%B5%8F%E8%A7%88%E5%99%A8%E4%B8%8A/" >VScode初次使用时如何运行html文件到浏览器上</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -1097,7 +1204,27 @@ sublime中只需要输入html点击回车即可实现
     
     
         <li class="archive-post-item">
+            <span class="archive-post-date">02/04</span><a class="archive-post-title" href= "/2021/02/04/better-scroll%E6%BB%9A%E5%8A%A8%E5%A4%B1%E6%95%88%EF%BC%88%E5%8E%BB%E5%93%AA%E7%BD%91%E5%84%BF%E9%A1%B9%E7%9B%AE%E7%A7%BB%E5%8A%A8%E7%AB%AF%EF%BC%89/" >better-scroll滚动失效（去哪网儿项目移动端）</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/04</span><a class="archive-post-title" href= "/2021/02/04/VsCode%E4%B8%ADGit%E8%B7%AF%E5%BE%84%E7%9A%84%E8%AE%BE%E7%BD%AE/" >VsCode中git路径的设置（window系统）</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/02</span><a class="archive-post-title" href= "/2021/02/02/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8FRegExp%E8%A1%A5%E5%85%85%E4%B8%80/" >正则表达式RegExp补充一</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
             <span class="archive-post-date">01/04</span><a class="archive-post-title" href= "/2021/01/04/CSS%E4%B8%AD%E6%96%87%E5%AD%97%E5%9C%A8%E6%B0%B4%E5%B9%B3%E5%92%8C%E7%AB%96%E7%9B%B4%E6%96%B9%E5%90%91%E4%B8%8A%E9%87%8D%E5%8F%A0/" >CSS中文字在水平和竖直方向上重叠</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/04</span><a class="archive-post-title" href= "/2021/01/04/js%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%8E%E6%95%B0%E5%AD%97%E7%9B%B8%E5%8A%A0%E5%87%8F/" >js字符串与数字相加减</a>
         </li>
     
     
@@ -1108,6 +1235,11 @@ sublime中只需要输入html点击回车即可实现
     
     <div class="archive-year"> 2020 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/25</span><a class="archive-post-title" href= "/2020/12/25/Vue%E7%BB%9F%E4%B8%80%E6%A0%B7%E5%BC%8F%EF%BC%88reset-css%E5%92%8Cborder-css%EF%BC%89/" >Vue统一样式（reset.css和border.css）</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -1130,6 +1262,11 @@ sublime中只需要输入html点击回车即可实现
         </li>
     
     
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/27</span><a class="archive-post-title" href= "/2020/09/27/HEXO%E5%8D%9A%E5%AE%A2%E7%9A%84%E6%90%AD%E5%BB%BA%E5%8F%8A%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%EF%BC%88%E4%B8%80%EF%BC%89/" >HEXO博客的搭建及环境配置（一）</a>
+        </li>
+    
+    
     
     
     
@@ -1149,47 +1286,8 @@ sublime中只需要输入html点击回车即可实现
     
         </ul>
     
-    <div class="archive-year"> 2021 </div>
-    <ul class="year-list">
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">02/05</span><a class="archive-post-title" href= "/2021/02/05/VScode%E5%88%9D%E6%AC%A1%E4%BD%BF%E7%94%A8%E6%97%B6%E5%A6%82%E4%BD%95%E8%BF%90%E8%A1%8Chtml%E6%96%87%E4%BB%B6%E5%88%B0%E6%B5%8F%E8%A7%88%E5%99%A8%E4%B8%8A/" >VScode初次使用时如何运行html文件到浏览器上</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">02/04</span><a class="archive-post-title" href= "/2021/02/04/better-scroll%E6%BB%9A%E5%8A%A8%E5%A4%B1%E6%95%88%EF%BC%88%E5%8E%BB%E5%93%AA%E7%BD%91%E5%84%BF%E9%A1%B9%E7%9B%AE%E7%A7%BB%E5%8A%A8%E7%AB%AF%EF%BC%89/" >better-scroll滚动失效（去哪网儿项目移动端）</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">02/04</span><a class="archive-post-title" href= "/2021/02/04/VsCode%E4%B8%ADGit%E8%B7%AF%E5%BE%84%E7%9A%84%E8%AE%BE%E7%BD%AE/" >VsCode中git路径的设置（window系统）</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">02/02</span><a class="archive-post-title" href= "/2021/02/02/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8FRegExp%E8%A1%A5%E5%85%85%E4%B8%80/" >正则表达式RegExp补充一</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">01/04</span><a class="archive-post-title" href= "/2021/01/04/js%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%8E%E6%95%B0%E5%AD%97%E7%9B%B8%E5%8A%A0%E5%87%8F/" >js字符串与数字相加减</a>
-        </li>
-    
-    
-    
-    
-    
-        </ul>
-    
     <div class="archive-year"> 2020 </div>
     <ul class="year-list">
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">12/25</span><a class="archive-post-title" href= "/2020/12/25/Vue%E7%BB%9F%E4%B8%80%E6%A0%B7%E5%BC%8F%EF%BC%88reset-css%E5%92%8Cborder-css%EF%BC%89/" >Vue统一样式（reset.css和border.css）</a>
-        </li>
     
     
         <li class="archive-post-item">
@@ -1224,11 +1322,6 @@ sublime中只需要输入html点击回车即可实现
     
         <li class="archive-post-item">
             <span class="archive-post-date">09/27</span><a class="archive-post-title" href= "/2020/09/27/Typora%E3%80%81Makedown/" >Typora、Makedown</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">09/27</span><a class="archive-post-title" href= "/2020/09/27/HEXO%E5%8D%9A%E5%AE%A2%E7%9A%84%E6%90%AD%E5%BB%BA%E5%8F%8A%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%EF%BC%88%E4%B8%80%EF%BC%89/" >HEXO博客的搭建及环境配置（一）</a>
         </li>
     
     
