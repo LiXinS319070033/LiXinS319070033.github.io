@@ -28,7 +28,7 @@
 <meta property="og:description" content="JavaScript知识点扩展作用域作用域作用： 1.定义：变量 函数 或者成员在整个程序内可以被访问的范围； 2.也可用于信息隐藏 块作用域：{…}包含的代码就是一个块作用域，JS没有块级作用域； 动态作用域：函数内的成员是否可以被访问只有在运行的时候才能确定 1234567891011121314function f()&amp;#123;	alert(x);&amp;#125;function f1()&amp;#">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-12-13T13:26:12.000Z">
-<meta property="article:modified_time" content="2020-12-14T08:08:14.322Z">
+<meta property="article:modified_time" content="2021-03-10T14:43:22.610Z">
 <meta property="article:author" content="Nice">
 <meta name="twitter:card" content="summary">
     <meta http-equiv="Cache-control" content="no-cache">
@@ -417,7 +417,7 @@ height:50vh;
 <p>JS只有静态作用域lexical，也叫词法作用域或者闭包，在词法创建阶段就确定了相关的作用域。闭包：引用了自由变量的函数。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">function f()&#123;</span><br><span class="line">	var x &#x3D; 100;</span><br><span class="line">	function g()&#123;</span><br><span class="line">		...</span><br><span class="line">	&#125;</span><br><span class="line">	g();</span><br><span class="line">&#125;</span><br><span class="line">f();</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">function f()&#123;&#x2F;&#x2F;f()创建的时候（浏览器解析的时候），给f添加一个看不到摸不着的成员[[scope]]</span><br><span class="line"> 		  	 &#x2F;&#x2F;f.[[scope]] &#x3D;&#x3D; window</span><br><span class="line">			 &#x2F;&#x2F;f()被调用的时候会创建自己的一个词法环境f.le, f.le -&gt;f.[[scope]]</span><br><span class="line">&#x2F;&#x2F;在预处理阶段(上一行解释，f()刚刚被调用时)，f.le&#123;x &#x3D; undefined, g()&#123;...&#125;&#125;，g.[[scope]] &#x3D;&#x3D; f.le</span><br><span class="line">&#x2F;&#x2F;在预处理阶段，无论g()是函数声明还是函数表达式创建的都会把g()加入到f.le中</span><br><span class="line">var x &#x3D; 100;&#x2F;&#x2F;在执行阶段，f.le&#123;x &#x3D; 100, g()&#123;...&#125;&#125;</span><br><span class="line">function g()&#123;&#x2F;&#x2F;在预处理阶段，g.[[scope]] &#x3D;&#x3D; f.le</span><br><span class="line">...</span><br><span class="line">&#125;</span><br><span class="line">g();&#x2F;&#x2F;g()在运行时，会创建自己的词法环境，g.le -&gt;g.[[scope]]</span><br><span class="line">	&#x2F;&#x2F;综上形成一条链条</span><br><span class="line">	&#x2F;&#x2F;g.le -&gt; g.[[scope]] &#x3D;&#x3D; f.le -&gt; f.[[scope]] &#x3D;&#x3D; window</span><br><span class="line">&#125;</span><br><span class="line">f();</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">function f()&#123;&#x2F;&#x2F;f()创建的时候（浏览器解析的时候），给f添加一个看不到摸不着的成员[[scope]]</span><br><span class="line"> 		  	 &#x2F;&#x2F;f.[[scope]] &#x3D;&#x3D; window</span><br><span class="line">			 &#x2F;&#x2F;f()被调用的时候会创建自己的一个词法环境f.le, f.le -&gt;f.[[scope]]</span><br><span class="line">&#x2F;&#x2F;在预处理阶段(上一行解释，f()刚刚被调用时)，f.le&#123;x &#x3D; undefined, g()&#123;...&#125;&#125;，g.[[scope]] &#x3D;&#x3D; f.le</span><br><span class="line">&#x2F;&#x2F;在预处理阶段，无论g()是函数声明还是函数表达式创建的都会把g()加入到f.le中</span><br><span class="line">	var x &#x3D; 100;&#x2F;&#x2F;在执行阶段，f.le&#123;x &#x3D; 100, g()&#123;...&#125;&#125;</span><br><span class="line">	function g()&#123;&#x2F;&#x2F;在预处理阶段，g.[[scope]] &#x3D;&#x3D; f.le</span><br><span class="line">		...</span><br><span class="line">	&#125;</span><br><span class="line">	g();&#x2F;&#x2F;g()在运行时，会创建自己的词法环境，g.le -&gt;g.[[scope]]</span><br><span class="line">	&#x2F;&#x2F;综上形成一条链条</span><br><span class="line">	&#x2F;&#x2F;g.le -&gt; g.[[scope]] &#x3D;&#x3D; f.le -&gt; f.[[scope]] &#x3D;&#x3D; window</span><br><span class="line">&#125;</span><br><span class="line">f();</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <h2 id="JS创建函数的方式"><a href="#JS创建函数的方式" class="headerlink" title="JS创建函数的方式"></a>JS创建函数的方式</h2><p>有3种：</p>
 <p>1.函数声明</p>
@@ -453,10 +453,10 @@ height:50vh;
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">function f()&#123;</span><br><span class="line">	var num &#x3D; 1;</span><br><span class="line">	return function()&#123;</span><br><span class="line">		num++;</span><br><span class="line">		alert(num);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">var result1 &#x3D; f();&#x2F;&#x2F;由函数的预处理可知，每次调用一个函数的时候会创建一个新的词法环境</span><br><span class="line">result1();&#x2F;&#x2F;2</span><br><span class="line">result1();&#x2F;&#x2F;3</span><br><span class="line">var result2 &#x3D; f();&#x2F;&#x2F;创建一个新的词法环境</span><br><span class="line">result2();&#x2F;&#x2F;2</span><br><span class="line">result2();&#x2F;&#x2F;3</span><br></pre></td></tr></table></figure>
 
 <p>3.循环中的问题</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">&lt;div id &#x3D; “1”&gt;1&lt;&#x2F;div&gt;</span><br><span class="line">&lt;div id &#x3D; “2”&gt;2&lt;&#x2F;div&gt;</span><br><span class="line">&lt;div id &#x3D; “3”&gt;3&lt;&#x2F;div&gt;</span><br><span class="line">for(var i &#x3D; 1;i &lt;&#x3D;3;i++)&#123;</span><br><span class="line">	var ele &#x3D; document.getElementById(”i”);</span><br><span class="line">	ele.onclick &#x3D; function()&#123;</span><br><span class="line">		alert(i);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;&#x2F;body&gt;</span><br><span class="line">&#x2F;&#x2F;点击1 2 3 都会弹出4，因为没有块级作用域，所以i相当于全局变量</span><br><span class="line">&#x2F;&#x2F;解决办法，可以用闭包</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;div id &#x3D; “1”&gt;1&lt;&#x2F;div&gt;</span><br><span class="line">&lt;div id &#x3D; “2”&gt;2&lt;&#x2F;div&gt;</span><br><span class="line">&lt;div id &#x3D; “3”&gt;3&lt;&#x2F;div&gt;</span><br><span class="line">(for(var i &#x3D; 1;i &lt;&#x3D;3;i++)&#123;</span><br><span class="line">	var ele &#x3D; document.getElementById(”i”);</span><br><span class="line">	ele.onclick &#x3D; (function(id)&#123;</span><br><span class="line">		return function()&#123;</span><br><span class="line">		alert(id);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)(i);&#x2F;&#x2F;每次点击1或2或3都会立即执行函数，从而达到点击几弹出几的效果</span><br><span class="line">&#x2F;&#x2F;每被调用一次函数，父函数的i都会被捕获，都会重新产生一个闭包</span><br><span class="line">&#125;</span><br><span class="line">&lt;&#x2F;body&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">&lt;div id &#x3D; “1”&gt;1&lt;&#x2F;div&gt;</span><br><span class="line">&lt;div id &#x3D; “2”&gt;2&lt;&#x2F;div&gt;</span><br><span class="line">&lt;div id &#x3D; “3”&gt;3&lt;&#x2F;div&gt;</span><br><span class="line">for(var i &#x3D; 1;i &lt;&#x3D;3;i++)&#123;</span><br><span class="line">	var ele &#x3D; document.getElementById(”i”);</span><br><span class="line">	ele.onclick &#x3D; function()&#123;</span><br><span class="line">		alert(i);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;&#x2F;body&gt;</span><br><span class="line">&#x2F;&#x2F;点击1 2 3 都会弹出4，因为没有块级作用域，所以i相当于全局变量</span><br><span class="line">&#x2F;&#x2F;解决办法，可以用闭包</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;div id &#x3D; “1”&gt;1&lt;&#x2F;div&gt;</span><br><span class="line">&lt;div id &#x3D; “2”&gt;2&lt;&#x2F;div&gt;</span><br><span class="line">&lt;div id &#x3D; “3”&gt;3&lt;&#x2F;div&gt;</span><br><span class="line">(for(var i &#x3D; 1;i &lt;&#x3D;3;i++)&#123;</span><br><span class="line">	var ele &#x3D; document.getElementById(”i”);</span><br><span class="line">	ele.onclick &#x3D; (function(id)&#123;</span><br><span class="line">		return function()&#123;</span><br><span class="line">		alert(id);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)(i);&#x2F;&#x2F;每次点击1或2或3都会立即执行函数，从而达到点击几弹出几的效果</span><br><span class="line">&#x2F;&#x2F;每被调用一次函数，父函数的i都会被捕获，都会重新产生一个闭包</span><br><span class="line">&lt;&#x2F;body&gt;</span><br></pre></td></tr></table></figure>
 
 <h2 id="伪类"><a href="#伪类" class="headerlink" title="伪类"></a>伪类</h2><p>对象的_ _ <em>proto</em> _ _与函数无关，直接指向函数的prototype</p>
-<p>//函数有prototype属性，对象有_ _ <em>proto</em> _ _属性，函数也是对象，所以函数也有prototype属性</p>
+<p>//函数有prototype属性，对象有_ _ <em>proto</em> _ <em>属性，函数也是对象，所以函数也有</em> _ <em>proto</em> _ _属性</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">function Person()&#123;</span><br><span class="line">	var age &#x3D; 30;</span><br><span class="line">	this.age &#x3D; 22;</span><br><span class="line">	this.name &#x3D; “nice”;</span><br><span class="line">&#125;</span><br><span class="line">Person.prototype.headCount &#x3D; 1;</span><br><span class="line">var p &#x3D; new Person();</span><br><span class="line">		&#x2F;&#x2F;此时Person()相当于伪类，对象p内部有age和name属性，p也可通过__proto__指向</span><br><span class="line">		&#x2F;&#x2F;Person.protptype,p完全与Person()无关了。</span><br><span class="line">Person.prototype &#x3D; &#123;xx:”xx”&#125;;&#x2F;&#x2F;将Person的prototype完全改写</span><br><span class="line">console.log(p.xx);&#x2F;&#x2F;undefined&#x2F;&#x2F;此时p已经不能取到新的Person.prototype了</span><br><span class="line">console.log(p.headcount);&#x2F;&#x2F;1&#x2F;&#x2F;但是原来的p.__proto__指向的Person.prototype还存在着</span><br></pre></td></tr></table></figure>
 
 <h1 id="this"><a href="#this" class="headerlink" title="this"></a>this</h1><p>this永远指向对象</p>
@@ -467,7 +467,7 @@ height:50vh;
 <p>第二种情况：</p>
 <p>//this的指向是运行时决定，不是编写代码时决定</p>
 <p>//运行时函数是谁调用的，this就指向谁</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var o &#x3D; &#123;</span><br><span class="line">	name:”nice”;</span><br><span class="line">	print:function()&#123;</span><br><span class="line">		console.log(this.name);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">o.print();&#x2F;&#x2F;cj&#x2F;&#x2F;函数是o调用的</span><br><span class="line">var ff &#x3D; o.print;</span><br><span class="line">ff();&#x2F;&#x2F;undefined&#x2F;&#x2F;此时相当于window.ff()，函数是window调用的</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var o &#x3D; &#123;</span><br><span class="line">	name:”nice”;</span><br><span class="line">	print:function()&#123;</span><br><span class="line">		console.log(this.name);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">o.print();&#x2F;&#x2F;nice&#x2F;&#x2F;函数是o调用的</span><br><span class="line">var ff &#x3D; o.print;</span><br><span class="line">ff();&#x2F;&#x2F;undefined&#x2F;&#x2F;此时相当于window.ff()，函数是window调用的</span><br></pre></td></tr></table></figure>
 
 <p>第三种情况：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function f()&#123;</span><br><span class="line">	this.name &#x3D; “nice”;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -494,7 +494,7 @@ height:50vh;
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">var person &#x3D; &#123;</span><br><span class="line">	name:”cj”;</span><br><span class="line">	age:22;</span><br><span class="line">	address:&#123;</span><br><span class="line">		home:”home address”;</span><br><span class="line">		office:”office address”;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">var programmer &#x3D; &#123;</span><br><span class="line">	language:”Javascript”;</span><br><span class="line">&#125;</span><br><span class="line">function extend(p, c)&#123;</span><br><span class="line">	var c &#x3D; c||&#123;&#125;;</span><br><span class="line">	for(var prop in p)&#123;</span><br><span class="line">		c[prop] &#x3D; p[prop];</span><br><span class="line">	&#125;</span><br><span class="line">	return c;&#x2F;&#x2F;没有这个语句也可以，没有的话传回的是个引用</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">extend(person, programmer)</span><br><span class="line">console.log(programmer.name);&#x2F;&#x2F;“cj”</span><br><span class="line">programmer.name &#x3D; “nice”;</span><br><span class="line">console.log(person.name);&#x2F;&#x2F;“cj”&#x2F;&#x2F;浅拷贝，变量值改变</span><br><span class="line">console.log(programmer.name);&#x2F;&#x2F;“nice”</span><br><span class="line">programmer.address.home &#x3D; “Shenzhen”;</span><br><span class="line">console.log(programmer.address.home);&#x2F;&#x2F;“Shenzhen”</span><br><span class="line">console.log(person.address.home);&#x2F;&#x2F;“Shenzhen”&#x2F;&#x2F;子改变了父的值，说明只是浅拷贝</span><br><span class="line">&#x2F;&#x2F;子和父的引用指向同一个位置</span><br><span class="line">&#x2F;&#x2F;数组和对象一样，可存在这个问题</span><br><span class="line">&#x2F;&#x2F;数组也可以用for in循环遍历</span><br></pre></td></tr></table></figure>
 
 <h3 id="深拷贝"><a href="#深拷贝" class="headerlink" title="深拷贝"></a>深拷贝</h3><p>对象自变量的形式实现的继承</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">function extendDeeply(p, c)&#123;</span><br><span class="line">	var c &#x3D;c||&#123;&#125;;</span><br><span class="line">	for(var prop in p)&#123;</span><br><span class="line">		if(typrof p[prop] &#x3D;&#x3D;&#x3D; “object”)&#123;</span><br><span class="line">			c[prop] &#x3D; (p.[prop].constructor &#x3D;&#x3D;&#x3D; Array)?[]:&#123;&#125;;</span><br><span class="line">			extendDeeply(p[prop], c[prop]);</span><br><span class="line">		&#125;else&#123;</span><br><span class="line">			c[prop] &#x3D; p[prop];</span><br><span class="line">		&#125;	</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">function extendDeeply(p, c)&#123;</span><br><span class="line">	var c &#x3D;c||&#123;&#125;;</span><br><span class="line">	for(var prop in p)&#123;</span><br><span class="line">		if(typeof p[prop] &#x3D;&#x3D;&#x3D; “object”)&#123;</span><br><span class="line">			c[prop] &#x3D; (p.[prop].constructor &#x3D;&#x3D;&#x3D; Array)?[]:&#123;&#125;;</span><br><span class="line">			extendDeeply(p[prop], c[prop]);</span><br><span class="line">		&#125;else&#123;</span><br><span class="line">			c[prop] &#x3D; p[prop];</span><br><span class="line">		&#125;	</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>用构造函数的形式实现继承</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">function Parent()&#123;&#x2F;&#x2F;父对象</span><br><span class="line">	this.name &#x3D; “abc”;</span><br><span class="line">	this.address &#x3D; &#123;home:”home”&#125;;</span><br><span class="line">&#125;</span><br><span class="line">function Child()&#123;&#x2F;&#x2F;子对象</span><br><span class="line">	Parent.call(this);&#x2F;&#x2F;用call形式拷贝</span><br><span class="line">	this.language &#x3D; “js”;</span><br><span class="line">&#125;</span><br><span class="line">c &#x3D; new Child();</span><br><span class="line">console.log(c.name);&#x2F;&#x2F;“abc”</span><br><span class="line">P &#x3D; new Parent();</span><br><span class="line">c.address.home &#x3D; “Shenzhen”</span><br><span class="line">console.log(p.address.home);&#x2F;&#x2F;“home”&#x2F;&#x2F;是深拷贝</span><br></pre></td></tr></table></figure>
@@ -513,20 +513,20 @@ height:50vh;
 <p>//创建子类</p>
 <p>//建立关系</p>
 <p>第一种方式</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">function P()&#123;&#125;&#x2F;&#x2F;父类</span><br><span class="line">function C()&#123;&#125;&#x2F;&#x2F;子类</span><br><span class="line">function P()&#123;&#125;&#x2F;&#x2F;父类</span><br><span class="line">function C()&#123;&#125;&#x2F;&#x2F;子类</span><br><span class="line">C.prototype &#x3D; P.prototype&#x2F;&#x2F;此时C.prototype.constructor 是P()，所以用类的方法继承后，</span><br><span class="line">&#x2F;&#x2F;要将原型类型的构造器恢复回来C.prototype &#x3D; C;</span><br><span class="line">var c1 &#x3D; new C();</span><br><span class="line">console.log(c1 instanceof C);&#x2F;&#x2F;true</span><br><span class="line">console.log(c1 instanceof P);&#x2F;&#x2F;true</span><br><span class="line">C.prototype.xx &#x3D; “xx”;</span><br><span class="line">var p1 &#x3D; new P();</span><br><span class="line">console.log(p.xx);&#x2F;&#x2F;“xx”</span><br><span class="line">&#x2F;&#x2F;不要用这种方式，因为缺点是子继承父，但是子的东西同样暴露给了父</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">function P()&#123;&#125;&#x2F;&#x2F;父类</span><br><span class="line">function C()&#123;&#125;&#x2F;&#x2F;子类</span><br><span class="line">C.prototype &#x3D; P.prototype&#x2F;&#x2F;此时C.prototype.constructor 是P()，所以用类的方法继承后，</span><br><span class="line">&#x2F;&#x2F;要将原型类型的构造器恢复回来C.prototype &#x3D; C;</span><br><span class="line">var c1 &#x3D; new C();</span><br><span class="line">console.log(c1 instanceof C);&#x2F;&#x2F;true</span><br><span class="line">console.log(c1 instanceof P);&#x2F;&#x2F;true</span><br><span class="line">C.prototype.xx &#x3D; “xx”;</span><br><span class="line">var p1 &#x3D; new P();</span><br><span class="line">console.log(p.xx);&#x2F;&#x2F;“xx”</span><br><span class="line">&#x2F;&#x2F;不要用这种方式，因为缺点是子继承父，但是子的东西同样暴露给了父</span><br></pre></td></tr></table></figure>
 
 <p>第二种方式</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">function P()&#123;&#125;&#x2F;&#x2F;父类</span><br><span class="line">function C()&#123;&#125;&#x2F;&#x2F;子类</span><br><span class="line">C.prototype &#x3D; new P();</span><br><span class="line">var c1 &#x3D; new C();</span><br><span class="line">console.log(c1 instanceof C);&#x2F;&#x2F;true</span><br><span class="line">console.log(c1 instanceof P);&#x2F;&#x2F;true</span><br><span class="line">C.prototype.xx &#x3D; “xx”;</span><br><span class="line">var p1 &#x3D; new P();</span><br><span class="line">console.log(p.xx);&#x2F;&#x2F;undefined</span><br><span class="line">&#x2F;&#x2F;优点：子的东西不会暴露给父</span><br><span class="line">&#x2F;&#x2F;缺点：在查找时中间多了一层，而且凭空new个P没有什么用，只是起到子与父的桥接</span><br></pre></td></tr></table></figure>
 
 <p>第三种形式</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">function P()&#123;&#125;&#x2F;&#x2F;父类</span><br><span class="line">function C()&#123;&#125;&#x2F;&#x2F;子类</span><br><span class="line">function F();</span><br><span class="line">F.prototype &#x3D; P.prototype;</span><br><span class="line">var f &#x3D; new F();</span><br><span class="line">C.prototype &#x3D; f;</span><br><span class="line">&#x2F;&#x2F;整体代码实际就是上面写过的Object.create(),所以可以直接写成</span><br><span class="line">C.prototype &#x3D; Object.create(P.prototype);</span><br><span class="line">&#x2F;&#x2F;优点是：只是中间new了一个空函数，不会有像上面所说的缺点</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">function P()&#123;&#125;&#x2F;&#x2F;父类</span><br><span class="line">function C()&#123;&#125;&#x2F;&#x2F;子类</span><br><span class="line">function F();</span><br><span class="line">F.prototype &#x3D; P.prototype;</span><br><span class="line">var f &#x3D; new F();</span><br><span class="line">C.prototype &#x3D; f;</span><br><span class="line">&#x2F;&#x2F;整体代码实际就是上面写过的Object.create(),所以可以直接写成</span><br><span class="line">&#x2F;&#x2F;C.prototype &#x3D; Object.create(P.prototype);</span><br><span class="line">&#x2F;&#x2F;优点是：只是中间new了一个空函数，不会有像上面所说的缺点</span><br></pre></td></tr></table></figure>
 
 <h3 id="类的继承四部曲："><a href="#类的继承四部曲：" class="headerlink" title="类的继承四部曲："></a>类的继承四部曲：</h3><p>1创建父类以及添加父类的属性和方法</p>
 <p>2创建子类</p>
 <p>3立即继承</p>
 <p>上面实现了继承，但是应该本能地将子类原型的constructor修正回子类的构造函数</p>
 <p>4此时再添加子类的属性，</p>
-<p>加入3和4颠倒，继承的时候有等号，相当于完完全全把子类重写成了父类的样子</p>
+<p>假如3和4颠倒，继承的时候有等号，相当于完完全全把子类重写成了父类的样子</p>
 <p>//举例</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">function Person()&#123;&#125;&#x2F;&#x2F;创建父类</span><br><span class="line">Person.prototype.headCount &#x3D; 1;&#x2F;&#x2F;添加父类属性</span><br><span class="line">Person.prototype.eat &#x3D; function()&#123;&#x2F;&#x2F;添加父类方法</span><br><span class="line">	console.log(”eating...”);</span><br><span class="line">&#125;</span><br><span class="line">function Programmer()&#123;&#125;&#x2F;&#x2F;创建子类</span><br><span class="line">Programmer.prototype &#x3D; Object.create(Person.prototype);&#x2F;&#x2F;继承a</span><br><span class="line">Programmer.prototype.constructor &#x3D; Programmer;&#x2F;&#x2F;将子类原型的constructor修正回来（本能）a</span><br><span class="line">Programmer.prototype.language &#x3D; “Javascript”;&#x2F;&#x2F;添加子类属性</span><br><span class="line">Programmer.prototype.work &#x3D; function()&#123;&#x2F;&#x2F;添加子类方法</span><br><span class="line">	console.log(”i am writing code in” + this.language);</span><br><span class="line">&#125;</span><br><span class="line">var js &#x3D; new Programmer();</span><br><span class="line">console.log(js.eat());&#x2F;&#x2F;eating...</span><br><span class="line">console.log(js.language);&#x2F;&#x2F;“Javascript”</span><br><span class="line">js.language &#x3D; “JS”;</span><br><span class="line">console.log(js.language);&#x2F;&#x2F;“JS”</span><br><span class="line">console.log(js.work());&#x2F;&#x2F;i am writing code in JS</span><br></pre></td></tr></table></figure>
 
@@ -547,7 +547,7 @@ height:50vh;
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">fucntion demo(a, b)&#123;</span><br><span class="line">	console.log(demo.length);&#x2F;&#x2F;形参的个数</span><br><span class="line">	console.log(arguments.length);&#x2F;&#x2F;实参的个数</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>可变长度的重载</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">function add()&#123;</span><br><span class="line">	var total &#x3D; 0;</span><br><span class="line">	for(var i &#x3D; arguments.length - 1; i &gt;&#x3D; 0; i—)&#123;</span><br><span class="line">		total +&#x3D; arguments[i];</span><br><span class="line">	&#125;</span><br><span class="line">	return total;</span><br><span class="line">&#125;</span><br><span class="line">console.log(add(1));&#x2F;&#x2F;1</span><br><span class="line">console.log(add(1, 2));&#x2F;&#x2F;3</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">function add()&#123;</span><br><span class="line">	var total &#x3D; 0;</span><br><span class="line">	for(var i &#x3D; arguments.length - 1; i &gt;&#x3D; 0; i—-)&#123;</span><br><span class="line">		total +&#x3D; arguments[i];</span><br><span class="line">	&#125;</span><br><span class="line">	return total;</span><br><span class="line">&#125;</span><br><span class="line">console.log(add(1));&#x2F;&#x2F;1</span><br><span class="line">console.log(add(1, 2));&#x2F;&#x2F;3</span><br></pre></td></tr></table></figure>
 
 <p>参数的个数不一样</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function fontSize()&#123;</span><br><span class="line">	var ele &#x3D; document.getElementById(”js”);</span><br><span class="line">	if(arguments.length &#x3D;&#x3D; 0)&#123;</span><br><span class="line">		return ele.style.fontSize;</span><br><span class="line">	&#125;else&#123;</span><br><span class="line">		ele.style.fontSize &#x3D; arguments[0];</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">fontSize(18);</span><br><span class="line">console.log(fontSize());&#x2F;&#x2F;18</span><br></pre></td></tr></table></figure>
@@ -575,7 +575,7 @@ height:50vh;
             <p>Author：<a href="https://lixins319070033.github.io">Nice</a>
             <p>原文链接：<a href="https://lixins319070033.github.io/2020/12/13/JavaScript%E7%9F%A5%E8%AF%86%E7%82%B9%E6%89%A9%E5%B1%95/">https://lixins319070033.github.io/2020/12/13/JavaScript%E7%9F%A5%E8%AF%86%E7%82%B9%E6%89%A9%E5%B1%95/</a>
             <p>发表日期：<a href="https://lixins319070033.github.io/2020/12/13/JavaScript%E7%9F%A5%E8%AF%86%E7%82%B9%E6%89%A9%E5%B1%95/">December 13th 2020, 9:26:12 pm</a>
-            <p>更新日期：<a href="https://lixins319070033.github.io/2020/12/13/JavaScript%E7%9F%A5%E8%AF%86%E7%82%B9%E6%89%A9%E5%B1%95/">December 14th 2020, 4:08:14 pm</a>
+            <p>更新日期：<a href="https://lixins319070033.github.io/2020/12/13/JavaScript%E7%9F%A5%E8%AF%86%E7%82%B9%E6%89%A9%E5%B1%95/">March 10th 2021, 10:43:22 pm</a>
             <p>版权声明：本文采用<a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
@@ -1223,9 +1223,150 @@ top:50vh;
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 38
+        Total : 47
         </div>
         <!-- search  -->
         
@@ -1238,6 +1379,51 @@ top:50vh;
     
     <div class="archive-year"> 2021 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/%E4%B8%80%E4%BA%8C%E9%9D%A2-%E5%8E%9F%E5%9E%8B%E9%93%BE/" >一二面_原型链</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/%E4%B8%80%E4%BA%8C%E9%9D%A2-%E5%AE%89%E5%85%A8%E7%B1%BB/" >一二面_安全类</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/%E4%B8%80%E4%BA%8C%E9%9D%A2-%E7%AE%97%E6%B3%95%E7%B1%BB/" >一二面_算法类</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/%E4%B8%80%E4%BA%8C%E9%9D%A2-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" >一二面_面向对象</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/%E4%B8%80%E4%BA%8C%E9%9D%A2-%E9%80%9A%E8%AE%AF%E7%B1%BB/" >一二面_通讯类</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/%E4%B8%80%E4%BA%8C%E9%9D%A2-CSS%E7%9B%92%E6%A8%A1%E5%9E%8B/" >一二面_CSS盒模型</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/%E4%B8%80%E4%BA%8C%E9%9D%A2-DOM%E4%BA%8B%E4%BB%B6%E7%B1%BB/" >一二面_DOM事件类</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/%E4%B8%80%E4%BA%8C%E9%9D%A2-HTTP%E5%8D%8F%E8%AE%AE%E7%B1%BB/" >一二面_HTTP协议类</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/%E4%B8%80%E4%BA%8C%E9%9D%A2-%E9%A1%B5%E9%9D%A2%E5%B8%83%E5%B1%80/" >一二面_页面布局</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -1346,7 +1532,7 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">01/04</span><a class="archive-post-title" href= "/2021/01/04/js%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%8E%E6%95%B0%E5%AD%97%E7%9B%B8%E5%8A%A0%E5%87%8F/" >js字符串与数字相加减</a>
+            <span class="archive-post-date">01/04</span><a class="archive-post-title" href= "/2021/01/04/js%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%8E%E6%95%B0%E5%AD%97%E7%9B%B8%E5%8A%A0%E5%87%8F%E4%B9%98%E9%99%A4/" >js字符串与数字相加减</a>
         </li>
     
     
@@ -1361,6 +1547,11 @@ top:50vh;
     
         <li class="archive-post-item">
             <span class="archive-post-date">12/25</span><a class="archive-post-title" href= "/2020/12/25/Vue%E7%BB%9F%E4%B8%80%E6%A0%B7%E5%BC%8F%EF%BC%88reset-css%E5%92%8Cborder-css%EF%BC%89/" >Vue统一样式（reset.css和border.css）</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/20</span><a class="archive-post-title" href= "/2020/12/20/%E5%AF%B9%E8%B1%A1/" >对象</a>
         </li>
     
     
@@ -1410,11 +1601,6 @@ top:50vh;
     
     <div class="archive-year"> 2020 </div>
     <ul class="year-list">
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">12/20</span><a class="archive-post-title" href= "/2020/12/20/%E5%AF%B9%E8%B1%A1/" >对象</a>
-        </li>
     
     
         <li class="archive-post-item">
