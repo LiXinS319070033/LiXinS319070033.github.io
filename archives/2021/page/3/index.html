@@ -354,6 +354,30 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2021/02/09/Vue%E9%A1%B9%E7%9B%AE%E6%B5%8F%E8%A7%88%E5%99%A8%E5%86%85Console%E4%B8%AD%E6%98%BE%E7%A4%BA-HMR-Waiting-for-update-signal-from-WDS%E2%80%A6%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" >
+            
+                <span>Vue项目浏览器内Console中显示[HMR] Waiting for update signal from WDS…的解决方案</span>
+        </a>
+        <div class="abstract-content">
+            Vue项目浏览器内Console中显示[HMR] Waiting for update signal from WDS…的解决方案解决方案： 在文件夹内依次找到node_modules -&gt; webpack -&gt; hot  **-&gt; **log.js，打开log.js文件，按照下面的样子注释这段话
+1234567891011module.exports &#x3D; function(level, msg)&#123;    &#x2F;&#x2F; if (shouldLog(level)) &#123;        &#x2F;&#x2F; if (level &...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/02/09</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2021/02/09/Vue-cli%E6%90%AD%E5%BB%BA%E5%A5%BD%E9%BB%98%E8%AE%A4%E9%A1%B9%E7%9B%AE%E5%90%8E%E4%BD%BF%E7%94%A8%E8%B7%AF%E7%94%B1%E5%8A%9F%E8%83%BD%EF%BC%8C%E6%8A%A5%E9%94%99Can%E2%80%99t%20resolve%20%E2%80%98vue-router%E2%80%99%20in/" >
             
                 <span>Vue-cli搭建好默认项目后使用路由功能，报错Can’t resolve ‘vue-router’ in</span>
@@ -566,31 +590,6 @@ sublime中只需要输入html点击回车即可实现
 先说解决方法：我按照视频的讲解，在生命周期函数mounted里面使用的better-scroll命令，将mounted换成updated就可以了。
 解释：
 先说一下better-scroll的工作原理（盗的网上的图），根据图像，父元素也就是绿色的wrpper是有固定高度的，父元素的第一个子元素，也就是黄的的content的高度随着内容的大小而撑开，只有当con...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/02/04</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2021/02/04/VsCode%E4%B8%ADGit%E8%B7%AF%E5%BE%84%E7%9A%84%E8%AE%BE%E7%BD%AE/" >
-            
-                <span>VsCode中git路径的设置（window系统）</span>
-        </a>
-        <div class="abstract-content">
-            VsCode中git路径的设置（window系统）首先电脑里已经安装好了git并已经把git添加到环境变量中去了（这有部分在之前的帖子中有讲过）
-找到你的电脑里的git路径先找到你的git安装目录，然后找到里面的cmd文件夹里面的git.exe文件，将这个文件完整的绝对路径复制下来。
-在VsCode中配置git依次点击 文件=》首选项=》设置=》在最上面的输入框里输入gitpath=》点击在settings.json中编辑=》将文件里面的”git.path”后面设置为自己的git.exe路径，例如我的是”git.path”: “D:\\Git\\installation\\Git\\cm...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -1353,9 +1352,28 @@ sublime中只需要输入html点击回车即可实现
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 48
+        Total : 49
         </div>
         <!-- search  -->
         
@@ -1368,6 +1386,11 @@ sublime中只需要输入html点击回车即可实现
     
     <div class="archive-year"> 2021 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/07</span><a class="archive-post-title" href= "/2021/06/07/%E7%AE%97%E6%B3%95%E9%A2%98%E6%80%BB%E7%BB%93/" >算法题总结</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -1456,12 +1479,12 @@ sublime中只需要输入html点击回车即可实现
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">02/09</span><a class="archive-post-title" href= "/2021/02/09/%E4%BD%BF%E7%94%A8swiper%E6%8F%92%E4%BB%B6%E6%97%B6%EF%BC%8C%E6%8A%A5%E9%94%99did-you-register-the-component-correctly-For-recursive-components-make-sure-to-provide-the-name-option/" >使用swiper插件时，报错did you register the component correctly? For recursive components, make sure to provide the name option</a>
+            <span class="archive-post-date">02/09</span><a class="archive-post-title" href= "/2021/02/09/%E4%BD%BF%E7%94%A8swiper%E6%8F%92%E4%BB%B6%E6%97%B6%EF%BC%8C%E6%8A%A5%E9%94%99Can-t-resolve-swiper-dist-css-swiper-css-in/" >使用swiper插件时，报错Can't resolve 'swiper/dist/css/swiper.css' in</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">02/09</span><a class="archive-post-title" href= "/2021/02/09/%E4%BD%BF%E7%94%A8swiper%E6%8F%92%E4%BB%B6%E6%97%B6%EF%BC%8C%E6%8A%A5%E9%94%99Can-t-resolve-swiper-dist-css-swiper-css-in/" >使用swiper插件时，报错Can't resolve 'swiper/dist/css/swiper.css' in</a>
+            <span class="archive-post-date">02/09</span><a class="archive-post-title" href= "/2021/02/09/%E4%BD%BF%E7%94%A8swiper%E6%8F%92%E4%BB%B6%E6%97%B6%EF%BC%8C%E6%8A%A5%E9%94%99did-you-register-the-component-correctly-For-recursive-components-make-sure-to-provide-the-name-option/" >使用swiper插件时，报错did you register the component correctly? For recursive components, make sure to provide the name option</a>
         </li>
     
     
