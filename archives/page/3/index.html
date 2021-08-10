@@ -354,23 +354,20 @@
     
     
     <article class="index-post">
-        <a class="abstract-title" href = "/2021/02/20/%E4%BD%BF%E7%94%A8styled-components%E6%8A%A5%E9%94%99-Attempted-import-error-injectGlobal-is-not-exported-from-styled-components/" >
+        <a class="abstract-title" href = "/2021/02/04/better-scroll%E6%BB%9A%E5%8A%A8%E5%A4%B1%E6%95%88%EF%BC%88%E5%8E%BB%E5%93%AA%E7%BD%91%E5%84%BF%E9%A1%B9%E7%9B%AE%E7%A7%BB%E5%8A%A8%E7%AB%AF%EF%BC%89/" >
             
-                <span>使用styled-components报错 Attempted import error: injectGlobal is not exported from styled-components</span>
+                <span>better-scroll滚动失效（去哪网儿项目移动端）</span>
         </a>
         <div class="abstract-content">
-            使用styled-components报错 Attempted import error: injectGlobal is not exported from styled-components慕课网中用React实现的简书网站的项目学习，7-1项目目录搭建，Styled-Components与Reset.css的结合使用
-按照视频流程：
-1.先安装styled-components
-1cnpm add styled-componen
-
-2.然后将css文件改为js文件style.js，并编辑代码：
-12345678import &#123; injectGlobal &#125; fr...
+            better-scroll滚动失效（去哪网儿项目移动端）之前在效仿做去哪网儿移动端的vue项目的时候有个使用better-scroll的环节，第一次使用的时候还是可以滚动的，刷新页面后却发现滚动失效了，寻找了好多方法，最终发现原因
+先说解决方法：我按照视频的讲解，在生命周期函数mounted里面使用的better-scroll命令，将mounted换成updated就可以了。
+解释：
+先说一下better-scroll的工作原理（盗的网上的图），根据图像，父元素也就是绿色的wrpper是有固定高度的，父元素的第一个子元素，也就是黄的的content的高度随着内容的大小而撑开，只有当con...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
             <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/02/20</span>
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/02/04</span>
             </div>
             <!-- tags  -->
             
@@ -383,20 +380,19 @@
     
     
     <article class="index-post">
-        <a class="abstract-title" href = "/2021/02/20/react%E4%B8%AD%E5%88%9B%E5%BB%BA%E7%BB%84%E4%BB%B6/" >
+        <a class="abstract-title" href = "/2021/02/04/VsCode%E4%B8%ADGit%E8%B7%AF%E5%BE%84%E7%9A%84%E8%AE%BE%E7%BD%AE/" >
             
-                <span>react中创建组件</span>
+                <span>VsCode中git路径的设置（window系统）</span>
         </a>
         <div class="abstract-content">
-            react中创建组件慕课网中用React实现的简书网站的项目学习，3-1使用React编写TodoList功能
-在编写TodoList组件的时候
-这两段代码实现效果是一样的，前者是视频里的方式，后者是最新的方式
-1234567891011import React, &#123; Component &#125; from &#39;react&#39;;class TodoList extends Component &#123;    render () &#123;        return (            &lt;div&gt;todolist&lt;&#x2F;div...
+            VsCode中git路径的设置（window系统）首先电脑里已经安装好了git并已经把git添加到环境变量中去了（这有部分在之前的帖子中有讲过）
+找到你的电脑里的git路径先找到你的git安装目录，然后找到里面的cmd文件夹里面的git.exe文件，将这个文件完整的绝对路径复制下来。
+在VsCode中配置git依次点击 文件=》首选项=》设置=》在最上面的输入框里输入gitpath=》点击在settings.json中编辑=》将文件里面的”git.path”后面设置为自己的git.exe路径，例如我的是”git.path”: “D:\\Git\\installation\\Git\\cm...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
             <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/02/20</span>
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/02/04</span>
             </div>
             <!-- tags  -->
             
@@ -409,20 +405,20 @@
     
     
     <article class="index-post">
-        <a class="abstract-title" href = "/2021/02/20/VUE%E9%A1%B9%E7%9B%AE%E6%8C%89%E9%9C%80%E5%BC%95%E5%85%A5ELEMENT-UI%EF%BC%8C%E4%BF%AE%E6%94%B9-BABELRC%E6%96%87%E4%BB%B6%E4%B9%8B%E5%90%8E%E6%8A%A5%E9%94%99/" >
+        <a class="abstract-title" href = "/2021/01/04/js%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%8E%E6%95%B0%E5%AD%97%E7%9B%B8%E5%8A%A0%E5%87%8F%E4%B9%98%E9%99%A4/" >
             
-                <span>VUE项目按需引入ELEMENT-UI，修改.BABELRC文件之后报错</span>
+                <span>js字符串与数字相加减</span>
         </a>
         <div class="abstract-content">
-            VUE项目按需引入ELEMENT-UI，修改.BABELRC文件之后报错（慕课网小米商城的项目11-2_ElementUI运用）
-自己在这里新建的.babelrc文件会和vue-cli自动创建的babel.config.js文件在编译时发生冲突而报错，原因是这两个文件里的内容功能上作用相同都是利用babel作为js的编译器，但在编译时不会合并在一起，所以直接留babel.config.js文件就行，把.babelrc里面应该设置的内容粘贴在babel.config.js文件中就行了。
-babel.config.js之前的内容代码
-123456module.exports &#x3D; &...
+            js字符串与数字相加减乘除在js中当字符串与数字相加时，数字转换为string类型，起到拼接的作用；当相减时，字符串转换为number类型，即数字相加减。加减乘除中，除了加会把数字变为字符串，减乘除都会将字符串变为数字。
+12345var a &#x3D; &#39;123&#39;;var b &#x3D; a + 1;console.log(b);&#x2F;&#x2F;&#39;1231&#39;var c &#x3D; a - 1;console.log(c);&#x2F;&#x2F;122
+
+1234&#x2F;&#x2F;将&#39;010&#39;变为&#39;10&#39...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
             <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/02/20</span>
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/01/04</span>
             </div>
             <!-- tags  -->
             
@@ -435,20 +431,19 @@ babel.config.js之前的内容代码
     
     
     <article class="index-post">
-        <a class="abstract-title" href = "/2021/02/20/yarn-command-not-found/" >
+        <a class="abstract-title" href = "/2021/01/04/CSS%E4%B8%AD%E6%96%87%E5%AD%97%E5%9C%A8%E6%B0%B4%E5%B9%B3%E5%92%8C%E7%AB%96%E7%9B%B4%E6%96%B9%E5%90%91%E4%B8%8A%E9%87%8D%E5%8F%A0/" >
             
-                <span>yarn: command not found</span>
+                <span>CSS中文字在水平和竖直方向上重叠</span>
         </a>
         <div class="abstract-content">
-            yarn: command not found缺少依赖，安装命令如下所示：
-1cnpm install -g yarn
-
-
+            css 中可以让文字在垂直和水平方向上重叠的两个属性是什么？line-height ：设置大小比字体大小 小 即可实现垂直方向上重叠
+letter-spacing ： 设置成负值即可实现水平方向上重叠
+123456789101112131415161718&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;	&lt;title&gt;&lt;&#x2F;title&gt;	&lt;style type&#x3D;&quot;text&#x2F;css&quot;&gt;		.welcome &#123;		word-break: normal;		w...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
             <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/02/20</span>
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/01/04</span>
             </div>
             <!-- tags  -->
             
@@ -461,28 +456,18 @@ babel.config.js之前的内容代码
     
     
     <article class="index-post">
-        <a class="abstract-title" href = "/2021/02/20/%E6%85%95%E8%AF%BE%E7%BD%91%E5%B0%8F%E7%B1%B3%E5%95%86%E5%9F%8E%E9%A1%B9%E7%9B%AE9-1-%E5%95%86%E5%93%81%E8%AF%A6%E6%83%85%E4%BA%A4%E4%BA%92%E5%AE%9E%E7%8E%B0%E8%AF%BE%E7%A8%8B%E4%B8%AD%E9%80%89%E6%8B%A9%E7%89%88%E6%9C%AC%E5%87%BA%E7%8E%B0%E7%9A%84%E5%B0%8F%E9%97%AE%E9%A2%98/" >
+        <a class="abstract-title" href = "/2020/12/25/Vue%E7%BB%9F%E4%B8%80%E6%A0%B7%E5%BC%8F%EF%BC%88reset-css%E5%92%8Cborder-css%EF%BC%89/" >
             
-                <span>慕课网小米商城项目9-1_商品详情交互实现课程中选择版本出现的小问题</span>
+                <span>Vue统一样式（reset.css和border.css）</span>
         </a>
         <div class="abstract-content">
-            慕课网小米商城项目9-1_商品详情交互实现课程中选择版本出现的小问题慕课网小米商城项目9-1_商品详情交互实现课程中选择版本出现的小问题
-
-选择版本这里会有这个问题，出现了字体在下面，而其实位置已经有了，经过检查发现.phone.fr的float: right;被删掉了
-
-在detail.vue脚本中这个位置加入一下有浮动就好了
-
-代码为
-123.phone.fr &#123;	float: right;&#125;
-
-即可得到正确样式，如图
-
-
+            Vue统一样式（reset.css和border.css）reset.css在做项目的时候需要对基本样式进行设置，已达到不同浏览器下的显示效果是相同的，该css样式的作用就在于此。
+12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394959697989910010110210310410...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
             <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/02/20</span>
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/12/25</span>
             </div>
             <!-- tags  -->
             
@@ -495,20 +480,17 @@ babel.config.js之前的内容代码
     
     
     <article class="index-post">
-        <a class="abstract-title" href = "/2021/02/09/%E4%BD%BF%E7%94%A8swiper%E6%8F%92%E4%BB%B6%E6%97%B6%EF%BC%8C%E6%8A%A5%E9%94%99did-you-register-the-component-correctly-For-recursive-components-make-sure-to-provide-the-name-option/" >
+        <a class="abstract-title" href = "/2020/12/20/%E5%AF%B9%E8%B1%A1/" >
             
-                <span>使用swiper插件时，报错did you register the component correctly? For recursive components, make sure to provide the name option</span>
+                <span>对象</span>
         </a>
         <div class="abstract-content">
-            使用swiper插件时，报错did you register the component correctly? For recursive components, make sure to provide the “name” option（在学习慕课网小米商城的项目5-8_首页轮播功能实现课程时）
-原因：虽然已经安装了vue-awesome-swiper，但是当前的vue-awesome-swiper版本太高了
-解决方案：
-1234&#x2F;&#x2F; 卸载当前版本的vue-awesome-swipernpm uninstall vue-awesome-swiper&#x2F;&#...
+            对象对象的创建：第一种方式：对象字面量形式（属性、方法、get set型属性）1234567891011121314151617181920212223&#x2F;&#x2F;例子var p &#x3D; &#123;	name: &quot;Dj&quot;,&#x2F;&#x2F;属性	work: function()&#123;&#x2F;&#x2F;方法		console.log(&quot;working...&quot;);	&#125;,	_age: 18,	get age()&#123;&#x2F;&#x2F;get型属性		return this._age;	&#125...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
             <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/02/09</span>
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/12/20</span>
             </div>
             <!-- tags  -->
             
@@ -521,22 +503,23 @@ babel.config.js之前的内容代码
     
     
     <article class="index-post">
-        <a class="abstract-title" href = "/2021/02/09/%E4%BD%BF%E7%94%A8swiper%E6%8F%92%E4%BB%B6%E6%97%B6%EF%BC%8C%E6%8A%A5%E9%94%99Can-t-resolve-swiper-dist-css-swiper-css-in/" >
+        <a class="abstract-title" href = "/2020/12/18/RegExp%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" >
             
-                <span>使用swiper插件时，报错Can&#39;t resolve &#39;swiper/dist/css/swiper.css&#39; in</span>
+                <span>RegExp正则表达式</span>
         </a>
         <div class="abstract-content">
-            使用swiper插件时，报错Can’t resolve ‘swiper/dist/css/swiper.css’ in（在学习慕课网小米商城的项目5-8_首页轮播功能实现课程时）
-原因：即使安装了swiper插件依然会出现这个问题，原因是安装的swiper版本太高了
-解决方案：
-1234&#x2F;&#x2F; 先卸载掉当前版本的swipernpm uninstall swiper&#x2F;&#x2F; 再安装指定版本的swiper降低一下版本就可以了cnpm install swiper swiper@3.4.2 --save-dev
+            正则表达式基础语法没有特殊意义的字符1234/ace/ // 匹配 ace/123/ // 匹配 123/-_-_-_/ // 匹配 -_-_-/煜成/ // 匹配 煜成
 
+转义字符
+字符集和1234[abc] //匹配a或b或c[^abc] //匹配abc之外的任意字符[0-9] //[0123456789]的缩写[a-z] //匹配a到z内的任意字符
 
+上图中部分转义字符与字符集的对应关系
+1234567. &#x2F;&#x2F;匹配除了换行符（\n）以外的任意一个字符 &#x3D; [^\n]\w &#x3D; [0-9a-Z_]\W &#x3D; [^0-9a-Z_]\s &#...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
             <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/02/09</span>
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/12/18</span>
             </div>
             <!-- tags  -->
             
@@ -549,21 +532,23 @@ babel.config.js之前的内容代码
     
     
     <article class="index-post">
-        <a class="abstract-title" href = "/2021/02/09/%E4%BD%BF%E7%94%A8sass%E6%97%B6%EF%BC%8C%E6%8A%A5%E9%94%99TypeError-this-getResolve-is-not-a-function-at-Object-loader/" >
+        <a class="abstract-title" href = "/2020/12/15/C++%E7%9A%84OpenCV%E4%BD%8E%E7%89%88%E6%9C%AC%E7%9A%84CvvImage-cpp%E5%92%8Ccvvimage-h%E6%96%87%E4%BB%B6/" >
             
-                <span>使用sass时，报错TypeError: this.getResolve is not a function at Object.loader</span>
+                <span>C++的OpenCV低版本的CvvImage.cpp和cvvimage.h文件</span>
         </a>
         <div class="abstract-content">
-            使用sass时，报错TypeError: this.getResolve is not a function at Object.loader（在学习慕课网小米商城的项目5-1NavHeader组件(1)课程时）
-原因：最开始在项目前期安装的sass的版本有问题，后来安装视频里的版本之后成功了。
-切记：只更换sass-loader的版本不更换node-sass版本是不行的，必须两者都更换版本
-解决方案：
-123456789&#x2F;&#x2F; 卸载当前node-sass版本   npm uninstall node-sass&#x2F;&#x2F; 安装指定node-sass版本  ...
+            C++的OpenCV低版本的CvvImage.cpp和cvvimage.h文件在VS2017中运行C++程序，发现缺少文件，原因是opencv版本更新的问题，高版本舍弃了低版本的CvvImage.cpp和cvvimage.h文件，在网上找了好多代码和解决方案，也没能成功，后来从实验室项目代码运行成功的电脑上拷贝过来这两个文件，放在指定的位置，代码运行成功
+
+CvvImage.cpp（放在自己项目的源文件和头文件等文件的同级路径下）如图
+
+#include &quot;StdAfx.h&quot;
+#include &quot;CvvImage.h&quot;
+//////////////...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
             <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/02/09</span>
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/12/15</span>
             </div>
             <!-- tags  -->
             
@@ -576,18 +561,22 @@ babel.config.js之前的内容代码
     
     
     <article class="index-post">
-        <a class="abstract-title" href = "/2021/02/09/Vue%E9%A1%B9%E7%9B%AE%E6%B5%8F%E8%A7%88%E5%99%A8%E5%86%85Console%E4%B8%AD%E6%98%BE%E7%A4%BA-HMR-Waiting-for-update-signal-from-WDS%E2%80%A6%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" >
+        <a class="abstract-title" href = "/2020/12/15/JS%E4%B8%AD%E7%9A%84%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%B5%85%E6%B5%85%E4%BA%86%E8%A7%A3/" >
             
-                <span>Vue项目浏览器内Console中显示[HMR] Waiting for update signal from WDS…的解决方案</span>
+                <span>JS中的面向对象浅浅了解</span>
         </a>
         <div class="abstract-content">
-            Vue项目浏览器内Console中显示[HMR] Waiting for update signal from WDS…的解决方案解决方案： 在文件夹内依次找到node_modules -&gt; webpack -&gt; hot  **-&gt; **log.js，打开log.js文件，按照下面的样子注释这段话
-1234567891011module.exports &#x3D; function(level, msg)&#123;    &#x2F;&#x2F; if (shouldLog(level)) &#123;        &#x2F;&#x2F; if (level &...
+            JS中的面向对象面向对象的概念：1）一切事物皆对象
+2）对象具有封装和继承特性
+3）信息隐藏
+字面量形式构造对象12345678var person &#x3D; &#123;	name:”nice”,	age:26,	eat:function()&#123;		alert(”超会吃”)	&#125;&#125;person.height &#x3D; 175;
+
+函数构造器构造对象12345678function Person()&#123;&#125;Person.prototype &#x3D; &#123;	name:”nice”,	eat:function()&#123;		a...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
             <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/02/09</span>
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/12/15</span>
             </div>
             <!-- tags  -->
             
@@ -600,21 +589,22 @@ babel.config.js之前的内容代码
     
     
     <article class="index-post">
-        <a class="abstract-title" href = "/2021/02/09/Vue-cli%E6%90%AD%E5%BB%BA%E5%A5%BD%E9%BB%98%E8%AE%A4%E9%A1%B9%E7%9B%AE%E5%90%8E%E4%BD%BF%E7%94%A8%E8%B7%AF%E7%94%B1%E5%8A%9F%E8%83%BD%EF%BC%8C%E6%8A%A5%E9%94%99Can%E2%80%99t%20resolve%20%E2%80%98vue-router%E2%80%99%20in/" >
+        <a class="abstract-title" href = "/2020/12/13/JavaScript%E7%9F%A5%E8%AF%86%E7%82%B9%E6%89%A9%E5%B1%95/" >
             
-                <span>Vue-cli搭建好默认项目后使用路由功能，报错Can’t resolve ‘vue-router’ in</span>
+                <span>JavaScript知识点扩展</span>
         </a>
         <div class="abstract-content">
-            Vue-cli搭建好默认项目后使用路由功能，报错Can’t resolve ‘vue-router’ in原因：缺少vue-router插件的原因，resolve的意思是找不到这个插件
-解决方案：在命令行中运行下面命令安装插件，再重启项目即可解决
-1cnpm install vue-router
-
-
+            JavaScript知识点扩展作用域作用域作用：
+1.定义：变量 函数 或者成员在整个程序内可以被访问的范围；
+2.也可用于信息隐藏
+块作用域：{…}包含的代码就是一个块作用域，JS没有块级作用域；
+动态作用域：函数内的成员是否可以被访问只有在运行的时候才能确定
+1234567891011121314function f()&#123;	alert(x);&#125;function f1()&#123;	var x &#x3D; 1;	f();&#125;function f2()&#123;	var x &#x3D; 2;	f();&#125;f1();&#x2F;&#x2F;报错：...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
             <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/02/09</span>
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/12/13</span>
             </div>
             <!-- tags  -->
             
@@ -624,7 +614,7 @@ babel.config.js之前的内容代码
     <!-- paginator  -->
     
     <nav class="page-nav">
-        <a class="extend prev" rel="prev" href="/archives/page/2/">&lt; PREV</a><a class="page-number" href="/archives/">1</a><a class="page-number" href="/archives/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/archives/page/4/">4</a><a class="page-number" href="/archives/page/5/">5</a><a class="page-number" href="/archives/page/6/">6</a><a class="extend next" rel="next" href="/archives/page/4/">NEXT &gt;</a>
+        <a class="extend prev" rel="prev" href="/archives/page/2/">&lt; PREV</a><a class="page-number" href="/archives/">1</a><a class="page-number" href="/archives/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/archives/page/4/">4</a><a class="extend next" rel="next" href="/archives/page/4/">NEXT &gt;</a>
     </nav>
     
 </main>
@@ -1244,294 +1234,9 @@ babel.config.js之前的内容代码
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 57
+        Total : 40
         </div>
         <!-- search  -->
         
@@ -1552,92 +1257,7 @@ babel.config.js之前的内容代码
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">06/08</span><a class="archive-post-title" href= "/2021/06/08/%E9%9D%A2%E8%AF%95%E7%9A%84/%E4%BA%8C%E4%B8%89%E9%9D%A2-%E6%B8%B2%E6%9F%93%E6%9C%BA%E5%88%B6%E7%B1%BB/" >二三面_渲染机制类</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">06/08</span><a class="archive-post-title" href= "/2021/06/08/%E9%9D%A2%E8%AF%95%E7%9A%84/%E4%BA%8C%E4%B8%89%E9%9D%A2-%E8%BF%90%E8%A1%8C%E6%9C%BA%E5%88%B6%E7%B1%BB/" >二三面_运行机制类</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">06/08</span><a class="archive-post-title" href= "/2021/06/08/%E9%9D%A2%E8%AF%95%E7%9A%84/%E4%BA%8C%E4%B8%89%E9%9D%A2-%E9%94%99%E8%AF%AF%E7%9B%91%E6%8E%A7%E7%B1%BB/" >二三面_错误监控类</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">06/08</span><a class="archive-post-title" href= "/2021/06/08/%E9%9D%A2%E8%AF%95%E7%9A%84/%E4%BA%8C%E4%B8%89%E9%9D%A2-%E9%A1%B5%E9%9D%A2%E6%80%A7%E8%83%BD/" >二三面_页面性能</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">06/08</span><a class="archive-post-title" href= "/2021/06/08/%E9%9D%A2%E8%AF%95%E7%9A%84/%E7%BB%88%E9%9D%A2%EF%BC%88HR%E9%9D%A2%EF%BC%89-%E8%81%8C%E4%B8%9A%E7%AB%9E%E4%BA%89%E5%8A%9B%E5%92%8C%E8%81%8C%E4%B8%9A%E8%A7%84%E5%88%92/" >终面（HR面）_职业竞争力和职业规划</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">06/08</span><a class="archive-post-title" href= "/2021/06/08/%E9%9D%A2%E8%AF%95%E7%9A%84/%E9%9D%A2%E8%AF%95%E6%80%BB%E7%BB%93/" >面试总结</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">06/08</span><a class="archive-post-title" href= "/2021/06/08/%E9%9D%A2%E8%AF%95%E7%9A%84/%E4%B8%89%E5%9B%9B%E9%9D%A2-%E4%B8%9A%E5%8A%A1%E8%83%BD%E5%8A%9B%E5%9B%A2%E9%98%9F%E5%8D%8F%E4%BD%9C%E8%83%BD%E5%8A%9B%E4%B8%8E%E5%B8%A6%E4%BA%BA%E8%83%BD%E5%8A%9B/" >三四面_业务能力团队协作能力与带人能力</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">06/07</span><a class="archive-post-title" href= "/2021/06/07/%E9%9D%A2%E8%AF%95%E7%9A%84/%E7%AE%97%E6%B3%95%E9%A2%98%E6%80%BB%E7%BB%93/" >算法题总结</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
             <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/%E4%B8%8A%E4%BC%A0%E5%8D%9A%E5%AE%A2%E5%88%B0github%E6%97%B6%E5%87%BA%E7%8E%B0%E7%9A%84%E9%97%AE%E9%A2%98-Failed-to-connect-to-github-com-port-443-Timed-out/" >上传博客到github时出现的问题 Failed to connect to github.com port 443: Timed out </a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/%E9%9D%A2%E8%AF%95%E7%9A%84/%E4%B8%80%E4%BA%8C%E9%9D%A2-%E5%8E%9F%E5%9E%8B%E9%93%BE/" >一二面_原型链</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/%E9%9D%A2%E8%AF%95%E7%9A%84/%E4%B8%80%E4%BA%8C%E9%9D%A2-%E5%AE%89%E5%85%A8%E7%B1%BB/" >一二面_安全类</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/%E9%9D%A2%E8%AF%95%E7%9A%84/%E4%B8%80%E4%BA%8C%E9%9D%A2-%E7%AE%97%E6%B3%95%E7%B1%BB/" >一二面_算法类</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/%E9%9D%A2%E8%AF%95%E7%9A%84/%E4%B8%80%E4%BA%8C%E9%9D%A2-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" >一二面_面向对象</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/%E9%9D%A2%E8%AF%95%E7%9A%84/%E4%B8%80%E4%BA%8C%E9%9D%A2-%E9%80%9A%E8%AE%AF%E7%B1%BB/" >一二面_通讯类</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/%E9%9D%A2%E8%AF%95%E7%9A%84/%E4%B8%80%E4%BA%8C%E9%9D%A2-CSS%E7%9B%92%E6%A8%A1%E5%9E%8B/" >一二面_CSS盒模型</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/%E9%9D%A2%E8%AF%95%E7%9A%84/%E4%B8%80%E4%BA%8C%E9%9D%A2-DOM%E4%BA%8B%E4%BB%B6%E7%B1%BB/" >一二面_DOM事件类</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/%E9%9D%A2%E8%AF%95%E7%9A%84/%E4%B8%80%E4%BA%8C%E9%9D%A2-HTTP%E5%8D%8F%E8%AE%AE%E7%B1%BB/" >一二面_HTTP协议类</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/%E9%9D%A2%E8%AF%95%E7%9A%84/%E4%B8%80%E4%BA%8C%E9%9D%A2-%E9%A1%B5%E9%9D%A2%E5%B8%83%E5%B1%80/" >一二面_页面布局</a>
         </li>
     
     
@@ -1647,12 +1267,12 @@ babel.config.js之前的内容代码
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">02/20</span><a class="archive-post-title" href= "/2021/02/20/react%E6%8A%A5%E9%94%99%EF%BC%9ATypeError-Class-extends-value-undefined-is-not-a-constructor-or-null/" >react报错：TypeError: Class extends value undefined is not a constructor or null</a>
+            <span class="archive-post-date">02/20</span><a class="archive-post-title" href= "/2021/02/20/react%E4%B8%AD%E5%88%9B%E5%BB%BA%E7%BB%84%E4%BB%B6/" >react中创建组件</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">02/20</span><a class="archive-post-title" href= "/2021/02/20/react%E4%B8%AD%E5%88%9B%E5%BB%BA%E7%BB%84%E4%BB%B6/" >react中创建组件</a>
+            <span class="archive-post-date">02/20</span><a class="archive-post-title" href= "/2021/02/20/react%E6%8A%A5%E9%94%99%EF%BC%9ATypeError-Class-extends-value-undefined-is-not-a-constructor-or-null/" >react报错：TypeError: Class extends value undefined is not a constructor or null</a>
         </li>
     
     
@@ -1677,12 +1297,12 @@ babel.config.js之前的内容代码
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">02/09</span><a class="archive-post-title" href= "/2021/02/09/%E4%BD%BF%E7%94%A8swiper%E6%8F%92%E4%BB%B6%E6%97%B6%EF%BC%8C%E6%8A%A5%E9%94%99did-you-register-the-component-correctly-For-recursive-components-make-sure-to-provide-the-name-option/" >使用swiper插件时，报错did you register the component correctly? For recursive components, make sure to provide the name option</a>
+            <span class="archive-post-date">02/09</span><a class="archive-post-title" href= "/2021/02/09/%E4%BD%BF%E7%94%A8swiper%E6%8F%92%E4%BB%B6%E6%97%B6%EF%BC%8C%E6%8A%A5%E9%94%99Can-t-resolve-swiper-dist-css-swiper-css-in/" >使用swiper插件时，报错Can't resolve 'swiper/dist/css/swiper.css' in</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">02/09</span><a class="archive-post-title" href= "/2021/02/09/%E4%BD%BF%E7%94%A8swiper%E6%8F%92%E4%BB%B6%E6%97%B6%EF%BC%8C%E6%8A%A5%E9%94%99Can-t-resolve-swiper-dist-css-swiper-css-in/" >使用swiper插件时，报错Can't resolve 'swiper/dist/css/swiper.css' in</a>
+            <span class="archive-post-date">02/09</span><a class="archive-post-title" href= "/2021/02/09/%E4%BD%BF%E7%94%A8swiper%E6%8F%92%E4%BB%B6%E6%97%B6%EF%BC%8C%E6%8A%A5%E9%94%99did-you-register-the-component-correctly-For-recursive-components-make-sure-to-provide-the-name-option/" >使用swiper插件时，报错did you register the component correctly? For recursive components, make sure to provide the name option</a>
         </li>
     
     
@@ -1766,6 +1386,11 @@ babel.config.js之前的内容代码
     
     
         <li class="archive-post-item">
+            <span class="archive-post-date">12/20</span><a class="archive-post-title" href= "/2020/12/20/%E5%AF%B9%E8%B1%A1/" >对象</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
             <span class="archive-post-date">12/18</span><a class="archive-post-title" href= "/2020/12/18/RegExp%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" >RegExp正则表达式</a>
         </li>
     
@@ -1777,6 +1402,11 @@ babel.config.js之前的内容代码
     
         <li class="archive-post-item">
             <span class="archive-post-date">12/15</span><a class="archive-post-title" href= "/2020/12/15/JS%E4%B8%AD%E7%9A%84%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%B5%85%E6%B5%85%E4%BA%86%E8%A7%A3/" >JS中的面向对象浅浅了解</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/13</span><a class="archive-post-title" href= "/2020/12/13/JavaScript%E7%9F%A5%E8%AF%86%E7%82%B9%E6%89%A9%E5%B1%95/" >JavaScript知识点扩展</a>
         </li>
     
     
@@ -1811,16 +1441,6 @@ babel.config.js之前的内容代码
     
     <div class="archive-year"> 2020 </div>
     <ul class="year-list">
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">12/20</span><a class="archive-post-title" href= "/2020/12/20/%E5%AF%B9%E8%B1%A1/" >对象</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">12/13</span><a class="archive-post-title" href= "/2020/12/13/JavaScript%E7%9F%A5%E8%AF%86%E7%82%B9%E6%89%A9%E5%B1%95/" >JavaScript知识点扩展</a>
-        </li>
     
     
         <li class="archive-post-item">
