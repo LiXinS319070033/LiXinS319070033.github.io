@@ -1,0 +1,1992 @@
+<!DOCTYPE html>
+<html lang="en">
+    <!-- title -->
+
+
+
+
+<!-- keywords -->
+
+
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" >
+    <meta name="author" content="Nice">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="Nice">
+    
+    <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
+    
+    <meta name="description" content="">
+    <meta name="description" content="算法题总结1反转字符串中的单词III给定一个字符串，你需要反转字符串中每个单词的字符顺序，同时仍保留空格和单词的初始顺序。  示例： 输入：”Let’s take LeetCode contest” 输出：”s’teL ekat edoCteeL tsetnoc”   提示： 在字符串中，每个单词由单个空格分隔，并且字符串中不会有任何额外的空格。 1234567891011121314151617">
+<meta property="og:type" content="article">
+<meta property="og:title" content="算法题总结">
+<meta property="og:url" content="https://lixins319070033.github.io/2021/06/07/%E7%AE%97%E6%B3%95%E9%A2%98%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="算法题总结1反转字符串中的单词III给定一个字符串，你需要反转字符串中每个单词的字符顺序，同时仍保留空格和单词的初始顺序。  示例： 输入：”Let’s take LeetCode contest” 输出：”s’teL ekat edoCteeL tsetnoc”   提示： 在字符串中，每个单词由单个空格分隔，并且字符串中不会有任何额外的空格。 1234567891011121314151617">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://lixins319070033.github.io/2021/06/07/%E7%AE%97%E6%B3%95%E9%A2%98%E6%80%BB%E7%BB%93/3%E7%94%B5%E8%AF%9D%E5%8F%B7%E7%A0%81%E7%9A%84%E5%AD%97%E6%AF%8D%E7%BB%84%E5%90%88.jpg">
+<meta property="og:image" content="https://lixins319070033.github.io/2021/06/07/%E7%AE%97%E6%B3%95%E9%A2%98%E6%80%BB%E7%BB%93/3%E7%94%B5%E8%AF%9D%E5%8F%B7%E7%A0%81%E7%9A%84%E5%AD%97%E6%AF%8D%E7%BB%84%E5%90%882.jpg">
+<meta property="og:image" content="https://lixins319070033.github.io/2021/06/07/%E7%AE%97%E6%B3%95%E9%A2%98%E6%80%BB%E7%BB%93/6%E6%A0%BC%E9%9B%B7%E7%BC%96%E7%A0%81.jpg">
+<meta property="og:image" content="https://lixins319070033.github.io/2021/06/07/%E7%AE%97%E6%B3%95%E9%A2%98%E6%80%BB%E7%BB%93/8.jpg">
+<meta property="og:image" content="https://lixins319070033.github.io/2021/06/07/%E7%AE%97%E6%B3%95%E9%A2%98%E6%80%BB%E7%BB%93/9.jpg">
+<meta property="article:published_time" content="2021-06-07T13:29:30.000Z">
+<meta property="article:modified_time" content="2021-07-03T07:33:19.542Z">
+<meta property="article:author" content="Nice">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://lixins319070033.github.io/2021/06/07/%E7%AE%97%E6%B3%95%E9%A2%98%E6%80%BB%E7%BB%93/3%E7%94%B5%E8%AF%9D%E5%8F%B7%E7%A0%81%E7%9A%84%E5%AD%97%E6%AF%8D%E7%BB%84%E5%90%88.jpg">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    
+    <title>算法题总结 · 煜成&#39;s Studio</title>
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s infinite;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+</style>
+
+    <link rel="preload" href= "/css/style.css?v=20180824" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <link rel="stylesheet" href= "/css/mobile.css?v=20180824" media="(max-width: 980px)">
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+(function( w ){
+	"use strict";
+	// rel=preload support test
+	if( !w.loadCSS ){
+		w.loadCSS = function(){};
+	}
+	// define on the loadCSS obj
+	var rp = loadCSS.relpreload = {};
+	// rel=preload feature support test
+	// runs once and returns a function for compat purposes
+	rp.support = (function(){
+		var ret;
+		try {
+			ret = w.document.createElement( "link" ).relList.supports( "preload" );
+		} catch (e) {
+			ret = false;
+		}
+		return function(){
+			return ret;
+		};
+	})();
+
+	// if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+	// then change that media back to its intended value on load
+	rp.bindMediaToggle = function( link ){
+		// remember existing media attr for ultimate state, or default to 'all'
+		var finalMedia = link.media || "all";
+
+		function enableStylesheet(){
+			link.media = finalMedia;
+		}
+
+		// bind load handlers to enable media
+		if( link.addEventListener ){
+			link.addEventListener( "load", enableStylesheet );
+		} else if( link.attachEvent ){
+			link.attachEvent( "onload", enableStylesheet );
+		}
+
+		// Set rel and non-applicable media type to start an async request
+		// note: timeout allows this to happen async to let rendering continue in IE
+		setTimeout(function(){
+			link.rel = "stylesheet";
+			link.media = "only x";
+		});
+		// also enable media after 3 seconds,
+		// which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+		setTimeout( enableStylesheet, 3000 );
+	};
+
+	// loop through link elements in DOM
+	rp.poly = function(){
+		// double check this to prevent external calls from running
+		if( rp.support() ){
+			return;
+		}
+		var links = w.document.getElementsByTagName( "link" );
+		for( var i = 0; i < links.length; i++ ){
+			var link = links[ i ];
+			// qualify links to those with rel=preload and as=style attrs
+			if( link.rel === "preload" && link.getAttribute( "as" ) === "style" && !link.getAttribute( "data-loadcss" ) ){
+				// prevent rerunning on link
+				link.setAttribute( "data-loadcss", true );
+				// bind listeners to toggle media back
+				rp.bindMediaToggle( link );
+			}
+		}
+	};
+
+	// if unsupported, run the polyfill
+	if( !rp.support() ){
+		// run once at least
+		rp.poly();
+
+		// rerun poly on an interval until onload
+		var run = w.setInterval( rp.poly, 500 );
+		if( w.addEventListener ){
+			w.addEventListener( "load", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		} else if( w.attachEvent ){
+			w.attachEvent( "onload", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		}
+	}
+
+
+	// commonjs
+	if( typeof exports !== "undefined" ){
+		exports.loadCSS = loadCSS;
+	}
+	else {
+		w.loadCSS = loadCSS;
+	}
+}( typeof global !== "undefined" ? global : this ) );
+</script>
+
+    <link rel="icon" href= "/assets/favicon.ico" />
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js" as="script" />
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" as="script" />
+    <link rel="preload" href="/scripts/main.js" as="script" />
+    <link rel="preload" as="font" href="/font/Oswald-Regular.ttf" crossorigin>
+    <link rel="preload" as="font" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" crossorigin>
+    
+    <!-- fancybox -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script>
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+    
+        <body class="post-body">
+    
+    
+<header class="header">
+
+    <div class="read-progress"></div>
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >煜成&#39;s Studio.</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">算法题总结</a>
+            </div>
+    </div>
+    
+    <a class="home-link" href=/>煜成's Studio.</a>
+</header>
+    <div class="wrapper">
+        <div class="site-intro" style="
+
+
+
+
+
+
+
+height:50vh;
+">
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(/chi.jpg)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            算法题总结
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                
+                    <div class="post-intro-read">
+                        <span>Word count: <span class="post-count word-count">6k</span>Reading time: <span class="post-count reading-time">27 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2021/06/07</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+        
+    </div>
+</div>
+        <script>
+ 
+  // get user agent
+  var browser = {
+    versions: function () {
+      var u = window.navigator.userAgent;
+      return {
+        userAgent: u,
+        trident: u.indexOf('Trident') > -1, //IE内核
+        presto: u.indexOf('Presto') > -1, //opera内核
+        webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+        android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+        iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+        iPad: u.indexOf('iPad') > -1, //是否为iPad
+        webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+        weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+        uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+      };
+    }()
+  }
+  console.log("userAgent:" + browser.versions.userAgent);
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded');
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+      document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in');
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb(){
+    if (browser.versions.uc) {
+      console.log("UCBrowser");
+      fontLoaded();
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular']
+        },
+        loading: function () {  //所有字体开始加载
+          // console.log('loading');
+        },
+        active: function () {  //所有字体已渲染
+          fontLoaded();
+        },
+        inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout');
+          fontLoaded();
+        },
+        timeout: 5000 // Set the timeout to two seconds
+      });
+    }
+  }
+
+  function asyncErr(){
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (cb) { o.addEventListener('load', function (e) { cb(null, e); }, false); }
+    if (err) { o.addEventListener('error', function (e) { err(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+
+  var asyncLoadWithFallBack = function(arr, success, reject) {
+      var currReject = function(){
+        reject()
+        arr.shift()
+        if(arr.length)
+          async(arr[0], success, currReject)
+        }
+
+      async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack([
+    "https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js", 
+    "https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js",
+    "/lib/webfontloader.min.js"
+  ], asyncCb, asyncErr)
+</script>        
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <div class="container container-unloaded">
+            <main class="main post-page">
+    <article class="article-entry">
+        <h1 id="算法题总结"><a href="#算法题总结" class="headerlink" title="算法题总结"></a>算法题总结</h1><h3 id="1反转字符串中的单词III"><a href="#1反转字符串中的单词III" class="headerlink" title="1反转字符串中的单词III"></a>1反转字符串中的单词III</h3><p>给定一个字符串，你需要反转字符串中每个单词的字符顺序，同时仍保留空格和单词的初始顺序。</p>
+<p> 示例：</p>
+<p>输入：”Let’s take LeetCode contest” 输出：”s’teL ekat edoCteeL tsetnoc” </p>
+<p> 提示：</p>
+<p>在字符串中，每个单词由单个空格分隔，并且字符串中不会有任何额外的空格。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;第一种解法</span><br><span class="line">export default (str) &#x3D;&gt; &#123;</span><br><span class="line">	return str.split(&#39; &#39;).map(item &#x3D;&gt; &#123;</span><br><span class="line">		return item.split(&#39;&#39;).reverse().join(&#39;&#39;)</span><br><span class="line">	&#125;).join(&#39; &#39;)</span><br><span class="line">&#125;</span><br><span class="line">&#x2F;&#x2F;第二种解法，把上面的split(&#39; &#39;)换为正则表达式</span><br><span class="line">export default (str) &#x3D;&gt; &#123;</span><br><span class="line">	return str.split(&#x2F;\s&#x2F;g).map(item &#x3D;&gt; &#123;</span><br><span class="line">		return item.split(&#39;&#39;).reverse().join(&#39;&#39;)</span><br><span class="line">	&#125;).join(&#39; &#39;)</span><br><span class="line">&#125;</span><br><span class="line">&#x2F;&#x2F;第三种解法</span><br><span class="line">export default (str) &#x3D;&gt; &#123;</span><br><span class="line">	return str.match(&#x2F;[\w&#39;]+&#x2F;g).map(item &#x3D;&gt; &#123;</span><br><span class="line">		return item.split(&#39;&#39;).reverse().join(&#39;&#39;)</span><br><span class="line">	&#125;).join(&#39; &#39;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2计数二进制子串"><a href="#2计数二进制子串" class="headerlink" title="2计数二进制子串"></a>2计数二进制子串</h3><p>给定一个字符串 s，计算具有相同数量 0 和 1 的非空（连续）子字符串的数量，并且这些子字符串中的所有 0 和所有 1 都是连续的。</p>
+<p>重复出现的子串要计算它们出现的次数。</p>
+<p> 示例 1 :</p>
+<p>输入: “00110011”<br>输出: 6<br>解释: 有6个子串具有相同数量的连续1和0：“0011”，“01”，“1100”，“10”，“0011” 和 “01”。</p>
+<p>请注意，一些重复出现的子串要计算它们出现的次数。</p>
+<p>另外，“00110011”不是有效的子串，因为所有的0（和1）没有组合在一起。<br>示例 2 :</p>
+<p>输入: “10101”<br>输出: 4<br>解释: 有4个子串：“10”，“01”，“10”，“01”，它们具有相同数量的连续1和0。</p>
+<p>提示：</p>
+<p>s.length 在1到50,000之间。<br>s 只包含“0”或“1”字符。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">var countBinarySubstrings &#x3D; function (s) &#123;</span><br><span class="line">	let all &#x3D; 0;</span><br><span class="line">	&#x2F;&#x2F;匹配字符串，拿出连续的0和1的字段，返回数组</span><br><span class="line">	let m &#x3D; s.match(&#x2F;([1]+)|(0)+&#x2F;g);</span><br><span class="line">	if (m.length &gt; 1) &#123;</span><br><span class="line">		&#x2F;&#x2F;循环，相邻比较</span><br><span class="line">		for (let i &#x3D; 0; i &lt; m.length - 1; i++) &#123;</span><br><span class="line">			all +&#x3D; Math.min(m[i].length, m[i+1].length);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125; </span><br><span class="line">	return all;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3电话号码的字母组合"><a href="#3电话号码的字母组合" class="headerlink" title="3电话号码的字母组合"></a>3电话号码的字母组合</h3><p>给定一个仅包含数字 2-9 的字符串，返回所有它能表示的字母组合。答案可以按任意顺序返回。</p>
+<p>给出数字到字母的映射如下（与电话按键相同）。注意 1 不对应任何字母。</p>
+<p><img src="/2021/06/07/%E7%AE%97%E6%B3%95%E9%A2%98%E6%80%BB%E7%BB%93/3%E7%94%B5%E8%AF%9D%E5%8F%B7%E7%A0%81%E7%9A%84%E5%AD%97%E6%AF%8D%E7%BB%84%E5%90%88.jpg" alt="3电话号码的字母组合"></p>
+<p>示例 1：</p>
+<p>输入：digits = “23”<br>输出：[“ad”,”ae”,”af”,”bd”,”be”,”bf”,”cd”,”ce”,”cf”]<br>示例 2：</p>
+<p>输入：digits = “”<br>输出：[]<br>示例 3：</p>
+<p>输入：digits = “2”<br>输出：[“a”,”b”,”c”]</p>
+<p>提示：</p>
+<p>0 &lt;= digits.length &lt;= 4<br>digits[i] 是范围 [‘2’, ‘9’] 的一个数字。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">export default (str) &#x3D;&gt; &#123;</span><br><span class="line">	&#x2F;&#x2F;建立电话号码键盘映射</span><br><span class="line">	let map &#x3D; [&#39;&#39;, &#39;&#39;, &#39;abc&#39;, &#39;def&#39;, &#39;ghi&#39;, &#39;jkl&#39;, &#39;mno&#39;, &#39;pqrs&#39;, &#39;tuv&#39;, &#39;wxyz&#39;];</span><br><span class="line">	&#x2F;&#x2F;把输入字符串按单字符串分隔变成数组，234 &#x3D;&gt; [2, 3, 4]</span><br><span class="line">	let num &#x3D; str.split(&#39;&#39;);</span><br><span class="line">	&#x2F;&#x2F;保存键盘映射后的字母内容，如23 &#x3D;&gt; [&#39;abc&#39;, &#39;def&#39;]</span><br><span class="line">	let code &#x3D; [];</span><br><span class="line">	num.forEach(item &#x3D;&gt; &#123;</span><br><span class="line">		if (map[item]) &#123;</span><br><span class="line">			code.push(map[item]);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;);</span><br><span class="line">	</span><br><span class="line">	let comb &#x3D; (arr) &#x3D;&gt; &#123;</span><br><span class="line">		&#x2F;&#x2F;临时变量用来保存前两个组合的结果</span><br><span class="line">		let tmp &#x3D; [];</span><br><span class="line">		&#x2F;&#x2F;最外层的循环是遍历第一个元素，里层的循环是遍历第二个元素</span><br><span class="line">		for (let i &#x3D; 0, il &#x3D; arr[0].length; i &lt; il; i++) &#123;</span><br><span class="line">			for (let j &#x3D; 0, jl &#x3D; arr[1].length; j &lt; jl; j++) &#123;</span><br><span class="line">				tmp.push(&#96;$&#123;arr[0][i]&#125;$&#123;arr[1][j]&#125;&#96;);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		&#x2F;&#x2F;把arr的前两个用循环后的临时变量tmp取代</span><br><span class="line">		arr.splice(0, 2, tmp);</span><br><span class="line">		if (arr.length &gt; 1) &#123;</span><br><span class="line">			&#x2F;&#x2F;递归</span><br><span class="line">			comb(arr);</span><br><span class="line">		&#125;else &#123;</span><br><span class="line">			return arr[0];</span><br><span class="line">		&#125;</span><br><span class="line">		&#x2F;&#x2F;视频里这里是这么写的，我感觉应该像上面一样写更简化</span><br><span class="line">		&#x2F;&#x2F;if (arr.length &gt; 1) &#123;</span><br><span class="line">			&#x2F;&#x2F;&#x2F;&#x2F;递归</span><br><span class="line">			&#x2F;&#x2F;comb(arr);</span><br><span class="line">		&#x2F;&#x2F;&#125;else &#123;</span><br><span class="line">			&#x2F;&#x2F;return tmp;</span><br><span class="line">		&#x2F;&#x2F;&#125;</span><br><span class="line">		&#x2F;&#x2F;return arr[0];</span><br><span class="line">		&#x2F;&#x2F;截止到这，以上是视频的</span><br><span class="line">	&#125;</span><br><span class="line">	return comb(code);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>解题思路如图：</p>
+<p><img src="/2021/06/07/%E7%AE%97%E6%B3%95%E9%A2%98%E6%80%BB%E7%BB%93/3%E7%94%B5%E8%AF%9D%E5%8F%B7%E7%A0%81%E7%9A%84%E5%AD%97%E6%AF%8D%E7%BB%84%E5%90%882.jpg" alt="3电话号码的字母组合2"></p>
+<h3 id="4卡牌分组"><a href="#4卡牌分组" class="headerlink" title="4卡牌分组"></a>4卡牌分组</h3><p>给定一副牌，每张牌上都写着一个整数。</p>
+<p>此时，你需要选定一个数字 X，使我们可以将整副牌按下述规则分成 1 组或更多组：</p>
+<p>每组都有 X 张牌。<br>组内所有的牌上都写着相同的整数。<br>仅当你可选的 X &gt;= 2 时返回 true。</p>
+<p> 示例 1：</p>
+<p>输入：[1,2,3,4,4,3,2,1]<br>输出：true<br>解释：可行的分组是 [1,1]，[2,2]，[3,3]，[4,4]<br>示例 2：</p>
+<p>输入：[1,1,1,2,2,2,3,3]<br>输出：false<br>解释：没有满足要求的分组。<br>示例 3：</p>
+<p>输入：[1]<br>输出：false<br>解释：没有满足要求的分组。<br>示例 4：</p>
+<p>输入：[1,1]<br>输出：true<br>解释：可行的分组是 [1,1]<br>示例 5：</p>
+<p>输入：[1,1,2,2,2,2]<br>输出：true<br>解释：可行的分组是 [1,1]，[2,2]，[2,2]</p>
+<p>提示：</p>
+<p>1 &lt;= deck.length &lt;= 10000<br>0 &lt;= deck[i] &lt; 10000</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;视频里的解析答案</span><br><span class="line">export default (arr) &#x3D;&gt; &#123;</span><br><span class="line">	&#x2F;&#x2F;对这副牌进行排序，升序、降序都可以</span><br><span class="line">	arr.sort((a, b) &#x3D;&gt; a-b);</span><br><span class="line">	let min &#x3D; Number.MAX_SAFE_INTEGER；</span><br><span class="line">	let dst &#x3D; [];</span><br><span class="line">	let result &#x3D; true;</span><br><span class="line">	for (let i &#x3D; 0, len &#x3D; arr.length, tmp &#x3D; []; i &lt; len; i++) &#123;</span><br><span class="line">		tmp.push(arr[i]);</span><br><span class="line">		for (let j &#x3D; i + 1; j &lt; len - 1; j++) &#123;</span><br><span class="line">			if (arr[i] &#x3D;&#x3D;&#x3D; arr[j]) &#123;</span><br><span class="line">				tmp.push(arr[j]);</span><br><span class="line">			&#125;else &#123;</span><br><span class="line">				if (min &gt; tmp.length) &#123;</span><br><span class="line">					min &#x3D; tmp.length;</span><br><span class="line">				&#125;</span><br><span class="line">				&#x2F;&#x2F;这里一定要这么写，因为数组是引用类型，</span><br><span class="line">				&#x2F;&#x2F;直接dst.push(tmp)的话，最后的结果都会被最终的tmp取代</span><br><span class="line">				dst.push([].concat(tmp));</span><br><span class="line">				&#x2F;&#x2F;临时数组进行清空</span><br><span class="line">				&#x2F;&#x2F;JS高程里有写，对数组的清空应该用数组名.length &#x3D; 0来清空，</span><br><span class="line">				&#x2F;&#x2F;不应该是数组名 &#x3D; []</span><br><span class="line">				tmp.length &#x3D; 0;</span><br><span class="line">				&#x2F;&#x2F;下面这句也很关键</span><br><span class="line">				i &#x3D; j;</span><br><span class="line">				break;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	&#x2F;&#x2F;注意，下面为什么用every不用forEach，</span><br><span class="line">	&#x2F;&#x2F;因为forEach不支持跳出，不支持循环的return、break功能</span><br><span class="line">	dst.every(item &#x3D;&gt; &#123;</span><br><span class="line">		if (item.length % min !&#x3D; 0) &#123;</span><br><span class="line">			result &#x3D; false;</span><br><span class="line">			return false;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;)</span><br><span class="line">	return result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;我想到的解析答案</span><br><span class="line">export default (arr) &#x3D;&gt; &#123;</span><br><span class="line">	&#x2F;&#x2F;对这副牌进行排序，升序、降序都可以</span><br><span class="line">	arr.sort((a, b) &#x3D;&gt; a-b);</span><br><span class="line">	let min &#x3D; Number.MAX_SAFE_INTEGER；</span><br><span class="line">	let result &#x3D; true;</span><br><span class="line">	&#x2F;&#x2F;数组先转换为字符串，再匹配字符串，拿出连续的字段，返回数组</span><br><span class="line">	let dst &#x3D; arr.join(&#39;&#39;).match(&#x2F;([0]+)|(1)+|(2)+|(3)+|(4)+|(5)+|(6)+|(7)+|(8)+|(9)+&#x2F;g);</span><br><span class="line">	&#x2F;&#x2F;寻找最小组</span><br><span class="line">	for (i &#x3D; 0, len &#x3D; dst.length; i &lt; len; i++) &#123;</span><br><span class="line">		if (dst[i].length &lt; min) &#123;</span><br><span class="line">			min &#x3D; dst.length;</span><br><span class="line">	&#125;</span><br><span class="line">	dst.every(item &#x3D;&gt; &#123;</span><br><span class="line">		if (item.length % min !&#x3D; 0) &#123;</span><br><span class="line">			result &#x3D; false;</span><br><span class="line">			return false;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;)</span><br><span class="line">	return result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="5种花问题"><a href="#5种花问题" class="headerlink" title="5种花问题"></a>5种花问题</h3><p>假设有一个很长的花坛，一部分地块种植了花，另一部分却没有。可是，花不能种植在相邻的地块上，它们会争夺水源，两者都会死去。</p>
+<p>给你一个整数数组 flowerbed 表示花坛，由若干 0 和 1 组成，其中 0 表示没种植花，1 表示种植了花。另有一个数 n ，能否在不打破种植规则的情况下种入 n 朵花？能则返回 true ，不能则返回 false。</p>
+<p>示例 1：</p>
+<p>输入：flowerbed = [1,0,0,0,1], n = 1<br>输出：true<br>示例 2：</p>
+<p>输入：flowerbed = [1,0,0,0,1], n = 2<br>输出：false</p>
+<p>提示：</p>
+<p>1 &lt;= flowerbed.length &lt;= 2 * 104<br>flowerbed[i] 为 0 或 1<br>flowerbed 中不存在相邻的两朵花<br>0 &lt;= n &lt;= flowerbed.length</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">export default (arr, n) &#x3D;&gt; &#123;</span><br><span class="line">	&#x2F;&#x2F;计数器</span><br><span class="line">	let max &#x3D; 0;</span><br><span class="line">	for (let i &#x3D; 0, len &#x3D; arr.length - 1; i &lt; len; i++) &#123;</span><br><span class="line">		if (arr[i] &#x3D;&#x3D;&#x3D;0) &#123;</span><br><span class="line">			if (i &#x3D;&#x3D;&#x3D; 0 &amp;&amp; arr[1] &#x3D;&#x3D;&#x3D;0) &#123;</span><br><span class="line">				max++;</span><br><span class="line">				i++;</span><br><span class="line">			&#125;else if (arr[i - 1] &#x3D;&#x3D;&#x3D; 0 &amp;&amp; arr[i + 1] &#x3D;&#x3D;&#x3D; 0) &#123;</span><br><span class="line">				max++;</span><br><span class="line">				i++;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	return max &gt;&#x3D; n;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="6格雷编码"><a href="#6格雷编码" class="headerlink" title="6格雷编码"></a>6格雷编码</h3><p>格雷编码是一个二进制数字系统，在该系统中，两个连续的数值仅有一个位数的差异。</p>
+<p>给定一个代表编码总位数的非负整数 n，打印其格雷编码序列。即使有多个不同答案，你也只需要返回其中一种。</p>
+<p>格雷编码序列必须以 0 开头。</p>
+<p>示例 1:</p>
+<p>输入: 2 </p>
+<p>输出: [0,1,3,2] </p>
+<p>解释: </p>
+<p>00 - 0</p>
+<p>01 - 1 </p>
+<p>11 - 3</p>
+<p>10 - 2 </p>
+<p>对于给定的 n，其格雷编码序列并不唯一。 例如，[0,2,3,1] 也是一个有效的格雷编码序列。 </p>
+<p>00 - 0 </p>
+<p>10 - 2 </p>
+<p>11 - 3 </p>
+<p>01 - 1</p>
+<p>示例 2:</p>
+<p>输入: 0 </p>
+<p>输出: [0] </p>
+<p>解释: 我们定义格雷编码序列必须以 0 开头。  给定编码总位数为 n 的格雷编码序列，其长度为 2n。当 n = 0 时，长度为 2的0次方 = 1。  因此，当 n = 0 时，其格雷编码序列为 [0]。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">export default (n) &#x3D;&gt; &#123;</span><br><span class="line">	&#x2F;&#x2F;递归函数，用来算输入为n的格雷编码序列</span><br><span class="line">	let make &#x3D; (n) &#x3D;&gt; &#123;</span><br><span class="line">		if (n &#x3D;&#x3D; 1) &#123;</span><br><span class="line">			return [&#39;0&#39;, &#39;1&#39;];</span><br><span class="line">		&#125;else &#123;</span><br><span class="line">			let prev &#x3D; make(n - 1);</span><br><span class="line">			let result &#x3D; [];</span><br><span class="line">			let max &#x3D; Max.pow(2, n) -1;</span><br><span class="line">			for (let i &#x3D; 0, len &#x3D; pre.length; i &lt; len; i++) &#123;</span><br><span class="line">				result[i] &#x3D; &#96;0$&#123;pre[i]&#125;&#96;;</span><br><span class="line">				result[max - i] &#x3D; &#96;1$&#123;pre[i]&#125;&#96;;</span><br><span class="line">			&#125;</span><br><span class="line">			return result;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	return make(n);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>解析图例</p>
+<p><img src="/2021/06/07/%E7%AE%97%E6%B3%95%E9%A2%98%E6%80%BB%E7%BB%93/6%E6%A0%BC%E9%9B%B7%E7%BC%96%E7%A0%81.jpg" alt="6格雷编码"></p>
+<p>第一行为0和1并且按照中间区分，接下来的行按照中间对称，依次递归</p>
+<h3 id="7重复的子字符串"><a href="#7重复的子字符串" class="headerlink" title="7重复的子字符串"></a>7重复的子字符串</h3><p>给定一个非空的字符串，判断它是否可以由它的一个子串重复多次构成，给定的字符串只含有小写英文字母，并且长度不超过10000。</p>
+<p>示例1：</p>
+<p>输入：”abab”</p>
+<p>输出：True</p>
+<p>解释：可由子字符串”ab”重复两次构成。</p>
+<p>示例2：</p>
+<p>输入：”aba”</p>
+<p>输出：False</p>
+<p>示例3：</p>
+<p>输入：”abcabcabc”</p>
+<p>输出：True</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">export default (str) &#x3D;&gt; &#123;</span><br><span class="line">	var reg &#x3D; &#x2F;^(\w+)\1+$&#x2F;;</span><br><span class="line">	return reg.test(str);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="8正则表达式匹配"><a href="#8正则表达式匹配" class="headerlink" title="8正则表达式匹配"></a>8正则表达式匹配</h3><p>给你一个字符串 s 和一个字符规律 p，请你来实现一个支持 ‘.’ 和 ‘*’ 的正则表达式匹配。</p>
+<p>‘.’ 匹配任意单个字符</p>
+<p>‘*’ 匹配零个或多个前面的那一个元素</p>
+<p>所谓匹配，是要涵盖 整个 字符串 s的，而不是部分字符串。</p>
+<p>示例 1：</p>
+<p>输入：s = “aa” p = “a” 输出：false 解释：”a” 无法匹配 “aa” 整个字符串。 </p>
+<p>示例 2:</p>
+<p>输入：s = “aa” p = “a*” 输出：true 解释：因为 ‘*’ 代表可以匹配零个或多个前面的那一个元素, 在这里前面的元素就是 ‘a’。因此，字符串 “aa” 可被视为 ‘a’ 重复了一次。 </p>
+<p>示例 3：</p>
+<p>输入：s = “ab” p = “.<em>“ 输出：true 解释：”.</em>“ 表示可匹配零个或多个（’*’）任意字符（’.’）。 </p>
+<p>示例 4：</p>
+<p>输入：s = “aab” p = “c<em>a</em>b” 输出：true 解释：因为 ‘*’ 表示零个或多个，这里 ‘c’ 为 0 个, ‘a’ 被重复一次。因此可以匹配字符串 “aab”。 </p>
+<p>示例 5：</p>
+<p>输入：s = “mississippi” p = “mis<em>is</em>p*.” 输出：false</p>
+<p>提示：</p>
+<p>0 &lt;= s.length &lt;= 20</p>
+<p>0 &lt;= p.length &lt;= 30</p>
+<p>s 可能为空，且只包含从 a-z 的小写字母。</p>
+<p>p 可能为空，且只包含从 a-z 的小写字母，以及字符 . 和 *。</p>
+<p>保证每次出现字符 * 时，前面都匹配到有效的字符</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">export default (str, mode) &#x3D;&gt; &#123;</span><br><span class="line">	&#x2F;&#x2F;对模式变量进行正则筛选</span><br><span class="line">	&#x2F;&#x2F;筛选出来的是一个数组</span><br><span class="line">	let modeArr &#x3D; mode.match(&#x2F;([a-z.]\*)|([a-z]+(?&#x3D;(a-z.)\*|$))&#x2F;g);</span><br><span class="line">	let cur &#x3D; 0;</span><br><span class="line">	let strLen &#x3D; str.length;</span><br><span class="line">	for (let i &#x3D; 0, len &#x3D; modeArr.length; i &lt; len; i++) &#123;</span><br><span class="line">		&#x2F;&#x2F;对于模式分为三类 .*|a*|cdef</span><br><span class="line">		m &#x3D; modeArr[i].split(&#39;&#39;);</span><br><span class="line">		if (m[1] &#x3D;&#x3D;&#x3D; &#39;*&#39;) &#123;</span><br><span class="line">			if (m[0] &#x3D;&#x3D;&#x3D; &#39;.&#39;) &#123;</span><br><span class="line">				cur &#x3D; strlen;</span><br><span class="line">				break;</span><br><span class="line">			&#125;else &#123;</span><br><span class="line">				while (str[cur] &#x3D;&#x3D;&#x3D; m[0]) &#123;</span><br><span class="line">					cur++;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;else &#123;</span><br><span class="line">			for (let j &#x3D; 0, jl &#x3D; m.length; j &lt; jl; j++) &#123;</span><br><span class="line">				if (m[j] !&#x3D;&#x3D; str[cur]) &#123;</span><br><span class="line">					return false;</span><br><span class="line">				&#125;else &#123;</span><br><span class="line">					cur++;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	return cur &#x3D;&#x3D;&#x3D; strlen;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2021/06/07/%E7%AE%97%E6%B3%95%E9%A2%98%E6%80%BB%E7%BB%93/8.jpg" alt="8"></p>
+<h3 id="9冒泡排序"><a href="#9冒泡排序" class="headerlink" title="9冒泡排序"></a>9冒泡排序</h3><p><img src="/2021/06/07/%E7%AE%97%E6%B3%95%E9%A2%98%E6%80%BB%E7%BB%93/9.jpg" alt="9"></p>
+<p>时间复杂度：运行的次数；</p>
+<p>空间复杂度：占用的内存</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">export default (arr) &#x3D;&gt; &#123;</span><br><span class="line">	&#x2F;&#x2F;冒泡排序</span><br><span class="line">	&#x2F;&#x2F;循环次数</span><br><span class="line">	for (let i &#x3D; arr.length - 1; i &gt; 0; i++) &#123;</span><br><span class="line">		&#x2F;&#x2F;每次循环从最开始到结束</span><br><span class="line">		for (let j &#x3D; 0; j &lt; i; j++) &#123;</span><br><span class="line">			tmp &#x3D; arr[j];</span><br><span class="line">			if (tmp &gt; arr[j + 1]) &#123;</span><br><span class="line">				arr[j] &#x3D; arr[j + 1];</span><br><span class="line">				arr[j + 1] &#x3D; tmp;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	return arr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="10选择排序"><a href="#10选择排序" class="headerlink" title="10选择排序"></a>10选择排序</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">function selectionSort (arr) &#123;</span><br><span class="line">	&#x2F;&#x2F;选择排序</span><br><span class="line">	var len &#x3D; arr.length;</span><br><span class="line">	var minIndex, temp;</span><br><span class="line">	for (var i &#x3D; 0; i &lt; len - 1; i++) &#123;</span><br><span class="line">		minIndex &#x3D; i;</span><br><span class="line">		for (var j &#x3D; i + 1; j &lt; len; j++) &#123;</span><br><span class="line">			if (arr[j] &lt; arr[minIndex]) &#123;</span><br><span class="line">				minIndex &#x3D; j;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		temp &#x3D; arr[i];</span><br><span class="line">		arr[i] &#x3D; arr[minIndex];</span><br><span class="line">		arr[minIndex] &#x3D; temp;</span><br><span class="line">	&#125;</span><br><span class="line">	return arr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>[<a target="_blank" rel="noopener" href="https://www.cnblogs.com/onepixel/articles/7674659.html">十大经典排序算法（动图演示） - 一像素 - 博客园 (cnblogs.com)</a>](<a target="_blank" rel="noopener" href="https://www.cnblogs.com/onepixel/articles/7674659.html">十大经典排序算法（动图演示） - 一像素 - 博客园 (cnblogs.com)</a>)</p>
+<h3 id="10补–快速排序"><a href="#10补–快速排序" class="headerlink" title="10补–快速排序"></a>10补–快速排序</h3><p>从数组中选择一个元素作为基准点；<br>排序数组，所有比基准值小的元素摆放在左边，而大于基准值的摆放在右边。每次分割结束以后基准值会插入到中间去；<br>最后利用递归，将摆放在左边的数组和右边的数组在进行一次上述的1和2操作。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">var quickSort &#x3D; function (arr) &#123;</span><br><span class="line">	if (arr.length &lt;&#x3D; 1) &#123;</span><br><span class="line">		return arr;</span><br><span class="line">	&#125;</span><br><span class="line">	var pivotIndex &#x3D; Math.floor(arr.length &#x2F; 2);</span><br><span class="line">	var pivot &#x3D; arr.splice(privotIndex, 1)[0];</span><br><span class="line">	var left &#x3D; [];</span><br><span class="line">	var right &#x3D; [];</span><br><span class="line">	for (var i &#x3D; 0; i &lt; arr.length; i++) &#123;</span><br><span class="line">		if (arr[i] &lt; piovt) &#123;</span><br><span class="line">			left.push(arr[i]);</span><br><span class="line">		&#125;else &#123;</span><br><span class="line">			right.push(arr[i]);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	return quickSort(left).concat([privot], quickSort(right));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="11最大间距"><a href="#11最大间距" class="headerlink" title="11最大间距"></a>11最大间距</h3><p>给定一个无序的数组，找出数组在排序之后，相邻元素之间最大的差值。</p>
+<p>如果数组元素个数小于 2，则返回 0。</p>
+<p>示例 1:</p>
+<p>输入: [3,6,9,1] 输出: 3 解释: 排序后的数组是 [1,3,6,9], 其中相邻元素 (3,6) 和 (6,9) 之间都存在最大差值 3。</p>
+<p>示例 2:</p>
+<p>输入: [10] 输出: 0 解释: 数组元素个数小于 2，因此返回 0。</p>
+<p>说明:</p>
+<p>你可以假设数组中所有元素都是非负整数，且数值在 32 位有符号整数范围内。</p>
+<p>请尝试在线性时间复杂度和空间复杂度的条件下解决此问题。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;第一种方法，常规做法</span><br><span class="line">export default (arr) &#x3D;&gt; &#123;</span><br><span class="line">	&#x2F;&#x2F;如果数组长度小于2返回0</span><br><span class="line">	if (arr.length &lt; 2) &#123;</span><br><span class="line">		return 0;</span><br><span class="line">	&#125;</span><br><span class="line">	&#x2F;&#x2F;排序</span><br><span class="line">	arr.sort();</span><br><span class="line">	&#x2F;&#x2F;用它来保存相邻元素的最大差值</span><br><span class="line">	let max &#x3D; 0;</span><br><span class="line">	for (let i &#x3D; 0, len &#x3D; arr.length, tmp; i &lt; len; i++) &#123;</span><br><span class="line">		tmp &#x3D; arr[i + 1] - arr[i];</span><br><span class="line">		if (tmp &lt; max) &#123;</span><br><span class="line">			max &#x3D; tmp;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	return max;</span><br><span class="line">&#125;</span><br><span class="line">&#x2F;&#x2F;第二种方法，利用冒泡排序</span><br><span class="line">export default (arr) &#x3D;&gt; &#123;</span><br><span class="line">	if (arr.length &lt; 2) &#123;</span><br><span class="line">		return 0;</span><br><span class="line">	&#125;</span><br><span class="line">	let max &#x3D; 0;</span><br><span class="line">	let len &#x3D; arr.length - 1;</span><br><span class="line">	let space;</span><br><span class="line">	&#x2F;&#x2F;遍历次数这里注意，i &gt; 0,对应最后返回那里，特别重要，否则会漏解</span><br><span class="line">	for (let i &#x3D; len, tmp; i &gt; 0; i--) &#123;</span><br><span class="line">		for (let j &#x3D; 0; j &lt; i; j) &#123;</span><br><span class="line">			tmp &#x3D; arr[j];</span><br><span class="line">			if (tmp &lt; arr[j + 1]) &#123;</span><br><span class="line">				arr[j] &#x3D; arr[j + 1];</span><br><span class="line">				arr[j + 1] &#x3D; tmp;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		&#x2F;&#x2F;第二轮后才会把最后两个进行差值比较，但是这种情况只能到arr[2] - arr[1],</span><br><span class="line">		&#x2F;&#x2F;对arr[1] - arr[0]的值取不到，因为上面冒泡排序的外层遍历i &gt; 0,</span><br><span class="line">		&#x2F;&#x2F;所以要在结尾return处进行处理一下</span><br><span class="line">		if (i &lt; len) &#123;</span><br><span class="line">			space &#x3D; arr[i + 1] - arr[i];</span><br><span class="line">			if (space &gt; max) &#123;</span><br><span class="line">				max &#x3D; space;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	&#x2F;&#x2F;要在这里处理一下arr[1] - arr[0]这种情况，特别重要</span><br><span class="line">	return Math.max(max, arr[1] - arr[0]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="12按奇偶排序数组II"><a href="#12按奇偶排序数组II" class="headerlink" title="12按奇偶排序数组II"></a>12按奇偶排序数组II</h3><p>给定一个非负整数数组 A， A 中一半整数是奇数，一半整数是偶数。</p>
+<p>对数组进行排序，以便当 A[i] 为奇数时，i 也是奇数；当 A[i] 为偶数时， i 也是偶数。</p>
+<p>你可以返回任何满足上述条件的数组作为答案。</p>
+<p>示例：</p>
+<p>输入：[4,2,5,7] 输出：[4,5,2,7] 解释：[4,7,2,5]，[2,5,4,7]，[2,7,4,5] 也会被接受。 </p>
+<p>提示：</p>
+<p>2 &lt;= A.length &lt;= 20000</p>
+<p>A.length % 2 == 0</p>
+<p>0 &lt;= A[i] &lt;= 1000</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">export default (arr) &#x3D;&gt; &#123;</span><br><span class="line">	&#x2F;&#x2F;进行升序排序</span><br><span class="line">	&#x2F;&#x2F;当然，如果只是排序，完全可以把(a, b) &#x3D;&gt; a - b去掉，直接排序就行</span><br><span class="line">	arr.sort((a, b) &#x3D;&gt; a - b);</span><br><span class="line">	&#x2F;&#x2F;声明一个空数组用来存储奇偶排序后的数组</span><br><span class="line">	let r &#x3D; [];</span><br><span class="line">	&#x2F;&#x2F;记录奇数、偶数下标</span><br><span class="line">	let odd &#x3D; 1;</span><br><span class="line">	let even &#x3D; 0;</span><br><span class="line">	&#x2F;&#x2F;对数组进行遍历</span><br><span class="line">	arr.forEach(item &#x3D;&gt; &#123;</span><br><span class="line">		if (item % 2 &#x3D;&#x3D;&#x3D; 1) &#123;</span><br><span class="line">			r[odd] &#x3D; item;</span><br><span class="line">			odd +&#x3D; 2;</span><br><span class="line">		&#125;else &#123;</span><br><span class="line">			r[even] &#x3D; item;</span><br><span class="line">			even +&#x3D; 2;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;)</span><br><span class="line">	return r;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="13数组中的第K个最大元素"><a href="#13数组中的第K个最大元素" class="headerlink" title="13数组中的第K个最大元素"></a>13数组中的第K个最大元素</h3><p>在未排序的数组中找到第 k 个最大的元素。请注意，你需要找的是数组排序后的第 k 个最大的元素，而不是第 k 个不同的元素。</p>
+<p>示例 1:</p>
+<p>输入: [3,2,1,5,6,4] 和 k = 2<br>输出: 5<br>示例 2:</p>
+<p>输入: [3,2,3,1,2,4,5,5,6] 和 k = 4<br>输出: 4<br>说明:</p>
+<p>你可以假设 k 总是有效的，且 1 ≤ k ≤ 数组的长度。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;第一种解法，常规解法</span><br><span class="line">export default (arr, k) &#x3D;&gt; &#123;</span><br><span class="line">	return arr.sort((a, b) &#x3D;&gt; b - a)[k - 1];</span><br><span class="line">&#125;</span><br><span class="line">&#x2F;&#x2F;第二种解法，利用冒泡排序</span><br><span class="line">export default (arr, k) &#x3D;&gt; &#123;</span><br><span class="line">	let len &#x3D; arr.length - 1;</span><br><span class="line">	for (let i &#x3D; len, tmp; i &gt; len - k; i--) &#123;</span><br><span class="line">		for (let j &#x3D; 0; j &lt; i; j++) &#123;</span><br><span class="line">			if (arr[j] &gt; arr[j + 1]) &#123;</span><br><span class="line">				tmp &#x3D; arr[j];</span><br><span class="line">				arr[j] &#x3D; arr[j + 1];</span><br><span class="line">				arr[j + 1] &#x3D; tmp;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	return arr[len - (k - 1)];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="14缺失的第一个正数"><a href="#14缺失的第一个正数" class="headerlink" title="14缺失的第一个正数"></a>14缺失的第一个正数</h3><p>给你一个未排序的整数数组 nums ，请你找出其中没有出现的最小的正整数。</p>
+<p>进阶：你可以实现时间复杂度为 O(n) 并且只使用常数级别额外空间的解决方案吗？</p>
+<p>示例 1：</p>
+<p>输入：nums = [1,2,0]<br>输出：3<br>示例 2：</p>
+<p>输入：nums = [3,4,-1,1]<br>输出：2<br>示例 3：</p>
+<p>输入：nums = [7,8,9,11,12]<br>输出：1<br>提示：</p>
+<p>0 &lt;= nums.length &lt;= 300<br>-231 &lt;= nums[i] &lt;= 231 - 1</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;第一种方法，常规想法</span><br><span class="line">export default (arr) &#x3D;&gt; &#123;</span><br><span class="line">	&#x2F;&#x2F;过滤掉非正整数</span><br><span class="line">	arr &#x3D; arr.filter(item &#x3D;&gt; item &gt; 0);</span><br><span class="line">	&#x2F;&#x2F;正整数数组是不是为空</span><br><span class="line">	if (arr.length) &#123;</span><br><span class="line">		&#x2F;&#x2F;升序，目的：方便从左到右取最小值arr[0]</span><br><span class="line">		arr.sort((a, b) &#x3D;&gt; a - b);</span><br><span class="line">		&#x2F;&#x2F;如果第一个元素不为1，返回1</span><br><span class="line">		if (arr[0] !&#x3D;&#x3D; 1) &#123;</span><br><span class="line">			return 1;</span><br><span class="line">		&#125;else &#123;</span><br><span class="line">			&#x2F;&#x2F;从左边开始遍历，只要下一个元素和当前元素差值大于1，则就找到了</span><br><span class="line">			for (let i &#x3D; 0, len &#x3D; arr.length - 1; i &lt; len; i++) &#123;</span><br><span class="line">				if (arr[i + 1] - arr[i] &gt; 1) &#123;</span><br><span class="line">					return arr[i] + 1;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			&#x2F;&#x2F;如果数组是连续的从1开始的正整数，则最后一个数+1就是所求的值</span><br><span class="line">			return arr.pop() + 1;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;else &#123;</span><br><span class="line">		&#x2F;&#x2F;如果是个空数组，直接返回1</span><br><span class="line">		return 1;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#x2F;&#x2F;第二种方法，选择排序</span><br><span class="line">export default (arr) &#x3D;&gt; &#123;</span><br><span class="line">	arr &#x3D; arr.filter(item &#x3D;&gt; item &gt; 0);</span><br><span class="line">	if (arr.length) &#123;</span><br><span class="line">		&#x2F;&#x2F;实现选择排序，先拿到最小值，如果第一个元素不是1直接返回1，如果是1，就要比相邻元素差值</span><br><span class="line">        for (let i &#x3D; 0, len &#x3D; arr.length, min; i &lt; len; i++) &#123;</span><br><span class="line">            min &#x3D; arr[i];</span><br><span class="line">            for (let j &#x3D; i + 1; j &lt; len; j++) &#123;</span><br><span class="line">                if (arr[j] &lt; min) &#123;</span><br><span class="line">                    let c &#x3D; min;</span><br><span class="line">                    min &#x3D; arr[j];</span><br><span class="line">                    arr[j] &#x3D; c;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            arr[i] &#x3D; min;</span><br><span class="line">            &#x2F;&#x2F;i &gt; 0 表示遍历至少两次了</span><br><span class="line">            if (i &gt; 0) &#123;</span><br><span class="line">                if (arr[i] - arr[i - 1] &gt; 1) &#123;</span><br><span class="line">                    return arr[i - 1] + 1;</span><br><span class="line">                &#125;else &#123;</span><br><span class="line">                	return arr.pop() + 1;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;else &#123;</span><br><span class="line">                if (min !&#x3D;&#x3D; 1) &#123;</span><br><span class="line">                    return 1;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">	&#125;else &#123;</span><br><span class="line">		return 1;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="15复原IP地址"><a href="#15复原IP地址" class="headerlink" title="15复原IP地址"></a>15复原IP地址</h3><p>给定一个只包含数字的字符串，用以表示一个 IP 地址，返回所有可能从 s 获得的 有效 IP 地址 。你可以按任何顺序返回答案。</p>
+<p>有效 IP 地址 正好由四个整数（每个整数位于 0 到 255 之间组成，且不能含有前导 0），整数之间用 ‘.’ 分隔。</p>
+<p>例如：”0.1.2.201” 和 “192.168.1.1” 是 有效 IP 地址，但是 “0.011.255.245”、”192.168.1.312” 和 “<a href="mailto:&#49;&#57;&#50;&#x2e;&#49;&#x36;&#x38;&#64;&#x31;&#46;&#49;">&#49;&#57;&#50;&#x2e;&#49;&#x36;&#x38;&#64;&#x31;&#46;&#49;</a>“ 是 无效 IP 地址。</p>
+<p>示例 1：</p>
+<p>输入：s = “25525511135”<br>输出：[“255.255.11.135”,”255.255.111.35”]<br>示例 2：</p>
+<p>输入：s = “0000”<br>输出：[“0.0.0.0”]<br>示例 3：</p>
+<p>输入：s = “1111”<br>输出：[“1.1.1.1”]<br>示例 4：</p>
+<p>输入：s = “010010”<br>输出：[“0.10.0.10”,”0.100.1.0”]<br>示例 5：</p>
+<p>输入：s = “101023”<br>输出：[“1.0.10.23”,”1.0.102.3”,”10.1.0.23”,”10.10.2.3”,”101.0.2.3”]</p>
+<p>提示：</p>
+<p>0 &lt;= s.length &lt;= 3000<br>s 仅由数字组成</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;第一种方法(B站的视频)</span><br><span class="line">export default (s) &#x3D;&gt; &#123;</span><br><span class="line">	var ret &#x3D; [];</span><br><span class="line">	&#x2F;&#x2F;特殊情况</span><br><span class="line">	&#x2F;&#x2F;s的长度小于4（4*1）或者大于12（4*3），那么直接返回空数组</span><br><span class="line">	if (s.length &lt; 4 || s.length &gt; 12) &#123;</span><br><span class="line">		return ret;</span><br><span class="line">	&#125;</span><br><span class="line">	&#x2F;&#x2F;这个函数用来判断传入的string转换为数字是否符合ip的（0， 255）的要求</span><br><span class="line">	var isValid &#x3D; (s) &#x3D;&gt; &#123;</span><br><span class="line">		&#x2F;&#x2F;单个整数都可以，0也可以，但两位数04就不可以了</span><br><span class="line">		if (s.length &#x3D;&#x3D;&#x3D; 1) &#123;</span><br><span class="line">			return true;</span><br><span class="line">		&#125;else &#123;</span><br><span class="line">			&#x2F;&#x2F;088这样的字符串是不符合要求的</span><br><span class="line">			if (s[0] &#x3D;&#x3D;&#x3D; &#39;0&#39;) &#123;</span><br><span class="line">				return false;</span><br><span class="line">			&#125;</span><br><span class="line">			&#x2F;&#x2F;也可以是if (+s &lt; &#x3D; 255)</span><br><span class="line">			&#x2F;&#x2F;因为字符型字符串，前面加上一个+，就会将这个字符串转换为数字</span><br><span class="line">			if (Number(s) &lt;&#x3D; 255) &#123;</span><br><span class="line">				return true;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	&#x2F;&#x2F;定义一个深度探索的函数</span><br><span class="line">	&#x2F;&#x2F;s是原字符串，P是下标指针，str是已经组成的字符串，cnt是已经存在的几组数字</span><br><span class="line">	var def &#x3D; (s, p, str, cnt) &#x3D;&gt; &#123;</span><br><span class="line">		if (cnt &#x3D;&#x3D; 4 &amp;&amp; p &#x3D;&#x3D; s.length) &#123;</span><br><span class="line">			ret.push(str);</span><br><span class="line">			return;</span><br><span class="line">		&#125;</span><br><span class="line">		&#x2F;&#x2F;cnt &#x3D; 4,但是p却没走到末尾，p走到末尾但是cnt却没达到4，这两种都不行，直接放弃</span><br><span class="line">		if (cnt &#x3D;&#x3D; 4 || p &#x3D;&#x3D; s.length) &#123;</span><br><span class="line">			return;</span><br><span class="line">		&#125;</span><br><span class="line">		&#x2F;&#x2F;i可以取1，2，3</span><br><span class="line">		for (let i &#x3D; 1; i &lt; 4; i++) &#123;</span><br><span class="line">			&#x2F;&#x2F;如果指针已经走超过了末尾，直接跳出循环</span><br><span class="line">			if (p + i &gt; s.length) &#123;</span><br><span class="line">				break;</span><br><span class="line">			&#125;</span><br><span class="line">			let cutStr &#x3D; s.slice(p, p + i);</span><br><span class="line">			if (isValid(cutStr)) &#123;</span><br><span class="line">				&#x2F;&#x2F;如果指针没到末尾则不需要加上&#39;.&#39;</span><br><span class="line">				dfs(s, p + i, str + (p + i &#x3D;&#x3D; s.length ? curStr : curStr + &#39;.&#39;), cnt + 1);</span><br><span class="line">			&#125;else &#123;</span><br><span class="line">				continue;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	dfs(s, 0, &#39;&#39;, 0);</span><br><span class="line">	return ret;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="16串联所有单词的子串"><a href="#16串联所有单词的子串" class="headerlink" title="16串联所有单词的子串"></a>16串联所有单词的子串</h3><p>给定一个字符串 s 和一些长度相同的单词 words。找出 s 中恰好可以由 words 中所有单词串联形成的子串的起始位置。</p>
+<p>注意子串要与 words 中的单词完全匹配，中间不能有其他字符，但不需要考虑 words 中单词串联的顺序。</p>
+<p>示例 1：</p>
+<p>输入：<br> s = “barfoothefoobarman”,<br> words = [“foo”,”bar”]<br>输出：[0,9]<br>解释：<br>从索引 0 和 9 开始的子串分别是 “barfoo” 和 “foobar” 。<br>输出的顺序不重要, [9,0] 也是有效答案。<br>示例 2：</p>
+<p>输入：<br> s = “wordgoodgoodgoodbestword”,<br> words = [“word”,”good”,”best”,”word”]<br>输出：[]</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">export default (s, words) &#123;</span><br><span class="line">	if (!words || !words.length) return [];</span><br><span class="line">	let wordLen &#x3D; words[0].length;</span><br><span class="line">	let allWordsLen &#x3D; wordLen * words.length;</span><br><span class="line">	let ans &#x3D; [], wordMap &#x3D; &#123;&#125;;</span><br><span class="line">	&#x2F;&#x2F;遍历数组，改为Map，如果不存在则为1，如果存在则加1</span><br><span class="line">	for (let w of words) &#123;</span><br><span class="line">		wordMap[w] ? wordMap[w]++ : wordMap[w] &#x3D; 1;</span><br><span class="line">	&#125;</span><br><span class="line">	for (let i &#x3D; 0; i &lt; s.length - allWordsLen + 1; i++) &#123;</span><br><span class="line">		&#x2F;&#x2F;把wordMap复制给wn</span><br><span class="line">		let wn &#x3D; Object.assign(&#123;&#125;, wordMap);</span><br><span class="line">		&#x2F;&#x2F;遍历查验Map，</span><br><span class="line">		&#x2F;&#x2F;i + allWordsLen - wordLen +1表示从i开始到整个数组.length前一个wordLen的后一位</span><br><span class="line">		for (let j &#x3D; i; j &lt; i + allWordsLen - wordLen +1; j +&#x3D; wordLen) &#123;</span><br><span class="line">			let w &#x3D; s.slice(j, j + wordLen);</span><br><span class="line">			if (wm[w]) &#123;</span><br><span class="line">				wm[w]--;</span><br><span class="line">			&#125;else &#123;</span><br><span class="line">				break;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		if (Object.values(wm).every(n &#x3D;&gt; n &#x3D;&#x3D;&#x3D; 0)) ans.push(i);</span><br><span class="line">	&#125;</span><br><span class="line">	return ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+    </article>
+    <!-- license  -->
+    
+        <div class="license-wrapper">
+            <p>Author：<a href="https://lixins319070033.github.io">Nice</a>
+            <p>原文链接：<a href="https://lixins319070033.github.io/2021/06/07/%E7%AE%97%E6%B3%95%E9%A2%98%E6%80%BB%E7%BB%93/">https://lixins319070033.github.io/2021/06/07/%E7%AE%97%E6%B3%95%E9%A2%98%E6%80%BB%E7%BB%93/</a>
+            <p>发表日期：<a href="https://lixins319070033.github.io/2021/06/07/%E7%AE%97%E6%B3%95%E9%A2%98%E6%80%BB%E7%BB%93/">June 7th 2021, 9:29:30 pm</a>
+            <p>更新日期：<a href="https://lixins319070033.github.io/2021/06/07/%E7%AE%97%E6%B3%95%E9%A2%98%E6%80%BB%E7%BB%93/">July 3rd 2021, 3:33:19 pm</a>
+            <p>版权声明：本文采用<a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+        </div>
+    
+    <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+                <div class="nextSlogan">Next Post</div>
+                <a href= "/2021/06/08/%E4%BA%8C%E4%B8%89%E9%9D%A2-%E6%B8%B2%E6%9F%93%E6%9C%BA%E5%88%B6%E7%B1%BB/" title= "二三面_渲染机制类">
+                    <div class="nextTitle">二三面_渲染机制类</div>
+                </a>
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2021/06/05/%E4%B8%8A%E4%BC%A0%E5%8D%9A%E5%AE%A2%E5%88%B0github%E6%97%B6%E5%87%BA%E7%8E%B0%E7%9A%84%E9%97%AE%E9%A2%98-Failed-to-connect-to-github-com-port-443-Timed-out/" title= "上传博客到github时出现的问题 Failed to connect to github.com port 443: Timed out ">
+                    <div class="prevTitle">上传博客到github时出现的问题 Failed to connect to github.com port 443: Timed out </div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
+    
+    
+    <!-- gitalk评论 -->
+
+    <!-- utteranc评论 -->
+
+    <!-- partial('_partial/comment/changyan') -->
+    <!--PC版-->
+
+
+    
+    
+
+    <!-- 评论 -->
+</main>
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="mailto:1753304332@qq.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="https://github.com/LiXinS319070033" class="iconfont-archer github" target="_blank" title=github></a>
+            
+        
+    
+        
+            
+                <span class="iconfont-archer wechat" title=wechat>
+                  
+                  <img class="profile-qr" src="/weixin.png" />
+                </span>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+    </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- 不蒜子  -->
+    
+    <div class="busuanzi-container">
+    
+     
+    <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span> :)</span>
+    
+    </div>
+    
+</footer>
+    </div>
+    <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AE%97%E6%B3%95%E9%A2%98%E6%80%BB%E7%BB%93"><span class="toc-number">1.</span> <span class="toc-text">算法题总结</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E7%9A%84%E5%8D%95%E8%AF%8DIII"><span class="toc-number">1.0.1.</span> <span class="toc-text">1反转字符串中的单词III</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E8%AE%A1%E6%95%B0%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%AD%90%E4%B8%B2"><span class="toc-number">1.0.2.</span> <span class="toc-text">2计数二进制子串</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E7%94%B5%E8%AF%9D%E5%8F%B7%E7%A0%81%E7%9A%84%E5%AD%97%E6%AF%8D%E7%BB%84%E5%90%88"><span class="toc-number">1.0.3.</span> <span class="toc-text">3电话号码的字母组合</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4%E5%8D%A1%E7%89%8C%E5%88%86%E7%BB%84"><span class="toc-number">1.0.4.</span> <span class="toc-text">4卡牌分组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5%E7%A7%8D%E8%8A%B1%E9%97%AE%E9%A2%98"><span class="toc-number">1.0.5.</span> <span class="toc-text">5种花问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6%E6%A0%BC%E9%9B%B7%E7%BC%96%E7%A0%81"><span class="toc-number">1.0.6.</span> <span class="toc-text">6格雷编码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7%E9%87%8D%E5%A4%8D%E7%9A%84%E5%AD%90%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-number">1.0.7.</span> <span class="toc-text">7重复的子字符串</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%8C%B9%E9%85%8D"><span class="toc-number">1.0.8.</span> <span class="toc-text">8正则表达式匹配</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F"><span class="toc-number">1.0.9.</span> <span class="toc-text">9冒泡排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F"><span class="toc-number">1.0.10.</span> <span class="toc-text">10选择排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10%E8%A1%A5%E2%80%93%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F"><span class="toc-number">1.0.11.</span> <span class="toc-text">10补–快速排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11%E6%9C%80%E5%A4%A7%E9%97%B4%E8%B7%9D"><span class="toc-number">1.0.12.</span> <span class="toc-text">11最大间距</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12%E6%8C%89%E5%A5%87%E5%81%B6%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84II"><span class="toc-number">1.0.13.</span> <span class="toc-text">12按奇偶排序数组II</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#13%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E7%AC%ACK%E4%B8%AA%E6%9C%80%E5%A4%A7%E5%85%83%E7%B4%A0"><span class="toc-number">1.0.14.</span> <span class="toc-text">13数组中的第K个最大元素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#14%E7%BC%BA%E5%A4%B1%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%E6%AD%A3%E6%95%B0"><span class="toc-number">1.0.15.</span> <span class="toc-text">14缺失的第一个正数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#15%E5%A4%8D%E5%8E%9FIP%E5%9C%B0%E5%9D%80"><span class="toc-number">1.0.16.</span> <span class="toc-text">15复原IP地址</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#16%E4%B8%B2%E8%81%94%E6%89%80%E6%9C%89%E5%8D%95%E8%AF%8D%E7%9A%84%E5%AD%90%E4%B8%B2"><span class="toc-number">1.0.17.</span> <span class="toc-text">16串联所有单词的子串</span></a></li></ol></li></ol></li></ol>
+    </div>
+    
+    <div class="back-top iconfont-archer">&#xe639;</div>
+    <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-panel-archives">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 57
+        </div>
+        <!-- search  -->
+        
+    </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2021 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/27</span><a class="archive-post-title" href= "/2021/06/27/%E6%89%8B%E5%86%99Promise-all%E5%92%8CPromise-race/" >手写Promise.all和Promise.race</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/08</span><a class="archive-post-title" href= "/2021/06/08/%E4%BA%8C%E4%B8%89%E9%9D%A2-%E6%B8%B2%E6%9F%93%E6%9C%BA%E5%88%B6%E7%B1%BB/" >二三面_渲染机制类</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/08</span><a class="archive-post-title" href= "/2021/06/08/%E4%BA%8C%E4%B8%89%E9%9D%A2-%E8%BF%90%E8%A1%8C%E6%9C%BA%E5%88%B6%E7%B1%BB/" >二三面_运行机制类</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/08</span><a class="archive-post-title" href= "/2021/06/08/%E4%BA%8C%E4%B8%89%E9%9D%A2-%E9%94%99%E8%AF%AF%E7%9B%91%E6%8E%A7%E7%B1%BB/" >二三面_错误监控类</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/08</span><a class="archive-post-title" href= "/2021/06/08/%E4%BA%8C%E4%B8%89%E9%9D%A2-%E9%A1%B5%E9%9D%A2%E6%80%A7%E8%83%BD/" >二三面_页面性能</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/08</span><a class="archive-post-title" href= "/2021/06/08/%E7%BB%88%E9%9D%A2%EF%BC%88HR%E9%9D%A2%EF%BC%89-%E8%81%8C%E4%B8%9A%E7%AB%9E%E4%BA%89%E5%8A%9B%E5%92%8C%E8%81%8C%E4%B8%9A%E8%A7%84%E5%88%92/" >终面（HR面）_职业竞争力和职业规划</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/08</span><a class="archive-post-title" href= "/2021/06/08/%E9%9D%A2%E8%AF%95%E6%80%BB%E7%BB%93/" >面试总结</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/08</span><a class="archive-post-title" href= "/2021/06/08/%E4%B8%89%E5%9B%9B%E9%9D%A2-%E4%B8%9A%E5%8A%A1%E8%83%BD%E5%8A%9B%E5%9B%A2%E9%98%9F%E5%8D%8F%E4%BD%9C%E8%83%BD%E5%8A%9B%E4%B8%8E%E5%B8%A6%E4%BA%BA%E8%83%BD%E5%8A%9B/" >三四面_业务能力团队协作能力与带人能力</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/07</span><a class="archive-post-title" href= "/2021/06/07/%E7%AE%97%E6%B3%95%E9%A2%98%E6%80%BB%E7%BB%93/" >算法题总结</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/%E4%B8%80%E4%BA%8C%E9%9D%A2-%E5%8E%9F%E5%9E%8B%E9%93%BE/" >一二面_原型链</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/%E4%B8%80%E4%BA%8C%E9%9D%A2-%E5%AE%89%E5%85%A8%E7%B1%BB/" >一二面_安全类</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/%E4%B8%80%E4%BA%8C%E9%9D%A2-%E7%AE%97%E6%B3%95%E7%B1%BB/" >一二面_算法类</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/%E4%B8%80%E4%BA%8C%E9%9D%A2-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" >一二面_面向对象</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/%E4%B8%8A%E4%BC%A0%E5%8D%9A%E5%AE%A2%E5%88%B0github%E6%97%B6%E5%87%BA%E7%8E%B0%E7%9A%84%E9%97%AE%E9%A2%98-Failed-to-connect-to-github-com-port-443-Timed-out/" >上传博客到github时出现的问题 Failed to connect to github.com port 443: Timed out </a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/%E4%B8%80%E4%BA%8C%E9%9D%A2-%E9%80%9A%E8%AE%AF%E7%B1%BB/" >一二面_通讯类</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/%E4%B8%80%E4%BA%8C%E9%9D%A2-DOM%E4%BA%8B%E4%BB%B6%E7%B1%BB/" >一二面_DOM事件类</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/%E4%B8%80%E4%BA%8C%E9%9D%A2-CSS%E7%9B%92%E6%A8%A1%E5%9E%8B/" >一二面_CSS盒模型</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/%E4%B8%80%E4%BA%8C%E9%9D%A2-HTTP%E5%8D%8F%E8%AE%AE%E7%B1%BB/" >一二面_HTTP协议类</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/%E4%B8%80%E4%BA%8C%E9%9D%A2-%E9%A1%B5%E9%9D%A2%E5%B8%83%E5%B1%80/" >一二面_页面布局</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/20</span><a class="archive-post-title" href= "/2021/02/20/VUE%E9%A1%B9%E7%9B%AE%E6%8C%89%E9%9C%80%E5%BC%95%E5%85%A5ELEMENT-UI%EF%BC%8C%E4%BF%AE%E6%94%B9-BABELRC%E6%96%87%E4%BB%B6%E4%B9%8B%E5%90%8E%E6%8A%A5%E9%94%99/" >VUE项目按需引入ELEMENT-UI，修改.BABELRC文件之后报错</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/20</span><a class="archive-post-title" href= "/2021/02/20/react%E4%B8%AD%E5%88%9B%E5%BB%BA%E7%BB%84%E4%BB%B6/" >react中创建组件</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/20</span><a class="archive-post-title" href= "/2021/02/20/react%E6%8A%A5%E9%94%99%EF%BC%9ATypeError-Class-extends-value-undefined-is-not-a-constructor-or-null/" >react报错：TypeError: Class extends value undefined is not a constructor or null</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/20</span><a class="archive-post-title" href= "/2021/02/20/yarn-command-not-found/" >yarn: command not found</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/20</span><a class="archive-post-title" href= "/2021/02/20/%E4%BD%BF%E7%94%A8styled-components%E6%8A%A5%E9%94%99-Attempted-import-error-injectGlobal-is-not-exported-from-styled-components/" >使用styled-components报错 Attempted import error: injectGlobal is not exported from styled-components</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/20</span><a class="archive-post-title" href= "/2021/02/20/%E6%85%95%E8%AF%BE%E7%BD%91%E5%B0%8F%E7%B1%B3%E5%95%86%E5%9F%8E%E9%A1%B9%E7%9B%AE9-1-%E5%95%86%E5%93%81%E8%AF%A6%E6%83%85%E4%BA%A4%E4%BA%92%E5%AE%9E%E7%8E%B0%E8%AF%BE%E7%A8%8B%E4%B8%AD%E9%80%89%E6%8B%A9%E7%89%88%E6%9C%AC%E5%87%BA%E7%8E%B0%E7%9A%84%E5%B0%8F%E9%97%AE%E9%A2%98/" >慕课网小米商城项目9-1_商品详情交互实现课程中选择版本出现的小问题</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/09</span><a class="archive-post-title" href= "/2021/02/09/%E4%BD%BF%E7%94%A8sass%E6%97%B6%EF%BC%8C%E6%8A%A5%E9%94%99TypeError-this-getResolve-is-not-a-function-at-Object-loader/" >使用sass时，报错TypeError: this.getResolve is not a function at Object.loader</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/09</span><a class="archive-post-title" href= "/2021/02/09/%E4%BD%BF%E7%94%A8swiper%E6%8F%92%E4%BB%B6%E6%97%B6%EF%BC%8C%E6%8A%A5%E9%94%99Can-t-resolve-swiper-dist-css-swiper-css-in/" >使用swiper插件时，报错Can't resolve 'swiper/dist/css/swiper.css' in</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/09</span><a class="archive-post-title" href= "/2021/02/09/%E4%BD%BF%E7%94%A8swiper%E6%8F%92%E4%BB%B6%E6%97%B6%EF%BC%8C%E6%8A%A5%E9%94%99did-you-register-the-component-correctly-For-recursive-components-make-sure-to-provide-the-name-option/" >使用swiper插件时，报错did you register the component correctly? For recursive components, make sure to provide the name option</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/09</span><a class="archive-post-title" href= "/2021/02/09/Vue-cli%E6%90%AD%E5%BB%BA%E5%A5%BD%E9%BB%98%E8%AE%A4%E9%A1%B9%E7%9B%AE%E5%90%8E%E4%BD%BF%E7%94%A8%E8%B7%AF%E7%94%B1%E5%8A%9F%E8%83%BD%EF%BC%8C%E6%8A%A5%E9%94%99Can%E2%80%99t%20resolve%20%E2%80%98vue-router%E2%80%99%20in/" >Vue-cli搭建好默认项目后使用路由功能，报错Can’t resolve ‘vue-router’ in</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/09</span><a class="archive-post-title" href= "/2021/02/09/Vue%E9%A1%B9%E7%9B%AE%E6%B5%8F%E8%A7%88%E5%99%A8%E5%86%85Console%E4%B8%AD%E6%98%BE%E7%A4%BA-HMR-Waiting-for-update-signal-from-WDS%E2%80%A6%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" >Vue项目浏览器内Console中显示[HMR] Waiting for update signal from WDS…的解决方案</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/05</span><a class="archive-post-title" href= "/2021/02/05/VScode%E5%88%9D%E6%AC%A1%E4%BD%BF%E7%94%A8%E6%97%B6%E5%A6%82%E4%BD%95%E8%BF%90%E8%A1%8Chtml%E6%96%87%E4%BB%B6%E5%88%B0%E6%B5%8F%E8%A7%88%E5%99%A8%E4%B8%8A/" >VScode初次使用时如何运行html文件到浏览器上</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/05</span><a class="archive-post-title" href= "/2021/02/05/vue%E9%A1%B9%E7%9B%AE%E4%B8%AD%E9%83%A8%E5%88%86%E5%8A%9F%E8%83%BD%E5%9C%A8vscode%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/" >vue项目中部分功能在vscode中的使用方法</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/05</span><a class="archive-post-title" href= "/2021/02/05/%E8%BF%90%E8%A1%8Cvue%E9%A1%B9%E7%9B%AE%E6%97%B6%E6%8A%A5%E9%94%99The-template-root-requires-exactly-one-element/" >运行vue项目时报错The template root requires exactly one element</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/05</span><a class="archive-post-title" href= "/2021/02/05/vscode%E7%9A%84%E4%BB%A3%E7%A0%81%E4%B8%8A%E4%BC%A0%E5%88%B0%E6%85%95%E8%AF%BE%E7%BD%91%E4%BB%93%E5%BA%93%E6%97%B6%E4%B8%8A%E4%BC%A0%E4%B8%8D%E6%88%90%E5%8A%9F-%E6%85%95%E8%AF%BE%E7%BD%91%E9%AB%98%E4%BB%BF%E5%B0%8F%E7%B1%B3%E5%95%86%E5%9F%8E%E9%A1%B9%E7%9B%AE/" >vscode的代码上传到慕课网仓库时上传不成功--慕课网高仿小米商城项目</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/04</span><a class="archive-post-title" href= "/2021/02/04/vscode%E3%80%81sublime%E6%80%8E%E4%B9%88%E5%9C%A8%E7%A9%BA%E7%99%BD%E8%84%9A%E6%9C%AC%E4%B8%AD%E5%BF%AB%E9%80%9F%E7%94%9F%E6%88%90html5%E6%A0%87%E5%87%86%E6%A8%A1%E6%9D%BF%E6%A0%BC%E5%BC%8F/" >vscode、sublime怎么在空白脚本中快速生成html5标准模板格式</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/04</span><a class="archive-post-title" href= "/2021/02/04/vscode%E8%BD%AF%E4%BB%B6%E4%B8%AD%E7%9A%84html%E6%96%87%E4%BB%B6%E7%9A%84%E5%B8%B8%E7%94%A8%E7%9A%84%E5%BF%AB%E6%8D%B7%E6%96%B9%E5%BC%8F/" >vscode软件中的html文件的常用的快捷方式</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/04</span><a class="archive-post-title" href= "/2021/02/04/%EF%BC%88tinypng%E5%9B%BE%E7%89%87%E5%8E%8B%E7%BC%A9%EF%BC%89%E8%A7%A3%E5%86%B3CSDN%E4%B8%8A%E4%BC%A0%E4%B8%8D%E4%BA%86%E8%BF%87%E5%A4%A7%E7%9A%84%E5%9B%BE%E7%89%87%E9%97%AE%E9%A2%98/" >（tinypng图片压缩）解决CSDN上传不了过大的图片问题</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/04</span><a class="archive-post-title" href= "/2021/02/04/better-scroll%E6%BB%9A%E5%8A%A8%E5%A4%B1%E6%95%88%EF%BC%88%E5%8E%BB%E5%93%AA%E7%BD%91%E5%84%BF%E9%A1%B9%E7%9B%AE%E7%A7%BB%E5%8A%A8%E7%AB%AF%EF%BC%89/" >better-scroll滚动失效（去哪网儿项目移动端）</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/04</span><a class="archive-post-title" href= "/2021/02/04/VsCode%E4%B8%ADGit%E8%B7%AF%E5%BE%84%E7%9A%84%E8%AE%BE%E7%BD%AE/" >VsCode中git路径的设置（window系统）</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/04</span><a class="archive-post-title" href= "/2021/01/04/CSS%E4%B8%AD%E6%96%87%E5%AD%97%E5%9C%A8%E6%B0%B4%E5%B9%B3%E5%92%8C%E7%AB%96%E7%9B%B4%E6%96%B9%E5%90%91%E4%B8%8A%E9%87%8D%E5%8F%A0/" >CSS中文字在水平和竖直方向上重叠</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/04</span><a class="archive-post-title" href= "/2021/01/04/js%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%8E%E6%95%B0%E5%AD%97%E7%9B%B8%E5%8A%A0%E5%87%8F%E4%B9%98%E9%99%A4/" >js字符串与数字相加减</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2020 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/25</span><a class="archive-post-title" href= "/2020/12/25/Vue%E7%BB%9F%E4%B8%80%E6%A0%B7%E5%BC%8F%EF%BC%88reset-css%E5%92%8Cborder-css%EF%BC%89/" >Vue统一样式（reset.css和border.css）</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/20</span><a class="archive-post-title" href= "/2020/12/20/%E5%AF%B9%E8%B1%A1/" >对象</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/18</span><a class="archive-post-title" href= "/2020/12/18/RegExp%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" >RegExp正则表达式</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/15</span><a class="archive-post-title" href= "/2020/12/15/C++%E7%9A%84OpenCV%E4%BD%8E%E7%89%88%E6%9C%AC%E7%9A%84CvvImage-cpp%E5%92%8Ccvvimage-h%E6%96%87%E4%BB%B6/" >C++的OpenCV低版本的CvvImage.cpp和cvvimage.h文件</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/15</span><a class="archive-post-title" href= "/2020/12/15/JS%E4%B8%AD%E7%9A%84%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%B5%85%E6%B5%85%E4%BA%86%E8%A7%A3/" >JS中的面向对象浅浅了解</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/13</span><a class="archive-post-title" href= "/2020/12/13/JavaScript%E7%9F%A5%E8%AF%86%E7%82%B9%E6%89%A9%E5%B1%95/" >JavaScript知识点扩展</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/06</span><a class="archive-post-title" href= "/2020/12/06/ES6%E6%80%BB%E7%BB%93%E6%95%B4%E7%90%86/" >ES6总结整理</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/27</span><a class="archive-post-title" href= "/2020/09/27/HEXO%E5%8D%9A%E5%AE%A2%E7%9A%84%E6%90%AD%E5%BB%BA%E5%8F%8A%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%EF%BC%88%E4%B8%80%EF%BC%89/" >HEXO博客的搭建及环境配置（一）</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> Invalid date </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/09/27/HEXO%E5%8D%9A%E5%AE%A2%E7%9A%84%E6%90%AD%E5%BB%BA%E5%8F%8A%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%EF%BC%88%E4%BA%8C%EF%BC%89/" >HEXO博客的搭建及环境配置（二）</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2020 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/08</span><a class="archive-post-title" href= "/2020/11/08/Sass%E6%80%BB%E7%BB%93/" >Sass总结</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/28</span><a class="archive-post-title" href= "/2020/09/28/hexo%E5%8D%9A%E5%AE%A2%E4%B8%AD%E6%8F%92%E5%85%A5%E7%9A%84%E5%9B%BE%E7%89%87%E4%B8%8D%E6%98%BE%E7%A4%BA/" >hexo博客中插入的图片不显示</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/27</span><a class="archive-post-title" href= "/2020/09/27/hexo%E7%82%B9%E5%87%BB%E5%8D%9A%E5%AE%A2%E5%90%8E%E6%A0%87%E9%A2%98%E4%B8%8D%E6%98%BE%E7%A4%BA/" >hexo点击博客后标题不显示</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/27</span><a class="archive-post-title" href= "/2020/09/27/JavaScript%E5%8E%9F%E5%9E%8B%E9%93%BE/" >JavaScript原型链</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/27</span><a class="archive-post-title" href= "/2020/09/27/Typora%E3%80%81Makedown/" >Typora、Makedown</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> Invalid date </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/09/27/hexo%E4%B8%BB%E9%A2%98%E4%BF%AE%E6%94%B9/" >hexo主题修改</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2020 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/27</span><a class="archive-post-title" href= "/2020/09/27/%E7%85%9C%E6%88%90%E2%80%99studio/" >煜成’studio</a>
+        </li>
+    
+    </div>
+  </div>
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+    
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br/>
+    1、请确保node版本大于6.2<br/>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #787878; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: true
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var siteMeta = {
+        root: "/",
+        author: "Nice"
+    }
+</script>
+    <!-- CDN failover -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ === 'undefined')
+        {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/lib/jquery.min.js">\x3C/script>')
+        }
+    </script>
+    <script src="/scripts/main.js"></script>
+    <!-- algolia -->
+    
+    <!-- busuanzi  -->
+    
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    <!-- CNZZ  -->
+    
+    </div>
+    <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
+     
+    </body>
+</html>
+
+
