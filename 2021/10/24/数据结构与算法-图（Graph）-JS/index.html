@@ -1,0 +1,2301 @@
+<!DOCTYPE html>
+<html lang="en">
+    <!-- title -->
+
+
+
+
+<!-- keywords -->
+
+
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" >
+    <meta name="author" content="Nice">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="Nice">
+    
+    <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
+    
+    <meta name="description" content="">
+    <meta name="description" content="数据结构与算法-图（Graph）-JS图结构是一种与树结构相似的数据结构。图论是数学的一个分支，在数学的概念上，树是图的一种。以图为研究对象，研究顶点和边组成的图形的数学理论和方法，主要研究目的是事务之间的关系，顶点代表事务，边代表两个事务间的关系 图可以模拟很多现实的数据结构，比如家谱或公司组织架构等 图是使用几叉树都不能模拟的。图的特点：一组顶点（通常用V Vertex表示顶点的集合）；一组边">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构与算法-图（Graph）-JS">
+<meta property="og:url" content="https://lixins319070033.github.io/2021/10/24/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E5%9B%BE%EF%BC%88Graph%EF%BC%89-JS/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="数据结构与算法-图（Graph）-JS图结构是一种与树结构相似的数据结构。图论是数学的一个分支，在数学的概念上，树是图的一种。以图为研究对象，研究顶点和边组成的图形的数学理论和方法，主要研究目的是事务之间的关系，顶点代表事务，边代表两个事务间的关系 图可以模拟很多现实的数据结构，比如家谱或公司组织架构等 图是使用几叉树都不能模拟的。图的特点：一组顶点（通常用V Vertex表示顶点的集合）；一组边">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-10-24T11:48:46.000Z">
+<meta property="article:modified_time" content="2021-10-31T15:34:31.940Z">
+<meta property="article:author" content="Nice">
+<meta name="twitter:card" content="summary">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    
+    <title>数据结构与算法-图（Graph）-JS · 煜成&#39;s Studio</title>
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s infinite;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+</style>
+
+    <link rel="preload" href= "/css/style.css?v=20180824" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <link rel="stylesheet" href= "/css/mobile.css?v=20180824" media="(max-width: 980px)">
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+(function( w ){
+	"use strict";
+	// rel=preload support test
+	if( !w.loadCSS ){
+		w.loadCSS = function(){};
+	}
+	// define on the loadCSS obj
+	var rp = loadCSS.relpreload = {};
+	// rel=preload feature support test
+	// runs once and returns a function for compat purposes
+	rp.support = (function(){
+		var ret;
+		try {
+			ret = w.document.createElement( "link" ).relList.supports( "preload" );
+		} catch (e) {
+			ret = false;
+		}
+		return function(){
+			return ret;
+		};
+	})();
+
+	// if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+	// then change that media back to its intended value on load
+	rp.bindMediaToggle = function( link ){
+		// remember existing media attr for ultimate state, or default to 'all'
+		var finalMedia = link.media || "all";
+
+		function enableStylesheet(){
+			link.media = finalMedia;
+		}
+
+		// bind load handlers to enable media
+		if( link.addEventListener ){
+			link.addEventListener( "load", enableStylesheet );
+		} else if( link.attachEvent ){
+			link.attachEvent( "onload", enableStylesheet );
+		}
+
+		// Set rel and non-applicable media type to start an async request
+		// note: timeout allows this to happen async to let rendering continue in IE
+		setTimeout(function(){
+			link.rel = "stylesheet";
+			link.media = "only x";
+		});
+		// also enable media after 3 seconds,
+		// which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+		setTimeout( enableStylesheet, 3000 );
+	};
+
+	// loop through link elements in DOM
+	rp.poly = function(){
+		// double check this to prevent external calls from running
+		if( rp.support() ){
+			return;
+		}
+		var links = w.document.getElementsByTagName( "link" );
+		for( var i = 0; i < links.length; i++ ){
+			var link = links[ i ];
+			// qualify links to those with rel=preload and as=style attrs
+			if( link.rel === "preload" && link.getAttribute( "as" ) === "style" && !link.getAttribute( "data-loadcss" ) ){
+				// prevent rerunning on link
+				link.setAttribute( "data-loadcss", true );
+				// bind listeners to toggle media back
+				rp.bindMediaToggle( link );
+			}
+		}
+	};
+
+	// if unsupported, run the polyfill
+	if( !rp.support() ){
+		// run once at least
+		rp.poly();
+
+		// rerun poly on an interval until onload
+		var run = w.setInterval( rp.poly, 500 );
+		if( w.addEventListener ){
+			w.addEventListener( "load", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		} else if( w.attachEvent ){
+			w.attachEvent( "onload", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		}
+	}
+
+
+	// commonjs
+	if( typeof exports !== "undefined" ){
+		exports.loadCSS = loadCSS;
+	}
+	else {
+		w.loadCSS = loadCSS;
+	}
+}( typeof global !== "undefined" ? global : this ) );
+</script>
+
+    <link rel="icon" href= "/assets/favicon.ico" />
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js" as="script" />
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" as="script" />
+    <link rel="preload" href="/scripts/main.js" as="script" />
+    <link rel="preload" as="font" href="/font/Oswald-Regular.ttf" crossorigin>
+    <link rel="preload" as="font" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" crossorigin>
+    
+    <!-- fancybox -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script>
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+    
+        <body class="post-body">
+    
+    
+<header class="header">
+
+    <div class="read-progress"></div>
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >煜成&#39;s Studio.</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">数据结构与算法-图（Graph）-JS</a>
+            </div>
+    </div>
+    
+    <a class="home-link" href=/>煜成's Studio.</a>
+</header>
+    <div class="wrapper">
+        <div class="site-intro" style="
+
+
+
+
+
+
+
+height:50vh;
+">
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(/chi.jpg)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            数据结构与算法-图（Graph）-JS
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                
+                    <div class="post-intro-read">
+                        <span>Word count: <span class="post-count word-count">2.6k</span>Reading time: <span class="post-count reading-time">11 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2021/10/24</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+        
+    </div>
+</div>
+        <script>
+ 
+  // get user agent
+  var browser = {
+    versions: function () {
+      var u = window.navigator.userAgent;
+      return {
+        userAgent: u,
+        trident: u.indexOf('Trident') > -1, //IE内核
+        presto: u.indexOf('Presto') > -1, //opera内核
+        webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+        android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+        iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+        iPad: u.indexOf('iPad') > -1, //是否为iPad
+        webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+        weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+        uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+      };
+    }()
+  }
+  console.log("userAgent:" + browser.versions.userAgent);
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded');
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+      document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in');
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb(){
+    if (browser.versions.uc) {
+      console.log("UCBrowser");
+      fontLoaded();
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular']
+        },
+        loading: function () {  //所有字体开始加载
+          // console.log('loading');
+        },
+        active: function () {  //所有字体已渲染
+          fontLoaded();
+        },
+        inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout');
+          fontLoaded();
+        },
+        timeout: 5000 // Set the timeout to two seconds
+      });
+    }
+  }
+
+  function asyncErr(){
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (cb) { o.addEventListener('load', function (e) { cb(null, e); }, false); }
+    if (err) { o.addEventListener('error', function (e) { err(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+
+  var asyncLoadWithFallBack = function(arr, success, reject) {
+      var currReject = function(){
+        reject()
+        arr.shift()
+        if(arr.length)
+          async(arr[0], success, currReject)
+        }
+
+      async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack([
+    "https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js", 
+    "https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js",
+    "/lib/webfontloader.min.js"
+  ], asyncCb, asyncErr)
+</script>        
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <div class="container container-unloaded">
+            <main class="main post-page">
+    <article class="article-entry">
+        <h1 id="数据结构与算法-图（Graph）-JS"><a href="#数据结构与算法-图（Graph）-JS" class="headerlink" title="数据结构与算法-图（Graph）-JS"></a>数据结构与算法-图（Graph）-JS</h1><p>图结构是一种与树结构相似的数据结构。图论是数学的一个分支，在数学的概念上，树是图的一种。以图为研究对象，研究顶点和边组成的图形的数学理论和方法，主要研究目的是事务之间的关系，顶点代表事务，边代表两个事务间的关系</p>
+<p>图可以模拟很多现实的数据结构，比如家谱或公司组织架构等</p>
+<p>图是使用几叉树都不能模拟的。图的特点：一组顶点（通常用V Vertex表示顶点的集合）；一组边（通常用E Edge表示边的集合），边可以是有向的，也可以是无向的</p>
+<p>欧拉七桥问题开辟了图论与集合拓扑，欧拉最终解释这个问题无解，并给出了一笔画的充要条件是：奇点（连到一点的边的数目是奇数条）的数目不是0个就是2个。</p>
+<h4 id="图的术语："><a href="#图的术语：" class="headerlink" title="图的术语："></a>图的术语：</h4><p>顶点：图中的一个节点；边：顶点和顶点之间的连线；相邻顶点：有一条边连接在一起的顶点；度：一个顶点的度是相邻顶点的数量；路径：顶点与另一个顶点的一个连续序列；简单路径：路径不包含重复的顶点；回路：第一个顶点和最后一个顶点相同的路径称为回路；</p>
+<p>无向图：所有的边都没有方向；有向图：图中的边是有方向的；无权图：边没有携带权重；有权图：边有一定的权重；</p>
+<p>程序中如何表示图，需要体现顶点和边，顶点可以使用一个数组来存储起来或者使用链表，边的表示方法有些复杂</p>
+<p>图的一种表示方式：邻接矩阵。使用二维数组来表示顶点直接的连接，可以表示方向，也可以用数字表示权重。邻接矩阵的问题：如果图是一个稀疏图，矩阵中存在大量的0，这就意味着浪费了计算机存储空间来表示根本不存在的边。</p>
+<p>图的另一种表示方式：邻接表。可以通过数组、链表、字典、哈希表实现。邻接表的问题：计算“出度”（自己指向别人的数量）是比较简单的，计算“入度”就很麻烦了，需要遍历，可以构造一个“逆邻接表”，才能有效地计算“入度”，但是在开发中，“入度”相对用的比较少。</p>
+<p>图的遍历思想和树的遍历思想是一样的，图的遍历意味着需要将图中的每个顶点访问一遍，并且不能有重复的访问</p>
+<p>有两种算法可以对图进行遍历，广度优先搜索（Breath-First Search,BFS）深度优先搜索（Depth-First-Search,DFS），这两种遍历算法都需要明确指定第一个被访问的顶点。</p>
+<p>两种算法的思想：BFS：基于队列，入队列的顶点先被探索；DFS：基于栈或使用递归（递归本质上就是函数栈的调用），通过将顶点存入栈中，顶点是沿着路径被探索的，存在新的相邻顶点就去访问。</p>
+<p>为了记录顶点是否被访问过，使用三种颜色来反应它们的状态：白色：表示该顶点还没有被访问(没有入队列)；灰色：表示该顶点被访问过（已经入队列了），但并未被探索过（还没有获取该顶点的相邻顶点）；黑色：表示该顶点被访问过且别完全探索过（获取了该顶点的相邻顶点）</p>
+<h4 id="广度优先搜索："><a href="#广度优先搜索：" class="headerlink" title="广度优先搜索："></a>广度优先搜索：</h4><p>从指定的第一个顶点开始遍历图，新访问其所有的相邻点，当依次访问相邻点时，继续访问相邻点的相邻点。</p>
+<p>BFS实现步骤：创建一个队列Q；将白色v入队列Q（访问v），v变为灰色；如果Q非空，执行下面步骤，将灰色v从Q中取出队列，再将v所有的未被访问过的邻接点（白色）加入到队列中（被探索），此时v变为黑色，v可以进行一些其他操作，比如之后的呈现操作handler。</p>
+<h4 id="深度优先搜索："><a href="#深度优先搜索：" class="headerlink" title="深度优先搜索："></a>深度优先搜索：</h4><p>从第一个指定的顶点开始遍历图，沿着路径知道这条路径最后的顶点被访问了，接着原路回退变探索下一条路径。（广度优先搜索相当于从开始顶点逐渐扩散，深度优先搜索相当于先一条路走到黑，然后原路返回找其他岔路）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;先进行一个字典的封装</span><br><span class="line">function Dictionary() &#123;</span><br><span class="line">    &#x2F;&#x2F;字典属性</span><br><span class="line">    this.items &#x3D; &#123;&#125;;</span><br><span class="line">    &#x2F;&#x2F;字典操作方法</span><br><span class="line">    &#x2F;&#x2F;在字典中添加键值对</span><br><span class="line">    Dictionary.prototype.set &#x3D; function (key, value) &#123;</span><br><span class="line">        this.items[key] &#x3D; value;</span><br><span class="line">    &#125;</span><br><span class="line">    &#x2F;&#x2F;判断字典中是否有某个key</span><br><span class="line">    Dictionary.prototype.has &#x3D; function (key) &#123;</span><br><span class="line">        return this.items.hasOwnProperty(key);</span><br><span class="line">    &#125;</span><br><span class="line">    &#x2F;&#x2F;从字典中移除元素</span><br><span class="line">    Dictionary.prototype.remove &#x3D; function(key) &#123;</span><br><span class="line">        &#x2F;&#x2F;判断字典中是否有这个key</span><br><span class="line">        if (!this.has(key)) return false;</span><br><span class="line">        &#x2F;&#x2F;从字典中删除key</span><br><span class="line">        delete this.items[key];</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line">    &#x2F;&#x2F;根据key去获取value</span><br><span class="line">    Dictionary.prototype.get &#x3D; function (key) &#123;</span><br><span class="line">        return this.has(key) ? this.items[key] : undefined;</span><br><span class="line">    &#125;</span><br><span class="line">    &#x2F;&#x2F;获取所有的keys</span><br><span class="line">    Dictionary.prototype.keys &#x3D; function () &#123;</span><br><span class="line">        return Object.keys(this.items);</span><br><span class="line">    &#125;</span><br><span class="line">    &#x2F;&#x2F;获取所有的values</span><br><span class="line">    Dictionary.prototype.values &#x3D; function () &#123;</span><br><span class="line">        return Object.values(this.items);</span><br><span class="line">    &#125;</span><br><span class="line">    &#x2F;&#x2F;size方法</span><br><span class="line">    Dictionary.prototype.size &#x3D; function () &#123;</span><br><span class="line">        return this.keys().length;</span><br><span class="line">    &#125;</span><br><span class="line">    &#x2F;&#x2F;clear方法</span><br><span class="line">    Dictionary.prototype.clear &#x3D; function () &#123;</span><br><span class="line">        this.items &#x3D; [];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">&#x2F;&#x2F;封装队列类</span><br><span class="line">function Queue() &#123;</span><br><span class="line">    &#x2F;&#x2F;属性</span><br><span class="line">    this.items &#x3D; [];</span><br><span class="line">    &#x2F;&#x2F;方法</span><br><span class="line">    &#x2F;&#x2F;1.将元素加入到队列中</span><br><span class="line">    Queue.prototype.enqueue &#x3D; function (element) &#123;</span><br><span class="line">        this.items.push(element);</span><br><span class="line">    &#125;</span><br><span class="line">    &#x2F;&#x2F;2.从队列中删除前端元素</span><br><span class="line">    Queue.prototype.dequeue &#x3D; function () &#123;</span><br><span class="line">        return this.items.shift();</span><br><span class="line">    &#125;</span><br><span class="line">    &#x2F;&#x2F;3.查看前端的元素</span><br><span class="line">    Queue.prototype.front &#x3D; function () &#123;</span><br><span class="line">        return this.items[0];</span><br><span class="line">    &#125;</span><br><span class="line">    &#x2F;&#x2F;查看队列是否为空</span><br><span class="line">    Queue.prototype.isempty &#x3D; function () &#123;</span><br><span class="line">        return this.items.length &#x3D;&#x3D; 0;</span><br><span class="line">    &#125;</span><br><span class="line">    &#x2F;&#x2F;查看队列中的元素个数</span><br><span class="line">    Queue.prototype.size &#x3D; function () &#123;</span><br><span class="line">        return this.items.length;</span><br><span class="line">    &#125;</span><br><span class="line">    &#x2F;&#x2F;6.toString方法</span><br><span class="line">    Queue.prototype.toString &#x3D; function () &#123;</span><br><span class="line">        var resultStr &#x3D; &#39;&#39;;</span><br><span class="line">        for (var i &#x3D; 0; i &lt; this.items.length; i++) &#123;</span><br><span class="line">            resultStr +&#x3D; this.items[i];</span><br><span class="line">        &#125;</span><br><span class="line">        return resultStr;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">&#x2F;&#x2F;图结构的封装</span><br><span class="line">function Graph() &#123;</span><br><span class="line">    &#x2F;&#x2F;属性：顶点（数组）&#x2F;边（字典）</span><br><span class="line">    this.vertexes &#x3D; []; &#x2F;&#x2F;顶点</span><br><span class="line">    this.edges &#x3D; new Dictionary() &#x2F;&#x2F;边</span><br><span class="line">    &#x2F;&#x2F;方法</span><br><span class="line">    &#x2F;&#x2F;添加顶点的方法</span><br><span class="line">    Graph.prototype.addVertex &#x3D; function (v) &#123;</span><br><span class="line">        this.vertexes.push(v);</span><br><span class="line">        this.edges.set(v, []);</span><br><span class="line">    &#125;</span><br><span class="line">    &#x2F;&#x2F;添加边的方法</span><br><span class="line">    Graph.prototype.addEdge &#x3D; function (v1, v2) &#123;</span><br><span class="line">        &#x2F;&#x2F;下面两句表示的是无向图，如果是有向图，只需要写其中的句就行</span><br><span class="line">        this.edges.get(v1).push(v2);</span><br><span class="line">        this.edges.get(v2).push(v1);</span><br><span class="line">    &#125;</span><br><span class="line">    &#x2F;&#x2F;实现toString方法</span><br><span class="line">    Graph.prototype.toString &#x3D; function () &#123;</span><br><span class="line">        &#x2F;&#x2F;定义字符串，保存最终结果</span><br><span class="line">        var resultString &#x3D; &quot;&quot;;</span><br><span class="line">        &#x2F;&#x2F;遍历所有的顶点，以及顶点对应的边，达到这样效果A-&gt;B C D</span><br><span class="line">        for (var i &#x3D; 0; i &lt; this.vertexes.length; i++) &#123;</span><br><span class="line">            resultString +&#x3D; this.vertexes[i] + &#39;-&gt;&#39;;</span><br><span class="line">            var vEdges &#x3D; this.edges.get(this.vertexes[i]);</span><br><span class="line">            for (var j &#x3D; 0; j &lt; vEdges.length; j++) &#123;</span><br><span class="line">                resultString +&#x3D; vEdges[j] + &#39; &#39;;</span><br><span class="line">            &#125;</span><br><span class="line">            resultString +&#x3D; &#39;\n&#39;;</span><br><span class="line">        &#125;</span><br><span class="line">        return resultString;</span><br><span class="line">    &#125;</span><br><span class="line">    &#x2F;&#x2F;初始化状态颜色</span><br><span class="line">    Graph.prototype.initializeColor &#x3D; function () &#123;</span><br><span class="line">        var colors &#x3D; [];</span><br><span class="line">        for (var i &#x3D; 0; i &lt; this.vertexes.length; i++) &#123;</span><br><span class="line">            colors[this.vertexes[i]] &#x3D; &#39;white&#39;;</span><br><span class="line">        &#125;</span><br><span class="line">        &#x2F;&#x2F;返回的数组有很多属性，这些属性的名称为遍历的顶点名，这些属性的值都是white</span><br><span class="line">        return colors;</span><br><span class="line">    &#125;</span><br><span class="line">    &#x2F;&#x2F;实现广度优先搜索（BFS）</span><br><span class="line">    &#x2F;&#x2F;handler为呈现出来的函数</span><br><span class="line">    Graph.prototype.bfs &#x3D; function (initV, handler) &#123;</span><br><span class="line">        &#x2F;&#x2F;初始化颜色，把图的所有顶点都变为白色的，colors是个数组，这个数组的属性值都是white</span><br><span class="line">        var colors &#x3D; this.initializeColor();</span><br><span class="line">        &#x2F;&#x2F;创建队列</span><br><span class="line">        var queue &#x3D; new Queue();</span><br><span class="line">        &#x2F;&#x2F;将顶点加入到队列中</span><br><span class="line">        queue.enqueue(initV);</span><br><span class="line">        &#x2F;&#x2F;循环从队列中取出元素</span><br><span class="line">        while (!queue.isempty()) &#123;</span><br><span class="line">            &#x2F;&#x2F;将v的颜色设置为灰色</span><br><span class="line">            colors[v] &#x3D; &#39;grey&#39;;</span><br><span class="line">            &#x2F;&#x2F;从队列中取出一个顶点</span><br><span class="line">            var v &#x3D; queue.dequeue();</span><br><span class="line">            &#x2F;&#x2F;获取和顶点相连的另外顶点</span><br><span class="line">            var vList &#x3D; this.edges.get(v);</span><br><span class="line">            &#x2F;&#x2F;遍历所有的顶点并且加入到队列中</span><br><span class="line">            for (var i &#x3D; 0; i &lt; vList.length; i++) &#123;</span><br><span class="line">                var e &#x3D; vList[i];</span><br><span class="line">                if (colors[e] &#x3D;&#x3D; &#39;white&#39;) &#123;</span><br><span class="line">                    colors[e] &#x3D; &#39;grey&#39;;</span><br><span class="line">                    queue.enqueue(e);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            &#x2F;&#x2F;将顶点设置为黑色</span><br><span class="line">            colors[v] &#x3D; &#39;black&#39;;</span><br><span class="line">            &#x2F;&#x2F;处理顶点</span><br><span class="line">            handler(v);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    &#x2F;&#x2F;深度优先探索（DFS）</span><br><span class="line">    Graph.prototype.dfs &#x3D; function (initV, handler) &#123;</span><br><span class="line">        &#x2F;&#x2F;初始化颜色，白色</span><br><span class="line">        var colors &#x3D; this.initializeColor();</span><br><span class="line">        &#x2F;&#x2F;从某个顶点开始一次递归访问</span><br><span class="line">        this.dfsVisit(initV, colors, handler);</span><br><span class="line">    &#125;</span><br><span class="line">    &#x2F;&#x2F;</span><br><span class="line">    Graph.prototype.dfsVisit &#x3D; function (v, colors, handler) &#123;</span><br><span class="line">        &#x2F;&#x2F;将颜色变为灰色</span><br><span class="line">        colors[v] &#x3D; &#39;grey&#39;;</span><br><span class="line">        &#x2F;&#x2F;处理v顶点</span><br><span class="line">        handler(v);</span><br><span class="line">        &#x2F;&#x2F;访问v相连的顶点</span><br><span class="line">        var vList &#x3D; this.edges.get(v);</span><br><span class="line">        for (var i &#x3D; 0; i &lt; vList.length; i++) &#123;</span><br><span class="line">            var e &#x3D; vList[i];</span><br><span class="line">            if (colors[e] &#x3D;&#x3D; &#39;white&#39;) &#123;</span><br><span class="line">                this.dfsVisit(e, colors, handler);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        &#x2F;&#x2F;将v设置为黑色</span><br><span class="line">        colors[v] &#x3D; &#39;black&#39;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">&#x2F;&#x2F;测试代码</span><br><span class="line">&#x2F;&#x2F;创建图结构</span><br><span class="line">var graph &#x3D; new Graph();</span><br><span class="line">&#x2F;&#x2F;添加顶点</span><br><span class="line">var myVertexes &#x3D; [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;, &#39;D&#39;, &#39;E&#39;, &#39;F&#39;, &#39;G&#39;, &#39;H&#39;, &#39;I&#39;];</span><br><span class="line">&#x2F;&#x2F;不能用下面的代码直接添加顶点，理论上只是添加顶点没问题，但是少了addVertex方法为每个顶点加的边</span><br><span class="line">&#x2F;&#x2F; graph.vertexes &#x3D; myVertexes;</span><br><span class="line">for (var i &#x3D; 0; i &lt; myVertexes.length; i++) &#123;</span><br><span class="line">    graph.addVertex(myVertexes[i]);</span><br><span class="line">&#125;</span><br><span class="line">&#x2F;&#x2F;添加边</span><br><span class="line">graph.addEdge(&#39;A&#39;, &#39;B&#39;);</span><br><span class="line">graph.addEdge(&#39;A&#39;, &#39;C&#39;);</span><br><span class="line">graph.addEdge(&#39;A&#39;, &#39;D&#39;);</span><br><span class="line">graph.addEdge(&#39;C&#39;, &#39;D&#39;);</span><br><span class="line">graph.addEdge(&#39;C&#39;, &#39;G&#39;);</span><br><span class="line">graph.addEdge(&#39;D&#39;, &#39;G&#39;);</span><br><span class="line">graph.addEdge(&#39;D&#39;, &#39;H&#39;);       </span><br><span class="line">graph.addEdge(&#39;B&#39;, &#39;E&#39;);</span><br><span class="line">graph.addEdge(&#39;B&#39;, &#39;F&#39;);</span><br><span class="line">graph.addEdge(&#39;E&#39;, &#39;I&#39;);</span><br><span class="line">&#x2F;&#x2F;测试结果</span><br><span class="line">alert(graph);</span><br><span class="line">&#x2F;&#x2F;测试bfs</span><br><span class="line">var result &#x3D; &#39;&#39;;</span><br><span class="line">graph.bfs(graph.vertexes[0], function (v) &#123;</span><br><span class="line">    result +&#x3D; v + &#39; &#39;;</span><br><span class="line">&#125;)</span><br><span class="line">alert(result); &#x2F;&#x2F;A B C D E F G H I </span><br><span class="line">&#x2F;&#x2F;测试dfs</span><br><span class="line">result &#x3D; &#39;&#39;;</span><br><span class="line">graph.dfs(graph.vertexes[0], function (v) &#123;</span><br><span class="line">    result +&#x3D; v + &#39; &#39;;</span><br><span class="line">&#125;)</span><br><span class="line">alert(result); &#x2F;&#x2F;A B E I F C D G H </span><br></pre></td></tr></table></figure>
+
+
+    </article>
+    <!-- license  -->
+    
+        <div class="license-wrapper">
+            <p>Author：<a href="https://lixins319070033.github.io">Nice</a>
+            <p>原文链接：<a href="https://lixins319070033.github.io/2021/10/24/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E5%9B%BE%EF%BC%88Graph%EF%BC%89-JS/">https://lixins319070033.github.io/2021/10/24/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E5%9B%BE%EF%BC%88Graph%EF%BC%89-JS/</a>
+            <p>发表日期：<a href="https://lixins319070033.github.io/2021/10/24/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E5%9B%BE%EF%BC%88Graph%EF%BC%89-JS/">October 24th 2021, 7:48:46 pm</a>
+            <p>更新日期：<a href="https://lixins319070033.github.io/2021/10/24/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E5%9B%BE%EF%BC%88Graph%EF%BC%89-JS/">October 31st 2021, 11:34:31 pm</a>
+            <p>版权声明：本文采用<a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+        </div>
+    
+    <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+                <div class="nextSlogan">Next Post</div>
+                <a href= "/2021/10/24/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E6%A0%91%EF%BC%88Tree%EF%BC%89-JS/" title= "数据结构与算法-树（Tree）-JS">
+                    <div class="nextTitle">数据结构与算法-树（Tree）-JS</div>
+                </a>
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2021/10/24/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E5%93%88%E5%B8%8C%E8%A1%A8-JS/" title= "数据结构与算法--哈希表--JS">
+                    <div class="prevTitle">数据结构与算法--哈希表--JS</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
+    
+    
+    <!-- gitalk评论 -->
+
+    <!-- utteranc评论 -->
+
+    <!-- partial('_partial/comment/changyan') -->
+    <!--PC版-->
+
+
+    
+    
+
+    <!-- 评论 -->
+</main>
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="mailto:1753304332@qq.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="https://github.com/LiXinS319070033" class="iconfont-archer github" target="_blank" title=github></a>
+            
+        
+    
+        
+            
+                <span class="iconfont-archer wechat" title=wechat>
+                  
+                  <img class="profile-qr" src="/weixin.png" />
+                </span>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+    </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- 不蒜子  -->
+    
+    <div class="busuanzi-container">
+    
+     
+    <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span> :)</span>
+    
+    </div>
+    
+</footer>
+    </div>
+    <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E5%9B%BE%EF%BC%88Graph%EF%BC%89-JS"><span class="toc-number">1.</span> <span class="toc-text">数据结构与算法-图（Graph）-JS</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9B%BE%E7%9A%84%E6%9C%AF%E8%AF%AD%EF%BC%9A"><span class="toc-number">1.0.0.1.</span> <span class="toc-text">图的术语：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B9%BF%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2%EF%BC%9A"><span class="toc-number">1.0.0.2.</span> <span class="toc-text">广度优先搜索：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2%EF%BC%9A"><span class="toc-number">1.0.0.3.</span> <span class="toc-text">深度优先搜索：</span></a></li></ol></li></ol></li></ol></li></ol>
+    </div>
+    
+    <div class="back-top iconfont-archer">&#xe639;</div>
+    <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-panel-archives">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 72
+        </div>
+        <!-- search  -->
+        
+    </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2021 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/19</span><a class="archive-post-title" href= "/2021/12/19/JS%E7%9F%A5%E8%AF%86%E7%82%B9%E8%A1%A5%E5%85%85/" >JS知识点补充</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/21</span><a class="archive-post-title" href= "/2021/11/21/%E6%95%B0%E6%8D%AE%E5%BA%93-mysql%E6%9F%A5%E8%AF%A2%E7%BB%83%E4%B9%A0/" >数据库-mysql查询练习</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/21</span><a class="archive-post-title" href= "/2021/11/21/%E6%95%B0%E6%8D%AE%E5%BA%93-MySQL%E7%9A%84%E4%BA%8B%E5%8A%A1/" >数据库-MySQL的事务</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/14</span><a class="archive-post-title" href= "/2021/11/14/%E6%95%B0%E6%8D%AE%E5%BA%93-%E4%BD%BF%E7%94%A8%E7%BB%88%E7%AB%AF%E6%93%8D%E4%BD%9C%E6%95%B0%E6%8D%AE%E5%BA%93/" >数据库-使用终端操作数据库</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/14</span><a class="archive-post-title" href= "/2021/11/14/%E6%95%B0%E6%8D%AE%E5%BA%93-%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%89%E5%A4%A7%E8%AE%BE%E8%AE%A1%E8%8C%83%E5%BC%8F/" >数据库-数据库三大设计范式</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/07</span><a class="archive-post-title" href= "/2021/11/07/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E6%8E%92%E5%BA%8F/" >数据结构与算法--排序</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/24</span><a class="archive-post-title" href= "/2021/10/24/weka%E8%BD%AF%E4%BB%B6%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%8CCBR%E9%9D%9E%E5%81%B6%E7%84%B6%E6%80%A7%E8%A7%84%E5%88%92/" >weka软件的使用，CBR非偶然性规划</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/24</span><a class="archive-post-title" href= "/2021/10/24/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95--%E9%98%9F%E5%88%97%EF%BC%88Queue%EF%BC%89-JS/" >数据结构与算法--队列（Queue）--JS</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/24</span><a class="archive-post-title" href= "/2021/10/24/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98%E6%80%BB%E7%BB%93/" >前端面试题总结</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/24</span><a class="archive-post-title" href= "/2021/10/24/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E9%9B%86%E5%90%88%EF%BC%88Set%EF%BC%89-JS/" >数据结构与算法--集合（Set）--JS</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/24</span><a class="archive-post-title" href= "/2021/10/24/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95--%E9%93%BE%E8%A1%A8%EF%BC%88Linked%20list%EF%BC%89-JS/" >数据结构与算法--链表（Linked list）--JS</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/24</span><a class="archive-post-title" href= "/2021/10/24/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E6%A0%91%EF%BC%88Tree%EF%BC%89-JS/" >数据结构与算法-树（Tree）-JS</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/24</span><a class="archive-post-title" href= "/2021/10/24/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E5%9B%BE%EF%BC%88Graph%EF%BC%89-JS/" >数据结构与算法-图（Graph）-JS</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/24</span><a class="archive-post-title" href= "/2021/10/24/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E5%93%88%E5%B8%8C%E8%A1%A8-JS/" >数据结构与算法--哈希表--JS</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/24</span><a class="archive-post-title" href= "/2021/10/24/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95--%E6%A0%88%EF%BC%88Stack%EF%BC%89--JS/" >数据结构与算法--栈（Stack）--JS</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/27</span><a class="archive-post-title" href= "/2021/06/27/%E6%89%8B%E5%86%99Promise-all%E5%92%8CPromise-race/" >手写Promise.all和Promise.race</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/08</span><a class="archive-post-title" href= "/2021/06/08/%E4%BA%8C%E4%B8%89%E9%9D%A2-%E8%BF%90%E8%A1%8C%E6%9C%BA%E5%88%B6%E7%B1%BB/" >二三面_运行机制类</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/08</span><a class="archive-post-title" href= "/2021/06/08/%E9%9D%A2%E8%AF%95%E6%80%BB%E7%BB%93/" >面试总结</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/08</span><a class="archive-post-title" href= "/2021/06/08/%E4%BA%8C%E4%B8%89%E9%9D%A2-%E9%94%99%E8%AF%AF%E7%9B%91%E6%8E%A7%E7%B1%BB/" >二三面_错误监控类</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/08</span><a class="archive-post-title" href= "/2021/06/08/%E4%BA%8C%E4%B8%89%E9%9D%A2-%E9%A1%B5%E9%9D%A2%E6%80%A7%E8%83%BD/" >二三面_页面性能</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/08</span><a class="archive-post-title" href= "/2021/06/08/%E4%BA%8C%E4%B8%89%E9%9D%A2-%E6%B8%B2%E6%9F%93%E6%9C%BA%E5%88%B6%E7%B1%BB/" >二三面_渲染机制类</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/08</span><a class="archive-post-title" href= "/2021/06/08/%E7%BB%88%E9%9D%A2%EF%BC%88HR%E9%9D%A2%EF%BC%89-%E8%81%8C%E4%B8%9A%E7%AB%9E%E4%BA%89%E5%8A%9B%E5%92%8C%E8%81%8C%E4%B8%9A%E8%A7%84%E5%88%92/" >终面（HR面）_职业竞争力和职业规划</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/08</span><a class="archive-post-title" href= "/2021/06/08/%E4%B8%89%E5%9B%9B%E9%9D%A2-%E4%B8%9A%E5%8A%A1%E8%83%BD%E5%8A%9B%E5%9B%A2%E9%98%9F%E5%8D%8F%E4%BD%9C%E8%83%BD%E5%8A%9B%E4%B8%8E%E5%B8%A6%E4%BA%BA%E8%83%BD%E5%8A%9B/" >三四面_业务能力团队协作能力与带人能力</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/07</span><a class="archive-post-title" href= "/2021/06/07/%E7%AE%97%E6%B3%95%E9%A2%98%E6%80%BB%E7%BB%93/" >算法题总结</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/%E4%B8%80%E4%BA%8C%E9%9D%A2-%E5%8E%9F%E5%9E%8B%E9%93%BE/" >一二面_原型链</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/%E4%B8%80%E4%BA%8C%E9%9D%A2-%E5%AE%89%E5%85%A8%E7%B1%BB/" >一二面_安全类</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/%E4%B8%80%E4%BA%8C%E9%9D%A2-%E7%AE%97%E6%B3%95%E7%B1%BB/" >一二面_算法类</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/%E4%B8%80%E4%BA%8C%E9%9D%A2-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" >一二面_面向对象</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/%E4%B8%8A%E4%BC%A0%E5%8D%9A%E5%AE%A2%E5%88%B0github%E6%97%B6%E5%87%BA%E7%8E%B0%E7%9A%84%E9%97%AE%E9%A2%98-Failed-to-connect-to-github-com-port-443-Timed-out/" >上传博客到github时出现的问题 Failed to connect to github.com port 443: Timed out </a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/%E4%B8%80%E4%BA%8C%E9%9D%A2-%E9%80%9A%E8%AE%AF%E7%B1%BB/" >一二面_通讯类</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/%E4%B8%80%E4%BA%8C%E9%9D%A2-%E9%A1%B5%E9%9D%A2%E5%B8%83%E5%B1%80/" >一二面_页面布局</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> Invalid date </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/09/27/hexo%E4%B8%BB%E9%A2%98%E4%BF%AE%E6%94%B9/" >hexo主题修改</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2021 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/%E4%B8%80%E4%BA%8C%E9%9D%A2-HTTP%E5%8D%8F%E8%AE%AE%E7%B1%BB/" >一二面_HTTP协议类</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/%E4%B8%80%E4%BA%8C%E9%9D%A2-CSS%E7%9B%92%E6%A8%A1%E5%9E%8B/" >一二面_CSS盒模型</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/%E4%B8%80%E4%BA%8C%E9%9D%A2-DOM%E4%BA%8B%E4%BB%B6%E7%B1%BB/" >一二面_DOM事件类</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/20</span><a class="archive-post-title" href= "/2021/02/20/react%E4%B8%AD%E5%88%9B%E5%BB%BA%E7%BB%84%E4%BB%B6/" >react中创建组件</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/20</span><a class="archive-post-title" href= "/2021/02/20/%E4%BD%BF%E7%94%A8styled-components%E6%8A%A5%E9%94%99-Attempted-import-error-injectGlobal-is-not-exported-from-styled-components/" >使用styled-components报错 Attempted import error: injectGlobal is not exported from styled-components</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/20</span><a class="archive-post-title" href= "/2021/02/20/VUE%E9%A1%B9%E7%9B%AE%E6%8C%89%E9%9C%80%E5%BC%95%E5%85%A5ELEMENT-UI%EF%BC%8C%E4%BF%AE%E6%94%B9-BABELRC%E6%96%87%E4%BB%B6%E4%B9%8B%E5%90%8E%E6%8A%A5%E9%94%99/" >VUE项目按需引入ELEMENT-UI，修改.BABELRC文件之后报错</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/20</span><a class="archive-post-title" href= "/2021/02/20/react%E6%8A%A5%E9%94%99%EF%BC%9ATypeError-Class-extends-value-undefined-is-not-a-constructor-or-null/" >react报错：TypeError: Class extends value undefined is not a constructor or null</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/20</span><a class="archive-post-title" href= "/2021/02/20/yarn-command-not-found/" >yarn: command not found</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/20</span><a class="archive-post-title" href= "/2021/02/20/%E6%85%95%E8%AF%BE%E7%BD%91%E5%B0%8F%E7%B1%B3%E5%95%86%E5%9F%8E%E9%A1%B9%E7%9B%AE9-1-%E5%95%86%E5%93%81%E8%AF%A6%E6%83%85%E4%BA%A4%E4%BA%92%E5%AE%9E%E7%8E%B0%E8%AF%BE%E7%A8%8B%E4%B8%AD%E9%80%89%E6%8B%A9%E7%89%88%E6%9C%AC%E5%87%BA%E7%8E%B0%E7%9A%84%E5%B0%8F%E9%97%AE%E9%A2%98/" >慕课网小米商城项目9-1_商品详情交互实现课程中选择版本出现的小问题</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/09</span><a class="archive-post-title" href= "/2021/02/09/%E4%BD%BF%E7%94%A8swiper%E6%8F%92%E4%BB%B6%E6%97%B6%EF%BC%8C%E6%8A%A5%E9%94%99Can-t-resolve-swiper-dist-css-swiper-css-in/" >使用swiper插件时，报错Can't resolve 'swiper/dist/css/swiper.css' in</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/09</span><a class="archive-post-title" href= "/2021/02/09/%E4%BD%BF%E7%94%A8swiper%E6%8F%92%E4%BB%B6%E6%97%B6%EF%BC%8C%E6%8A%A5%E9%94%99did-you-register-the-component-correctly-For-recursive-components-make-sure-to-provide-the-name-option/" >使用swiper插件时，报错did you register the component correctly? For recursive components, make sure to provide the name option</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/09</span><a class="archive-post-title" href= "/2021/02/09/%E4%BD%BF%E7%94%A8sass%E6%97%B6%EF%BC%8C%E6%8A%A5%E9%94%99TypeError-this-getResolve-is-not-a-function-at-Object-loader/" >使用sass时，报错TypeError: this.getResolve is not a function at Object.loader</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/09</span><a class="archive-post-title" href= "/2021/02/09/Vue%E9%A1%B9%E7%9B%AE%E6%B5%8F%E8%A7%88%E5%99%A8%E5%86%85Console%E4%B8%AD%E6%98%BE%E7%A4%BA-HMR-Waiting-for-update-signal-from-WDS%E2%80%A6%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" >Vue项目浏览器内Console中显示[HMR] Waiting for update signal from WDS…的解决方案</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/09</span><a class="archive-post-title" href= "/2021/02/09/Vue-cli%E6%90%AD%E5%BB%BA%E5%A5%BD%E9%BB%98%E8%AE%A4%E9%A1%B9%E7%9B%AE%E5%90%8E%E4%BD%BF%E7%94%A8%E8%B7%AF%E7%94%B1%E5%8A%9F%E8%83%BD%EF%BC%8C%E6%8A%A5%E9%94%99Can%E2%80%99t%20resolve%20%E2%80%98vue-router%E2%80%99%20in/" >Vue-cli搭建好默认项目后使用路由功能，报错Can’t resolve ‘vue-router’ in</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/05</span><a class="archive-post-title" href= "/2021/02/05/vue%E9%A1%B9%E7%9B%AE%E4%B8%AD%E9%83%A8%E5%88%86%E5%8A%9F%E8%83%BD%E5%9C%A8vscode%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/" >vue项目中部分功能在vscode中的使用方法</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/05</span><a class="archive-post-title" href= "/2021/02/05/%E8%BF%90%E8%A1%8Cvue%E9%A1%B9%E7%9B%AE%E6%97%B6%E6%8A%A5%E9%94%99The-template-root-requires-exactly-one-element/" >运行vue项目时报错The template root requires exactly one element</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/05</span><a class="archive-post-title" href= "/2021/02/05/VScode%E5%88%9D%E6%AC%A1%E4%BD%BF%E7%94%A8%E6%97%B6%E5%A6%82%E4%BD%95%E8%BF%90%E8%A1%8Chtml%E6%96%87%E4%BB%B6%E5%88%B0%E6%B5%8F%E8%A7%88%E5%99%A8%E4%B8%8A/" >VScode初次使用时如何运行html文件到浏览器上</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/05</span><a class="archive-post-title" href= "/2021/02/05/vscode%E7%9A%84%E4%BB%A3%E7%A0%81%E4%B8%8A%E4%BC%A0%E5%88%B0%E6%85%95%E8%AF%BE%E7%BD%91%E4%BB%93%E5%BA%93%E6%97%B6%E4%B8%8A%E4%BC%A0%E4%B8%8D%E6%88%90%E5%8A%9F-%E6%85%95%E8%AF%BE%E7%BD%91%E9%AB%98%E4%BB%BF%E5%B0%8F%E7%B1%B3%E5%95%86%E5%9F%8E%E9%A1%B9%E7%9B%AE/" >vscode的代码上传到慕课网仓库时上传不成功--慕课网高仿小米商城项目</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/04</span><a class="archive-post-title" href= "/2021/02/04/vscode%E3%80%81sublime%E6%80%8E%E4%B9%88%E5%9C%A8%E7%A9%BA%E7%99%BD%E8%84%9A%E6%9C%AC%E4%B8%AD%E5%BF%AB%E9%80%9F%E7%94%9F%E6%88%90html5%E6%A0%87%E5%87%86%E6%A8%A1%E6%9D%BF%E6%A0%BC%E5%BC%8F/" >vscode、sublime怎么在空白脚本中快速生成html5标准模板格式</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/04</span><a class="archive-post-title" href= "/2021/02/04/%EF%BC%88tinypng%E5%9B%BE%E7%89%87%E5%8E%8B%E7%BC%A9%EF%BC%89%E8%A7%A3%E5%86%B3CSDN%E4%B8%8A%E4%BC%A0%E4%B8%8D%E4%BA%86%E8%BF%87%E5%A4%A7%E7%9A%84%E5%9B%BE%E7%89%87%E9%97%AE%E9%A2%98/" >（tinypng图片压缩）解决CSDN上传不了过大的图片问题</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/04</span><a class="archive-post-title" href= "/2021/02/04/vscode%E8%BD%AF%E4%BB%B6%E4%B8%AD%E7%9A%84html%E6%96%87%E4%BB%B6%E7%9A%84%E5%B8%B8%E7%94%A8%E7%9A%84%E5%BF%AB%E6%8D%B7%E6%96%B9%E5%BC%8F/" >vscode软件中的html文件的常用的快捷方式</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/04</span><a class="archive-post-title" href= "/2021/02/04/better-scroll%E6%BB%9A%E5%8A%A8%E5%A4%B1%E6%95%88%EF%BC%88%E5%8E%BB%E5%93%AA%E7%BD%91%E5%84%BF%E9%A1%B9%E7%9B%AE%E7%A7%BB%E5%8A%A8%E7%AB%AF%EF%BC%89/" >better-scroll滚动失效（去哪网儿项目移动端）</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/04</span><a class="archive-post-title" href= "/2021/02/04/VsCode%E4%B8%ADGit%E8%B7%AF%E5%BE%84%E7%9A%84%E8%AE%BE%E7%BD%AE/" >VsCode中git路径的设置（window系统）</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/04</span><a class="archive-post-title" href= "/2021/01/04/js%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%8E%E6%95%B0%E5%AD%97%E7%9B%B8%E5%8A%A0%E5%87%8F%E4%B9%98%E9%99%A4/" >js字符串与数字相加减</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/04</span><a class="archive-post-title" href= "/2021/01/04/CSS%E4%B8%AD%E6%96%87%E5%AD%97%E5%9C%A8%E6%B0%B4%E5%B9%B3%E5%92%8C%E7%AB%96%E7%9B%B4%E6%96%B9%E5%90%91%E4%B8%8A%E9%87%8D%E5%8F%A0/" >CSS中文字在水平和竖直方向上重叠</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2020 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/25</span><a class="archive-post-title" href= "/2020/12/25/Vue%E7%BB%9F%E4%B8%80%E6%A0%B7%E5%BC%8F%EF%BC%88reset-css%E5%92%8Cborder-css%EF%BC%89/" >Vue统一样式（reset.css和border.css）</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/20</span><a class="archive-post-title" href= "/2020/12/20/%E5%AF%B9%E8%B1%A1/" >对象</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/18</span><a class="archive-post-title" href= "/2020/12/18/RegExp%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" >RegExp正则表达式</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/15</span><a class="archive-post-title" href= "/2020/12/15/C++%E7%9A%84OpenCV%E4%BD%8E%E7%89%88%E6%9C%AC%E7%9A%84CvvImage-cpp%E5%92%8Ccvvimage-h%E6%96%87%E4%BB%B6/" >C++的OpenCV低版本的CvvImage.cpp和cvvimage.h文件</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/15</span><a class="archive-post-title" href= "/2020/12/15/JS%E4%B8%AD%E7%9A%84%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%B5%85%E6%B5%85%E4%BA%86%E8%A7%A3/" >JS中的面向对象浅浅了解</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/13</span><a class="archive-post-title" href= "/2020/12/13/JavaScript%E7%9F%A5%E8%AF%86%E7%82%B9%E6%89%A9%E5%B1%95/" >JavaScript知识点扩展</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/06</span><a class="archive-post-title" href= "/2020/12/06/ES6%E6%80%BB%E7%BB%93%E6%95%B4%E7%90%86/" >ES6总结整理</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/08</span><a class="archive-post-title" href= "/2020/11/08/Sass%E6%80%BB%E7%BB%93/" >Sass总结</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/28</span><a class="archive-post-title" href= "/2020/09/28/hexo%E5%8D%9A%E5%AE%A2%E4%B8%AD%E6%8F%92%E5%85%A5%E7%9A%84%E5%9B%BE%E7%89%87%E4%B8%8D%E6%98%BE%E7%A4%BA/" >hexo博客中插入的图片不显示</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/27</span><a class="archive-post-title" href= "/2020/09/27/hexo%E7%82%B9%E5%87%BB%E5%8D%9A%E5%AE%A2%E5%90%8E%E6%A0%87%E9%A2%98%E4%B8%8D%E6%98%BE%E7%A4%BA/" >hexo点击博客后标题不显示</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/27</span><a class="archive-post-title" href= "/2020/09/27/JavaScript%E5%8E%9F%E5%9E%8B%E9%93%BE/" >JavaScript原型链</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/27</span><a class="archive-post-title" href= "/2020/09/27/Typora%E3%80%81Makedown/" >Typora、Makedown</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> Invalid date </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/09/27/HEXO%E5%8D%9A%E5%AE%A2%E7%9A%84%E6%90%AD%E5%BB%BA%E5%8F%8A%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%EF%BC%88%E4%BA%8C%EF%BC%89/" >HEXO博客的搭建及环境配置（二）</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2020 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/27</span><a class="archive-post-title" href= "/2020/09/27/HEXO%E5%8D%9A%E5%AE%A2%E7%9A%84%E6%90%AD%E5%BB%BA%E5%8F%8A%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%EF%BC%88%E4%B8%80%EF%BC%89/" >HEXO博客的搭建及环境配置（一）</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/27</span><a class="archive-post-title" href= "/2020/09/27/%E7%85%9C%E6%88%90%E2%80%99studio/" >煜成’studio</a>
+        </li>
+    
+    </div>
+  </div>
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+    
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br/>
+    1、请确保node版本大于6.2<br/>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #787878; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: true
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var siteMeta = {
+        root: "/",
+        author: "Nice"
+    }
+</script>
+    <!-- CDN failover -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ === 'undefined')
+        {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/lib/jquery.min.js">\x3C/script>')
+        }
+    </script>
+    <script src="/scripts/main.js"></script>
+    <!-- algolia -->
+    
+    <!-- busuanzi  -->
+    
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    <!-- CNZZ  -->
+    
+    </div>
+    <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
+     
+    </body>
+</html>
+
+

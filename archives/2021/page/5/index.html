@@ -354,20 +354,20 @@
     
     
     <article class="index-post">
-        <a class="abstract-title" href = "/2021/01/04/js%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%8E%E6%95%B0%E5%AD%97%E7%9B%B8%E5%8A%A0%E5%87%8F%E4%B9%98%E9%99%A4/" >
+        <a class="abstract-title" href = "/2021/02/09/%E4%BD%BF%E7%94%A8swiper%E6%8F%92%E4%BB%B6%E6%97%B6%EF%BC%8C%E6%8A%A5%E9%94%99did-you-register-the-component-correctly-For-recursive-components-make-sure-to-provide-the-name-option/" >
             
-                <span>js字符串与数字相加减</span>
+                <span>使用swiper插件时，报错did you register the component correctly? For recursive components, make sure to provide the name option</span>
         </a>
         <div class="abstract-content">
-            js字符串与数字相加减乘除在js中当字符串与数字相加时，数字转换为string类型，起到拼接的作用；当相减时，字符串转换为number类型，即数字相加减。加减乘除中，除了加会把数字变为字符串，减乘除都会将字符串变为数字。
-12345var a &#x3D; &#39;123&#39;;var b &#x3D; a + 1;console.log(b);&#x2F;&#x2F;&#39;1231&#39;var c &#x3D; a - 1;console.log(c);&#x2F;&#x2F;122
-
-1234&#x2F;&#x2F;将&#39;010&#39;变为&#39;10&#39...
+            使用swiper插件时，报错did you register the component correctly? For recursive components, make sure to provide the “name” option（在学习慕课网小米商城的项目5-8_首页轮播功能实现课程时）
+原因：虽然已经安装了vue-awesome-swiper，但是当前的vue-awesome-swiper版本太高了
+解决方案：
+1234&#x2F;&#x2F; 卸载当前版本的vue-awesome-swipernpm uninstall vue-awesome-swiper&#x2F;&#...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
             <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/01/04</span>
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/02/09</span>
             </div>
             <!-- tags  -->
             
@@ -380,19 +380,226 @@
     
     
     <article class="index-post">
-        <a class="abstract-title" href = "/2021/01/04/CSS%E4%B8%AD%E6%96%87%E5%AD%97%E5%9C%A8%E6%B0%B4%E5%B9%B3%E5%92%8C%E7%AB%96%E7%9B%B4%E6%96%B9%E5%90%91%E4%B8%8A%E9%87%8D%E5%8F%A0/" >
+        <a class="abstract-title" href = "/2021/02/09/%E4%BD%BF%E7%94%A8swiper%E6%8F%92%E4%BB%B6%E6%97%B6%EF%BC%8C%E6%8A%A5%E9%94%99Can-t-resolve-swiper-dist-css-swiper-css-in/" >
             
-                <span>CSS中文字在水平和竖直方向上重叠</span>
+                <span>使用swiper插件时，报错Can&#39;t resolve &#39;swiper/dist/css/swiper.css&#39; in</span>
         </a>
         <div class="abstract-content">
-            css 中可以让文字在垂直和水平方向上重叠的两个属性是什么？line-height ：设置大小比字体大小 小 即可实现垂直方向上重叠
-letter-spacing ： 设置成负值即可实现水平方向上重叠
-123456789101112131415161718&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;	&lt;title&gt;&lt;&#x2F;title&gt;	&lt;style type&#x3D;&quot;text&#x2F;css&quot;&gt;		.welcome &#123;		word-break: normal;		w...
+            使用swiper插件时，报错Can’t resolve ‘swiper/dist/css/swiper.css’ in（在学习慕课网小米商城的项目5-8_首页轮播功能实现课程时）
+原因：即使安装了swiper插件依然会出现这个问题，原因是安装的swiper版本太高了
+解决方案：
+1234&#x2F;&#x2F; 先卸载掉当前版本的swipernpm uninstall swiper&#x2F;&#x2F; 再安装指定版本的swiper降低一下版本就可以了cnpm install swiper swiper@3.4.2 --save-dev
+
+
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
             <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/01/04</span>
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/02/09</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2021/02/09/%E4%BD%BF%E7%94%A8sass%E6%97%B6%EF%BC%8C%E6%8A%A5%E9%94%99TypeError-this-getResolve-is-not-a-function-at-Object-loader/" >
+            
+                <span>使用sass时，报错TypeError: this.getResolve is not a function at Object.loader</span>
+        </a>
+        <div class="abstract-content">
+            使用sass时，报错TypeError: this.getResolve is not a function at Object.loader（在学习慕课网小米商城的项目5-1NavHeader组件(1)课程时）
+原因：最开始在项目前期安装的sass的版本有问题，后来安装视频里的版本之后成功了。
+切记：只更换sass-loader的版本不更换node-sass版本是不行的，必须两者都更换版本
+解决方案：
+123456789&#x2F;&#x2F; 卸载当前node-sass版本   npm uninstall node-sass&#x2F;&#x2F; 安装指定node-sass版本  ...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/02/09</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2021/02/09/Vue%E9%A1%B9%E7%9B%AE%E6%B5%8F%E8%A7%88%E5%99%A8%E5%86%85Console%E4%B8%AD%E6%98%BE%E7%A4%BA-HMR-Waiting-for-update-signal-from-WDS%E2%80%A6%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" >
+            
+                <span>Vue项目浏览器内Console中显示[HMR] Waiting for update signal from WDS…的解决方案</span>
+        </a>
+        <div class="abstract-content">
+            Vue项目浏览器内Console中显示[HMR] Waiting for update signal from WDS…的解决方案解决方案： 在文件夹内依次找到node_modules -&gt; webpack -&gt; hot  **-&gt; **log.js，打开log.js文件，按照下面的样子注释这段话
+1234567891011module.exports &#x3D; function(level, msg)&#123;    &#x2F;&#x2F; if (shouldLog(level)) &#123;        &#x2F;&#x2F; if (level &...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/02/09</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2021/02/09/Vue-cli%E6%90%AD%E5%BB%BA%E5%A5%BD%E9%BB%98%E8%AE%A4%E9%A1%B9%E7%9B%AE%E5%90%8E%E4%BD%BF%E7%94%A8%E8%B7%AF%E7%94%B1%E5%8A%9F%E8%83%BD%EF%BC%8C%E6%8A%A5%E9%94%99Can%E2%80%99t%20resolve%20%E2%80%98vue-router%E2%80%99%20in/" >
+            
+                <span>Vue-cli搭建好默认项目后使用路由功能，报错Can’t resolve ‘vue-router’ in</span>
+        </a>
+        <div class="abstract-content">
+            Vue-cli搭建好默认项目后使用路由功能，报错Can’t resolve ‘vue-router’ in原因：缺少vue-router插件的原因，resolve的意思是找不到这个插件
+解决方案：在命令行中运行下面命令安装插件，再重启项目即可解决
+1cnpm install vue-router
+
+
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/02/09</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2021/02/05/%E8%BF%90%E8%A1%8Cvue%E9%A1%B9%E7%9B%AE%E6%97%B6%E6%8A%A5%E9%94%99The-template-root-requires-exactly-one-element/" >
+            
+                <span>运行vue项目时报错The template root requires exactly one element</span>
+        </a>
+        <div class="abstract-content">
+            运行vue项目时报错The template root requires exactly one element在终端输入npm run serve运行vue项目后，报错The template root requires exactly one element，解决方案：
+第一步：先看是否安装了Vetur插件，没有安装的话按照下图安装一下，下图用的是vscode软件
+
+第二步：安装好了Vetur插件后，依次点击文件=》首选项=》设置，然后在最上面的输入框内输入eslint来搜索 Vetur的验证模板，取消勾选Validate vue-html in using eslint-plugi...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/02/05</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2021/02/05/VScode%E5%88%9D%E6%AC%A1%E4%BD%BF%E7%94%A8%E6%97%B6%E5%A6%82%E4%BD%95%E8%BF%90%E8%A1%8Chtml%E6%96%87%E4%BB%B6%E5%88%B0%E6%B5%8F%E8%A7%88%E5%99%A8%E4%B8%8A/" >
+            
+                <span>VScode初次使用时如何运行html文件到浏览器上</span>
+        </a>
+        <div class="abstract-content">
+            VScode初次使用时如何运行html文件到浏览器上如果在vscode中创建了一个HTML文件，想要右键直接能转接到浏览器上，需要以下设置：
+如图打开拓展栏，输入open in browser即可找到该插件，点击安装即可
+
+此时右键即可看到有如图所示，可以点击Open in Default Browser（快捷键Alt+B），或者使用Open in Other Browsers（快捷键Shift+Alt+B）选择其他浏览器打开。
+
+
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/02/05</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2021/02/05/vue%E9%A1%B9%E7%9B%AE%E4%B8%AD%E9%83%A8%E5%88%86%E5%8A%9F%E8%83%BD%E5%9C%A8vscode%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/" >
+            
+                <span>vue项目中部分功能在vscode中的使用方法</span>
+        </a>
+        <div class="abstract-content">
+            vue项目中部分功能在vscode中的使用方法在vscode中vue项目分支合并的方式：ctrl+shift+p打开命令行=》搜索“Git合并”即可找到分支合并的命令
+持续更新
+
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/02/05</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2021/02/05/vscode%E7%9A%84%E4%BB%A3%E7%A0%81%E4%B8%8A%E4%BC%A0%E5%88%B0%E6%85%95%E8%AF%BE%E7%BD%91%E4%BB%93%E5%BA%93%E6%97%B6%E4%B8%8A%E4%BC%A0%E4%B8%8D%E6%88%90%E5%8A%9F-%E6%85%95%E8%AF%BE%E7%BD%91%E9%AB%98%E4%BB%BF%E5%B0%8F%E7%B1%B3%E5%95%86%E5%9F%8E%E9%A1%B9%E7%9B%AE/" >
+            
+                <span>vscode的代码上传到慕课网仓库时上传不成功--慕课网高仿小米商城项目</span>
+        </a>
+        <div class="abstract-content">
+            vscode的代码上传到慕课网仓库时上传不成功–慕课网高仿小米商城项目最近在使用Vue做慕课网的高仿小米商城的项目，在将慕课网仓库克隆到本地后，将本地通过vue-cli新建的vue项目（文件夹为Mall）按照视频全部复制到克隆到本地的仓库文件夹（文件夹为MiMall）后，发现在vscode中创建新的分支或者改动代码，提交不到慕课网网上仓库了，在最上面会提示给你个对话框让你输入提交地址或者让你关联github地址，当时我很纠结，明明按照视频做的没有差别呀，后来又重新做了一遍还是这样子，仔细思考了一下发现了端倪并成功了上传到慕课网仓库。
+原因及解决方案：通过vue-cli新建的vue项目的文...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/02/05</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2021/02/04/vscode%E8%BD%AF%E4%BB%B6%E4%B8%AD%E7%9A%84html%E6%96%87%E4%BB%B6%E7%9A%84%E5%B8%B8%E7%94%A8%E7%9A%84%E5%BF%AB%E6%8D%B7%E6%96%B9%E5%BC%8F/" >
+            
+                <span>vscode软件中的html文件的常用的快捷方式</span>
+        </a>
+        <div class="abstract-content">
+            vscode软件中的html文件的常用的快捷方式1234567891011121314&#x2F;&#x2F;输入article.left，显示的效果为&lt;article class&#x3D;&quot;left&quot;&gt;&lt;&#x2F;article&gt;&#x2F;&#x2F;输入div.left+div.right+div.center，显示的效果为&lt;div class&#x3D;&quot;left&quot;&gt;&lt;&#x2F;div&gt;&lt;div class&#x3D;&quot;right&quot;&gt;&lt;&#x2F;d...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/02/04</span>
             </div>
             <!-- tags  -->
             
@@ -402,7 +609,7 @@ letter-spacing ： 设置成负值即可实现水平方向上重叠
     <!-- paginator  -->
     
     <nav class="page-nav">
-        <a class="extend prev" rel="prev" href="/archives/2021/page/4/">&lt; PREV</a><a class="page-number" href="/archives/2021/">1</a><span class="space">&hellip;</span><a class="page-number" href="/archives/2021/page/3/">3</a><a class="page-number" href="/archives/2021/page/4/">4</a><span class="page-number current">5</span>
+        <a class="extend prev" rel="prev" href="/archives/2021/page/4/">&lt; PREV</a><a class="page-number" href="/archives/2021/">1</a><span class="space">&hellip;</span><a class="page-number" href="/archives/2021/page/3/">3</a><a class="page-number" href="/archives/2021/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/archives/2021/page/6/">6</a><a class="extend next" rel="next" href="/archives/2021/page/6/">NEXT &gt;</a>
     </nav>
     
 </main>
@@ -1324,9 +1531,399 @@ letter-spacing ： 设置成负值即可实现水平方向上重叠
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 58
+        Total : 72
         </div>
         <!-- search  -->
         
@@ -1342,6 +1939,76 @@ letter-spacing ： 设置成负值即可实现水平方向上重叠
     
     
         <li class="archive-post-item">
+            <span class="archive-post-date">12/19</span><a class="archive-post-title" href= "/2021/12/19/JS%E7%9F%A5%E8%AF%86%E7%82%B9%E8%A1%A5%E5%85%85/" >JS知识点补充</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/21</span><a class="archive-post-title" href= "/2021/11/21/%E6%95%B0%E6%8D%AE%E5%BA%93-mysql%E6%9F%A5%E8%AF%A2%E7%BB%83%E4%B9%A0/" >数据库-mysql查询练习</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/21</span><a class="archive-post-title" href= "/2021/11/21/%E6%95%B0%E6%8D%AE%E5%BA%93-MySQL%E7%9A%84%E4%BA%8B%E5%8A%A1/" >数据库-MySQL的事务</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/14</span><a class="archive-post-title" href= "/2021/11/14/%E6%95%B0%E6%8D%AE%E5%BA%93-%E4%BD%BF%E7%94%A8%E7%BB%88%E7%AB%AF%E6%93%8D%E4%BD%9C%E6%95%B0%E6%8D%AE%E5%BA%93/" >数据库-使用终端操作数据库</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/14</span><a class="archive-post-title" href= "/2021/11/14/%E6%95%B0%E6%8D%AE%E5%BA%93-%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%89%E5%A4%A7%E8%AE%BE%E8%AE%A1%E8%8C%83%E5%BC%8F/" >数据库-数据库三大设计范式</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/07</span><a class="archive-post-title" href= "/2021/11/07/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E6%8E%92%E5%BA%8F/" >数据结构与算法--排序</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/24</span><a class="archive-post-title" href= "/2021/10/24/weka%E8%BD%AF%E4%BB%B6%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%8CCBR%E9%9D%9E%E5%81%B6%E7%84%B6%E6%80%A7%E8%A7%84%E5%88%92/" >weka软件的使用，CBR非偶然性规划</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/24</span><a class="archive-post-title" href= "/2021/10/24/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95--%E9%98%9F%E5%88%97%EF%BC%88Queue%EF%BC%89-JS/" >数据结构与算法--队列（Queue）--JS</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/24</span><a class="archive-post-title" href= "/2021/10/24/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98%E6%80%BB%E7%BB%93/" >前端面试题总结</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/24</span><a class="archive-post-title" href= "/2021/10/24/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E9%9B%86%E5%90%88%EF%BC%88Set%EF%BC%89-JS/" >数据结构与算法--集合（Set）--JS</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/24</span><a class="archive-post-title" href= "/2021/10/24/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95--%E9%93%BE%E8%A1%A8%EF%BC%88Linked%20list%EF%BC%89-JS/" >数据结构与算法--链表（Linked list）--JS</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/24</span><a class="archive-post-title" href= "/2021/10/24/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E6%A0%91%EF%BC%88Tree%EF%BC%89-JS/" >数据结构与算法-树（Tree）-JS</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/24</span><a class="archive-post-title" href= "/2021/10/24/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E5%9B%BE%EF%BC%88Graph%EF%BC%89-JS/" >数据结构与算法-图（Graph）-JS</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/24</span><a class="archive-post-title" href= "/2021/10/24/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E5%93%88%E5%B8%8C%E8%A1%A8-JS/" >数据结构与算法--哈希表--JS</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
             <span class="archive-post-date">10/24</span><a class="archive-post-title" href= "/2021/10/24/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95--%E6%A0%88%EF%BC%88Stack%EF%BC%89--JS/" >数据结构与算法--栈（Stack）--JS</a>
         </li>
     
@@ -1352,12 +2019,12 @@ letter-spacing ： 设置成负值即可实现水平方向上重叠
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">06/08</span><a class="archive-post-title" href= "/2021/06/08/%E4%BA%8C%E4%B8%89%E9%9D%A2-%E6%B8%B2%E6%9F%93%E6%9C%BA%E5%88%B6%E7%B1%BB/" >二三面_渲染机制类</a>
+            <span class="archive-post-date">06/08</span><a class="archive-post-title" href= "/2021/06/08/%E4%BA%8C%E4%B8%89%E9%9D%A2-%E8%BF%90%E8%A1%8C%E6%9C%BA%E5%88%B6%E7%B1%BB/" >二三面_运行机制类</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">06/08</span><a class="archive-post-title" href= "/2021/06/08/%E4%BA%8C%E4%B8%89%E9%9D%A2-%E8%BF%90%E8%A1%8C%E6%9C%BA%E5%88%B6%E7%B1%BB/" >二三面_运行机制类</a>
+            <span class="archive-post-date">06/08</span><a class="archive-post-title" href= "/2021/06/08/%E9%9D%A2%E8%AF%95%E6%80%BB%E7%BB%93/" >面试总结</a>
         </li>
     
     
@@ -1372,12 +2039,12 @@ letter-spacing ： 设置成负值即可实现水平方向上重叠
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">06/08</span><a class="archive-post-title" href= "/2021/06/08/%E7%BB%88%E9%9D%A2%EF%BC%88HR%E9%9D%A2%EF%BC%89-%E8%81%8C%E4%B8%9A%E7%AB%9E%E4%BA%89%E5%8A%9B%E5%92%8C%E8%81%8C%E4%B8%9A%E8%A7%84%E5%88%92/" >终面（HR面）_职业竞争力和职业规划</a>
+            <span class="archive-post-date">06/08</span><a class="archive-post-title" href= "/2021/06/08/%E4%BA%8C%E4%B8%89%E9%9D%A2-%E6%B8%B2%E6%9F%93%E6%9C%BA%E5%88%B6%E7%B1%BB/" >二三面_渲染机制类</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">06/08</span><a class="archive-post-title" href= "/2021/06/08/%E9%9D%A2%E8%AF%95%E6%80%BB%E7%BB%93/" >面试总结</a>
+            <span class="archive-post-date">06/08</span><a class="archive-post-title" href= "/2021/06/08/%E7%BB%88%E9%9D%A2%EF%BC%88HR%E9%9D%A2%EF%BC%89-%E8%81%8C%E4%B8%9A%E7%AB%9E%E4%BA%89%E5%8A%9B%E5%92%8C%E8%81%8C%E4%B8%9A%E8%A7%84%E5%88%92/" >终面（HR面）_职业竞争力和职业规划</a>
         </li>
     
     
@@ -1422,6 +2089,39 @@ letter-spacing ： 设置成负值即可实现水平方向上重叠
     
     
         <li class="archive-post-item">
+            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/%E4%B8%80%E4%BA%8C%E9%9D%A2-%E9%A1%B5%E9%9D%A2%E5%B8%83%E5%B1%80/" >一二面_页面布局</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> Invalid date </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/09/27/hexo%E4%B8%BB%E9%A2%98%E4%BF%AE%E6%94%B9/" >hexo主题修改</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2021 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/%E4%B8%80%E4%BA%8C%E9%9D%A2-HTTP%E5%8D%8F%E8%AE%AE%E7%B1%BB/" >一二面_HTTP协议类</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
             <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/%E4%B8%80%E4%BA%8C%E9%9D%A2-CSS%E7%9B%92%E6%A8%A1%E5%9E%8B/" >一二面_CSS盒模型</a>
         </li>
     
@@ -1432,22 +2132,17 @@ letter-spacing ： 设置成负值即可实现水平方向上重叠
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/%E4%B8%80%E4%BA%8C%E9%9D%A2-HTTP%E5%8D%8F%E8%AE%AE%E7%B1%BB/" >一二面_HTTP协议类</a>
+            <span class="archive-post-date">02/20</span><a class="archive-post-title" href= "/2021/02/20/react%E4%B8%AD%E5%88%9B%E5%BB%BA%E7%BB%84%E4%BB%B6/" >react中创建组件</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/%E4%B8%80%E4%BA%8C%E9%9D%A2-%E9%A1%B5%E9%9D%A2%E5%B8%83%E5%B1%80/" >一二面_页面布局</a>
+            <span class="archive-post-date">02/20</span><a class="archive-post-title" href= "/2021/02/20/%E4%BD%BF%E7%94%A8styled-components%E6%8A%A5%E9%94%99-Attempted-import-error-injectGlobal-is-not-exported-from-styled-components/" >使用styled-components报错 Attempted import error: injectGlobal is not exported from styled-components</a>
         </li>
     
     
         <li class="archive-post-item">
             <span class="archive-post-date">02/20</span><a class="archive-post-title" href= "/2021/02/20/VUE%E9%A1%B9%E7%9B%AE%E6%8C%89%E9%9C%80%E5%BC%95%E5%85%A5ELEMENT-UI%EF%BC%8C%E4%BF%AE%E6%94%B9-BABELRC%E6%96%87%E4%BB%B6%E4%B9%8B%E5%90%8E%E6%8A%A5%E9%94%99/" >VUE项目按需引入ELEMENT-UI，修改.BABELRC文件之后报错</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">02/20</span><a class="archive-post-title" href= "/2021/02/20/react%E4%B8%AD%E5%88%9B%E5%BB%BA%E7%BB%84%E4%BB%B6/" >react中创建组件</a>
         </li>
     
     
@@ -1462,17 +2157,7 @@ letter-spacing ： 设置成负值即可实现水平方向上重叠
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">02/20</span><a class="archive-post-title" href= "/2021/02/20/%E4%BD%BF%E7%94%A8styled-components%E6%8A%A5%E9%94%99-Attempted-import-error-injectGlobal-is-not-exported-from-styled-components/" >使用styled-components报错 Attempted import error: injectGlobal is not exported from styled-components</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
             <span class="archive-post-date">02/20</span><a class="archive-post-title" href= "/2021/02/20/%E6%85%95%E8%AF%BE%E7%BD%91%E5%B0%8F%E7%B1%B3%E5%95%86%E5%9F%8E%E9%A1%B9%E7%9B%AE9-1-%E5%95%86%E5%93%81%E8%AF%A6%E6%83%85%E4%BA%A4%E4%BA%92%E5%AE%9E%E7%8E%B0%E8%AF%BE%E7%A8%8B%E4%B8%AD%E9%80%89%E6%8B%A9%E7%89%88%E6%9C%AC%E5%87%BA%E7%8E%B0%E7%9A%84%E5%B0%8F%E9%97%AE%E9%A2%98/" >慕课网小米商城项目9-1_商品详情交互实现课程中选择版本出现的小问题</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">02/09</span><a class="archive-post-title" href= "/2021/02/09/%E4%BD%BF%E7%94%A8sass%E6%97%B6%EF%BC%8C%E6%8A%A5%E9%94%99TypeError-this-getResolve-is-not-a-function-at-Object-loader/" >使用sass时，报错TypeError: this.getResolve is not a function at Object.loader</a>
         </li>
     
     
@@ -1487,7 +2172,7 @@ letter-spacing ： 设置成负值即可实现水平方向上重叠
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">02/09</span><a class="archive-post-title" href= "/2021/02/09/Vue-cli%E6%90%AD%E5%BB%BA%E5%A5%BD%E9%BB%98%E8%AE%A4%E9%A1%B9%E7%9B%AE%E5%90%8E%E4%BD%BF%E7%94%A8%E8%B7%AF%E7%94%B1%E5%8A%9F%E8%83%BD%EF%BC%8C%E6%8A%A5%E9%94%99Can%E2%80%99t%20resolve%20%E2%80%98vue-router%E2%80%99%20in/" >Vue-cli搭建好默认项目后使用路由功能，报错Can’t resolve ‘vue-router’ in</a>
+            <span class="archive-post-date">02/09</span><a class="archive-post-title" href= "/2021/02/09/%E4%BD%BF%E7%94%A8sass%E6%97%B6%EF%BC%8C%E6%8A%A5%E9%94%99TypeError-this-getResolve-is-not-a-function-at-Object-loader/" >使用sass时，报错TypeError: this.getResolve is not a function at Object.loader</a>
         </li>
     
     
@@ -1497,7 +2182,7 @@ letter-spacing ： 设置成负值即可实现水平方向上重叠
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">02/05</span><a class="archive-post-title" href= "/2021/02/05/VScode%E5%88%9D%E6%AC%A1%E4%BD%BF%E7%94%A8%E6%97%B6%E5%A6%82%E4%BD%95%E8%BF%90%E8%A1%8Chtml%E6%96%87%E4%BB%B6%E5%88%B0%E6%B5%8F%E8%A7%88%E5%99%A8%E4%B8%8A/" >VScode初次使用时如何运行html文件到浏览器上</a>
+            <span class="archive-post-date">02/09</span><a class="archive-post-title" href= "/2021/02/09/Vue-cli%E6%90%AD%E5%BB%BA%E5%A5%BD%E9%BB%98%E8%AE%A4%E9%A1%B9%E7%9B%AE%E5%90%8E%E4%BD%BF%E7%94%A8%E8%B7%AF%E7%94%B1%E5%8A%9F%E8%83%BD%EF%BC%8C%E6%8A%A5%E9%94%99Can%E2%80%99t%20resolve%20%E2%80%98vue-router%E2%80%99%20in/" >Vue-cli搭建好默认项目后使用路由功能，报错Can’t resolve ‘vue-router’ in</a>
         </li>
     
     
@@ -1512,6 +2197,11 @@ letter-spacing ： 设置成负值即可实现水平方向上重叠
     
     
         <li class="archive-post-item">
+            <span class="archive-post-date">02/05</span><a class="archive-post-title" href= "/2021/02/05/VScode%E5%88%9D%E6%AC%A1%E4%BD%BF%E7%94%A8%E6%97%B6%E5%A6%82%E4%BD%95%E8%BF%90%E8%A1%8Chtml%E6%96%87%E4%BB%B6%E5%88%B0%E6%B5%8F%E8%A7%88%E5%99%A8%E4%B8%8A/" >VScode初次使用时如何运行html文件到浏览器上</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
             <span class="archive-post-date">02/05</span><a class="archive-post-title" href= "/2021/02/05/vscode%E7%9A%84%E4%BB%A3%E7%A0%81%E4%B8%8A%E4%BC%A0%E5%88%B0%E6%85%95%E8%AF%BE%E7%BD%91%E4%BB%93%E5%BA%93%E6%97%B6%E4%B8%8A%E4%BC%A0%E4%B8%8D%E6%88%90%E5%8A%9F-%E6%85%95%E8%AF%BE%E7%BD%91%E9%AB%98%E4%BB%BF%E5%B0%8F%E7%B1%B3%E5%95%86%E5%9F%8E%E9%A1%B9%E7%9B%AE/" >vscode的代码上传到慕课网仓库时上传不成功--慕课网高仿小米商城项目</a>
         </li>
     
@@ -1522,12 +2212,12 @@ letter-spacing ： 设置成负值即可实现水平方向上重叠
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">02/04</span><a class="archive-post-title" href= "/2021/02/04/vscode%E8%BD%AF%E4%BB%B6%E4%B8%AD%E7%9A%84html%E6%96%87%E4%BB%B6%E7%9A%84%E5%B8%B8%E7%94%A8%E7%9A%84%E5%BF%AB%E6%8D%B7%E6%96%B9%E5%BC%8F/" >vscode软件中的html文件的常用的快捷方式</a>
+            <span class="archive-post-date">02/04</span><a class="archive-post-title" href= "/2021/02/04/%EF%BC%88tinypng%E5%9B%BE%E7%89%87%E5%8E%8B%E7%BC%A9%EF%BC%89%E8%A7%A3%E5%86%B3CSDN%E4%B8%8A%E4%BC%A0%E4%B8%8D%E4%BA%86%E8%BF%87%E5%A4%A7%E7%9A%84%E5%9B%BE%E7%89%87%E9%97%AE%E9%A2%98/" >（tinypng图片压缩）解决CSDN上传不了过大的图片问题</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">02/04</span><a class="archive-post-title" href= "/2021/02/04/%EF%BC%88tinypng%E5%9B%BE%E7%89%87%E5%8E%8B%E7%BC%A9%EF%BC%89%E8%A7%A3%E5%86%B3CSDN%E4%B8%8A%E4%BC%A0%E4%B8%8D%E4%BA%86%E8%BF%87%E5%A4%A7%E7%9A%84%E5%9B%BE%E7%89%87%E9%97%AE%E9%A2%98/" >（tinypng图片压缩）解决CSDN上传不了过大的图片问题</a>
+            <span class="archive-post-date">02/04</span><a class="archive-post-title" href= "/2021/02/04/vscode%E8%BD%AF%E4%BB%B6%E4%B8%AD%E7%9A%84html%E6%96%87%E4%BB%B6%E7%9A%84%E5%B8%B8%E7%94%A8%E7%9A%84%E5%BF%AB%E6%8D%B7%E6%96%B9%E5%BC%8F/" >vscode软件中的html文件的常用的快捷方式</a>
         </li>
     
     
@@ -1542,12 +2232,12 @@ letter-spacing ： 设置成负值即可实现水平方向上重叠
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">01/04</span><a class="archive-post-title" href= "/2021/01/04/CSS%E4%B8%AD%E6%96%87%E5%AD%97%E5%9C%A8%E6%B0%B4%E5%B9%B3%E5%92%8C%E7%AB%96%E7%9B%B4%E6%96%B9%E5%90%91%E4%B8%8A%E9%87%8D%E5%8F%A0/" >CSS中文字在水平和竖直方向上重叠</a>
+            <span class="archive-post-date">01/04</span><a class="archive-post-title" href= "/2021/01/04/js%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%8E%E6%95%B0%E5%AD%97%E7%9B%B8%E5%8A%A0%E5%87%8F%E4%B9%98%E9%99%A4/" >js字符串与数字相加减</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">01/04</span><a class="archive-post-title" href= "/2021/01/04/js%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%8E%E6%95%B0%E5%AD%97%E7%9B%B8%E5%8A%A0%E5%87%8F%E4%B9%98%E9%99%A4/" >js字符串与数字相加减</a>
+            <span class="archive-post-date">01/04</span><a class="archive-post-title" href= "/2021/01/04/CSS%E4%B8%AD%E6%96%87%E5%AD%97%E5%9C%A8%E6%B0%B4%E5%B9%B3%E5%92%8C%E7%AB%96%E7%9B%B4%E6%96%B9%E5%90%91%E4%B8%8A%E9%87%8D%E5%8F%A0/" >CSS中文字在水平和竖直方向上重叠</a>
         </li>
     
     
@@ -1596,34 +2286,6 @@ letter-spacing ： 设置成负值即可实现水平方向上重叠
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">09/27</span><a class="archive-post-title" href= "/2020/09/27/HEXO%E5%8D%9A%E5%AE%A2%E7%9A%84%E6%90%AD%E5%BB%BA%E5%8F%8A%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%EF%BC%88%E4%B8%80%EF%BC%89/" >HEXO博客的搭建及环境配置（一）</a>
-        </li>
-    
-    
-    
-    
-    
-        </ul>
-    
-    <div class="archive-year"> Invalid date </div>
-    <ul class="year-list">
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/09/27/HEXO%E5%8D%9A%E5%AE%A2%E7%9A%84%E6%90%AD%E5%BB%BA%E5%8F%8A%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%EF%BC%88%E4%BA%8C%EF%BC%89/" >HEXO博客的搭建及环境配置（二）</a>
-        </li>
-    
-    
-    
-    
-    
-        </ul>
-    
-    <div class="archive-year"> 2020 </div>
-    <ul class="year-list">
-    
-    
-        <li class="archive-post-item">
             <span class="archive-post-date">11/08</span><a class="archive-post-title" href= "/2020/11/08/Sass%E6%80%BB%E7%BB%93/" >Sass总结</a>
         </li>
     
@@ -1658,7 +2320,7 @@ letter-spacing ： 设置成负值即可实现水平方向上重叠
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/09/27/hexo%E4%B8%BB%E9%A2%98%E4%BF%AE%E6%94%B9/" >hexo主题修改</a>
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/09/27/HEXO%E5%8D%9A%E5%AE%A2%E7%9A%84%E6%90%AD%E5%BB%BA%E5%8F%8A%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%EF%BC%88%E4%BA%8C%EF%BC%89/" >HEXO博客的搭建及环境配置（二）</a>
         </li>
     
     
@@ -1669,6 +2331,11 @@ letter-spacing ： 设置成负值即可实现水平方向上重叠
     
     <div class="archive-year"> 2020 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/27</span><a class="archive-post-title" href= "/2020/09/27/HEXO%E5%8D%9A%E5%AE%A2%E7%9A%84%E6%90%AD%E5%BB%BA%E5%8F%8A%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%EF%BC%88%E4%B8%80%EF%BC%89/" >HEXO博客的搭建及环境配置（一）</a>
+        </li>
     
     
         <li class="archive-post-item">

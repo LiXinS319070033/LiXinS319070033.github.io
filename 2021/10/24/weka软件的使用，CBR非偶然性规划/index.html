@@ -1,0 +1,2388 @@
+<!DOCTYPE html>
+<html lang="en">
+    <!-- title -->
+
+
+
+
+<!-- keywords -->
+
+
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" >
+    <meta name="author" content="Nice">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="Nice">
+    
+    <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
+    
+    <meta name="description" content="">
+    <meta name="description" content="weka软件的使用，CBR非偶然性规划最近在研究CER非偶然性规划，其中需要创建数据集，需要用到weka软件，网上的相关文章很少，还好遇到了这一篇，解决了我很多问题，感谢。weka的基本使用 - RongT - 博客园 (cnblogs.com) weka的基本使用目录：1. 简介 2.界面初识 3.数据格式 4.数据准备 5.关联规则 6.分类与回归 7.聚类分析 8.Weka相关资料 9.We">
+<meta property="og:type" content="article">
+<meta property="og:title" content="weka软件的使用，CBR非偶然性规划">
+<meta property="og:url" content="https://lixins319070033.github.io/2021/10/24/weka%E8%BD%AF%E4%BB%B6%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%8CCBR%E9%9D%9E%E5%81%B6%E7%84%B6%E6%80%A7%E8%A7%84%E5%88%92/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="weka软件的使用，CBR非偶然性规划最近在研究CER非偶然性规划，其中需要创建数据集，需要用到weka软件，网上的相关文章很少，还好遇到了这一篇，解决了我很多问题，感谢。weka的基本使用 - RongT - 博客园 (cnblogs.com) weka的基本使用目录：1. 简介 2.界面初识 3.数据格式 4.数据准备 5.关联规则 6.分类与回归 7.聚类分析 8.Weka相关资料 9.We">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://lixins319070033.github.io/2021/10/24/weka%E8%BD%AF%E4%BB%B6%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%8CCBR%E9%9D%9E%E5%81%B6%E7%84%B6%E6%80%A7%E8%A7%84%E5%88%92/1.png">
+<meta property="og:image" content="https://lixins319070033.github.io/2021/10/24/weka%E8%BD%AF%E4%BB%B6%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%8CCBR%E9%9D%9E%E5%81%B6%E7%84%B6%E6%80%A7%E8%A7%84%E5%88%92/2.png">
+<meta property="og:image" content="https://lixins319070033.github.io/2021/10/24/weka%E8%BD%AF%E4%BB%B6%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%8CCBR%E9%9D%9E%E5%81%B6%E7%84%B6%E6%80%A7%E8%A7%84%E5%88%92/3.png">
+<meta property="og:image" content="https://lixins319070033.github.io/2021/10/24/weka%E8%BD%AF%E4%BB%B6%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%8CCBR%E9%9D%9E%E5%81%B6%E7%84%B6%E6%80%A7%E8%A7%84%E5%88%92/4.png">
+<meta property="article:published_time" content="2021-10-24T12:16:23.000Z">
+<meta property="article:modified_time" content="2021-10-24T12:27:50.801Z">
+<meta property="article:author" content="Nice">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://lixins319070033.github.io/2021/10/24/weka%E8%BD%AF%E4%BB%B6%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%8CCBR%E9%9D%9E%E5%81%B6%E7%84%B6%E6%80%A7%E8%A7%84%E5%88%92/1.png">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    
+    <title>weka软件的使用，CBR非偶然性规划 · 煜成&#39;s Studio</title>
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s infinite;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+</style>
+
+    <link rel="preload" href= "/css/style.css?v=20180824" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <link rel="stylesheet" href= "/css/mobile.css?v=20180824" media="(max-width: 980px)">
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+(function( w ){
+	"use strict";
+	// rel=preload support test
+	if( !w.loadCSS ){
+		w.loadCSS = function(){};
+	}
+	// define on the loadCSS obj
+	var rp = loadCSS.relpreload = {};
+	// rel=preload feature support test
+	// runs once and returns a function for compat purposes
+	rp.support = (function(){
+		var ret;
+		try {
+			ret = w.document.createElement( "link" ).relList.supports( "preload" );
+		} catch (e) {
+			ret = false;
+		}
+		return function(){
+			return ret;
+		};
+	})();
+
+	// if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+	// then change that media back to its intended value on load
+	rp.bindMediaToggle = function( link ){
+		// remember existing media attr for ultimate state, or default to 'all'
+		var finalMedia = link.media || "all";
+
+		function enableStylesheet(){
+			link.media = finalMedia;
+		}
+
+		// bind load handlers to enable media
+		if( link.addEventListener ){
+			link.addEventListener( "load", enableStylesheet );
+		} else if( link.attachEvent ){
+			link.attachEvent( "onload", enableStylesheet );
+		}
+
+		// Set rel and non-applicable media type to start an async request
+		// note: timeout allows this to happen async to let rendering continue in IE
+		setTimeout(function(){
+			link.rel = "stylesheet";
+			link.media = "only x";
+		});
+		// also enable media after 3 seconds,
+		// which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+		setTimeout( enableStylesheet, 3000 );
+	};
+
+	// loop through link elements in DOM
+	rp.poly = function(){
+		// double check this to prevent external calls from running
+		if( rp.support() ){
+			return;
+		}
+		var links = w.document.getElementsByTagName( "link" );
+		for( var i = 0; i < links.length; i++ ){
+			var link = links[ i ];
+			// qualify links to those with rel=preload and as=style attrs
+			if( link.rel === "preload" && link.getAttribute( "as" ) === "style" && !link.getAttribute( "data-loadcss" ) ){
+				// prevent rerunning on link
+				link.setAttribute( "data-loadcss", true );
+				// bind listeners to toggle media back
+				rp.bindMediaToggle( link );
+			}
+		}
+	};
+
+	// if unsupported, run the polyfill
+	if( !rp.support() ){
+		// run once at least
+		rp.poly();
+
+		// rerun poly on an interval until onload
+		var run = w.setInterval( rp.poly, 500 );
+		if( w.addEventListener ){
+			w.addEventListener( "load", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		} else if( w.attachEvent ){
+			w.attachEvent( "onload", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		}
+	}
+
+
+	// commonjs
+	if( typeof exports !== "undefined" ){
+		exports.loadCSS = loadCSS;
+	}
+	else {
+		w.loadCSS = loadCSS;
+	}
+}( typeof global !== "undefined" ? global : this ) );
+</script>
+
+    <link rel="icon" href= "/assets/favicon.ico" />
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js" as="script" />
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" as="script" />
+    <link rel="preload" href="/scripts/main.js" as="script" />
+    <link rel="preload" as="font" href="/font/Oswald-Regular.ttf" crossorigin>
+    <link rel="preload" as="font" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" crossorigin>
+    
+    <!-- fancybox -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script>
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+    
+        <body class="post-body">
+    
+    
+<header class="header">
+
+    <div class="read-progress"></div>
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >煜成&#39;s Studio.</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">weka软件的使用，CBR非偶然性规划</a>
+            </div>
+    </div>
+    
+    <a class="home-link" href=/>煜成's Studio.</a>
+</header>
+    <div class="wrapper">
+        <div class="site-intro" style="
+
+
+
+
+
+
+
+height:50vh;
+">
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(/chi.jpg)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            weka软件的使用，CBR非偶然性规划
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                
+                    <div class="post-intro-read">
+                        <span>Word count: <span class="post-count word-count">8.6k</span>Reading time: <span class="post-count reading-time">32 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2021/10/24</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+        
+    </div>
+</div>
+        <script>
+ 
+  // get user agent
+  var browser = {
+    versions: function () {
+      var u = window.navigator.userAgent;
+      return {
+        userAgent: u,
+        trident: u.indexOf('Trident') > -1, //IE内核
+        presto: u.indexOf('Presto') > -1, //opera内核
+        webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+        android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+        iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+        iPad: u.indexOf('iPad') > -1, //是否为iPad
+        webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+        weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+        uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+      };
+    }()
+  }
+  console.log("userAgent:" + browser.versions.userAgent);
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded');
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+      document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in');
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb(){
+    if (browser.versions.uc) {
+      console.log("UCBrowser");
+      fontLoaded();
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular']
+        },
+        loading: function () {  //所有字体开始加载
+          // console.log('loading');
+        },
+        active: function () {  //所有字体已渲染
+          fontLoaded();
+        },
+        inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout');
+          fontLoaded();
+        },
+        timeout: 5000 // Set the timeout to two seconds
+      });
+    }
+  }
+
+  function asyncErr(){
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (cb) { o.addEventListener('load', function (e) { cb(null, e); }, false); }
+    if (err) { o.addEventListener('error', function (e) { err(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+
+  var asyncLoadWithFallBack = function(arr, success, reject) {
+      var currReject = function(){
+        reject()
+        arr.shift()
+        if(arr.length)
+          async(arr[0], success, currReject)
+        }
+
+      async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack([
+    "https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js", 
+    "https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js",
+    "/lib/webfontloader.min.js"
+  ], asyncCb, asyncErr)
+</script>        
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <div class="container container-unloaded">
+            <main class="main post-page">
+    <article class="article-entry">
+        <h1 id="weka软件的使用，CBR非偶然性规划"><a href="#weka软件的使用，CBR非偶然性规划" class="headerlink" title="weka软件的使用，CBR非偶然性规划"></a>weka软件的使用，CBR非偶然性规划</h1><p>最近在研究CER非偶然性规划，其中需要创建数据集，需要用到weka软件，网上的相关文章很少，还好遇到了这一篇，解决了我很多问题，感谢。<a target="_blank" rel="noopener" href="https://www.cnblogs.com/tanrong/p/8671068.html#xuexiziliao">weka的基本使用 - RongT - 博客园 (cnblogs.com)</a></p>
+<h1 id="weka的基本使用"><a href="#weka的基本使用" class="headerlink" title="weka的基本使用"></a><a target="_blank" rel="noopener" href="https://www.cnblogs.com/tanrong/p/8671068.html">weka的基本使用</a></h1><h2 id="目录："><a href="#目录：" class="headerlink" title="目录："></a>目录：</h2><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/tanrong/p/8671068.html#jianjie">1. 简介</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/tanrong/p/8671068.html#jiemianchushi">2.界面初识</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/tanrong/p/8671068.html#shujugeshi">3.数据格式</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/tanrong/p/8671068.html#shujuzhunbei">4.数据准备</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/tanrong/p/8671068.html#guanlianfenxi">5.关联规则</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/tanrong/p/8671068.html#fenleihuigui">6.分类与回归</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/tanrong/p/8671068.html#juleifenxi">7.聚类分析</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/tanrong/p/8671068.html#xuexiziliao">8.Weka相关资料</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/tanrong/p/8671068.html#ercikaifa">9.Weka二次开发</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/tanrong/p/8671068.html#yuandaimadaoru">10.Weka源代码导入</a></p>
+<h3 id="1-简介"><a href="#1-简介" class="headerlink" title="1. 简介"></a>1. 简介</h3><p>WEKA的全名是怀卡托智能分析环境（Waikato Environment for Knowledge Analysis），它的源代码可通过<a target="_blank" rel="noopener" href="http://www.cs.waikato.ac.nz/ml/weka%E5%BE%97%E5%88%B0%E3%80%82%E5%90%8C%E6%97%B6weka%E4%B9%9F%E6%98%AF%E6%96%B0%E8%A5%BF%E5%85%B0%E7%9A%84%E4%B8%80%E7%A7%8D%E9%B8%9F%E5%90%8D%EF%BC%8C%E8%80%8CWEKA%E7%9A%84%E4%B8%BB%E8%A6%81%E5%BC%80%E5%8F%91%E8%80%85%E6%9D%A5%E8%87%AA%E6%96%B0%E8%A5%BF%E5%85%B0%E3%80%82%E6%98%AF%E4%B8%80%E6%AC%BE%E5%85%8D%E8%B4%B9%E7%9A%84%EF%BC%8C%E9%9D%9E%E5%95%86%E4%B8%9A%E5%8C%96%EF%BC%88%E4%B8%8E%E4%B9%8B%E5%AF%B9%E5%BA%94%E7%9A%84%E6%98%AFSPSS%E5%85%AC%E5%8F%B8%E5%95%86%E4%B8%9A%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98%E4%BA%A7%E5%93%81%E2%80%93Clementine">http://www.cs.waikato.ac.nz/ml/weka得到。同时weka也是新西兰的一种鸟名，而WEKA的主要开发者来自新西兰。是一款免费的，非商业化（与之对应的是SPSS公司商业数据挖掘产品–Clementine</a> ）的，基于JAVA环境下开源的机器学习（machine learning）以及数据挖掘（data minining）软件。</p>
+<p>WEKA作为一个公开的数据挖掘工作平台，集合了大量能承担数据挖掘任务的机器学习算法，包括对数据进行预处理，分类，回归、聚类、关联规则以及在新的交互式界面上的可视化。<br>如果想自己实现数据挖掘算法的话，可以看一看weka的接口文档。在weka中集成自己的算法甚至借鉴它的方法自己实现可视化工具并不是件很困难的事情。</p>
+<h3 id="2-界面初识："><a href="#2-界面初识：" class="headerlink" title="2. 界面初识："></a>2. 界面初识：</h3><p>运行weka GUI：</p>
+<p><img src="/2021/10/24/weka%E8%BD%AF%E4%BB%B6%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%8CCBR%E9%9D%9E%E5%81%B6%E7%84%B6%E6%80%A7%E8%A7%84%E5%88%92/1.png" alt="img"></p>
+<p>点击 Explorer 按钮，打开explorer界面：</p>
+<p><img src="/2021/10/24/weka%E8%BD%AF%E4%BB%B6%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%8CCBR%E9%9D%9E%E5%81%B6%E7%84%B6%E6%80%A7%E8%A7%84%E5%88%92/2.png" alt="img"></p>
+<p>区域1的几个选项卡是用来切换不同的挖掘任务面板。以下介绍“Preprocess”面板<br>区域2是一些常用按钮。包括打开数据，保存及编辑功能。可以通过它将csv 转 arff</p>
+<p>区域3中“Choose”某个“Filter”，可以实现筛选数据或者对数据进行某种变换。数据预处理主要就利用它来实现。<br>区域4展示了数据集的一些基本情况。<br>区域5中列出了数据集的所有属性。勾选一些属性并“Remove”就可以删除它们，删除后还可以利用区域2的“Undo”按钮找回。区域5上方的一排按钮是用来实现快速勾选的。<br>在区域5中选中某个属性，则区域6中有关于这个属性的摘要。注意对于数值属性和分类属性，摘要的方式是不一样的。图中显示的是对数值属性“income”的摘要。<br>区域7是区域5中选中属性的直方图。若数据集的最后一个属性（我们说过这是分类或回归任务的默认目标变量）是分类变量（这里的“pep”正好是），直方图中的每个长方形就会按照该变量的比例分成不同颜色的段。要想换个分段的依据，在区域7上方的下拉框中选个不同的分类属性就可以了。下拉框里选上“No Class”或者一个数值属性会变成黑白的直方图。<br>区域8是状态栏，可以查看Log以判断是否有错。右边的weka鸟在动的话说明WEKA正在执行挖掘任务。右键点击状态栏还可以执行JAVA内存的垃圾回收。</p>
+<h3 id="3-数据格式"><a href="#3-数据格式" class="headerlink" title="3. 数据格式"></a>3. 数据格式</h3><p><img src="/2021/10/24/weka%E8%BD%AF%E4%BB%B6%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%8CCBR%E9%9D%9E%E5%81%B6%E7%84%B6%E6%80%A7%E8%A7%84%E5%88%92/3.png" alt="img"></p>
+<p>表格里的一个横行称作一个实例（Instance），相当于统计学中的一个样本，或者数据库中的一条记录。竖行称作一个属性（Attrbute），相当于统计学中的一个变量，或者数据库中的一个字段。这样一个表格，或者叫数据集，在WEKA看来，呈现了属性之间的一种关系(Relation)。图1中一共有14个实例，5个属性，关系名称为“weather”。</p>
+<p>WEKA存储数据的格式是ARFF（Attribute-Relation File Format）文件，这是一种ASCII文本文件。图1所示的二维表格存储在如下的ARFF文件中。这也就是WEKA自带的“weather.arff”文件，在WEKA安装目录的“data”子目录下可以找到。</p>
+<p>需要注意的是，在Windows记事本打开这个文件时，可能会因为回车符定义不一致而导致分行不正常。推荐使用UltraEdit这样的字符编辑软件察看ARFF文件的内容。</p>
+<p><img src="/2021/10/24/weka%E8%BD%AF%E4%BB%B6%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%8CCBR%E9%9D%9E%E5%81%B6%E7%84%B6%E6%80%A7%E8%A7%84%E5%88%92/4.png" alt="img"></p>
+<h4 id="内容部分："><a href="#内容部分：" class="headerlink" title="内容部分："></a>内容部分：</h4><p>识别ARFF文件的重要依据是分行，因此不能在这种文件里随意的断行。空行（或全是空格的行）将被忽略。<br>以“%”开始的行是注释，WEKA将忽略这些行。如果你看到的“weather.arff”文件多了或少了些“%”开始的行，是没有影响的。<br>除去注释后，整个ARFF文件可以分为两个部分。第一部分给出了头信息（Head information），包括了对关系的声明和对属性的声明。第二部分给出了数据信息（Data information），即数据集中给出的数据。从“@data”标记开始，后面的就是数据信息了。</p>
+<p><strong>关系声明</strong><br>关系名称在ARFF文件的第一个有效行来定义，格式为<br>@relation <relation-name><br><relation-name>是一个字符串。如果这个字符串包含空格，它必须加上引号（指英文标点的单引号或双引号）。 </relation-name></relation-name></p>
+<p><strong>属性声明</strong><br>属性声明用一列以“@attribute”开头的语句表示。数据集中的每一个属性都有它对应的“@attribute”语句，来定义它的属性名称和数据类型。<br>这些声明语句的顺序很重要。首先它表明了该项属性在数据部分的位置。例如，“humidity”是第三个被声明的属性，这说明数据部分那些被逗号分开的列中，第三列数据 85 90 86 96 … 是相应的“humidity”值。其次，最后一个声明的属性被称作class属性，在分类或回归任务中，它是默认的目标变量。<br>属性声明的格式为<br>@attribute <attribute-name> <datatype><br>其中<attribute-name>是必须以字母开头的字符串。和关系名称一样，如果这个字符串包含空格，它必须加上引号。<br>WEKA支持的<datatype>有四种，分别是<br>numeric————————-数值型<br><nominal-specification>—–分类（nominal）型<br>string—————————-字符串型<br>date [<date-format>]——–日期和时间型<br>其中<nominal-specification> 和<date-format> 将在下面说明。还可以使用两个类型“integer”和“real”，但是WEKA把它们都当作“numeric”看待。注意“integer”，“real”，“numeric”，“date”，“string”这些关键字是区分大小写的，而“relation”“attribute ”和“date”则不区分。</date-format></nominal-specification></date-format></nominal-specification></datatype></attribute-name></datatype></attribute-name></p>
+<p><strong>数值属性</strong><br>数值型属性可以是整数或者实数，但WEKA把它们都当作实数看待。 </p>
+<p><strong>分类属性</strong><br>分类属性由<nominal-specification>列出一系列可能的类别名称并放在花括号中：{<nominal-name1>, <nominal-name2>, <nominal-name3>, …} 。数据集中该属性的值只能是其中一种类别。<br>例如如下的属性声明说明“outlook”属性有三种类别：“sunny”，“ overcast”和“rainy”。而数据集中每个实例对应的“outlook”值必是这三者之一。<br>@attribute outlook {sunny, overcast, rainy}<br>如果类别名称带有空格，仍需要将之放入引号中。 </nominal-name3></nominal-name2></nominal-name1></nominal-specification></p>
+<p><strong>字符串属性</strong><br>字符串属性中可以包含任意的文本。这种类型的属性在文本挖掘中非常有用。<br>示例：<br>@ATTRIBUTE LCC string </p>
+<p><strong>日期和时间属性</strong><br>日期和时间属性统一用“date”类型表示，它的格式是<br>@attribute <name> date [<date-format>]<br>其中<name>是这个属性的名称，<date-format>是一个字符串，来规定该怎样解析和显示日期或时间的格式，默认的字符串是ISO-8601所给的日期时间组合格式“<em>yyyy-MM-dd</em>T<em>HH:mm:ss</em>”。<br>数据信息部分表达日期的字符串必须符合声明中规定的格式要求（下文有例子）。 </date-format></name></date-format></name></p>
+<p><strong>数据信息</strong><br>数据信息中“@data”标记独占一行，剩下的是各个实例的数据。 </p>
+<p>每个实例占一行。实例的各属性值用逗号“,”隔开。如果某个属性的值是缺失值（missing value），用问号“?”表示，且这个问号不能省略。例如：<br>@data<br>sunny,85,85,FALSE,no<br>?,78,90,?,yes </p>
+<p>字符串属性和分类属性的值是区分大小写的。若值中含有空格，必须被引号括起来。例如：<br>@relation LCCvsLCSH<br> @attribute LCC string<br> @attribute LCSH string<br> @data<br> AG5, ‘Encyclopedias and dictionaries.;Twentieth century.’<br> AS262, ‘Science – Soviet Union – History.’ </p>
+<p>日期属性的值必须与属性声明中给定的相一致。例如：<br>@RELATION Timestamps<br> @ATTRIBUTE timestamp DATE “yyyy-MM-dd HH:mm:ss”<br> @DATA<br> “2001-04-03 12:12:12”<br> “2001-05-03 12:59:55” </p>
+<p><strong>稀疏数据</strong><br>有的时候数据集中含有大量的0值（比如购物篮分析），这个时候用稀疏格式的数据存贮更加省空间。<br>稀疏格式是针对数据信息中某个实例的表示而言，不需要修改ARFF文件的其它部分。看如下的数据：<br>@data<br> 0, X, 0, Y, “class A”<br> 0, 0, W, 0, “class B”<br>用稀疏格式表达的话就是<br>@data<br> {1 X, 3 Y, 4 “class A”}<br> {2 W, 4 “class B”}<br>每个实例用花括号括起来。实例中每一个非0的属性值用<index> &lt;空格&gt; <value>表示。<index>是属性的序号，从0开始计；<value>是属性值。属性值之间仍用逗号隔开。这里每个实例的数值必须按属性的顺序来写，如 {1 X, 3 Y, 4 “class A”}，不能写成{3 Y, 1 X, 4 “class A”}。<br>注意在稀疏格式中没有注明的属性值不是缺失值，而是0值。若要表示缺失值必须显式的用问号表示出来。</value></index></value></index></p>
+<p><strong>Relational型属性</strong><br>在WEKA 3.5版中增加了一种属性类型叫做Relational，有了这种类型我们可以像关系型数据库那样处理多个维度了。但是这种类型目前还不见广泛应用，暂不作介绍。</p>
+<p>–整理自<a target="_blank" rel="noopener" href="http://www.cs.waikato.ac.nz/~ml/weka/arff.html">http://www.cs.waikato.ac.nz/~ml/weka/arff.html</a> 和<a target="_blank" rel="noopener" href="http://weka.sourceforge.net/wekadoc/index.php/en:ARFF_(3.5.3)">http://weka.sourceforge.net/wekadoc/index.php/en:ARFF_%283.5.3%29</a></p>
+<h3 id="4-数据准备"><a href="#4-数据准备" class="headerlink" title="4. 数据准备"></a>4. 数据准备</h3><p>使用WEKA作数据挖掘，面临的第一个问题往往是我们的数据不是ARFF格式的。幸好，WEKA还提供了对CSV文件的支持，而这种格式是被很多其他软件所支持的。此外，WEKA还提供了通过JDBC访问数据库的功能。<br>在这一节里，我们先以Excel和Matlab为例，说明如何获得CSV文件。然后我们将知道CSV文件如何转化成ARFF文件，毕竟后者才是WEKA支持得最好的文件格式。面对一个ARFF文件，我们仍有一些预处理要做，才能进行挖掘任务。</p>
+<p>.* -&gt; .csv<br>我们给出一个CSV文件的例子（<a target="_blank" rel="noopener" href="http://maya.cs.depaul.edu/~classes/ect584/WEKA/data/bank-data.csv">bank-data.csv</a>）。用UltraEdit打开它可以看到，这种格式也是一种逗号分割数据的文本文件,储存了一个二维表格。</p>
+<p>Excel的XLS文件可以让多个二维表格放到不同的工作表（Sheet）中，我们只能把每个工作表存成不同的CSV文件。打开一个XLS文件并切换到需要转换的工作表，另存为CSV类型，点“确定”、“是”忽略提示即可完成操作。</p>
+<p>在Matlab中的二维表格是一个矩阵，我们通过这条命令把一个矩阵存成CSV格式。<br>csvwrite(‘filename’,matrixname)<br>需要注意的是，Matllab给出的CSV文件往往没有属性名（Excel给出的也有可能没有）。而WEKA必须从CSV文件的第一行读取属性名，否则就会把第一行的各属性值读成变量名。因此我们对于Matllab给出的CSV文件需要用UltraEdit打开，手工添加一行属性名。注意属性名的个数要跟数据属性的个数一致，仍用逗号隔开。</p>
+<p>.csv -&gt; .arff<br>将CSV转换为ARFF最迅捷的办法是使用WEKA所带的命令行工具。<br>运行WEKA的主程序，出现GUI后可以点击下方按钮进入相应的模块。我们点击进入“Simple CLI”模块提供的命令行功能。在新窗口的最下方（上方是不能写字的）输入框写上<br>java weka.core.converters.CSVLoader filename.csv &gt; filename.arff<br>即可完成转换。<br>在WEKA 3.5中提供了一个“Arff Viewer”模块，我们可以用它打开一个CSV文件将进行浏览，然后另存为ARFF文件。<br>进入“Exploer”模块，从上方的按钮中打开CSV文件然后另存为ARFF文件亦可。 </p>
+<p>预处理<br>bank-data数据各属性的含义如下：<br>id a unique identification number<br>age age of customer in years (numeric)<br>sex MALE / FEMALE<br>region inner_city/rural/suburban/town<br>income income of customer (numeric)<br>married is the customer married (YES/NO)<br>children number of children (numeric)<br>car does the customer own a car (YES/NO)<br>save_acct does the customer have a saving account (YES/NO)<br>current_acct does the customer have a current account (YES/NO)<br>mortgage does the customer have a mortgage (YES/NO)<br>pep did the customer buy a PEP (Personal Equity Plan) after the last mailing (YES/NO)</p>
+<p>通常对于数据挖掘任务来说，ID这样的信息是无用的，我们将之删除。在区域5勾选属性“id”，并点击“Remove”。将新的数据集保存一次，并用UltraEdit打开这个ARFF文件。我们发现，在属性声明部分，WEKA已经为每个属性选好了合适的类型。</p>
+<p>我们知道，有些算法，只能处理所有的属性都是分类型的情况。这时候我们就需要对数值型的属性进行离散化。在这个数据集中有3个变量是数值型的，分别是“age”，“income”和“children”。<br>其中“children”只有4个取值：0，1，2，3。这时我们在UltraEdit中直接修改ARFF文件，把<br>@attribute children numeric<br>改为<br>@attribute children {0,1,2,3}<br>就可以了。<br>在“Explorer”中重新打开“bank-data.arff”，看看选中“children”属性后，区域6那里显示的“Type”是不是变成“Nominal”了？</p>
+<p>“age”和“income”的离散化我们需要借助WEKA中名为“Discretize”的Filter来完成。在区域2中点“Choose”，出现一棵“Filter树”，逐级找到“weka.filters.unsupervised.attribute.Discretize”，点击。若无法关闭这个树，在树之外的地方点击“Explorer”面板即可。<br>现在“Choose”旁边的文本框应该显示“Discretize -B 10 -M -0.1 -R first-last”。 点击这个文本框会弹出新窗口以修改离散化的参数。<br>我们不打算对所有的属性离散化，只是针对对第1个和第4个属性（见区域5属性名左边的数字），故把attributeIndices右边改成“1,4”。计划把这两个属性都分成3段，于是把“bins”改成“3”。其它框里不用更改，关于它们的意思可以点“More”查看。点“OK”回到“Explorer”，可以看到“age”和“income”已经被离散化成分类型的属性。若想放弃离散化可以点区域2的“Undo”。<br>如果对“”(-inf-34.333333]””这样晦涩的标识不满，我们可以用UltraEdit打开保存后的ARFF文件，把所有的“’&#39;(-inf-34.333333]&#39;‘”替换成“0_34”。其它标识做类似地手动替换。</p>
+<p>经过上述操作得到的数据集我们保存为<a target="_blank" rel="noopener" href="http://maya.cs.depaul.edu/~classes/ect584/WEKA/data/bank-data-final.arff">bank-data-final.arff</a>。</p>
+<p>—-整理自<a target="_blank" rel="noopener" href="http://maya.cs.depaul.edu/~classes/ect584/WEKA/preprocess.html">http://maya.cs.depaul.edu/~classes/ect584/WEKA/preprocess.html</a></p>
+<h3 id="5-关联规则（购物篮分析）"><a href="#5-关联规则（购物篮分析）" class="headerlink" title="5.关联规则（购物篮分析）"></a>5.关联规则（购物篮分析）</h3><p>注意：目前，WEKA的关联规则分析功能仅能用来作示范，不适合用来挖掘大型数据集。 </p>
+<p>我们打算对前面的“bank-data”数据作关联规则的分析。用“Explorer”打开“bank-data-final.arff”后，切换到“Associate”选项卡。默认关联规则分析是用Apriori算法，我们就用这个算法，但是点“Choose”右边的文本框修改默认的参数，弹出的窗口中点“More”可以看到各参数的说明。</p>
+<p>背景知识<br>首先我们来温习一下Apriori的有关知识。对于一条关联规则L-&gt;R，我们常用支持度（Support）和置信度（Confidence）来衡量它的重要性。规则的支持度是用来估计在一个购物篮中同时观察到L和R的概率P(L,R)，而规则的置信度是估计购物栏中出现了L时也出会现R的条件概率P(R|L)。关联规则的目标一般是产生支持度和置信度都较高的规则。<br>有几个类似的度量代替置信度来衡量规则的关联程度，它们分别是<br>Lift（提升度？）： P(L,R)/(P(L)P(R))<br>Lift=1时表示L和R独立。这个数越大，越表明L和R存在在一个购物篮中不是偶然现象。<br>Leverage（不知道怎么翻译）：P(L,R)-P(L)P(R)<br>它和Lift的含义差不多。Leverage=0时L和R独立，Leverage越大L和R的关系越密切。<br>Conviction（更不知道译了）：P(L)P(!R)/P(L,!R) （!R表示R没有发生）<br>Conviction也是用来衡量L和R的独立性。从它和lift的关系（对R取反，代入Lift公式后求倒数）可以看出，我们也希望这个值越大越好。<br>值得注意的是，用Lift和Leverage作标准时，L和R是对称的，Confidence和Conviction则不然。 </p>
+<p>参数设置<br>现在我们计划挖掘出支持度在10%到100%之间，并且lift值超过1.5且lift值排在前100位的那些关联规则。我们把“lowerBoundMinSupport”和“upperBoundMinSupport”分别设为0.1和1，“metricType”设为lift，“minMetric”设为1.5，“numRules”设为100。其他选项保持默认即可。“OK” 之后在“Explorer”中点击“Start”开始运行算法，在右边窗口显示数据集摘要和挖掘结果。</p>
+<p>下面是挖掘出来的lift排前5的规则。<br>Best rules found:<br>\1. age=52_max save_act=YES current_act=YES 113 ==&gt; income=43759_max 61 conf:(0.54) &lt; lift:(4.05)&gt; lev:(0.0 [45] conv:(1.85)<br> \2. income=43759_max 80 ==&gt; age=52_max save_act=YES current_act=YES 61 conf:(0.76) &lt; lift:(4.05)&gt; lev:(0.0 [45] conv:(3.25)<br> \3. income=43759_max current_act=YES 63 ==&gt; age=52_max save_act=YES 61 conf:(0.97) &lt; lift:(3.85)&gt; lev:(0.0 [45] conv:(15.72)<br> \4. age=52_max save_act=YES 151 ==&gt; income=43759_max current_act=YES 61 conf:(0.4) &lt; lift:(3.85)&gt; lev:(0.0 [45] conv:(1.49)<br> \5. age=52_max save_act=YES 151 ==&gt; income=43759_max 76 conf:(0.5) &lt; lift:(3.77)&gt; lev:(0.09) [55] conv:(1.72)<br>对于挖掘出的每条规则，WEKA列出了它们关联程度的四项指标。 </p>
+<p>命令行方式<br>我们也可以利用命令行来完成挖掘任务，在“Simlpe CLI”模块中输入如下格式的命令：<br>java weka.associations.Apriori options -t directory-path\bank-data-final.arff<br>即可完成Apriori算法。注意，“-t”参数后的文件路径中不能含有空格。<br>在前面我们使用的option为<br>-N 100 -T 1 -C 1.5 -D 0.05 -U 1.0 -M 0.1 -S -1.0 命令行中使用这些参数得到的结果和前面利用GUI得到的一样。<br>我们还可以加上“- I”参数，得到不同项数的频繁项集。我用的命令如下：<br>java weka.associations.Apriori -N 100 -T 1 -C 1.5 -D 0.05 -U 1.0 -M 0.1 -S -1.0 -I -t d:\weka\bank-data-final.arff<br>挖掘结果在上方显示，应是<a target="_blank" rel="noopener" href="http://maya.cs.depaul.edu/~classes/ect584/WEKA/data/bank-data-ar2.txt">这个文件</a>的样子。</p>
+<p>—-整理自<a target="_blank" rel="noopener" href="http://maya.cs.depaul.edu/~classes/ect584/WEKA/associate.html">http://maya.cs.depaul.edu/~classes/ect584/WEKA/associate.html</a></p>
+<h3 id="6-分类与回归"><a href="#6-分类与回归" class="headerlink" title="6.分类与回归"></a>6.分类与回归</h3><p>背景知识<br>WEKA把分类(Classification)和回归(Regression)都放在“Classify”选项卡中，这是有原因的。<br>在这两个任务中，都有一个目标属性（输出变量）。我们希望根据一个样本(WEKA中称作实例)的一组特征（输入变量），对目标进行预测。为了实现这一目的，我们需要有一个训练数据集，这个数据集中每个实例的输入和输出都是已知的。观察训练集中的实例，可以建立起预测的模型。有了这个模型，我们就可以新的输出未知的实例进行预测了。衡量模型的好坏就在于预测的准确程度。<br>在WEKA中，待预测的目标（输出）被称作Class属性，这应该是来自分类任务的“类”。一般的，若Class属性是分类型时我们的任务才叫分类，Class属性是数值型时我们的任务叫回归。</p>
+<p>选择算法<br>这一节中，我们使用C4.5决策树算法对bank-data建立起分类模型。<br>我们来看原来的“<a target="_blank" rel="noopener" href="http://maya.cs.depaul.edu/~classes/ect584/WEKA/data/bank-data.csv">bank-data.csv</a>”文件。“ID”属性肯定是不需要的。由于C4.5算法可以处理数值型的属性，我们不用像前面用关联规则那样把每个变量都离散化成分类型。尽管如此，我们还是把“Children”属性转换成分类型的两个值“YES”和“NO”。另外，我们的训练集仅取原来数据集实例的一半；而从另外一半中抽出若干条作为待预测的实例，它们的“pep”属性都设为缺失值。经过了这些处理的训练集数据在<a target="_blank" rel="noopener" href="http://maya.cs.depaul.edu/~classes/ect584/WEKA/classify/bank.arff">这里</a>下载；待预测集数据在<a target="_blank" rel="noopener" href="http://maya.cs.depaul.edu/~classes/ect584/WEKA/classify/bank-new.arff">这里</a>下载。</p>
+<p>我们用“Explorer”打开训练集“bank.arff”，观察一下它是不是按照前面的要求处理好了。切换到“Classify”选项卡，点击“Choose”按钮后可以看到很多分类或者回归的算法分门别类的列在一个树型框里。3.5版的WEKA中，树型框下方有一个“Filter…”按钮，点击可以根据数据集的特性过滤掉不合适的算法。我们数据集的输入属性中有“Binary”型（即只有两个类的分类型）和数值型的属性，而Class变量是“Binary”的；于是我们勾选“Binary attributes”“Numeric attributes”和“Binary class”。点“OK”后回到树形图，可以发现一些算法名称变红了，说明它们不能用。选择“trees”下的“J48”，这就是我们需要的C4.5算法，还好它没有变红。<br>点击“Choose”右边的文本框，弹出新窗口为该算法设置各种参数。点“More”查看参数说明，点“Capabilities”是查看算法适用范围。这里我们把参数保持默认。<br>现在来看左中的“Test Option”。我们没有专门设置检验数据集，为了保证生成的模型的准确性而不至于出现过拟合（overfitting）的现象，我们有必要采用10折交叉验证（10-fold cross validation）来选择和评估模型。若不明白交叉验证的含义可以<a target="_blank" rel="noopener" href="http://www.google.com/search?&q=cross+validation">Google</a>一下。</p>
+<p>建模结果<br>OK，选上“Cross-validation”并在“Folds”框填上“10”。点“Start”按钮开始让算法生成决策树模型。很快，用文本表示的一棵决策树，以及对这个决策树的误差分析等等结果出现在右边的“Classifier output”中。同时左下的“Results list”出现了一个项目显示刚才的时间和算法名称。如果换一个模型或者换个参数，重新“Start”一次，则“Results list”又会多出一项。</p>
+<p>我们看到“J48”算法交叉验证的结果之一为<br>Correctly Classified Instances 206 68.6667 %<br>也就是说这个模型的准确度只有69%左右。也许我们需要对原属性进行处理，或者修改算法的参数来提高准确度。但这里我们不管它，继续用这个模型。 </p>
+<p>右键点击“Results list”刚才出现的那一项，弹出菜单中选择“Visualize tree”，新窗口里可以看到图形模式的决策树。建议把这个新窗口最大化，然后点右键，选“Fit to screen”，可以把这个树看清楚些。看完后截图或者关掉</p>
+<p>这里我们解释一下“Confusion Matrix”的含义。<br>=== Confusion Matrix ===<br> a b &lt;– classified as<br> 74 64 | a = YES<br> 30 132 | b = NO<br>这个矩阵是说，原本“pep”是“YES”的实例，有74个被正确的预测为“YES”，有64个错误的预测成了“NO”；原本“pep”是“NO”的实例，有30个被错误的预测为“YES”，有132个正确的预测成了“NO”。74+64+30+132 = 300是实例总数，而(74+132)/300 = 0.68667正好是正确分类的实例所占比例。这个矩阵对角线上的数字越大，说明预测得越好。</p>
+<p>模型应用<br>现在我们要用生成的模型对那些待预测的数据集进行预测了。注意待预测数据集和训练用数据集各个属性的设置必须是一致的。即使你没有待预测数据集的Class属性的值，你也要添加这个属性，可以将该属性在各实例上的值均设成缺失值。<br>在“Test Opion”中选择“Supplied test set”，并且“Set”成你要应用模型的数据集，这里是“bank-new.arff”文件。<br>现在，右键点击“Result list”中刚产生的那一项，选择“Re-evaluate model on current test set”。右边显示结果的区域中会增加一些内容，告诉你该模型应用在这个数据集上表现将如何。如果你的Class属性都是些缺失值，那这些内容是无意义的，我们关注的是模型在新数据集上的预测值。<br>现在点击右键菜单中的“Visualize classifier errors”，将弹出一个新窗口显示一些有关预测误差的散点图。点击这个新窗口中的“Save”按钮，保存一个Arff文件。打开这个文件可以看到在倒数第二个位置多了一个属性（predictedpep），这个属性上的值就是模型对每个实例的预测值。</p>
+<p>使用命令行（推荐）<br>虽然使用图形界面查看结果和设置参数很方便，但是最直接最灵活的建模及应用的办法仍是使用命令行。<br>打开“Simple CLI”模块，像上面那样使用“J48”算法的命令格式为：<br>java weka.classifiers.trees.J48 -C 0.25 -M 2 -t directory-path\bank.arff -d directory-path \bank.model<br>其中参数“ -C 0.25”和“-M 2”是和图形界面中所设的一样的。“-t ”后面跟着的是训练数据集的完整路径（包括目录和文件名），“-d ”后面跟着的是保存模型的完整路径。注意！这里我们可以把模型保存下来。<br>输入上述命令后，所得到树模型和误差分析会在“Simple CLI”上方显示，可以复制下来保存在文本文件里。误差是把模型应用到训练集上给出的。<br>把这个模型应用到“bank-new.arff”所用命令的格式为：<br>java weka.classifiers.trees.J48 -p 9 -l directory-path\bank.model -T directory-path \bank-new.arff<br>其中“-p 9”说的是模型中的待预测属性的真实值存在第9个（也就是“pep”）属性中，这里它们全部未知因此全部用缺失值代替。“-l”后面是模型的完整路径。“-T”后面是待预测数据集的完整路径。<br>输入上述命令后，在“Simple CLI”上方会有这样一些结果：<br>0 YES 0.75 ?<br>1 NO 0.7272727272727273 ?<br>2 YES 0.95 ?<br>3 YES 0.8813559322033898 ?<br>4 NO 0.8421052631578947 ?<br>…<br>这里的第一列就是我们提到过的“Instance_number”，第二列就是刚才的“predictedpep”，第四列则是“bank-new.arff”中原来的“pep”值（这里都是“?”缺失值）。第三列对预测结果的置信度（confidence ）。比如说对于实例0，我们有75%的把握说它的“pep”的值会是“YES”，对实例4我们有84.2%的把握说它的“pep”值会是“NO”。<br>我们看到，使用命令行至少有两个好处。一个是可以把模型保存下来，这样有新的待预测数据出现时，不用每次重新建模，直接应用保存好的模型即可。另一个是对预测结果给出了置信度，我们可以有选择的采纳预测结果，例如，只考虑那些置信度在85%以上的结果。</p>
+<p>—-整理自<a target="_blank" rel="noopener" href="http://maya.cs.depaul.edu/~classes/ect584/WEKA/classify.html">http://maya.cs.depaul.edu/~classes/ect584/WEKA/classify.html</a></p>
+<h3 id="7-聚类分析"><a href="#7-聚类分析" class="headerlink" title="7.聚类分析"></a>7.聚类分析</h3><p><strong>原理与实现</strong> </p>
+<p>聚类分析中的“类”（cluster）和前面分类的“类”（class）是不同的，对cluster更加准确的翻译应该是“簇”。聚类的任务是把所有的实例分配到若干的簇，使得同一个簇的实例聚集在一个簇中心的周围，它们之间距离的比较近；而不同簇实例之间的距离比较远。对于由数值型属性刻画的实例来说，这个距离通常指欧氏距离。<br>现在我们对前面的“bank data”作聚类分析，使用最常见的K均值（K-means）算法。下面我们简单描述一下K均值聚类的步骤。<br>K均值算法首先随机的指定K个簇中心。然后：1)将每个实例分配到距它最近的簇中心，得到K个簇；2)计分别计算各簇中所有实例的均值，把它们作为各簇新的簇中心。重复1)和2)，直到K个簇中心的位置都固定，簇的分配也固定。</p>
+<p>上述K均值算法只能处理数值型的属性，遇到分类型的属性时要把它变为若干个取值0和1的属性。WEKA将自动实施这个分类型到数值型的变换，而且WEKA会自动对数值型的数据作标准化。因此，对于原始数据“bank-data.csv”，我们所做的预处理只是删去属性“id”，保存为ARFF格式后，修改属性“children”为分类型。这样得到的数据文件为“<a target="_blank" rel="noopener" href="http://maya.cs.depaul.edu/~classes/ect584/WEKA/cluster/bank.arff">bank.arff</a>”，含600条实例。</p>
+<p>用“Explorer”打开刚才得到的“bank.arff”，并切换到“Cluster”。点“Choose”按钮选择“SimpleKMeans”，这是WEKA中实现K均值的算法。点击旁边的文本框，修改“numClusters”为6，说明我们希望把这600条实例聚成6类，即K=6。下面的“seed”参数是要设置一个随机种子，依此产生一个随机数，用来得到K均值算法中第一次给出的K个簇中心的位置。我们不妨暂时让它就为10。<br>选中“Cluster Mode”的“Use training set”，点击“Start”按钮，观察右边“Clusterer output”给出的聚类结果。也可以在左下角“Result list”中这次产生的结果上点右键，“View in separate window”在新窗口中浏览结果。</p>
+<p><strong>结果解释</strong><br>首先我们注意到结果中有这么一行：<br>Within cluster sum of squared errors: 1604.7416693522332<br>这是评价聚类好坏的标准，数值越小说明同一簇实例之间的距离越小。也许你得到的数值会不一样；实际上如果把“seed”参数改一下，得到的这个数值就可能会不一样。我们应该多尝试几个seed，并采纳这个数值最小的那个结果。例如我让“seed”取100，就得到<br>Within cluster sum of squared errors: 1555.6241507629218<br>我该取后面这个。当然再尝试几个seed，这个数值可能会更小。 </p>
+<p>接下来“Cluster centroids:”之后列出了各个簇中心的位置。对于数值型的属性，簇中心就是它的均值（Mean）；分类型的就是它的众数（Mode），也就是说这个属性上取值为众数值的实例最多。对于数值型的属性，还给出了它在各个簇里的标准差（Std Devs）。 </p>
+<p>最后的“Clustered Instances”是各个簇中实例的数目及百分比。 </p>
+<p>为了观察可视化的聚类结果，我们在左下方“Result list”列出的结果上右击，点“Visualize cluster assignments”。弹出的窗口给出了各实例的散点图。最上方的两个框是选择横坐标和纵坐标，第二行的“color”是散点图着色的依据，默认是根据不同的簇“Cluster”给实例标上不同的颜色。<br>可以在这里点“Save”把聚类结果保存成ARFF文件。在这个新的ARFF文件中，“instance_number”属性表示某实例的编号，“Cluster”属性表示聚类算法给出的该实例所在的簇。</p>
+<p>—-整理自 <a target="_blank" rel="noopener" href="http://maya.cs.depaul.edu/~classes/ect584/WEKA/k-means.html">http://maya.cs.depaul.edu/~classes/ect584/WEKA/k-means.html</a></p>
+<h3 id="8-Weka学习相关资料"><a href="#8-Weka学习相关资料" class="headerlink" title="8. Weka学习相关资料:"></a>8. Weka学习相关资料:</h3><p>①首先就是Weka的官方网站：<br><a target="_blank" rel="noopener" href="http://www.cs.waikato.ac.nz/ml/weka/">http://www.cs.waikato.ac.nz/ml/weka/</a><br>②Weka 的API中文版：<br><a target="_blank" rel="noopener" href="http://download.csdn.net/detail/monoid0805/5277987">http://download.csdn.net/detail/monoid0805/5277987</a><br>③Weka编程手册：<br>Weka manual,可以在官网找到。<br>④Weka问答社区：<br><a target="_blank" rel="noopener" href="http://weka.wikispaces.com/Frequently+Asked+Questions">http://weka.wikispaces.com/Frequently+Asked+Questions</a><br>⑤Weka入门指南<br><a target="_blank" rel="noopener" href="http://weka.wiki.sourceforge.net/Use+Weka+in+your+Java+code">http://weka.wiki.sourceforge.net/Use+Weka+in+your+Java+code</a><br>其他的还有比如Stack Overflow等程序员问答社区也有不少资料，有很多大牛的回答。<br>基本上以上的资料学习Weka就足够的，本教程主要讲解Weka的API使用，GUI的使用官方文档讲解比较详细，也很容易摸索。</p>
+<h3 id="9-Weka二次开发："><a href="#9-Weka二次开发：" class="headerlink" title="9. Weka二次开发："></a>9. Weka二次开发：</h3><p>如果使用Weka进行API二次开发，强烈建议使用Maven进行项目管理，便于将所需要的依赖包方便的导入。Weka开发所需要的依赖包可以在下面网址找到：<br><a target="_blank" rel="noopener" href="http://mvnrepository.com/artifact/nz.ac.waikato.cms.weka">http://mvnrepository.com/artifact/nz.ac.waikato.cms.weka</a><br>当然，Weka3.7版本和Weka3.6版本区别还是比较大，Weka3.7版本删除了如LibSVM包、SMOTE包等第三方包，但是在使用中你如果使用到这些功能你仍然可以在Maven仓库中找到。<br>使用Intellij进行开发是个不错的选择，当然eclipse也可以，当把这些工作都搞定后，就可以进行实际的开发工作了。</p>
+<h3 id="10-Weka源代码导入"><a href="#10-Weka源代码导入" class="headerlink" title="10. Weka源代码导入"></a>10. Weka源代码导入</h3><ol>
+<li><p>下载源代码</p>
+<ol>
+<li>下载安装文件，安装后在安装目录中会有一个 weka-src.jar ，解压后即为源码； <a target="_blank" rel="noopener" href="https://www.cs.waikato.ac.nz/ml/weka/downloading.html">https://www.cs.waikato.ac.nz/ml/weka/downloading.html</a></li>
+<li>通过SVN下载： <a target="_blank" rel="noopener" href="https://svn.cms.waikato.ac.nz/svn/weka/trunk/weka">https://svn.cms.waikato.ac.nz/svn/weka/trunk/weka</a> 机子上需要SVN工具如：TortoiseSVN</li>
+</ol>
+</li>
+<li><p>导入eclipse</p>
+</li>
+<li><ol>
+<li>准备源代码。在weka的安装目录中找到weka-src.jar，解压缩到一个weka目录下。包含lib、src、META-INF、resources文件夹和另外几个文件；</li>
+<li>在Eclipse下新建java project，命名为weka，在src下新建名为weka的包；（有人建议使用Maven进行项目管理）</li>
+<li>在此项目下import–&gt;File System–&gt;选择…/weka/src/main/java/weka，并全部导入；</li>
+<li>项目导入库文件，biuldpath–&gt;add external jar–&gt;导入lib里的 jar包；</li>
+<li>其他比如resources、META-INF等内容可以选择性导入</li>
+<li>运行weka.gui.main成功；</li>
+</ol>
+</li>
+<li><p>参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/hanma602/article/details/50535063">https://blog.csdn.net/hanma602/article/details/50535063</a></p>
+</li>
+</ol>
+<h3 id="转载自："><a href="#转载自：" class="headerlink" title="转载自："></a>转载自：</h3><p>WEKA使用教程：<a target="_blank" rel="noopener" href="https://blog.csdn.net/yangliuy/article/details/7589306">https://blog.csdn.net/yangliuy/article/details/7589306</a></p>
+<p>weka的基本使用—explorer界面的介绍：<a target="_blank" rel="noopener" href="https://blog.csdn.net/u010372981/article/details/44900435">https://blog.csdn.net/u010372981/article/details/44900435</a></p>
+
+    </article>
+    <!-- license  -->
+    
+        <div class="license-wrapper">
+            <p>Author：<a href="https://lixins319070033.github.io">Nice</a>
+            <p>原文链接：<a href="https://lixins319070033.github.io/2021/10/24/weka%E8%BD%AF%E4%BB%B6%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%8CCBR%E9%9D%9E%E5%81%B6%E7%84%B6%E6%80%A7%E8%A7%84%E5%88%92/">https://lixins319070033.github.io/2021/10/24/weka%E8%BD%AF%E4%BB%B6%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%8CCBR%E9%9D%9E%E5%81%B6%E7%84%B6%E6%80%A7%E8%A7%84%E5%88%92/</a>
+            <p>发表日期：<a href="https://lixins319070033.github.io/2021/10/24/weka%E8%BD%AF%E4%BB%B6%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%8CCBR%E9%9D%9E%E5%81%B6%E7%84%B6%E6%80%A7%E8%A7%84%E5%88%92/">October 24th 2021, 8:16:23 pm</a>
+            <p>更新日期：<a href="https://lixins319070033.github.io/2021/10/24/weka%E8%BD%AF%E4%BB%B6%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%8CCBR%E9%9D%9E%E5%81%B6%E7%84%B6%E6%80%A7%E8%A7%84%E5%88%92/">October 24th 2021, 8:27:50 pm</a>
+            <p>版权声明：本文采用<a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+        </div>
+    
+    <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+                <div class="nextSlogan">Next Post</div>
+                <a href= "/2021/11/07/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E6%8E%92%E5%BA%8F/" title= "数据结构与算法--排序">
+                    <div class="nextTitle">数据结构与算法--排序</div>
+                </a>
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2021/10/24/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E6%A0%91%EF%BC%88Tree%EF%BC%89-JS/" title= "数据结构与算法-树（Tree）-JS">
+                    <div class="prevTitle">数据结构与算法-树（Tree）-JS</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
+    
+    
+    <!-- gitalk评论 -->
+
+    <!-- utteranc评论 -->
+
+    <!-- partial('_partial/comment/changyan') -->
+    <!--PC版-->
+
+
+    
+    
+
+    <!-- 评论 -->
+</main>
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="mailto:1753304332@qq.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="https://github.com/LiXinS319070033" class="iconfont-archer github" target="_blank" title=github></a>
+            
+        
+    
+        
+            
+                <span class="iconfont-archer wechat" title=wechat>
+                  
+                  <img class="profile-qr" src="/weixin.png" />
+                </span>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+    </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- 不蒜子  -->
+    
+    <div class="busuanzi-container">
+    
+     
+    <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span> :)</span>
+    
+    </div>
+    
+</footer>
+    </div>
+    <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#weka%E8%BD%AF%E4%BB%B6%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%8CCBR%E9%9D%9E%E5%81%B6%E7%84%B6%E6%80%A7%E8%A7%84%E5%88%92"><span class="toc-number">1.</span> <span class="toc-text">weka软件的使用，CBR非偶然性规划</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#weka%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="toc-number">2.</span> <span class="toc-text">weka的基本使用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%AE%E5%BD%95%EF%BC%9A"><span class="toc-number">2.1.</span> <span class="toc-text">目录：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E7%AE%80%E4%BB%8B"><span class="toc-number">2.1.1.</span> <span class="toc-text">1. 简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E7%95%8C%E9%9D%A2%E5%88%9D%E8%AF%86%EF%BC%9A"><span class="toc-number">2.1.2.</span> <span class="toc-text">2. 界面初识：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F"><span class="toc-number">2.1.3.</span> <span class="toc-text">3. 数据格式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%86%85%E5%AE%B9%E9%83%A8%E5%88%86%EF%BC%9A"><span class="toc-number">2.1.3.1.</span> <span class="toc-text">内容部分：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E6%95%B0%E6%8D%AE%E5%87%86%E5%A4%87"><span class="toc-number">2.1.4.</span> <span class="toc-text">4. 数据准备</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E5%85%B3%E8%81%94%E8%A7%84%E5%88%99%EF%BC%88%E8%B4%AD%E7%89%A9%E7%AF%AE%E5%88%86%E6%9E%90%EF%BC%89"><span class="toc-number">2.1.5.</span> <span class="toc-text">5.关联规则（购物篮分析）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E5%88%86%E7%B1%BB%E4%B8%8E%E5%9B%9E%E5%BD%92"><span class="toc-number">2.1.6.</span> <span class="toc-text">6.分类与回归</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-%E8%81%9A%E7%B1%BB%E5%88%86%E6%9E%90"><span class="toc-number">2.1.7.</span> <span class="toc-text">7.聚类分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-Weka%E5%AD%A6%E4%B9%A0%E7%9B%B8%E5%85%B3%E8%B5%84%E6%96%99"><span class="toc-number">2.1.8.</span> <span class="toc-text">8. Weka学习相关资料:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-Weka%E4%BA%8C%E6%AC%A1%E5%BC%80%E5%8F%91%EF%BC%9A"><span class="toc-number">2.1.9.</span> <span class="toc-text">9. Weka二次开发：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-Weka%E6%BA%90%E4%BB%A3%E7%A0%81%E5%AF%BC%E5%85%A5"><span class="toc-number">2.1.10.</span> <span class="toc-text">10. Weka源代码导入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BD%AC%E8%BD%BD%E8%87%AA%EF%BC%9A"><span class="toc-number">2.1.11.</span> <span class="toc-text">转载自：</span></a></li></ol></li></ol></li></ol>
+    </div>
+    
+    <div class="back-top iconfont-archer">&#xe639;</div>
+    <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-panel-archives">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 72
+        </div>
+        <!-- search  -->
+        
+    </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2021 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/19</span><a class="archive-post-title" href= "/2021/12/19/JS%E7%9F%A5%E8%AF%86%E7%82%B9%E8%A1%A5%E5%85%85/" >JS知识点补充</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/21</span><a class="archive-post-title" href= "/2021/11/21/%E6%95%B0%E6%8D%AE%E5%BA%93-mysql%E6%9F%A5%E8%AF%A2%E7%BB%83%E4%B9%A0/" >数据库-mysql查询练习</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/21</span><a class="archive-post-title" href= "/2021/11/21/%E6%95%B0%E6%8D%AE%E5%BA%93-MySQL%E7%9A%84%E4%BA%8B%E5%8A%A1/" >数据库-MySQL的事务</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/14</span><a class="archive-post-title" href= "/2021/11/14/%E6%95%B0%E6%8D%AE%E5%BA%93-%E4%BD%BF%E7%94%A8%E7%BB%88%E7%AB%AF%E6%93%8D%E4%BD%9C%E6%95%B0%E6%8D%AE%E5%BA%93/" >数据库-使用终端操作数据库</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/14</span><a class="archive-post-title" href= "/2021/11/14/%E6%95%B0%E6%8D%AE%E5%BA%93-%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%89%E5%A4%A7%E8%AE%BE%E8%AE%A1%E8%8C%83%E5%BC%8F/" >数据库-数据库三大设计范式</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/07</span><a class="archive-post-title" href= "/2021/11/07/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E6%8E%92%E5%BA%8F/" >数据结构与算法--排序</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/24</span><a class="archive-post-title" href= "/2021/10/24/weka%E8%BD%AF%E4%BB%B6%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%8CCBR%E9%9D%9E%E5%81%B6%E7%84%B6%E6%80%A7%E8%A7%84%E5%88%92/" >weka软件的使用，CBR非偶然性规划</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/24</span><a class="archive-post-title" href= "/2021/10/24/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95--%E9%98%9F%E5%88%97%EF%BC%88Queue%EF%BC%89-JS/" >数据结构与算法--队列（Queue）--JS</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/24</span><a class="archive-post-title" href= "/2021/10/24/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98%E6%80%BB%E7%BB%93/" >前端面试题总结</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/24</span><a class="archive-post-title" href= "/2021/10/24/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E9%9B%86%E5%90%88%EF%BC%88Set%EF%BC%89-JS/" >数据结构与算法--集合（Set）--JS</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/24</span><a class="archive-post-title" href= "/2021/10/24/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95--%E9%93%BE%E8%A1%A8%EF%BC%88Linked%20list%EF%BC%89-JS/" >数据结构与算法--链表（Linked list）--JS</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/24</span><a class="archive-post-title" href= "/2021/10/24/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E6%A0%91%EF%BC%88Tree%EF%BC%89-JS/" >数据结构与算法-树（Tree）-JS</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/24</span><a class="archive-post-title" href= "/2021/10/24/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E5%9B%BE%EF%BC%88Graph%EF%BC%89-JS/" >数据结构与算法-图（Graph）-JS</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/24</span><a class="archive-post-title" href= "/2021/10/24/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E5%93%88%E5%B8%8C%E8%A1%A8-JS/" >数据结构与算法--哈希表--JS</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/24</span><a class="archive-post-title" href= "/2021/10/24/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95--%E6%A0%88%EF%BC%88Stack%EF%BC%89--JS/" >数据结构与算法--栈（Stack）--JS</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/27</span><a class="archive-post-title" href= "/2021/06/27/%E6%89%8B%E5%86%99Promise-all%E5%92%8CPromise-race/" >手写Promise.all和Promise.race</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/08</span><a class="archive-post-title" href= "/2021/06/08/%E4%BA%8C%E4%B8%89%E9%9D%A2-%E8%BF%90%E8%A1%8C%E6%9C%BA%E5%88%B6%E7%B1%BB/" >二三面_运行机制类</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/08</span><a class="archive-post-title" href= "/2021/06/08/%E9%9D%A2%E8%AF%95%E6%80%BB%E7%BB%93/" >面试总结</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/08</span><a class="archive-post-title" href= "/2021/06/08/%E4%BA%8C%E4%B8%89%E9%9D%A2-%E9%94%99%E8%AF%AF%E7%9B%91%E6%8E%A7%E7%B1%BB/" >二三面_错误监控类</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/08</span><a class="archive-post-title" href= "/2021/06/08/%E4%BA%8C%E4%B8%89%E9%9D%A2-%E9%A1%B5%E9%9D%A2%E6%80%A7%E8%83%BD/" >二三面_页面性能</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/08</span><a class="archive-post-title" href= "/2021/06/08/%E4%BA%8C%E4%B8%89%E9%9D%A2-%E6%B8%B2%E6%9F%93%E6%9C%BA%E5%88%B6%E7%B1%BB/" >二三面_渲染机制类</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/08</span><a class="archive-post-title" href= "/2021/06/08/%E7%BB%88%E9%9D%A2%EF%BC%88HR%E9%9D%A2%EF%BC%89-%E8%81%8C%E4%B8%9A%E7%AB%9E%E4%BA%89%E5%8A%9B%E5%92%8C%E8%81%8C%E4%B8%9A%E8%A7%84%E5%88%92/" >终面（HR面）_职业竞争力和职业规划</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/08</span><a class="archive-post-title" href= "/2021/06/08/%E4%B8%89%E5%9B%9B%E9%9D%A2-%E4%B8%9A%E5%8A%A1%E8%83%BD%E5%8A%9B%E5%9B%A2%E9%98%9F%E5%8D%8F%E4%BD%9C%E8%83%BD%E5%8A%9B%E4%B8%8E%E5%B8%A6%E4%BA%BA%E8%83%BD%E5%8A%9B/" >三四面_业务能力团队协作能力与带人能力</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/07</span><a class="archive-post-title" href= "/2021/06/07/%E7%AE%97%E6%B3%95%E9%A2%98%E6%80%BB%E7%BB%93/" >算法题总结</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/%E4%B8%80%E4%BA%8C%E9%9D%A2-%E5%8E%9F%E5%9E%8B%E9%93%BE/" >一二面_原型链</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/%E4%B8%80%E4%BA%8C%E9%9D%A2-%E5%AE%89%E5%85%A8%E7%B1%BB/" >一二面_安全类</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/%E4%B8%80%E4%BA%8C%E9%9D%A2-%E7%AE%97%E6%B3%95%E7%B1%BB/" >一二面_算法类</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/%E4%B8%80%E4%BA%8C%E9%9D%A2-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" >一二面_面向对象</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/%E4%B8%8A%E4%BC%A0%E5%8D%9A%E5%AE%A2%E5%88%B0github%E6%97%B6%E5%87%BA%E7%8E%B0%E7%9A%84%E9%97%AE%E9%A2%98-Failed-to-connect-to-github-com-port-443-Timed-out/" >上传博客到github时出现的问题 Failed to connect to github.com port 443: Timed out </a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/%E4%B8%80%E4%BA%8C%E9%9D%A2-%E9%80%9A%E8%AE%AF%E7%B1%BB/" >一二面_通讯类</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/%E4%B8%80%E4%BA%8C%E9%9D%A2-%E9%A1%B5%E9%9D%A2%E5%B8%83%E5%B1%80/" >一二面_页面布局</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> Invalid date </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/09/27/hexo%E4%B8%BB%E9%A2%98%E4%BF%AE%E6%94%B9/" >hexo主题修改</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2021 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/%E4%B8%80%E4%BA%8C%E9%9D%A2-HTTP%E5%8D%8F%E8%AE%AE%E7%B1%BB/" >一二面_HTTP协议类</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/%E4%B8%80%E4%BA%8C%E9%9D%A2-CSS%E7%9B%92%E6%A8%A1%E5%9E%8B/" >一二面_CSS盒模型</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/%E4%B8%80%E4%BA%8C%E9%9D%A2-DOM%E4%BA%8B%E4%BB%B6%E7%B1%BB/" >一二面_DOM事件类</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/20</span><a class="archive-post-title" href= "/2021/02/20/react%E4%B8%AD%E5%88%9B%E5%BB%BA%E7%BB%84%E4%BB%B6/" >react中创建组件</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/20</span><a class="archive-post-title" href= "/2021/02/20/%E4%BD%BF%E7%94%A8styled-components%E6%8A%A5%E9%94%99-Attempted-import-error-injectGlobal-is-not-exported-from-styled-components/" >使用styled-components报错 Attempted import error: injectGlobal is not exported from styled-components</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/20</span><a class="archive-post-title" href= "/2021/02/20/VUE%E9%A1%B9%E7%9B%AE%E6%8C%89%E9%9C%80%E5%BC%95%E5%85%A5ELEMENT-UI%EF%BC%8C%E4%BF%AE%E6%94%B9-BABELRC%E6%96%87%E4%BB%B6%E4%B9%8B%E5%90%8E%E6%8A%A5%E9%94%99/" >VUE项目按需引入ELEMENT-UI，修改.BABELRC文件之后报错</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/20</span><a class="archive-post-title" href= "/2021/02/20/react%E6%8A%A5%E9%94%99%EF%BC%9ATypeError-Class-extends-value-undefined-is-not-a-constructor-or-null/" >react报错：TypeError: Class extends value undefined is not a constructor or null</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/20</span><a class="archive-post-title" href= "/2021/02/20/yarn-command-not-found/" >yarn: command not found</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/20</span><a class="archive-post-title" href= "/2021/02/20/%E6%85%95%E8%AF%BE%E7%BD%91%E5%B0%8F%E7%B1%B3%E5%95%86%E5%9F%8E%E9%A1%B9%E7%9B%AE9-1-%E5%95%86%E5%93%81%E8%AF%A6%E6%83%85%E4%BA%A4%E4%BA%92%E5%AE%9E%E7%8E%B0%E8%AF%BE%E7%A8%8B%E4%B8%AD%E9%80%89%E6%8B%A9%E7%89%88%E6%9C%AC%E5%87%BA%E7%8E%B0%E7%9A%84%E5%B0%8F%E9%97%AE%E9%A2%98/" >慕课网小米商城项目9-1_商品详情交互实现课程中选择版本出现的小问题</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/09</span><a class="archive-post-title" href= "/2021/02/09/%E4%BD%BF%E7%94%A8swiper%E6%8F%92%E4%BB%B6%E6%97%B6%EF%BC%8C%E6%8A%A5%E9%94%99Can-t-resolve-swiper-dist-css-swiper-css-in/" >使用swiper插件时，报错Can't resolve 'swiper/dist/css/swiper.css' in</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/09</span><a class="archive-post-title" href= "/2021/02/09/%E4%BD%BF%E7%94%A8swiper%E6%8F%92%E4%BB%B6%E6%97%B6%EF%BC%8C%E6%8A%A5%E9%94%99did-you-register-the-component-correctly-For-recursive-components-make-sure-to-provide-the-name-option/" >使用swiper插件时，报错did you register the component correctly? For recursive components, make sure to provide the name option</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/09</span><a class="archive-post-title" href= "/2021/02/09/%E4%BD%BF%E7%94%A8sass%E6%97%B6%EF%BC%8C%E6%8A%A5%E9%94%99TypeError-this-getResolve-is-not-a-function-at-Object-loader/" >使用sass时，报错TypeError: this.getResolve is not a function at Object.loader</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/09</span><a class="archive-post-title" href= "/2021/02/09/Vue%E9%A1%B9%E7%9B%AE%E6%B5%8F%E8%A7%88%E5%99%A8%E5%86%85Console%E4%B8%AD%E6%98%BE%E7%A4%BA-HMR-Waiting-for-update-signal-from-WDS%E2%80%A6%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" >Vue项目浏览器内Console中显示[HMR] Waiting for update signal from WDS…的解决方案</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/09</span><a class="archive-post-title" href= "/2021/02/09/Vue-cli%E6%90%AD%E5%BB%BA%E5%A5%BD%E9%BB%98%E8%AE%A4%E9%A1%B9%E7%9B%AE%E5%90%8E%E4%BD%BF%E7%94%A8%E8%B7%AF%E7%94%B1%E5%8A%9F%E8%83%BD%EF%BC%8C%E6%8A%A5%E9%94%99Can%E2%80%99t%20resolve%20%E2%80%98vue-router%E2%80%99%20in/" >Vue-cli搭建好默认项目后使用路由功能，报错Can’t resolve ‘vue-router’ in</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/05</span><a class="archive-post-title" href= "/2021/02/05/vue%E9%A1%B9%E7%9B%AE%E4%B8%AD%E9%83%A8%E5%88%86%E5%8A%9F%E8%83%BD%E5%9C%A8vscode%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/" >vue项目中部分功能在vscode中的使用方法</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/05</span><a class="archive-post-title" href= "/2021/02/05/%E8%BF%90%E8%A1%8Cvue%E9%A1%B9%E7%9B%AE%E6%97%B6%E6%8A%A5%E9%94%99The-template-root-requires-exactly-one-element/" >运行vue项目时报错The template root requires exactly one element</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/05</span><a class="archive-post-title" href= "/2021/02/05/VScode%E5%88%9D%E6%AC%A1%E4%BD%BF%E7%94%A8%E6%97%B6%E5%A6%82%E4%BD%95%E8%BF%90%E8%A1%8Chtml%E6%96%87%E4%BB%B6%E5%88%B0%E6%B5%8F%E8%A7%88%E5%99%A8%E4%B8%8A/" >VScode初次使用时如何运行html文件到浏览器上</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/05</span><a class="archive-post-title" href= "/2021/02/05/vscode%E7%9A%84%E4%BB%A3%E7%A0%81%E4%B8%8A%E4%BC%A0%E5%88%B0%E6%85%95%E8%AF%BE%E7%BD%91%E4%BB%93%E5%BA%93%E6%97%B6%E4%B8%8A%E4%BC%A0%E4%B8%8D%E6%88%90%E5%8A%9F-%E6%85%95%E8%AF%BE%E7%BD%91%E9%AB%98%E4%BB%BF%E5%B0%8F%E7%B1%B3%E5%95%86%E5%9F%8E%E9%A1%B9%E7%9B%AE/" >vscode的代码上传到慕课网仓库时上传不成功--慕课网高仿小米商城项目</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/04</span><a class="archive-post-title" href= "/2021/02/04/vscode%E3%80%81sublime%E6%80%8E%E4%B9%88%E5%9C%A8%E7%A9%BA%E7%99%BD%E8%84%9A%E6%9C%AC%E4%B8%AD%E5%BF%AB%E9%80%9F%E7%94%9F%E6%88%90html5%E6%A0%87%E5%87%86%E6%A8%A1%E6%9D%BF%E6%A0%BC%E5%BC%8F/" >vscode、sublime怎么在空白脚本中快速生成html5标准模板格式</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/04</span><a class="archive-post-title" href= "/2021/02/04/%EF%BC%88tinypng%E5%9B%BE%E7%89%87%E5%8E%8B%E7%BC%A9%EF%BC%89%E8%A7%A3%E5%86%B3CSDN%E4%B8%8A%E4%BC%A0%E4%B8%8D%E4%BA%86%E8%BF%87%E5%A4%A7%E7%9A%84%E5%9B%BE%E7%89%87%E9%97%AE%E9%A2%98/" >（tinypng图片压缩）解决CSDN上传不了过大的图片问题</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/04</span><a class="archive-post-title" href= "/2021/02/04/vscode%E8%BD%AF%E4%BB%B6%E4%B8%AD%E7%9A%84html%E6%96%87%E4%BB%B6%E7%9A%84%E5%B8%B8%E7%94%A8%E7%9A%84%E5%BF%AB%E6%8D%B7%E6%96%B9%E5%BC%8F/" >vscode软件中的html文件的常用的快捷方式</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/04</span><a class="archive-post-title" href= "/2021/02/04/better-scroll%E6%BB%9A%E5%8A%A8%E5%A4%B1%E6%95%88%EF%BC%88%E5%8E%BB%E5%93%AA%E7%BD%91%E5%84%BF%E9%A1%B9%E7%9B%AE%E7%A7%BB%E5%8A%A8%E7%AB%AF%EF%BC%89/" >better-scroll滚动失效（去哪网儿项目移动端）</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/04</span><a class="archive-post-title" href= "/2021/02/04/VsCode%E4%B8%ADGit%E8%B7%AF%E5%BE%84%E7%9A%84%E8%AE%BE%E7%BD%AE/" >VsCode中git路径的设置（window系统）</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/04</span><a class="archive-post-title" href= "/2021/01/04/js%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%8E%E6%95%B0%E5%AD%97%E7%9B%B8%E5%8A%A0%E5%87%8F%E4%B9%98%E9%99%A4/" >js字符串与数字相加减</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/04</span><a class="archive-post-title" href= "/2021/01/04/CSS%E4%B8%AD%E6%96%87%E5%AD%97%E5%9C%A8%E6%B0%B4%E5%B9%B3%E5%92%8C%E7%AB%96%E7%9B%B4%E6%96%B9%E5%90%91%E4%B8%8A%E9%87%8D%E5%8F%A0/" >CSS中文字在水平和竖直方向上重叠</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2020 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/25</span><a class="archive-post-title" href= "/2020/12/25/Vue%E7%BB%9F%E4%B8%80%E6%A0%B7%E5%BC%8F%EF%BC%88reset-css%E5%92%8Cborder-css%EF%BC%89/" >Vue统一样式（reset.css和border.css）</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/20</span><a class="archive-post-title" href= "/2020/12/20/%E5%AF%B9%E8%B1%A1/" >对象</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/18</span><a class="archive-post-title" href= "/2020/12/18/RegExp%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" >RegExp正则表达式</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/15</span><a class="archive-post-title" href= "/2020/12/15/C++%E7%9A%84OpenCV%E4%BD%8E%E7%89%88%E6%9C%AC%E7%9A%84CvvImage-cpp%E5%92%8Ccvvimage-h%E6%96%87%E4%BB%B6/" >C++的OpenCV低版本的CvvImage.cpp和cvvimage.h文件</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/15</span><a class="archive-post-title" href= "/2020/12/15/JS%E4%B8%AD%E7%9A%84%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%B5%85%E6%B5%85%E4%BA%86%E8%A7%A3/" >JS中的面向对象浅浅了解</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/13</span><a class="archive-post-title" href= "/2020/12/13/JavaScript%E7%9F%A5%E8%AF%86%E7%82%B9%E6%89%A9%E5%B1%95/" >JavaScript知识点扩展</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/06</span><a class="archive-post-title" href= "/2020/12/06/ES6%E6%80%BB%E7%BB%93%E6%95%B4%E7%90%86/" >ES6总结整理</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/08</span><a class="archive-post-title" href= "/2020/11/08/Sass%E6%80%BB%E7%BB%93/" >Sass总结</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/28</span><a class="archive-post-title" href= "/2020/09/28/hexo%E5%8D%9A%E5%AE%A2%E4%B8%AD%E6%8F%92%E5%85%A5%E7%9A%84%E5%9B%BE%E7%89%87%E4%B8%8D%E6%98%BE%E7%A4%BA/" >hexo博客中插入的图片不显示</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/27</span><a class="archive-post-title" href= "/2020/09/27/hexo%E7%82%B9%E5%87%BB%E5%8D%9A%E5%AE%A2%E5%90%8E%E6%A0%87%E9%A2%98%E4%B8%8D%E6%98%BE%E7%A4%BA/" >hexo点击博客后标题不显示</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/27</span><a class="archive-post-title" href= "/2020/09/27/JavaScript%E5%8E%9F%E5%9E%8B%E9%93%BE/" >JavaScript原型链</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/27</span><a class="archive-post-title" href= "/2020/09/27/Typora%E3%80%81Makedown/" >Typora、Makedown</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> Invalid date </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/09/27/HEXO%E5%8D%9A%E5%AE%A2%E7%9A%84%E6%90%AD%E5%BB%BA%E5%8F%8A%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%EF%BC%88%E4%BA%8C%EF%BC%89/" >HEXO博客的搭建及环境配置（二）</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2020 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/27</span><a class="archive-post-title" href= "/2020/09/27/HEXO%E5%8D%9A%E5%AE%A2%E7%9A%84%E6%90%AD%E5%BB%BA%E5%8F%8A%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%EF%BC%88%E4%B8%80%EF%BC%89/" >HEXO博客的搭建及环境配置（一）</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/27</span><a class="archive-post-title" href= "/2020/09/27/%E7%85%9C%E6%88%90%E2%80%99studio/" >煜成’studio</a>
+        </li>
+    
+    </div>
+  </div>
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+    
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br/>
+    1、请确保node版本大于6.2<br/>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #787878; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: true
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var siteMeta = {
+        root: "/",
+        author: "Nice"
+    }
+</script>
+    <!-- CDN failover -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ === 'undefined')
+        {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/lib/jquery.min.js">\x3C/script>')
+        }
+    </script>
+    <script src="/scripts/main.js"></script>
+    <!-- algolia -->
+    
+    <!-- busuanzi  -->
+    
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    <!-- CNZZ  -->
+    
+    </div>
+    <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
+     
+    </body>
+</html>
+
+
