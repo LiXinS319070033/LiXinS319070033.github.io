@@ -1,0 +1,2261 @@
+<!DOCTYPE html>
+<html lang="en">
+    <!-- title -->
+
+
+
+
+<!-- keywords -->
+
+
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" >
+    <meta name="author" content="Nice">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="Nice">
+    
+    <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
+    
+    <meta name="description" content="">
+    <meta name="description" content="Ajax技术（属于前端方面的技术）即“Asynchronous JavaScript and XML”，在页面不刷新情况下和服务器进行交互。 特点：异步请求，局部刷新 同步：发送方发出数据后，等接收方发回响应以后才发下一个数据包的通讯方式； 异步：发送方发出数据后，不等接收方发回响应，接着发送下个数据包的通讯方式。 优点：Web应用程序更为迅捷地回应用户动作并避免了在网络上发送哪些没有改变的信息，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ajax">
+<meta property="og:url" content="https://lixins319070033.github.io/2022/01/16/Ajax/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Ajax技术（属于前端方面的技术）即“Asynchronous JavaScript and XML”，在页面不刷新情况下和服务器进行交互。 特点：异步请求，局部刷新 同步：发送方发出数据后，等接收方发回响应以后才发下一个数据包的通讯方式； 异步：发送方发出数据后，不等接收方发回响应，接着发送下个数据包的通讯方式。 优点：Web应用程序更为迅捷地回应用户动作并避免了在网络上发送哪些没有改变的信息，">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-01-16T01:48:17.000Z">
+<meta property="article:modified_time" content="2022-01-23T10:10:55.972Z">
+<meta property="article:author" content="Nice">
+<meta name="twitter:card" content="summary">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    
+    <title>Ajax · 煜成&#39;s Studio</title>
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s infinite;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+</style>
+
+    <link rel="preload" href= "/css/style.css?v=20180824" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <link rel="stylesheet" href= "/css/mobile.css?v=20180824" media="(max-width: 980px)">
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+(function( w ){
+	"use strict";
+	// rel=preload support test
+	if( !w.loadCSS ){
+		w.loadCSS = function(){};
+	}
+	// define on the loadCSS obj
+	var rp = loadCSS.relpreload = {};
+	// rel=preload feature support test
+	// runs once and returns a function for compat purposes
+	rp.support = (function(){
+		var ret;
+		try {
+			ret = w.document.createElement( "link" ).relList.supports( "preload" );
+		} catch (e) {
+			ret = false;
+		}
+		return function(){
+			return ret;
+		};
+	})();
+
+	// if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+	// then change that media back to its intended value on load
+	rp.bindMediaToggle = function( link ){
+		// remember existing media attr for ultimate state, or default to 'all'
+		var finalMedia = link.media || "all";
+
+		function enableStylesheet(){
+			link.media = finalMedia;
+		}
+
+		// bind load handlers to enable media
+		if( link.addEventListener ){
+			link.addEventListener( "load", enableStylesheet );
+		} else if( link.attachEvent ){
+			link.attachEvent( "onload", enableStylesheet );
+		}
+
+		// Set rel and non-applicable media type to start an async request
+		// note: timeout allows this to happen async to let rendering continue in IE
+		setTimeout(function(){
+			link.rel = "stylesheet";
+			link.media = "only x";
+		});
+		// also enable media after 3 seconds,
+		// which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+		setTimeout( enableStylesheet, 3000 );
+	};
+
+	// loop through link elements in DOM
+	rp.poly = function(){
+		// double check this to prevent external calls from running
+		if( rp.support() ){
+			return;
+		}
+		var links = w.document.getElementsByTagName( "link" );
+		for( var i = 0; i < links.length; i++ ){
+			var link = links[ i ];
+			// qualify links to those with rel=preload and as=style attrs
+			if( link.rel === "preload" && link.getAttribute( "as" ) === "style" && !link.getAttribute( "data-loadcss" ) ){
+				// prevent rerunning on link
+				link.setAttribute( "data-loadcss", true );
+				// bind listeners to toggle media back
+				rp.bindMediaToggle( link );
+			}
+		}
+	};
+
+	// if unsupported, run the polyfill
+	if( !rp.support() ){
+		// run once at least
+		rp.poly();
+
+		// rerun poly on an interval until onload
+		var run = w.setInterval( rp.poly, 500 );
+		if( w.addEventListener ){
+			w.addEventListener( "load", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		} else if( w.attachEvent ){
+			w.attachEvent( "onload", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		}
+	}
+
+
+	// commonjs
+	if( typeof exports !== "undefined" ){
+		exports.loadCSS = loadCSS;
+	}
+	else {
+		w.loadCSS = loadCSS;
+	}
+}( typeof global !== "undefined" ? global : this ) );
+</script>
+
+    <link rel="icon" href= "/assets/favicon.ico" />
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js" as="script" />
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" as="script" />
+    <link rel="preload" href="/scripts/main.js" as="script" />
+    <link rel="preload" as="font" href="/font/Oswald-Regular.ttf" crossorigin>
+    <link rel="preload" as="font" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" crossorigin>
+    
+    <!-- fancybox -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script>
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+    
+        <body class="post-body">
+    
+    
+<header class="header">
+
+    <div class="read-progress"></div>
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >煜成&#39;s Studio.</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">Ajax</a>
+            </div>
+    </div>
+    
+    <a class="home-link" href=/>煜成's Studio.</a>
+</header>
+    <div class="wrapper">
+        <div class="site-intro" style="
+
+
+
+
+
+
+
+height:50vh;
+">
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(/chi.jpg)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            Ajax
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                
+                    <div class="post-intro-read">
+                        <span>Word count: <span class="post-count word-count">3k</span>Reading time: <span class="post-count reading-time">13 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2022/01/16</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+        
+    </div>
+</div>
+        <script>
+ 
+  // get user agent
+  var browser = {
+    versions: function () {
+      var u = window.navigator.userAgent;
+      return {
+        userAgent: u,
+        trident: u.indexOf('Trident') > -1, //IE内核
+        presto: u.indexOf('Presto') > -1, //opera内核
+        webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+        android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+        iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+        iPad: u.indexOf('iPad') > -1, //是否为iPad
+        webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+        weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+        uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+      };
+    }()
+  }
+  console.log("userAgent:" + browser.versions.userAgent);
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded');
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+      document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in');
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb(){
+    if (browser.versions.uc) {
+      console.log("UCBrowser");
+      fontLoaded();
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular']
+        },
+        loading: function () {  //所有字体开始加载
+          // console.log('loading');
+        },
+        active: function () {  //所有字体已渲染
+          fontLoaded();
+        },
+        inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout');
+          fontLoaded();
+        },
+        timeout: 5000 // Set the timeout to two seconds
+      });
+    }
+  }
+
+  function asyncErr(){
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (cb) { o.addEventListener('load', function (e) { cb(null, e); }, false); }
+    if (err) { o.addEventListener('error', function (e) { err(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+
+  var asyncLoadWithFallBack = function(arr, success, reject) {
+      var currReject = function(){
+        reject()
+        arr.shift()
+        if(arr.length)
+          async(arr[0], success, currReject)
+        }
+
+      async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack([
+    "https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js", 
+    "https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js",
+    "/lib/webfontloader.min.js"
+  ], asyncCb, asyncErr)
+</script>        
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <div class="container container-unloaded">
+            <main class="main post-page">
+    <article class="article-entry">
+        <h1 id="Ajax技术（属于前端方面的技术）"><a href="#Ajax技术（属于前端方面的技术）" class="headerlink" title="Ajax技术（属于前端方面的技术）"></a>Ajax技术（属于前端方面的技术）</h1><p>即“Asynchronous JavaScript and XML”，在页面不刷新情况下和服务器进行交互。</p>
+<p><strong>特点：异步请求，局部刷新</strong></p>
+<p>同步：发送方发出数据后，等接收方发回响应以后才发下一个数据包的通讯方式；</p>
+<p>异步：发送方发出数据后，不等接收方发回响应，接着发送下个数据包的通讯方式。</p>
+<p><strong>优点：</strong>Web应用程序更为迅捷地回应用户动作并避免了在网络上发送哪些没有改变的信息，减轻服务器压力。</p>
+<p><strong>缺点：</strong>浏览器实现之间差异，需处理兼容性问题；不利于SEO（SEO只能识别第一次呈现在页面的数据，异步的不行）；不能回退和前进；默认不支持跨域访问。</p>
+<p><strong>注意：</strong>ajax技术必须要在网络协议环境下才可以使用，不能把页面直接拖入到浏览器执行，必须在web服务器模式下访问。</p>
+<h3 id="AJAX书写步骤："><a href="#AJAX书写步骤：" class="headerlink" title="AJAX书写步骤："></a><strong>AJAX书写步骤：</strong></h3><p>1.创建AJAX对象；</p>
+<p>2.设置请求路径、请求方式等；</p>
+<p>3.绑定监听状态改变的处理函数，在处理函数可获取响应数据（回调函数）；</p>
+<p>4.发送请求；</p>
+<p><strong>创建ajax对象时浏览器的兼容性处理</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">function createAjax() &#123;</span><br><span class="line">	var ajax;</span><br><span class="line">	try &#123; &#x2F;&#x2F;非IE</span><br><span class="line">		ajax &#x3D; new XMLHttpRequest(); &#x2F;&#x2F;IE浏览器下没有XMLHttpRquest这个对象就会报错</span><br><span class="line">	&#125; catch(e) &#123;</span><br><span class="line">		ajax &#x3D; new ActiveXObject(&#39;Microsoft.XMLHTTP&#39;);</span><br><span class="line">	&#125;</span><br><span class="line">	return ajax;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>响应处理和响应流程</strong></p>
+<p>响应处理，即对服务响应回浏览器的数据根据状态码和AJAX对象的状态信息进行不同的处理，在绑定状态改变的处理函数中写对应的逻辑代码即可。</p>
+<p><strong>AJAX对象有4个属性：</strong></p>
+<p><strong>readyState</strong>总共有5个状态值，分别为0-4，每个值代表了不同的含义：<strong>onreadystatechange</strong>，一旦状态发生非标就执行，改变几次，执行几次</p>
+<p>0：初始化，AJAX对象还没有完成初始化，new XMLHttpRequest()；</p>
+<p>1：载入，AJAX对象开始发送请求，ajax.open(请求方式，请求路径)；</p>
+<p>2：载入完成，AJAX对象的请求发送完成，ajax.send()；</p>
+<p>3：解析：AJAX对象开始读取服务器的响应，ajax.onreadystatechange；</p>
+<p>4：完成，AJAX对象读取服务器响应结束。</p>
+<p><strong>status</strong>表示响应的HTTP状态码，常见的状态码如下：</p>
+<p>200：成功；</p>
+<p>302：重定向；</p>
+<p>404：找不到资源；</p>
+<p>500：服务器错误；</p>
+<p><strong>responseText</strong>获取字符串形式的响应数据（常用）</p>
+<p><strong>responseXML</strong>获取XML形式的响应数据</p>
+<p>综上，在状态改变的处理函数一般针对ajax.readyState==4且ajax.status==200的情况才处理（这也是说什么时候可以开始渲染数据？服务器响应完毕且成功获取数据之后），再根据后台返回的数据类型决定从responseText或者responseXML获取服务器响应回来的数据。</p>
+<h3 id="ajax的get请求"><a href="#ajax的get请求" class="headerlink" title="ajax的get请求"></a>ajax的get请求</h3><p><strong>客户端代码</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">	<span class="keyword">let</span> oBtn = <span class="built_in">document</span>.getElementById(<span class="string">&quot;obtn&quot;</span>);</span><br><span class="line">	<span class="keyword">let</span> oDiv = <span class="built_in">document</span>.getElementById(<span class="string">&quot;odiv&quot;</span>);</span><br><span class="line">	</span><br><span class="line">	oBtn.onclick = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">		<span class="built_in">console</span>.log(<span class="string">&quot;点击了按钮&quot;</span>);</span><br><span class="line">		<span class="comment">//发送ajax请求</span></span><br><span class="line">		<span class="comment">//1.创建ajax对象</span></span><br><span class="line">		<span class="keyword">let</span> ajax = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">		<span class="comment">//2.设置请求方式、请求路径url</span></span><br><span class="line">		ajax.open(<span class="string">&quot;GET&quot;</span>, <span class="string">&quot;/get_data&quot;</span>);</span><br><span class="line">		<span class="comment">//3.绑定监听状态的改变的处理函数，在这个函数里面可以获取响应数据（回调函数）</span></span><br><span class="line">		ajax.onreadystatechange = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">			<span class="comment">//这个函数里面的代码什么时候执行？状态发生改变的时候就执行</span></span><br><span class="line">			<span class="comment">//获取响应的数据</span></span><br><span class="line">			<span class="comment">//什么时候页面开始渲染数据？服务器响应完毕之后ajax.readyState为4，并且成功获取数据之后ajax.status为200</span></span><br><span class="line">			<span class="keyword">if</span>(ajax.readyState === <span class="number">4</span> &amp;&amp; ajax.status === <span class="number">200</span>) &#123;</span><br><span class="line">				<span class="comment">//服务器传来的数据用什么表示？ajax.readyState</span></span><br><span class="line">				<span class="built_in">console</span>.log(ajax.readyState);</span><br><span class="line">				<span class="comment">//渲染数据到页面上</span></span><br><span class="line">				oDiv.innerHTML = ajax.responseText;</span><br><span class="line">                <span class="comment">//oDiv.html(ajax.responseText);</span></span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">//发送请求</span></span><br><span class="line">		ajax.send();</span><br><span class="line">	&#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>附：标签.innerHTML  就等于 标签.html(“…”)</p>
+<p><strong>服务器代码（nodejs文档中有讲解）</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">&quot;http&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&quot;fs&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">&quot;path&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> port = <span class="number">8081</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> server = http.createServer(<span class="function">(<span class="params">request, response</span>) =&gt;</span> &#123;</span><br><span class="line">	<span class="comment">//每来一个请求就执行一次这里的代码</span></span><br><span class="line">	<span class="comment">//判断浏览器需要哪个资源文件，把下面这些代码进行封装的话就是路由</span></span><br><span class="line">	<span class="keyword">let</span> reqUrl = request.url;</span><br><span class="line">	<span class="keyword">if</span>(reqUrl === <span class="string">&#x27;/&#x27;</span> || reqUrl === <span class="string">&#x27;/index.html&#x27;</span>) &#123;</span><br><span class="line">		<span class="comment">//读取页面内容，返回信息</span></span><br><span class="line">		</span><br><span class="line">		<span class="keyword">let</span> filePath = path.join(__dirname, <span class="string">&quot;assets&quot;</span>, <span class="string">&quot;html&quot;</span>, <span class="string">&quot;index.html&quot;</span>);</span><br><span class="line">		<span class="keyword">let</span> content = fs.readFileSync(filePath);</span><br><span class="line">		response.end(content);</span><br><span class="line">	&#125; <span class="keyword">else</span> <span class="keyword">if</span>(reqUrl === <span class="string">&#x27;/detail.html&#x27;</span>) &#123;</span><br><span class="line">		<span class="comment">//读取页面内容，返回信息</span></span><br><span class="line">		</span><br><span class="line">		<span class="keyword">let</span> filePath = path.join(__dirname, <span class="string">&quot;assets&quot;</span>, <span class="string">&quot;html&quot;</span>, <span class="string">&quot;detail.html&quot;</span>);</span><br><span class="line">		<span class="keyword">let</span> content = fs.readFileSync(filePath);</span><br><span class="line">		response.end(content); <span class="comment">//这句不能放在外面，因为使用let定义的content有块级作用域</span></span><br><span class="line">        </span><br><span class="line">	&#125;  <span class="keyword">else</span> <span class="keyword">if</span>(reqUrl === <span class="string">&#x27;/get_data&#x27;</span>) &#123; <span class="comment">//或者正则：/get_data.*/.test(reqUrl)</span></span><br><span class="line">        </span><br><span class="line">		response.end(<span class="string">&quot;接收到ajax的get请求，这是响应给浏览器的数据&quot;</span>);</span><br><span class="line">		<span class="comment">//上面的字符串就是响应到客户端的ajax.responseText</span></span><br><span class="line">	&#125; <span class="keyword">else</span> <span class="keyword">if</span>(reqUrl.endsWith(<span class="string">&quot;.css&quot;</span>)) &#123;</span><br><span class="line">		<span class="comment">//如果读取的是一个css文件，也是一个请求，也会执行一次代码</span></span><br><span class="line">		<span class="comment">//哪些标签会造成请求？就有href(link)和src(src img)属性的标签，浏览器是自发的请求；还有像按钮、a标签的话需要在表单里而且需要点击过后才会请求</span></span><br><span class="line">		<span class="comment">//如果用a标签实现跳转的话，index.html中&lt;a href=&quot;/detail.html&quot;&gt;跳转到详情页&lt;/a&gt;</span></span><br><span class="line">        <span class="comment">//这里的跳转地址不是看前端的路径，而是看后端的路由是怎么配的，和这里的if else里的判断内容一致，点击之后也是一次请求</span></span><br><span class="line">        </span><br><span class="line">		<span class="keyword">let</span> filePath = path.join(__dirname, <span class="string">&quot;assets&quot;</span>, <span class="string">&quot;css&quot;</span>, <span class="string">&quot;index.css&quot;</span>);</span><br><span class="line">		<span class="keyword">let</span> content = fs.readFileSync(filePath);</span><br><span class="line">		response.end(content);</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		response.setHeader(<span class="string">&quot;Content-type&quot;</span>, <span class="string">&quot;text/html; charset=utf-8&quot;</span>); <span class="comment">//不加这句下面的语句会出现乱码</span></span><br><span class="line">		response.end(<span class="string">&quot;404错误：该资源找不到！&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">server.listen(port, <span class="function">(<span class="params">error</span>) =&gt;</span> &#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">`WebServer is listening at port &amp;&#123;port&#125;!`</span>);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="ajax的post请求"><a href="#ajax的post请求" class="headerlink" title="ajax的post请求"></a>ajax的post请求</h3><p>附：&lt;input type=”button” value=”提交” /&gt;是完全没有提交行为的，而&lt;button&gt;&lt;/button&gt;在有的浏览器下是有提交行为的</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">	&lt;<span class="keyword">from</span>&gt;</span><br><span class="line">		用户名：&lt;input type=<span class="string">&quot;text&quot;</span> name=<span class="string">&quot;username&quot;</span> id=<span class="string">&quot;username&quot;</span> /&gt;&lt;/br&gt;</span><br><span class="line">		密&amp;emsp码：&lt;input type=<span class="string">&quot;password&quot;</span> name=<span class="string">&quot;password&quot;</span> id=<span class="string">&quot;password&quot;</span> /&gt;&lt;/br&gt;</span><br><span class="line">		&lt;input type=<span class="string">&quot;button&quot;</span> value=<span class="string">&quot;提交&quot;</span> id=<span class="string">&quot;obtn&quot;</span> /&gt;</span><br><span class="line">	&lt;/<span class="keyword">from</span>&gt;</span><br><span class="line">	&lt;div id=<span class="string">&quot;odiv&quot;</span>&gt;&lt;/div&gt;</span><br><span class="line">	&lt;script&gt;</span><br><span class="line">		<span class="keyword">let</span> oBtn = <span class="built_in">document</span>.getElementById(<span class="string">&quot;obtn&quot;</span>);</span><br><span class="line">		<span class="keyword">let</span> oDiv = <span class="built_in">document</span>.getElementById(<span class="string">&quot;odiv&quot;</span>);</span><br><span class="line">		</span><br><span class="line">		oBtn.onclick = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">			<span class="comment">//post提交</span></span><br><span class="line">			<span class="comment">//获取用户填写的数据</span></span><br><span class="line">			<span class="keyword">let</span> username = <span class="built_in">document</span>.getElementById(<span class="string">&quot;username&quot;</span>).value;</span><br><span class="line">			<span class="keyword">let</span> password = <span class="built_in">document</span>.getElementById(<span class="string">&quot;password&quot;</span>).value;</span><br><span class="line">			<span class="keyword">let</span> params = &#123; <span class="comment">//这样的形式是将获取的值看着方便且容易处理，下面处理时还需要转换为服务器需要的JSON格式</span></span><br><span class="line">				username,</span><br><span class="line">				password</span><br><span class="line">			&#125;</span><br><span class="line">			</span><br><span class="line">			<span class="comment">//Ajax提交（四个步骤）</span></span><br><span class="line">			<span class="keyword">let</span> ajax = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">			ajax.open(<span class="string">&quot;POST&quot;</span>, <span class="string">&quot;/login_post&quot;</span>);</span><br><span class="line">			ajax.onreadystatechange = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">				<span class="keyword">if</span>(ajax.readyState === <span class="number">4</span> &amp;&amp; ajax.status === <span class="number">200</span>) &#123;</span><br><span class="line">					<span class="comment">//相当于成功后的回调函数，这里可以封装为一个函数，写在最外面，通过调用使用</span></span><br><span class="line">					<span class="comment">//ajax.responseText是服务器传过来的字符串</span></span><br><span class="line">					oDiv.innerHTML = ajax.responseText;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			</span><br><span class="line">			ajax.send(<span class="built_in">JSON</span>.stringify(params)); <span class="comment">//服务器需要的是JSON格式的数据，所以需要转换一下</span></span><br><span class="line">		&#125;</span><br><span class="line">	&lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>服务器代码</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">&quot;http&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&quot;fs&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">&quot;path&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> port = <span class="number">8081</span>;</span><br><span class="line"><span class="keyword">let</span> uname = <span class="string">&quot;laozhuang&quot;</span>;</span><br><span class="line"><span class="keyword">let</span> pwd = <span class="string">&quot;123456&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//包装为函数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">responseEnd</span>(<span class="params">response, dirName, fileName</span>) </span>&#123; <span class="comment">//dirName文件路径，fileName文件名称</span></span><br><span class="line">	<span class="keyword">let</span> filePath = path.join(__dirname, <span class="string">&quot;assets&quot;</span>, <span class="string">&quot;dirName&quot;</span>, <span class="string">&quot;fileName&quot;</span>);</span><br><span class="line">	<span class="keyword">let</span> content = fs.readFileSync(filePath);</span><br><span class="line">	response.end(content);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> server = http.createServer(<span class="function">(<span class="params">request, response</span>) =&gt;</span> &#123;</span><br><span class="line">	<span class="keyword">let</span> reqUrl = request.url;</span><br><span class="line">	<span class="keyword">if</span>(reqUrl === <span class="string">&#x27;/&#x27;</span> || reqUrl === <span class="string">&#x27;/index.html&#x27;</span>) &#123;</span><br><span class="line">		responseEnd(response, <span class="string">&quot;html&quot;</span>, <span class="string">&quot;index.html&quot;</span>);</span><br><span class="line">	&#125; <span class="keyword">else</span> <span class="keyword">if</span>(reqUrl === <span class="string">&#x27;/detail.html&#x27;</span>) &#123;</span><br><span class="line">		responseEnd(response, <span class="string">&quot;html&quot;</span>, <span class="string">&quot;detail.html&quot;</span>);</span><br><span class="line">	&#125; <span class="keyword">else</span> <span class="keyword">if</span>(reqUrl === <span class="string">&#x27;/login.html&#x27;</span>) &#123;</span><br><span class="line">	</span><br><span class="line">		responseEnd(response, <span class="string">&quot;html&quot;</span>, <span class="string">&quot;login.html&quot;</span>);</span><br><span class="line">		</span><br><span class="line">	&#125; <span class="keyword">else</span> <span class="keyword">if</span>(reqUrl === <span class="string">&#x27;/get_data&#x27;</span>) &#123;</span><br><span class="line">		response.end(<span class="string">&quot;接收到ajax的get请求，这是响应给浏览器的数据&quot;</span>);</span><br><span class="line">	&#125; <span class="keyword">else</span> <span class="keyword">if</span>(reqUrl === <span class="string">&#x27;/login_post&#x27;</span>) &#123;</span><br><span class="line">	</span><br><span class="line">		<span class="comment">//处理post请求</span></span><br><span class="line">		<span class="comment">//一旦post请求过来就会触发data事件</span></span><br><span class="line">		request.on(<span class="string">&quot;data&quot;</span>, <span class="function">(<span class="params">postData</span>) =&gt;</span> &#123;</span><br><span class="line">			<span class="comment">//postData就是post请求传递过来的参数，是Buffer对象，需要toString()一下</span></span><br><span class="line">			<span class="comment">//还需要把JSON格式的字符串转换为对象，因为转为对象才能通过.的方式拿到属性值</span></span><br><span class="line">			<span class="comment">//获取到浏览器传过来的数据，就是post请求传递过来的参数</span></span><br><span class="line">			<span class="keyword">let</span> &#123;username, password&#125; = <span class="built_in">JSON</span>.parse(postData.toString()); <span class="comment">//解构</span></span><br><span class="line">			<span class="comment">//需要查询数据库看有没有用户名，没有的话就需要注册，如果有还需对比密码是否正确，或者其他逻辑操作</span></span><br><span class="line">			<span class="keyword">if</span>(username === uname &amp;&amp; password === pwd) &#123;</span><br><span class="line">				<span class="comment">//还可以跳转之类的操作</span></span><br><span class="line">				response.end(<span class="string">&quot;登录成功！&quot;</span>);</span><br><span class="line">			&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				response.end(<span class="string">&quot;用户名或者密码错误，登录失败&quot;</span>)</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;)</span><br><span class="line">		</span><br><span class="line">	&#125; <span class="keyword">else</span> <span class="keyword">if</span>(reqUrl.endsWith(<span class="string">&quot;.css&quot;</span>)) &#123;</span><br><span class="line">		responseEnd(response, <span class="string">&quot;css&quot;</span>, <span class="string">&quot;index.css&quot;</span>);</span><br><span class="line">	&#125; <span class="keyword">else</span> <span class="keyword">if</span>(reqUrl.endsWith(<span class="string">&quot;.js&quot;</span>)) &#123;</span><br><span class="line">		responseEnd(response, <span class="string">&quot;js&quot;</span>, <span class="string">&quot;index.js&quot;</span>);</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		response.setHeader(<span class="string">&quot;Content-type&quot;</span>, <span class="string">&quot;text/html; charset=utf-8&quot;</span>);</span><br><span class="line">		response.end(<span class="string">&quot;404错误：该资源找不到！&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">server.listen(port, <span class="function">(<span class="params">error</span>) =&gt;</span> &#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">`WebServer is listening at port &amp;&#123;port&#125;!`</span>);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p><strong>避免缓存问题：</strong></p>
+<p>AJAX减少了重复数据的载入从而提高页面载入速度，是因为数据会一直缓存在内存中，当提交的URL和历史URL一致时，就不需要提交给服务器。虽然降低了服务器的负载提高了用户体验，但是不能获取到最新的数据，为了保证数据都是最新的，就需要禁止其缓存功能，主要以下几种方式：</p>
+<p>1.在URL后面加一个随机数：Math.random()</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//客户端代码</span></span><br><span class="line">ajax.open(<span class="string">&quot;GET&quot;</span>, <span class="string">&quot;/get_data&quot;</span> + <span class="built_in">Math</span>.random());</span><br><span class="line"></span><br><span class="line"><span class="comment">//服务端代码</span></span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span>(reqUrl.startsWith(<span class="string">&#x27;/get_data&#x27;</span>)) &#123;</span><br><span class="line">	response.end(<span class="string">&quot;接收到ajax的get请求，这是响应给浏览器的数据&quot;</span>);</span><br><span class="line">	<span class="comment">//上面的字符串就是响应到客户端的ajax.responseText</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>2.在URL后面加上时间戳：new Date().getTime()，从1970.01.01开始的毫秒数</p>
+<p>3.在使用AJAX发送请求前加上ajax.setRequestHeader(“Cache-Control”, “no-cache”);</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ajax.open(...);</span><br><span class="line">ajax.setRequestHeader(<span class="string">&#x27;Cache-Control&#x27;</span>, <span class="string">&#x27;no-cache&#x27;</span>); <span class="comment">//请求头设置，在ajax.open()后面</span></span><br><span class="line"></span><br><span class="line">ajax.send();</span><br></pre></td></tr></table></figure>
+
+<p>4.手动将开发者工具下的Network的Disable cache勾上</p>
+<p><strong>超时处理：</strong></p>
+<p>有时网络会出现问题或者服务端出问题导致请求时间过长，一般提示网络请求稍后重试，以增加用户的体验感。代码中可以通过定时器和请求中断来实现超时处理的效果。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> timer = <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">	<span class="comment">//取消请求，终端请求</span></span><br><span class="line">	ajax.abort();</span><br><span class="line">	alert(<span class="string">&quot;请稍后重试&quot;</span>)</span><br><span class="line">&#125;, time)</span><br></pre></td></tr></table></figure>
+
+<p><strong>方法抽取（不是最终形式，工作中也不会这样写，了解）</strong></p>
+<p>一个ajax请求，请求方式、请求路径、请求参数、获得服务端内容后的回调函数，时间等可以封装为函数，这样get和post请求就可以写在一起了</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">ajax</span>(<span class="params">method, url, param, success, time</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> ajax;</span><br><span class="line">    <span class="comment">//处理ajax获取时候的兼容性问题</span></span><br><span class="line">    <span class="keyword">try</span> &#123; <span class="comment">//非IE</span></span><br><span class="line">        ajax = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">    &#125; <span class="keyword">catch</span>(e) &#123; <span class="comment">//IE</span></span><br><span class="line">        ajax = <span class="keyword">new</span> ActiveXObject(<span class="string">&#x27;Microsoft.XMLHTTP&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(method === <span class="string">&#x27;get&#x27;</span>) &#123;</span><br><span class="line">        param = encodeURL(param); <span class="comment">//针对get请求的查询参数出现中文的编码处理</span></span><br><span class="line">        url = url + <span class="string">&#x27;?&#x27;</span> + param;</span><br><span class="line">        param = <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    ajax.open(method, url);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span>(method === <span class="string">&#x27;post&#x27;</span>) &#123;</span><br><span class="line">        <span class="comment">//请求体格式，例如name=nodejs&amp;age=11</span></span><br><span class="line">        ajax.setRequestHeader(<span class="string">&#x27;Content-Type&#x27;</span>, <span class="string">&#x27;application/x-www-form-urlencoded&#x27;</span>);</span><br><span class="line">        <span class="comment">//也可以在&lt;form&gt;标签中设设置</span></span><br><span class="line">        <span class="comment">//&lt;form enctype=&quot;application/x-www-form-urlencoded&quot;&gt;...&lt;/form&gt;</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    ajax.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(ajax.readyState === <span class="number">4</span> &amp;&amp; ajax.status === <span class="number">200</span>) &#123;</span><br><span class="line">            success(ajax.responseText); <span class="comment">//在外面设置的获取服务端数据后处理数据的回调函数</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    ajax.send(param);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">var</span> time = <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        ajax.abort();</span><br><span class="line">    &#125;, time)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>jQuery的ajax方法、get请求、post请求（视频没看），$就是指的jQuery，$.ajax就是jQuery.ajax</strong></p>
+
+    </article>
+    <!-- license  -->
+    
+        <div class="license-wrapper">
+            <p>Author：<a href="https://lixins319070033.github.io">Nice</a>
+            <p>原文链接：<a href="https://lixins319070033.github.io/2022/01/16/Ajax/">https://lixins319070033.github.io/2022/01/16/Ajax/</a>
+            <p>发表日期：<a href="https://lixins319070033.github.io/2022/01/16/Ajax/">January 16th 2022, 9:48:17 am</a>
+            <p>更新日期：<a href="https://lixins319070033.github.io/2022/01/16/Ajax/">January 23rd 2022, 6:10:55 pm</a>
+            <p>版权声明：本文采用<a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+        </div>
+    
+    <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+                <div class="nextSlogan">Next Post</div>
+                <a href= "/2022/01/16/Express%E6%A1%86%E6%9E%B6/" title= "Express框架">
+                    <div class="nextTitle">Express框架</div>
+                </a>
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2022/01/16/node-js/" title= "node.js">
+                    <div class="prevTitle">node.js</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
+    
+    
+    <!-- gitalk评论 -->
+
+    <!-- utteranc评论 -->
+
+    <!-- partial('_partial/comment/changyan') -->
+    <!--PC版-->
+
+
+    
+    
+
+    <!-- 评论 -->
+</main>
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="mailto:1753304332@qq.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="https://github.com/LiXinS319070033" class="iconfont-archer github" target="_blank" title=github></a>
+            
+        
+    
+        
+            
+                <span class="iconfont-archer wechat" title=wechat>
+                  
+                  <img class="profile-qr" src="/weixin.png" />
+                </span>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+    </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- 不蒜子  -->
+    
+    <div class="busuanzi-container">
+    
+     
+    <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span> :)</span>
+    
+    </div>
+    
+</footer>
+    </div>
+    <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Ajax%E6%8A%80%E6%9C%AF%EF%BC%88%E5%B1%9E%E4%BA%8E%E5%89%8D%E7%AB%AF%E6%96%B9%E9%9D%A2%E7%9A%84%E6%8A%80%E6%9C%AF%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">Ajax技术（属于前端方面的技术）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#AJAX%E4%B9%A6%E5%86%99%E6%AD%A5%E9%AA%A4%EF%BC%9A"><span class="toc-number">1.0.1.</span> <span class="toc-text">AJAX书写步骤：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ajax%E7%9A%84get%E8%AF%B7%E6%B1%82"><span class="toc-number">1.0.2.</span> <span class="toc-text">ajax的get请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ajax%E7%9A%84post%E8%AF%B7%E6%B1%82"><span class="toc-number">1.0.3.</span> <span class="toc-text">ajax的post请求</span></a></li></ol></li></ol></li></ol>
+    </div>
+    
+    <div class="back-top iconfont-archer">&#xe639;</div>
+    <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-panel-archives">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 76
+        </div>
+        <!-- search  -->
+        
+    </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2022 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/16</span><a class="archive-post-title" href= "/2022/01/16/Ajax/" >Ajax</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/16</span><a class="archive-post-title" href= "/2022/01/16/Express%E6%A1%86%E6%9E%B6/" >Express框架</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/16</span><a class="archive-post-title" href= "/2022/01/16/node-js/" >node.js</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/16</span><a class="archive-post-title" href= "/2022/01/16/%E5%88%9B%E5%BB%BAUmiJS%E9%A1%B9%E7%9B%AE%E6%97%B6%E6%8A%A5%E9%94%99-%E6%96%87%E4%BB%B6%E5%90%8D%E3%80%81%E7%9B%AE%E5%BD%95%E5%90%8D%E6%88%96%E5%8D%B7%E6%A0%87%E8%AF%AD%E6%B3%95%E4%B8%8D%E6%AD%A3%E7%A1%AE/" >创建UmiJS项目时报错--文件名、目录名或卷标语法不正确</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2021 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/19</span><a class="archive-post-title" href= "/2021/12/19/JS%E7%9F%A5%E8%AF%86%E7%82%B9%E8%A1%A5%E5%85%85/" >JS知识点补充</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/21</span><a class="archive-post-title" href= "/2021/11/21/%E6%95%B0%E6%8D%AE%E5%BA%93-MySQL%E7%9A%84%E4%BA%8B%E5%8A%A1/" >数据库-MySQL的事务</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/21</span><a class="archive-post-title" href= "/2021/11/21/%E6%95%B0%E6%8D%AE%E5%BA%93-mysql%E6%9F%A5%E8%AF%A2%E7%BB%83%E4%B9%A0/" >数据库-mysql查询练习</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/14</span><a class="archive-post-title" href= "/2021/11/14/%E6%95%B0%E6%8D%AE%E5%BA%93-%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%89%E5%A4%A7%E8%AE%BE%E8%AE%A1%E8%8C%83%E5%BC%8F/" >数据库-数据库三大设计范式</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/14</span><a class="archive-post-title" href= "/2021/11/14/%E6%95%B0%E6%8D%AE%E5%BA%93-%E4%BD%BF%E7%94%A8%E7%BB%88%E7%AB%AF%E6%93%8D%E4%BD%9C%E6%95%B0%E6%8D%AE%E5%BA%93/" >数据库-使用终端操作数据库</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/07</span><a class="archive-post-title" href= "/2021/11/07/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E6%8E%92%E5%BA%8F/" >数据结构与算法--排序</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/24</span><a class="archive-post-title" href= "/2021/10/24/weka%E8%BD%AF%E4%BB%B6%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%8CCBR%E9%9D%9E%E5%81%B6%E7%84%B6%E6%80%A7%E8%A7%84%E5%88%92/" >weka软件的使用，CBR非偶然性规划</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/24</span><a class="archive-post-title" href= "/2021/10/24/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95--%E9%98%9F%E5%88%97%EF%BC%88Queue%EF%BC%89-JS/" >数据结构与算法--队列（Queue）--JS</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/24</span><a class="archive-post-title" href= "/2021/10/24/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95--%E9%93%BE%E8%A1%A8%EF%BC%88Linked%20list%EF%BC%89-JS/" >数据结构与算法--链表（Linked list）--JS</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/24</span><a class="archive-post-title" href= "/2021/10/24/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E5%9B%BE%EF%BC%88Graph%EF%BC%89-JS/" >数据结构与算法-图（Graph）-JS</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/24</span><a class="archive-post-title" href= "/2021/10/24/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E5%93%88%E5%B8%8C%E8%A1%A8-JS/" >数据结构与算法--哈希表--JS</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/24</span><a class="archive-post-title" href= "/2021/10/24/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98%E6%80%BB%E7%BB%93/" >前端面试题总结</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/24</span><a class="archive-post-title" href= "/2021/10/24/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E6%A0%91%EF%BC%88Tree%EF%BC%89-JS/" >数据结构与算法-树（Tree）-JS</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/24</span><a class="archive-post-title" href= "/2021/10/24/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E9%9B%86%E5%90%88%EF%BC%88Set%EF%BC%89-JS/" >数据结构与算法--集合（Set）--JS</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/24</span><a class="archive-post-title" href= "/2021/10/24/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95--%E6%A0%88%EF%BC%88Stack%EF%BC%89--JS/" >数据结构与算法--栈（Stack）--JS</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/27</span><a class="archive-post-title" href= "/2021/06/27/%E6%89%8B%E5%86%99Promise-all%E5%92%8CPromise-race/" >手写Promise.all和Promise.race</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/08</span><a class="archive-post-title" href= "/2021/06/08/%E4%B8%89%E5%9B%9B%E9%9D%A2-%E4%B8%9A%E5%8A%A1%E8%83%BD%E5%8A%9B%E5%9B%A2%E9%98%9F%E5%8D%8F%E4%BD%9C%E8%83%BD%E5%8A%9B%E4%B8%8E%E5%B8%A6%E4%BA%BA%E8%83%BD%E5%8A%9B/" >三四面_业务能力团队协作能力与带人能力</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/08</span><a class="archive-post-title" href= "/2021/06/08/%E4%BA%8C%E4%B8%89%E9%9D%A2-%E6%B8%B2%E6%9F%93%E6%9C%BA%E5%88%B6%E7%B1%BB/" >二三面_渲染机制类</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/08</span><a class="archive-post-title" href= "/2021/06/08/%E4%BA%8C%E4%B8%89%E9%9D%A2-%E8%BF%90%E8%A1%8C%E6%9C%BA%E5%88%B6%E7%B1%BB/" >二三面_运行机制类</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/08</span><a class="archive-post-title" href= "/2021/06/08/%E4%BA%8C%E4%B8%89%E9%9D%A2-%E9%94%99%E8%AF%AF%E7%9B%91%E6%8E%A7%E7%B1%BB/" >二三面_错误监控类</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/08</span><a class="archive-post-title" href= "/2021/06/08/%E4%BA%8C%E4%B8%89%E9%9D%A2-%E9%A1%B5%E9%9D%A2%E6%80%A7%E8%83%BD/" >二三面_页面性能</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/08</span><a class="archive-post-title" href= "/2021/06/08/%E7%BB%88%E9%9D%A2%EF%BC%88HR%E9%9D%A2%EF%BC%89-%E8%81%8C%E4%B8%9A%E7%AB%9E%E4%BA%89%E5%8A%9B%E5%92%8C%E8%81%8C%E4%B8%9A%E8%A7%84%E5%88%92/" >终面（HR面）_职业竞争力和职业规划</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/08</span><a class="archive-post-title" href= "/2021/06/08/%E9%9D%A2%E8%AF%95%E6%80%BB%E7%BB%93/" >面试总结</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/07</span><a class="archive-post-title" href= "/2021/06/07/%E7%AE%97%E6%B3%95%E9%A2%98%E6%80%BB%E7%BB%93/" >算法题总结</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/%E4%B8%80%E4%BA%8C%E9%9D%A2-%E5%8E%9F%E5%9E%8B%E9%93%BE/" >一二面_原型链</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/%E4%B8%80%E4%BA%8C%E9%9D%A2-%E5%AE%89%E5%85%A8%E7%B1%BB/" >一二面_安全类</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/%E4%B8%80%E4%BA%8C%E9%9D%A2-%E7%AE%97%E6%B3%95%E7%B1%BB/" >一二面_算法类</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/%E4%B8%80%E4%BA%8C%E9%9D%A2-%E9%80%9A%E8%AE%AF%E7%B1%BB/" >一二面_通讯类</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/%E4%B8%80%E4%BA%8C%E9%9D%A2-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" >一二面_面向对象</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/%E4%B8%8A%E4%BC%A0%E5%8D%9A%E5%AE%A2%E5%88%B0github%E6%97%B6%E5%87%BA%E7%8E%B0%E7%9A%84%E9%97%AE%E9%A2%98-Failed-to-connect-to-github-com-port-443-Timed-out/" >上传博客到github时出现的问题 Failed to connect to github.com port 443: Timed out </a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/%E4%B8%80%E4%BA%8C%E9%9D%A2-CSS%E7%9B%92%E6%A8%A1%E5%9E%8B/" >一二面_CSS盒模型</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/%E4%B8%80%E4%BA%8C%E9%9D%A2-DOM%E4%BA%8B%E4%BB%B6%E7%B1%BB/" >一二面_DOM事件类</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/%E4%B8%80%E4%BA%8C%E9%9D%A2-HTTP%E5%8D%8F%E8%AE%AE%E7%B1%BB/" >一二面_HTTP协议类</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/%E4%B8%80%E4%BA%8C%E9%9D%A2-%E9%A1%B5%E9%9D%A2%E5%B8%83%E5%B1%80/" >一二面_页面布局</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/20</span><a class="archive-post-title" href= "/2021/02/20/VUE%E9%A1%B9%E7%9B%AE%E6%8C%89%E9%9C%80%E5%BC%95%E5%85%A5ELEMENT-UI%EF%BC%8C%E4%BF%AE%E6%94%B9-BABELRC%E6%96%87%E4%BB%B6%E4%B9%8B%E5%90%8E%E6%8A%A5%E9%94%99/" >VUE项目按需引入ELEMENT-UI，修改.BABELRC文件之后报错</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/20</span><a class="archive-post-title" href= "/2021/02/20/react%E4%B8%AD%E5%88%9B%E5%BB%BA%E7%BB%84%E4%BB%B6/" >react中创建组件</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/20</span><a class="archive-post-title" href= "/2021/02/20/react%E6%8A%A5%E9%94%99%EF%BC%9ATypeError-Class-extends-value-undefined-is-not-a-constructor-or-null/" >react报错：TypeError: Class extends value undefined is not a constructor or null</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/20</span><a class="archive-post-title" href= "/2021/02/20/yarn-command-not-found/" >yarn: command not found</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/20</span><a class="archive-post-title" href= "/2021/02/20/%E4%BD%BF%E7%94%A8styled-components%E6%8A%A5%E9%94%99-Attempted-import-error-injectGlobal-is-not-exported-from-styled-components/" >使用styled-components报错 Attempted import error: injectGlobal is not exported from styled-components</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/20</span><a class="archive-post-title" href= "/2021/02/20/%E6%85%95%E8%AF%BE%E7%BD%91%E5%B0%8F%E7%B1%B3%E5%95%86%E5%9F%8E%E9%A1%B9%E7%9B%AE9-1-%E5%95%86%E5%93%81%E8%AF%A6%E6%83%85%E4%BA%A4%E4%BA%92%E5%AE%9E%E7%8E%B0%E8%AF%BE%E7%A8%8B%E4%B8%AD%E9%80%89%E6%8B%A9%E7%89%88%E6%9C%AC%E5%87%BA%E7%8E%B0%E7%9A%84%E5%B0%8F%E9%97%AE%E9%A2%98/" >慕课网小米商城项目9-1_商品详情交互实现课程中选择版本出现的小问题</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/09</span><a class="archive-post-title" href= "/2021/02/09/%E4%BD%BF%E7%94%A8sass%E6%97%B6%EF%BC%8C%E6%8A%A5%E9%94%99TypeError-this-getResolve-is-not-a-function-at-Object-loader/" >使用sass时，报错TypeError: this.getResolve is not a function at Object.loader</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/09</span><a class="archive-post-title" href= "/2021/02/09/%E4%BD%BF%E7%94%A8swiper%E6%8F%92%E4%BB%B6%E6%97%B6%EF%BC%8C%E6%8A%A5%E9%94%99Can-t-resolve-swiper-dist-css-swiper-css-in/" >使用swiper插件时，报错Can't resolve 'swiper/dist/css/swiper.css' in</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/09</span><a class="archive-post-title" href= "/2021/02/09/%E4%BD%BF%E7%94%A8swiper%E6%8F%92%E4%BB%B6%E6%97%B6%EF%BC%8C%E6%8A%A5%E9%94%99did-you-register-the-component-correctly-For-recursive-components-make-sure-to-provide-the-name-option/" >使用swiper插件时，报错did you register the component correctly? For recursive components, make sure to provide the name option</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/09</span><a class="archive-post-title" href= "/2021/02/09/Vue-cli%E6%90%AD%E5%BB%BA%E5%A5%BD%E9%BB%98%E8%AE%A4%E9%A1%B9%E7%9B%AE%E5%90%8E%E4%BD%BF%E7%94%A8%E8%B7%AF%E7%94%B1%E5%8A%9F%E8%83%BD%EF%BC%8C%E6%8A%A5%E9%94%99Can%E2%80%99t%20resolve%20%E2%80%98vue-router%E2%80%99%20in/" >Vue-cli搭建好默认项目后使用路由功能，报错Can’t resolve ‘vue-router’ in</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/09</span><a class="archive-post-title" href= "/2021/02/09/Vue%E9%A1%B9%E7%9B%AE%E6%B5%8F%E8%A7%88%E5%99%A8%E5%86%85Console%E4%B8%AD%E6%98%BE%E7%A4%BA-HMR-Waiting-for-update-signal-from-WDS%E2%80%A6%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" >Vue项目浏览器内Console中显示[HMR] Waiting for update signal from WDS…的解决方案</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/05</span><a class="archive-post-title" href= "/2021/02/05/VScode%E5%88%9D%E6%AC%A1%E4%BD%BF%E7%94%A8%E6%97%B6%E5%A6%82%E4%BD%95%E8%BF%90%E8%A1%8Chtml%E6%96%87%E4%BB%B6%E5%88%B0%E6%B5%8F%E8%A7%88%E5%99%A8%E4%B8%8A/" >VScode初次使用时如何运行html文件到浏览器上</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/05</span><a class="archive-post-title" href= "/2021/02/05/vue%E9%A1%B9%E7%9B%AE%E4%B8%AD%E9%83%A8%E5%88%86%E5%8A%9F%E8%83%BD%E5%9C%A8vscode%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/" >vue项目中部分功能在vscode中的使用方法</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/05</span><a class="archive-post-title" href= "/2021/02/05/%E8%BF%90%E8%A1%8Cvue%E9%A1%B9%E7%9B%AE%E6%97%B6%E6%8A%A5%E9%94%99The-template-root-requires-exactly-one-element/" >运行vue项目时报错The template root requires exactly one element</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/05</span><a class="archive-post-title" href= "/2021/02/05/vscode%E7%9A%84%E4%BB%A3%E7%A0%81%E4%B8%8A%E4%BC%A0%E5%88%B0%E6%85%95%E8%AF%BE%E7%BD%91%E4%BB%93%E5%BA%93%E6%97%B6%E4%B8%8A%E4%BC%A0%E4%B8%8D%E6%88%90%E5%8A%9F-%E6%85%95%E8%AF%BE%E7%BD%91%E9%AB%98%E4%BB%BF%E5%B0%8F%E7%B1%B3%E5%95%86%E5%9F%8E%E9%A1%B9%E7%9B%AE/" >vscode的代码上传到慕课网仓库时上传不成功--慕课网高仿小米商城项目</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/04</span><a class="archive-post-title" href= "/2021/02/04/vscode%E3%80%81sublime%E6%80%8E%E4%B9%88%E5%9C%A8%E7%A9%BA%E7%99%BD%E8%84%9A%E6%9C%AC%E4%B8%AD%E5%BF%AB%E9%80%9F%E7%94%9F%E6%88%90html5%E6%A0%87%E5%87%86%E6%A8%A1%E6%9D%BF%E6%A0%BC%E5%BC%8F/" >vscode、sublime怎么在空白脚本中快速生成html5标准模板格式</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/04</span><a class="archive-post-title" href= "/2021/02/04/vscode%E8%BD%AF%E4%BB%B6%E4%B8%AD%E7%9A%84html%E6%96%87%E4%BB%B6%E7%9A%84%E5%B8%B8%E7%94%A8%E7%9A%84%E5%BF%AB%E6%8D%B7%E6%96%B9%E5%BC%8F/" >vscode软件中的html文件的常用的快捷方式</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/04</span><a class="archive-post-title" href= "/2021/02/04/%EF%BC%88tinypng%E5%9B%BE%E7%89%87%E5%8E%8B%E7%BC%A9%EF%BC%89%E8%A7%A3%E5%86%B3CSDN%E4%B8%8A%E4%BC%A0%E4%B8%8D%E4%BA%86%E8%BF%87%E5%A4%A7%E7%9A%84%E5%9B%BE%E7%89%87%E9%97%AE%E9%A2%98/" >（tinypng图片压缩）解决CSDN上传不了过大的图片问题</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/04</span><a class="archive-post-title" href= "/2021/02/04/better-scroll%E6%BB%9A%E5%8A%A8%E5%A4%B1%E6%95%88%EF%BC%88%E5%8E%BB%E5%93%AA%E7%BD%91%E5%84%BF%E9%A1%B9%E7%9B%AE%E7%A7%BB%E5%8A%A8%E7%AB%AF%EF%BC%89/" >better-scroll滚动失效（去哪网儿项目移动端）</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/04</span><a class="archive-post-title" href= "/2021/02/04/VsCode%E4%B8%ADGit%E8%B7%AF%E5%BE%84%E7%9A%84%E8%AE%BE%E7%BD%AE/" >VsCode中git路径的设置（window系统）</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/04</span><a class="archive-post-title" href= "/2021/01/04/CSS%E4%B8%AD%E6%96%87%E5%AD%97%E5%9C%A8%E6%B0%B4%E5%B9%B3%E5%92%8C%E7%AB%96%E7%9B%B4%E6%96%B9%E5%90%91%E4%B8%8A%E9%87%8D%E5%8F%A0/" >CSS中文字在水平和竖直方向上重叠</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/04</span><a class="archive-post-title" href= "/2021/01/04/js%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%8E%E6%95%B0%E5%AD%97%E7%9B%B8%E5%8A%A0%E5%87%8F%E4%B9%98%E9%99%A4/" >js字符串与数字相加减</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2020 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/25</span><a class="archive-post-title" href= "/2020/12/25/Vue%E7%BB%9F%E4%B8%80%E6%A0%B7%E5%BC%8F%EF%BC%88reset-css%E5%92%8Cborder-css%EF%BC%89/" >Vue统一样式（reset.css和border.css）</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/20</span><a class="archive-post-title" href= "/2020/12/20/%E5%AF%B9%E8%B1%A1/" >对象</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/18</span><a class="archive-post-title" href= "/2020/12/18/RegExp%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" >RegExp正则表达式</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/15</span><a class="archive-post-title" href= "/2020/12/15/C++%E7%9A%84OpenCV%E4%BD%8E%E7%89%88%E6%9C%AC%E7%9A%84CvvImage-cpp%E5%92%8Ccvvimage-h%E6%96%87%E4%BB%B6/" >C++的OpenCV低版本的CvvImage.cpp和cvvimage.h文件</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/15</span><a class="archive-post-title" href= "/2020/12/15/JS%E4%B8%AD%E7%9A%84%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%B5%85%E6%B5%85%E4%BA%86%E8%A7%A3/" >JS中的面向对象浅浅了解</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/13</span><a class="archive-post-title" href= "/2020/12/13/JavaScript%E7%9F%A5%E8%AF%86%E7%82%B9%E6%89%A9%E5%B1%95/" >JavaScript知识点扩展</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/06</span><a class="archive-post-title" href= "/2020/12/06/ES6%E6%80%BB%E7%BB%93%E6%95%B4%E7%90%86/" >ES6总结整理</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/08</span><a class="archive-post-title" href= "/2020/11/08/Sass%E6%80%BB%E7%BB%93/" >Sass总结</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/28</span><a class="archive-post-title" href= "/2020/09/28/hexo%E5%8D%9A%E5%AE%A2%E4%B8%AD%E6%8F%92%E5%85%A5%E7%9A%84%E5%9B%BE%E7%89%87%E4%B8%8D%E6%98%BE%E7%A4%BA/" >hexo博客中插入的图片不显示</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/27</span><a class="archive-post-title" href= "/2020/09/27/JavaScript%E5%8E%9F%E5%9E%8B%E9%93%BE/" >JavaScript原型链</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/27</span><a class="archive-post-title" href= "/2020/09/27/HEXO%E5%8D%9A%E5%AE%A2%E7%9A%84%E6%90%AD%E5%BB%BA%E5%8F%8A%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%EF%BC%88%E4%B8%80%EF%BC%89/" >HEXO博客的搭建及环境配置（一）</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> Invalid date </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/09/27/HEXO%E5%8D%9A%E5%AE%A2%E7%9A%84%E6%90%AD%E5%BB%BA%E5%8F%8A%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%EF%BC%88%E4%BA%8C%EF%BC%89/" >HEXO博客的搭建及环境配置（二）</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2020 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/27</span><a class="archive-post-title" href= "/2020/09/27/Typora%E3%80%81Makedown/" >Typora、Makedown</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> Invalid date </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/09/27/hexo%E4%B8%BB%E9%A2%98%E4%BF%AE%E6%94%B9/" >hexo主题修改</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2020 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/27</span><a class="archive-post-title" href= "/2020/09/27/hexo%E7%82%B9%E5%87%BB%E5%8D%9A%E5%AE%A2%E5%90%8E%E6%A0%87%E9%A2%98%E4%B8%8D%E6%98%BE%E7%A4%BA/" >hexo点击博客后标题不显示</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/27</span><a class="archive-post-title" href= "/2020/09/27/%E7%85%9C%E6%88%90%E2%80%99studio/" >煜成’studio</a>
+        </li>
+    
+    </div>
+  </div>
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+    
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br/>
+    1、请确保node版本大于6.2<br/>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #787878; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: true
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var siteMeta = {
+        root: "/",
+        author: "Nice"
+    }
+</script>
+    <!-- CDN failover -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ === 'undefined')
+        {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/lib/jquery.min.js">\x3C/script>')
+        }
+    </script>
+    <script src="/scripts/main.js"></script>
+    <!-- algolia -->
+    
+    <!-- busuanzi  -->
+    
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    <!-- CNZZ  -->
+    
+    </div>
+    <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
+     
+    </body>
+</html>
+
+

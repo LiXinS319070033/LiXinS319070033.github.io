@@ -28,7 +28,7 @@
 <meta property="og:description" content="数据库-MySQL的事务mysql中，事务其实是一个最小的不可分割的工作单元。事务能够保证一个业务的完整性。比如银行转账，a用户的前转给b用户100元 a -&gt; -100 update user set money &#x3D; money - 100 where name &#x3D; ‘a’; b -&gt; +100 update user set money &#x3D; money + 100 where na">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-11-21T12:44:39.000Z">
-<meta property="article:modified_time" content="2021-11-21T12:46:20.866Z">
+<meta property="article:modified_time" content="2022-04-27T00:29:13.889Z">
 <meta property="article:author" content="Nice">
 <meta name="twitter:card" content="summary">
     <meta http-equiv="Cache-control" content="no-cache">
@@ -452,7 +452,7 @@ height:50vh;
 <p>select * from user;<br>+—-+——+——-+<br>| id | name | money |<br>+—-+——+——-+<br>|  1 | a    |   800 |<br>|  2 | b    |  1200 |<br>+—-+——+——-+<br>rollback;<br>select * from user;<br>+—-+——+——-+<br>| id | name | money |<br>+—-+——+——-+<br>|  1 | a    |   900 |<br>|  2 | b    |  1100 |<br>+—-+——+——-+</p>
 <p>事务开启后一旦commit提交，就不可以回滚了（就是当前这个事务在提交的时候就结束了）</p>
 <h4 id="commit-1"><a href="#commit-1" class="headerlink" title="commit;"></a>commit;</h4><p>select * from user;<br>+—-+——+——-+<br>| id | name | money |<br>+—-+——+——-+<br>|  1 | a    |   900 |<br>|  2 | b    |  1100 |<br>+—-+——+——-+<br>rollback;<br>select * from user;<br>+—-+——+——-+<br>| id | name | money |<br>+—-+——+——-+<br>|  1 | a    |   900 |<br>|  2 | b    |  1100 |<br>+—-+——+——-+</p>
-<h3 id="事务的四大特征：ACID"><a href="#事务的四大特征：ACID" class="headerlink" title="事务的四大特征：ACID"></a>事务的四大特征：ACID</h3><h4 id="A原子性：事务是最小的单位，不可以再分割"><a href="#A原子性：事务是最小的单位，不可以再分割" class="headerlink" title="A原子性：事务是最小的单位，不可以再分割"></a>A原子性：事务是最小的单位，不可以再分割</h4><h4 id="C一致性：事务要求，同一事务中的sql语句，必须保证同时成功或者同时失败"><a href="#C一致性：事务要求，同一事务中的sql语句，必须保证同时成功或者同时失败" class="headerlink" title="C一致性：事务要求，同一事务中的sql语句，必须保证同时成功或者同时失败"></a>C一致性：事务要求，同一事务中的sql语句，必须保证同时成功或者同时失败</h4><h4 id="I隔离性：事务1和事务2之间是具有隔离性的"><a href="#I隔离性：事务1和事务2之间是具有隔离性的" class="headerlink" title="I隔离性：事务1和事务2之间是具有隔离性的"></a>I隔离性：事务1和事务2之间是具有隔离性的</h4><h4 id="D持久性：事务一旦结束（commit，rollback二选一），就不可以返回。"><a href="#D持久性：事务一旦结束（commit，rollback二选一），就不可以返回。" class="headerlink" title="D持久性：事务一旦结束（commit，rollback二选一），就不可以返回。"></a>D持久性：事务一旦结束（commit，rollback二选一），就不可以返回。</h4><h3 id="事务开启："><a href="#事务开启：" class="headerlink" title="事务开启："></a>事务开启：</h3><h4 id="三种方式"><a href="#三种方式" class="headerlink" title="三种方式"></a>三种方式</h4><h4 id="1-修改默认提交-set-autocommit-0"><a href="#1-修改默认提交-set-autocommit-0" class="headerlink" title="1.修改默认提交 set autocommit = 0;"></a>1.修改默认提交 set autocommit = 0;</h4><h4 id="2-begin；"><a href="#2-begin；" class="headerlink" title="2.begin；"></a>2.begin；</h4><h4 id="3-start-transaction；"><a href="#3-start-transaction；" class="headerlink" title="3.start transaction；"></a>3.start transaction；</h4><h3 id="事务手动提交："><a href="#事务手动提交：" class="headerlink" title="事务手动提交："></a>事务手动提交：</h3><h4 id="commit；"><a href="#commit；" class="headerlink" title="commit；"></a>commit；</h4><h3 id="事务手动回滚"><a href="#事务手动回滚" class="headerlink" title="事务手动回滚:"></a>事务手动回滚:</h3><h4 id="rollback-1"><a href="#rollback-1" class="headerlink" title="rollback;"></a>rollback;</h4><h2 id="事务的隔离性："><a href="#事务的隔离性：" class="headerlink" title="事务的隔离性："></a>事务的隔离性：</h2><h4 id="1-read-uncommtited-—-读未提交的"><a href="#1-read-uncommtited-—-读未提交的" class="headerlink" title="1.read uncommtited;—-读未提交的"></a>1.read uncommtited;—-读未提交的</h4><h4 id="2-read-committed-—-读已经提交的"><a href="#2-read-committed-—-读已经提交的" class="headerlink" title="2.read committed;—-读已经提交的"></a>2.read committed;—-读已经提交的</h4><h4 id="3-repeatable-read-—-可以重复读"><a href="#3-repeatable-read-—-可以重复读" class="headerlink" title="3.repeatable read;—-可以重复读"></a>3.repeatable read;—-可以重复读</h4><h4 id="4-serializable-—-串行化"><a href="#4-serializable-—-串行化" class="headerlink" title="4.serializable;—-串行化"></a>4.serializable;—-串行化</h4><h3 id="1-read-uncommitted-—-读为提交的"><a href="#1-read-uncommitted-—-读为提交的" class="headerlink" title="1.read uncommitted;—-读为提交的"></a>1.read uncommitted;—-读为提交的</h3><h4 id="如果有事务a和事务b，a事务对数据进行操作，在操作的过程中，事务没有被提交，但b可以看到a操作的结果。"><a href="#如果有事务a和事务b，a事务对数据进行操作，在操作的过程中，事务没有被提交，但b可以看到a操作的结果。" class="headerlink" title="如果有事务a和事务b，a事务对数据进行操作，在操作的过程中，事务没有被提交，但b可以看到a操作的结果。"></a>如果有事务a和事务b，a事务对数据进行操作，在操作的过程中，事务没有被提交，但b可以看到a操作的结果。</h4><p>insert into user values(3, ‘小明’, 1000);</p>
+<h3 id="事务的四大特征：ACID"><a href="#事务的四大特征：ACID" class="headerlink" title="事务的四大特征：ACID"></a>事务的四大特征：ACID</h3><h4 id="A原子性：事务是最小的单位，不可以再分割"><a href="#A原子性：事务是最小的单位，不可以再分割" class="headerlink" title="A原子性：事务是最小的单位，不可以再分割"></a>A原子性：事务是最小的单位，不可以再分割</h4><h4 id="C一致性：事务要求，同一事务中的sql语句，必须保证同时成功或者同时失败"><a href="#C一致性：事务要求，同一事务中的sql语句，必须保证同时成功或者同时失败" class="headerlink" title="C一致性：事务要求，同一事务中的sql语句，必须保证同时成功或者同时失败"></a>C一致性：事务要求，同一事务中的sql语句，必须保证同时成功或者同时失败</h4><h4 id="I隔离性：事务1和事务2之间是具有隔离性的"><a href="#I隔离性：事务1和事务2之间是具有隔离性的" class="headerlink" title="I隔离性：事务1和事务2之间是具有隔离性的"></a>I隔离性：事务1和事务2之间是具有隔离性的</h4><h4 id="D持久性：事务一旦结束（commit，rollback二选一），就不可以返回。"><a href="#D持久性：事务一旦结束（commit，rollback二选一），就不可以返回。" class="headerlink" title="D持久性：事务一旦结束（commit，rollback二选一），就不可以返回。"></a>D持久性：事务一旦结束（commit，rollback二选一），就不可以返回。</h4><h3 id="事务开启："><a href="#事务开启：" class="headerlink" title="事务开启："></a>事务开启：</h3><h4 id="三种方式"><a href="#三种方式" class="headerlink" title="三种方式"></a>三种方式</h4><h4 id="1-修改默认提交-set-autocommit-0"><a href="#1-修改默认提交-set-autocommit-0" class="headerlink" title="1.修改默认提交 set autocommit = 0;"></a>1.修改默认提交 set autocommit = 0;</h4><h4 id="2-begin；"><a href="#2-begin；" class="headerlink" title="2.begin；"></a>2.begin；</h4><h4 id="3-start-transaction；"><a href="#3-start-transaction；" class="headerlink" title="3.start transaction；"></a>3.start transaction；</h4><h3 id="事务手动提交："><a href="#事务手动提交：" class="headerlink" title="事务手动提交："></a>事务手动提交：</h3><h4 id="commit；"><a href="#commit；" class="headerlink" title="commit；"></a>commit；</h4><h3 id="事务手动回滚"><a href="#事务手动回滚" class="headerlink" title="事务手动回滚:"></a>事务手动回滚:</h3><h4 id="rollback-1"><a href="#rollback-1" class="headerlink" title="rollback;"></a>rollback;</h4><h2 id="事务的隔离性："><a href="#事务的隔离性：" class="headerlink" title="事务的隔离性："></a>事务的隔离性：</h2><h4 id="1-read-uncommtited-—-读未提交的"><a href="#1-read-uncommtited-—-读未提交的" class="headerlink" title="1.read uncommtited;—-读未提交的"></a>1.read uncommtited;—-读未提交的</h4><h4 id="2-read-committed-—-读已经提交的"><a href="#2-read-committed-—-读已经提交的" class="headerlink" title="2.read committed;—-读已经提交的"></a>2.read committed;—-读已经提交的</h4><h4 id="3-repeatable-read-—-可以重复读"><a href="#3-repeatable-read-—-可以重复读" class="headerlink" title="3.repeatable read;—-可以重复读"></a>3.repeatable read;—-可以重复读</h4><h4 id="4-serializable-—-串行化"><a href="#4-serializable-—-串行化" class="headerlink" title="4.serializable;—-串行化"></a>4.serializable;—-串行化</h4><h3 id="1-read-uncommitted-—-读未提交的"><a href="#1-read-uncommitted-—-读未提交的" class="headerlink" title="1.read uncommitted;—-读未提交的"></a>1.read uncommitted;—-读未提交的</h3><h4 id="如果有事务a和事务b，a事务对数据进行操作，在操作的过程中，事务没有被提交，但b可以看到a操作的结果。"><a href="#如果有事务a和事务b，a事务对数据进行操作，在操作的过程中，事务没有被提交，但b可以看到a操作的结果。" class="headerlink" title="如果有事务a和事务b，a事务对数据进行操作，在操作的过程中，事务没有被提交，但b可以看到a操作的结果。"></a>如果有事务a和事务b，a事务对数据进行操作，在操作的过程中，事务没有被提交，但b可以看到a操作的结果。</h4><p>insert into user values(3, ‘小明’, 1000);</p>
 <p>insert into user values(4, ‘淘宝店’, 1000);</p>
 <p>select * from user;</p>
 <p>+—-+——–+——-+<br>| id | name   | money |<br>+—-+——–+——-+<br>|  1 | a      |   900 |<br>|  2 | b      |  1100 |<br>|  3 | 小明   |  1000 |<br>|  4 | 淘宝店 |  1000 |<br>+—-+——–+——-+</p>
@@ -470,7 +470,7 @@ height:50vh;
 <p> rollback;</p>
 <p>之后钱就回来了</p>
 <p>select * from user;<br>+—-+——–+——-+<br>| id | name   | money |<br>+—-+——–+——-+<br>|  1 | a      |   900 |<br>|  2 | b      |  1100 |<br>|  3 | 小明   |  1000 |<br>|  4 | 淘宝店 |  1000 |<br>+—-+——–+——-+</p>
-<p>如果两个不同的地方都在进行操作，如果事务a开启之后，它的数据可被其他事务读取到，这样就会出现脏读（一个事务读到了另一个事务没有提交的数据），就像上面的例子，实际开发是不允许脏读出现的。</p>
+<p>如果两个不同的地方都在进行操作，如果事务a开启之后，它的数据可被其他事务读取到，这样就会出现<strong>脏读</strong>（一个事务读到了另一个事务没有提交的数据），就像上面的例子，实际开发是不允许脏读出现的。</p>
 <h4 id="2-read-committed-—-读已经提交的-1"><a href="#2-read-committed-—-读已经提交的-1" class="headerlink" title="2.read committed;—-读已经提交的"></a>2.read committed;—-读已经提交的</h4><h4 id="set-global-transaction-isolation-level-read-committed"><a href="#set-global-transaction-isolation-level-read-committed" class="headerlink" title="set global transaction isolation level read committed;"></a>set global transaction isolation level read committed;</h4><p>select @@global.transaction_isolation;<br>+——————————–+<br>| @@global.transaction_isolation |<br>+——————————–+<br>| READ-COMMITTED                 |<br>+——————————–+</p>
 <h4 id="一个事务只能读取另一个事务已经提交的数据"><a href="#一个事务只能读取另一个事务已经提交的数据" class="headerlink" title="一个事务只能读取另一个事务已经提交的数据"></a>一个事务只能读取另一个事务已经提交的数据</h4><p>小张是银行的会计</p>
 <p>start transaction;</p>
@@ -531,7 +531,7 @@ height:50vh;
             <p>Author：<a href="https://lixins319070033.github.io">Nice</a>
             <p>原文链接：<a href="https://lixins319070033.github.io/2021/11/21/%E6%95%B0%E6%8D%AE%E5%BA%93-MySQL%E7%9A%84%E4%BA%8B%E5%8A%A1/">https://lixins319070033.github.io/2021/11/21/%E6%95%B0%E6%8D%AE%E5%BA%93-MySQL%E7%9A%84%E4%BA%8B%E5%8A%A1/</a>
             <p>发表日期：<a href="https://lixins319070033.github.io/2021/11/21/%E6%95%B0%E6%8D%AE%E5%BA%93-MySQL%E7%9A%84%E4%BA%8B%E5%8A%A1/">November 21st 2021, 8:44:39 pm</a>
-            <p>更新日期：<a href="https://lixins319070033.github.io/2021/11/21/%E6%95%B0%E6%8D%AE%E5%BA%93-MySQL%E7%9A%84%E4%BA%8B%E5%8A%A1/">November 21st 2021, 8:46:20 pm</a>
+            <p>更新日期：<a href="https://lixins319070033.github.io/2021/11/21/%E6%95%B0%E6%8D%AE%E5%BA%93-MySQL%E7%9A%84%E4%BA%8B%E5%8A%A1/">April 27th 2022, 8:29:13 am</a>
             <p>版权声明：本文采用<a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
@@ -672,7 +672,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93-MySQL%E7%9A%84%E4%BA%8B%E5%8A%A1"><span class="toc-number">1.</span> <span class="toc-text">数据库-MySQL的事务</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#mysql%E4%B8%AD%EF%BC%8C%E4%BA%8B%E5%8A%A1%E5%85%B6%E5%AE%9E%E6%98%AF%E4%B8%80%E4%B8%AA%E6%9C%80%E5%B0%8F%E7%9A%84%E4%B8%8D%E5%8F%AF%E5%88%86%E5%89%B2%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8D%95%E5%85%83%E3%80%82%E4%BA%8B%E5%8A%A1%E8%83%BD%E5%A4%9F%E4%BF%9D%E8%AF%81%E4%B8%80%E4%B8%AA%E4%B8%9A%E5%8A%A1%E7%9A%84%E5%AE%8C%E6%95%B4%E6%80%A7%E3%80%82"><span class="toc-number">1.0.0.1.</span> <span class="toc-text">mysql中，事务其实是一个最小的不可分割的工作单元。事务能够保证一个业务的完整性。</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#mysql%E4%B8%AD%E5%A6%82%E4%BD%95%E6%8E%A7%E5%88%B6%E4%BA%8B%E5%8A%A1"><span class="toc-number">1.1.</span> <span class="toc-text">mysql中如何控制事务</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-mysql%E9%BB%98%E8%AE%A4%E6%98%AF%E5%BC%80%E5%90%AF%E4%BA%8B%E5%8A%A1%E7%9A%84%EF%BC%88%E8%87%AA%E5%8A%A8%E6%8F%90%E4%BA%A4%EF%BC%89"><span class="toc-number">1.1.0.1.</span> <span class="toc-text">1.mysql默认是开启事务的（自动提交）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#select-autocommit"><span class="toc-number">1.1.0.2.</span> <span class="toc-text">select @@autocommit;</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%80%BC%E4%B8%BA1%E5%B0%B1%E6%98%AF%E8%87%AA%E5%8A%A8%E6%8F%90%E4%BA%A4"><span class="toc-number">1.1.0.3.</span> <span class="toc-text">值为1就是自动提交</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%BB%98%E8%AE%A4%E4%BA%8B%E5%8A%A1%E5%BC%80%E5%90%AF%E7%9A%84%E4%BD%9C%E7%94%A8%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">1.1.0.4.</span> <span class="toc-text">默认事务开启的作用是什么？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BD%93%E6%88%91%E4%BB%AC%E5%8E%BB%E6%89%A7%E8%A1%8C%E4%B8%80%E4%B8%AAsql%E8%AF%AD%E5%8F%A5%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E6%95%88%E6%9E%9C%E5%B0%B1%E4%BC%9A%E7%AB%8B%E5%8D%B3%E4%BD%93%E7%8E%B0%E5%87%BA%E6%9D%A5%EF%BC%8C%E4%B8%94%E4%B8%8D%E8%83%BD%E5%9B%9E%E6%BB%9A%E3%80%82"><span class="toc-number">1.1.0.5.</span> <span class="toc-text">当我们去执行一个sql语句的时候，效果就会立即体现出来，且不能回滚。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8F%92%E5%85%A5%E4%B8%80%E6%9D%A1%E6%95%B0%E6%8D%AE%E5%90%8E%E5%B0%B1%E7%AB%8B%E9%A9%AC%E7%94%9F%E6%95%88%E4%BA%86%EF%BC%8C%E4%B8%8D%E8%83%BD%E5%9B%9E%E6%BB%9A%EF%BC%8C%E7%9B%B8%E5%BD%93%E4%BA%8E%E9%BB%98%E8%AE%A4%E5%B0%B1%E6%8F%90%E4%BA%A4%E4%BA%86"><span class="toc-number">1.1.0.6.</span> <span class="toc-text">插入一条数据后就立马生效了，不能回滚，相当于默认就提交了</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8B%E5%8A%A1%E5%9B%9E%E6%BB%9A%EF%BC%9A%E6%92%A4%E9%94%80sql%E8%AF%AD%E5%8F%A5%E6%89%A7%E8%A1%8C%E6%95%88%E6%9E%9C"><span class="toc-number">1.1.0.7.</span> <span class="toc-text">事务回滚：撤销sql语句执行效果</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#rollback%EF%BC%9B"><span class="toc-number">1.1.0.8.</span> <span class="toc-text">rollback；</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%AF%E4%BB%A5%E8%BF%9B%E8%A1%8C%E5%9B%9E%E6%BB%9A%E7%9A%84%E8%AF%9D%EF%BC%8C%E9%9C%80%E8%A6%81%E8%AE%BE%E7%BD%AEmysql%E8%87%AA%E5%8A%A8%E6%8F%90%E4%BA%A4%E4%B8%BAfalse"><span class="toc-number">1.1.0.9.</span> <span class="toc-text">可以进行回滚的话，需要设置mysql自动提交为false</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#set-autocommit-0"><span class="toc-number">1.1.0.10.</span> <span class="toc-text">set autocommit &#x3D; 0;</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B3%E9%97%AD%E4%BA%86mysql%E7%9A%84%E8%87%AA%E5%8A%A8%E6%8F%90%E4%BA%A4%EF%BC%88commit%EF%BC%89"><span class="toc-number">1.1.0.11.</span> <span class="toc-text">关闭了mysql的自动提交（commit）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#select-autocommit-1"><span class="toc-number">1.1.0.12.</span> <span class="toc-text">select @@autocommit;</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%99%E9%87%8C%E7%9C%8B%E5%88%B0%E7%9A%84%E6%95%88%E6%9E%9C%E6%98%AF%E4%B8%80%E4%B8%AA%E4%B8%B4%E6%97%B6%E7%9A%84%E6%95%88%E6%9E%9C%EF%BC%8C%E8%BF%98%E6%B2%A1%E6%9C%89%E7%9C%9F%E5%AE%9E%E5%9C%B0%E5%8F%91%E7%94%9F%E5%9C%A8%E6%95%B0%E6%8D%AE%E5%BA%93%E9%87%8C%E9%9D%A2%EF%BC%8C%E5%8F%AA%E6%98%AF%E5%9C%A8%E4%B8%80%E4%B8%AA%E8%99%9A%E6%8B%9F%E7%9A%84%E8%A1%A8%E9%87%8C"><span class="toc-number">1.1.0.13.</span> <span class="toc-text">这里看到的效果是一个临时的效果，还没有真实地发生在数据库里面，只是在一个虚拟的表里</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#rollback"><span class="toc-number">1.1.0.14.</span> <span class="toc-text">rollback;</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A6%82%E6%9E%9C%E6%83%B3%E8%A6%81%E8%AE%A9%E8%99%9A%E6%8B%9F%E7%9A%84%E8%A1%A8%E6%8F%90%E4%BA%A4%E6%80%8E%E4%B9%88%E5%81%9A%EF%BC%9F%E7%94%A8commit%E8%AF%AD%E5%8F%A5"><span class="toc-number">1.1.0.15.</span> <span class="toc-text">如果想要让虚拟的表提交怎么做？用commit语句</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9B%A0%E4%B8%BA%E6%8A%8A%E8%87%AA%E5%8A%A8%E6%8F%90%E4%BA%A4%E5%85%B3%E9%97%AD%E4%BA%86%EF%BC%8C%E8%BF%99%E9%87%8C%E6%98%AF%E6%89%8B%E5%8A%A8%E6%8F%90%E4%BA%A4%E6%95%B0%E6%8D%AE"><span class="toc-number">1.1.0.16.</span> <span class="toc-text">因为把自动提交关闭了，这里是手动提交数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#commit"><span class="toc-number">1.1.0.17.</span> <span class="toc-text">commit;</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%86%8D%E6%92%A4%E9%94%80%E6%98%AF%E4%B8%8D%E5%8F%AF%E4%BB%A5%E6%92%A4%E9%94%80%E7%9A%84%EF%BC%88%E4%BA%8B%E5%8A%A1%E7%9A%84%E6%8C%81%E4%B9%85%E6%80%A7%EF%BC%8C%E5%B0%B1%E6%98%AF%E4%B8%80%E6%97%A6%E4%B9%8B%E5%89%8D%E6%8F%90%E4%BA%A4%E4%BA%86commit%EF%BC%8C%E5%B0%B1%E4%BC%9A%E6%8C%81%E4%B9%85%E5%9C%B0%E4%BA%A7%E7%94%9F%E6%95%88%E6%9E%9C%EF%BC%8C%E4%B8%8B%E9%9D%A2%E7%9A%84rollback%E5%B0%B1%E4%B8%8D%E4%BC%9A%E4%BA%A7%E7%94%9F%E6%95%88%E6%9E%9C%EF%BC%89"><span class="toc-number">1.1.0.18.</span> <span class="toc-text">再撤销是不可以撤销的（事务的持久性，就是一旦之前提交了commit，就会持久地产生效果，下面的rollback就不会产生效果）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%87%AA%E5%8A%A8%E6%8F%90%E4%BA%A4%EF%BC%9F-autocommit-1"><span class="toc-number">1.1.0.19.</span> <span class="toc-text">自动提交？@@autocommit &#x3D; 1;</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%89%8B%E5%8A%A8%E6%8F%90%E4%BA%A4%EF%BC%9Fcommit"><span class="toc-number">1.1.0.20.</span> <span class="toc-text">手动提交？commit;</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8B%E5%8A%A1%E5%9B%9E%E6%BB%9A-rollback"><span class="toc-number">1.1.0.21.</span> <span class="toc-text">事务回滚?rollback;</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E6%96%B9%E5%BC%8F%EF%BC%9A"><span class="toc-number">1.2.</span> <span class="toc-text">其他方式：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%89%8B%E5%8A%A8%E5%BC%80%E5%90%AF%E4%BA%8B%E5%8A%A1"><span class="toc-number">1.2.0.1.</span> <span class="toc-text">手动开启事务</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#begin%EF%BC%9B%E6%88%96start-transaction%EF%BC%9B%E8%BF%99%E4%B8%A4%E4%B8%AAsql%E8%AF%AD%E5%8F%A5%E9%83%BD%E5%8F%AF%E4%BB%A5%E5%B8%AE%E6%88%91%E4%BB%AC%E6%89%8B%E5%8A%A8%E5%BC%80%E5%90%AF%E4%B8%80%E4%B8%AA%E4%BA%8B%E5%8A%A1%EF%BC%9B"><span class="toc-number">1.2.0.2.</span> <span class="toc-text">begin；或start transaction；这两个sql语句都可以帮我们手动开启一个事务；</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#begin"><span class="toc-number">1.2.0.3.</span> <span class="toc-text">begin;</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#start-transaction"><span class="toc-number">1.2.0.4.</span> <span class="toc-text">start transaction;</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#commit-1"><span class="toc-number">1.2.0.5.</span> <span class="toc-text">commit;</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8B%E5%8A%A1%E7%9A%84%E5%9B%9B%E5%A4%A7%E7%89%B9%E5%BE%81%EF%BC%9AACID"><span class="toc-number">1.2.1.</span> <span class="toc-text">事务的四大特征：ACID</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#A%E5%8E%9F%E5%AD%90%E6%80%A7%EF%BC%9A%E4%BA%8B%E5%8A%A1%E6%98%AF%E6%9C%80%E5%B0%8F%E7%9A%84%E5%8D%95%E4%BD%8D%EF%BC%8C%E4%B8%8D%E5%8F%AF%E4%BB%A5%E5%86%8D%E5%88%86%E5%89%B2"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">A原子性：事务是最小的单位，不可以再分割</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#C%E4%B8%80%E8%87%B4%E6%80%A7%EF%BC%9A%E4%BA%8B%E5%8A%A1%E8%A6%81%E6%B1%82%EF%BC%8C%E5%90%8C%E4%B8%80%E4%BA%8B%E5%8A%A1%E4%B8%AD%E7%9A%84sql%E8%AF%AD%E5%8F%A5%EF%BC%8C%E5%BF%85%E9%A1%BB%E4%BF%9D%E8%AF%81%E5%90%8C%E6%97%B6%E6%88%90%E5%8A%9F%E6%88%96%E8%80%85%E5%90%8C%E6%97%B6%E5%A4%B1%E8%B4%A5"><span class="toc-number">1.2.1.2.</span> <span class="toc-text">C一致性：事务要求，同一事务中的sql语句，必须保证同时成功或者同时失败</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#I%E9%9A%94%E7%A6%BB%E6%80%A7%EF%BC%9A%E4%BA%8B%E5%8A%A11%E5%92%8C%E4%BA%8B%E5%8A%A12%E4%B9%8B%E9%97%B4%E6%98%AF%E5%85%B7%E6%9C%89%E9%9A%94%E7%A6%BB%E6%80%A7%E7%9A%84"><span class="toc-number">1.2.1.3.</span> <span class="toc-text">I隔离性：事务1和事务2之间是具有隔离性的</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#D%E6%8C%81%E4%B9%85%E6%80%A7%EF%BC%9A%E4%BA%8B%E5%8A%A1%E4%B8%80%E6%97%A6%E7%BB%93%E6%9D%9F%EF%BC%88commit%EF%BC%8Crollback%E4%BA%8C%E9%80%89%E4%B8%80%EF%BC%89%EF%BC%8C%E5%B0%B1%E4%B8%8D%E5%8F%AF%E4%BB%A5%E8%BF%94%E5%9B%9E%E3%80%82"><span class="toc-number">1.2.1.4.</span> <span class="toc-text">D持久性：事务一旦结束（commit，rollback二选一），就不可以返回。</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8B%E5%8A%A1%E5%BC%80%E5%90%AF%EF%BC%9A"><span class="toc-number">1.2.2.</span> <span class="toc-text">事务开启：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%89%E7%A7%8D%E6%96%B9%E5%BC%8F"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">三种方式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E4%BF%AE%E6%94%B9%E9%BB%98%E8%AE%A4%E6%8F%90%E4%BA%A4-set-autocommit-0"><span class="toc-number">1.2.2.2.</span> <span class="toc-text">1.修改默认提交 set autocommit &#x3D; 0;</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-begin%EF%BC%9B"><span class="toc-number">1.2.2.3.</span> <span class="toc-text">2.begin；</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-start-transaction%EF%BC%9B"><span class="toc-number">1.2.2.4.</span> <span class="toc-text">3.start transaction；</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8B%E5%8A%A1%E6%89%8B%E5%8A%A8%E6%8F%90%E4%BA%A4%EF%BC%9A"><span class="toc-number">1.2.3.</span> <span class="toc-text">事务手动提交：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#commit%EF%BC%9B"><span class="toc-number">1.2.3.1.</span> <span class="toc-text">commit；</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8B%E5%8A%A1%E6%89%8B%E5%8A%A8%E5%9B%9E%E6%BB%9A"><span class="toc-number">1.2.4.</span> <span class="toc-text">事务手动回滚:</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#rollback-1"><span class="toc-number">1.2.4.1.</span> <span class="toc-text">rollback;</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8B%E5%8A%A1%E7%9A%84%E9%9A%94%E7%A6%BB%E6%80%A7%EF%BC%9A"><span class="toc-number">1.3.</span> <span class="toc-text">事务的隔离性：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-read-uncommtited-%E2%80%94-%E8%AF%BB%E6%9C%AA%E6%8F%90%E4%BA%A4%E7%9A%84"><span class="toc-number">1.3.0.1.</span> <span class="toc-text">1.read uncommtited;—-读未提交的</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-read-committed-%E2%80%94-%E8%AF%BB%E5%B7%B2%E7%BB%8F%E6%8F%90%E4%BA%A4%E7%9A%84"><span class="toc-number">1.3.0.2.</span> <span class="toc-text">2.read committed;—-读已经提交的</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-repeatable-read-%E2%80%94-%E5%8F%AF%E4%BB%A5%E9%87%8D%E5%A4%8D%E8%AF%BB"><span class="toc-number">1.3.0.3.</span> <span class="toc-text">3.repeatable read;—-可以重复读</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-serializable-%E2%80%94-%E4%B8%B2%E8%A1%8C%E5%8C%96"><span class="toc-number">1.3.0.4.</span> <span class="toc-text">4.serializable;—-串行化</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-read-uncommitted-%E2%80%94-%E8%AF%BB%E4%B8%BA%E6%8F%90%E4%BA%A4%E7%9A%84"><span class="toc-number">1.3.1.</span> <span class="toc-text">1.read uncommitted;—-读为提交的</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A6%82%E6%9E%9C%E6%9C%89%E4%BA%8B%E5%8A%A1a%E5%92%8C%E4%BA%8B%E5%8A%A1b%EF%BC%8Ca%E4%BA%8B%E5%8A%A1%E5%AF%B9%E6%95%B0%E6%8D%AE%E8%BF%9B%E8%A1%8C%E6%93%8D%E4%BD%9C%EF%BC%8C%E5%9C%A8%E6%93%8D%E4%BD%9C%E7%9A%84%E8%BF%87%E7%A8%8B%E4%B8%AD%EF%BC%8C%E4%BA%8B%E5%8A%A1%E6%B2%A1%E6%9C%89%E8%A2%AB%E6%8F%90%E4%BA%A4%EF%BC%8C%E4%BD%86b%E5%8F%AF%E4%BB%A5%E7%9C%8B%E5%88%B0a%E6%93%8D%E4%BD%9C%E7%9A%84%E7%BB%93%E6%9E%9C%E3%80%82"><span class="toc-number">1.3.1.1.</span> <span class="toc-text">如果有事务a和事务b，a事务对数据进行操作，在操作的过程中，事务没有被提交，但b可以看到a操作的结果。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E6%9F%A5%E7%9C%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%EF%BC%9F%EF%BC%88%E7%B3%BB%E7%BB%9F%E4%B8%8D%E5%90%8C%E8%AF%AD%E5%8F%A5%E4%B8%8D%E5%90%8C%EF%BC%89"><span class="toc-number">1.3.1.2.</span> <span class="toc-text">如何查看数据库的隔离级别？（系统不同语句不同）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#select-global-transaction-isolation-%E7%B3%BB%E7%BB%9F%E7%BA%A7%E5%88%AB%E7%9A%84"><span class="toc-number">1.3.1.3.</span> <span class="toc-text">select @@global.transaction_isolation; &#x2F;&#x2F;系统级别的</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#select-transaction-isolation-%E4%BC%9A%E8%AF%9D%E7%BA%A7%E5%88%AB%E7%9A%84"><span class="toc-number">1.3.1.4.</span> <span class="toc-text">select @@transaction_isolation; &#x2F;&#x2F;会话级别的</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#mysql%E9%BB%98%E8%AE%A4%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%ABREPEATABLE-READ"><span class="toc-number">1.3.1.5.</span> <span class="toc-text">mysql默认隔离级别REPEATABLE-READ</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#select-global-tx-isolation-%E7%B3%BB%E7%BB%9F%E7%BA%A7%E5%88%AB%E7%9A%84"><span class="toc-number">1.3.1.6.</span> <span class="toc-text">select @@global.tx_isolation; &#x2F;&#x2F;系统级别的</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#select-tx-isolation-%E4%BC%9A%E8%AF%9D%E7%BA%A7%E5%88%AB%E7%9A%84"><span class="toc-number">1.3.1.7.</span> <span class="toc-text">select @@tx_isolation; &#x2F;&#x2F;会话级别的</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E4%BF%AE%E6%94%B9%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%EF%BC%9F"><span class="toc-number">1.3.1.8.</span> <span class="toc-text">如何修改隔离级别？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#set-global-transaction-isolation-level-read-uncommitted"><span class="toc-number">1.3.1.9.</span> <span class="toc-text">set global transaction isolation level read uncommitted;</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-read-committed-%E2%80%94-%E8%AF%BB%E5%B7%B2%E7%BB%8F%E6%8F%90%E4%BA%A4%E7%9A%84-1"><span class="toc-number">1.3.1.10.</span> <span class="toc-text">2.read committed;—-读已经提交的</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#set-global-transaction-isolation-level-read-committed"><span class="toc-number">1.3.1.11.</span> <span class="toc-text">set global transaction isolation level read committed;</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%80%E4%B8%AA%E4%BA%8B%E5%8A%A1%E5%8F%AA%E8%83%BD%E8%AF%BB%E5%8F%96%E5%8F%A6%E4%B8%80%E4%B8%AA%E4%BA%8B%E5%8A%A1%E5%B7%B2%E7%BB%8F%E6%8F%90%E4%BA%A4%E7%9A%84%E6%95%B0%E6%8D%AE"><span class="toc-number">1.3.1.12.</span> <span class="toc-text">一个事务只能读取另一个事务已经提交的数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%99%BD%E7%84%B6%E6%88%91%E5%8F%AA%E8%83%BD%E8%AF%BB%E5%88%B0%E5%8F%A6%E4%B8%80%E4%B8%AA%E4%BA%8B%E5%8A%A1%E6%8F%90%E4%BA%A4%E7%9A%84%E6%95%B0%E6%8D%AE%EF%BC%8C%E4%BD%86%E6%98%AF%E8%BF%98%E6%98%AF%E4%BC%9A%E5%87%BA%E7%8E%B0%E9%97%AE%E9%A2%98%EF%BC%8C%E5%B0%B1%E6%98%AF%E8%AF%BB%E5%8F%96%E5%90%8C%E4%B8%80%E4%B8%AA%E8%A1%A8%E7%9A%84%E6%95%B0%E6%8D%AE%EF%BC%8C%E5%8F%91%E7%8E%B0%E5%89%8D%E5%90%8E%E4%B8%8D%E4%B8%80%E8%87%B4%EF%BC%8C%E8%BF%99%E5%B0%B1%E6%98%AF%E4%B8%8D%E5%8F%AF%E9%87%8D%E5%A4%8D%E8%AF%BB%E7%8E%B0%E8%B1%A1%EF%BC%88read-committed%EF%BC%89"><span class="toc-number">1.3.1.13.</span> <span class="toc-text">虽然我只能读到另一个事务提交的数据，但是还是会出现问题，就是读取同一个表的数据，发现前后不一致，这就是不可重复读现象（read committed）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-repeatable-read-%E2%80%94-%E5%8F%AF%E4%BB%A5%E9%87%8D%E5%A4%8D%E8%AF%BB%EF%BC%88%E8%BF%99%E6%98%AFmysql%E9%BB%98%E8%AE%A4%E6%A8%A1%E5%BC%8F%EF%BC%89"><span class="toc-number">1.3.1.14.</span> <span class="toc-text">3.repeatable read;—-可以重复读（这是mysql默认模式）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#set-global-transaction-isolation-level-repeatable-read"><span class="toc-number">1.3.1.15.</span> <span class="toc-text">set global transaction isolation level repeatable read;</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%99%E7%A7%8D%E7%8E%B0%E8%B1%A1%E5%8F%AB%E5%81%9A%E5%B9%BB%E8%AF%BB%EF%BC%8C%E5%B0%B1%E6%98%AF%E4%BA%8B%E5%8A%A1a%E5%92%8C%E4%BA%8B%E5%8A%A1b%E5%90%8C%E6%97%B6%E6%93%8D%E4%BD%9C%E4%B8%80%E5%BC%A0%E8%A1%A8%EF%BC%8C%E4%BA%8B%E5%8A%A1a%E6%8F%90%E4%BA%A4%E7%9A%84%E6%95%B0%E6%8D%AE%E4%B9%9F%E4%B8%8D%E8%83%BD%E8%A2%AB%E4%BA%8B%E5%8A%A1b%E8%AF%BB%E5%88%B0%EF%BC%8C%E5%B0%B1%E9%80%A0%E6%88%90%E4%BA%86%E5%B9%BB%E8%AF%BB"><span class="toc-number">1.3.1.16.</span> <span class="toc-text">这种现象叫做幻读，就是事务a和事务b同时操作一张表，事务a提交的数据也不能被事务b读到，就造成了幻读</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-serializable-%E2%80%94-%E4%B8%B2%E8%A1%8C%E5%8C%96-1"><span class="toc-number">1.3.1.17.</span> <span class="toc-text">4.serializable;—-串行化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#set-global-transaction-isolation-level-serializable"><span class="toc-number">1.3.1.18.</span> <span class="toc-text">set global transaction isolation level serializable;</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BD%93user%E8%A1%A8%E8%A2%AB%E5%8F%A6%E5%A4%96%E4%B8%80%E4%B8%AA%E4%BA%8B%E5%8A%A1%E6%93%8D%E4%BD%9C%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E5%85%B6%E4%BB%96%E4%BA%8B%E5%8A%A1%E9%87%8C%E9%9D%A2%E7%9A%84%E5%86%99%E6%93%8D%E4%BD%9C%E6%98%AF%E4%B8%8D%E5%8F%AF%E4%BB%A5%E8%BF%9B%E8%A1%8C%E7%9A%84%EF%BC%8C%E5%9B%A0%E4%B8%BA%E7%8E%8B%E5%B0%BC%E7%8E%9B%E2%80%93%E5%8C%97%E4%BA%ACstart-transaction-%E5%BC%80%E5%90%AF%E4%BA%86%E4%BA%8B%E5%8A%A1%E5%90%8E%EF%BC%8C%E7%8E%8B%E5%B0%BC%E7%8E%9B%E8%BF%9B%E8%A1%8C%E4%BA%86user%E8%A1%A8%E7%9A%84%E6%93%8D%E4%BD%9Cselect-from-user-%E8%BF%99%E4%B8%A4%E4%B8%AA%E4%BA%8B%E5%8A%A1%E6%98%AF%E4%B8%B2%E8%A1%8C%E7%9A%84%EF%BC%8C%E5%BF%85%E9%A1%BB%E7%AD%89%E7%8E%8B%E5%B0%BC%E7%8E%9B%E8%BF%99%E8%BE%B9committed%EF%BC%9B%E6%8F%90%E4%BA%A4%E4%BA%86%EF%BC%8C%E5%BC%A0%E5%85%A8%E8%9B%8B%E8%BF%99%E8%BE%B9%E6%89%8D%E5%8F%AF%E4%BB%A5%E7%BB%A7%E7%BB%AD%E6%93%8D%E4%BD%9C%EF%BC%88%E5%89%8D%E6%8F%90%E6%98%AF%E7%8E%8B%E5%B0%BC%E7%8E%9B%E6%89%A7%E8%A1%8C%E7%9A%84%E8%AF%AD%E5%8F%A5%E6%B2%A1%E6%9C%89%E7%AD%89%E5%BE%85%E8%B6%85%E6%97%B6%EF%BC%89"><span class="toc-number">1.3.1.19.</span> <span class="toc-text">当user表被另外一个事务操作的时候，其他事务里面的写操作是不可以进行的，因为王尼玛–北京start transaction;开启了事务后，王尼玛进行了user表的操作select * from user;这两个事务是串行的，必须等王尼玛这边committed；提交了，张全蛋这边才可以继续操作（前提是王尼玛执行的语句没有等待超时）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%B2%E8%A1%8C%E5%8C%96%E7%9A%84%E9%97%AE%E9%A2%98%EF%BC%9A%E6%80%A7%E8%83%BD%E7%89%B9%E5%B7%AE"><span class="toc-number">1.3.1.20.</span> <span class="toc-text">串行化的问题：性能特差</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%80%A7%E8%83%BD%E6%AF%94%E8%BE%83%EF%BC%9A%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%E8%B6%8A%E9%AB%98%E6%80%A7%E8%83%BD%E8%B6%8A%E5%B7%AE%EF%BC%8Cmysql%E9%BB%98%E8%AE%A4%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%E6%98%AFrepeatable-read"><span class="toc-number">1.3.1.21.</span> <span class="toc-text">性能比较：隔离级别越高性能越差，mysql默认隔离级别是repeatable read;</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#read-uncommtited-gt-read-committed-gt-repeatable-read-gt-serializable-%E2%80%94-%E4%B8%B2%E8%A1%8C%E5%8C%96"><span class="toc-number">1.3.1.22.</span> <span class="toc-text">read uncommtited;&gt;read committed&gt;repeatable read;&gt;serializable;—-串行化</span></a></li></ol></li></ol></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93-MySQL%E7%9A%84%E4%BA%8B%E5%8A%A1"><span class="toc-number">1.</span> <span class="toc-text">数据库-MySQL的事务</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#mysql%E4%B8%AD%EF%BC%8C%E4%BA%8B%E5%8A%A1%E5%85%B6%E5%AE%9E%E6%98%AF%E4%B8%80%E4%B8%AA%E6%9C%80%E5%B0%8F%E7%9A%84%E4%B8%8D%E5%8F%AF%E5%88%86%E5%89%B2%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8D%95%E5%85%83%E3%80%82%E4%BA%8B%E5%8A%A1%E8%83%BD%E5%A4%9F%E4%BF%9D%E8%AF%81%E4%B8%80%E4%B8%AA%E4%B8%9A%E5%8A%A1%E7%9A%84%E5%AE%8C%E6%95%B4%E6%80%A7%E3%80%82"><span class="toc-number">1.0.0.1.</span> <span class="toc-text">mysql中，事务其实是一个最小的不可分割的工作单元。事务能够保证一个业务的完整性。</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#mysql%E4%B8%AD%E5%A6%82%E4%BD%95%E6%8E%A7%E5%88%B6%E4%BA%8B%E5%8A%A1"><span class="toc-number">1.1.</span> <span class="toc-text">mysql中如何控制事务</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-mysql%E9%BB%98%E8%AE%A4%E6%98%AF%E5%BC%80%E5%90%AF%E4%BA%8B%E5%8A%A1%E7%9A%84%EF%BC%88%E8%87%AA%E5%8A%A8%E6%8F%90%E4%BA%A4%EF%BC%89"><span class="toc-number">1.1.0.1.</span> <span class="toc-text">1.mysql默认是开启事务的（自动提交）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#select-autocommit"><span class="toc-number">1.1.0.2.</span> <span class="toc-text">select @@autocommit;</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%80%BC%E4%B8%BA1%E5%B0%B1%E6%98%AF%E8%87%AA%E5%8A%A8%E6%8F%90%E4%BA%A4"><span class="toc-number">1.1.0.3.</span> <span class="toc-text">值为1就是自动提交</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%BB%98%E8%AE%A4%E4%BA%8B%E5%8A%A1%E5%BC%80%E5%90%AF%E7%9A%84%E4%BD%9C%E7%94%A8%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">1.1.0.4.</span> <span class="toc-text">默认事务开启的作用是什么？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BD%93%E6%88%91%E4%BB%AC%E5%8E%BB%E6%89%A7%E8%A1%8C%E4%B8%80%E4%B8%AAsql%E8%AF%AD%E5%8F%A5%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E6%95%88%E6%9E%9C%E5%B0%B1%E4%BC%9A%E7%AB%8B%E5%8D%B3%E4%BD%93%E7%8E%B0%E5%87%BA%E6%9D%A5%EF%BC%8C%E4%B8%94%E4%B8%8D%E8%83%BD%E5%9B%9E%E6%BB%9A%E3%80%82"><span class="toc-number">1.1.0.5.</span> <span class="toc-text">当我们去执行一个sql语句的时候，效果就会立即体现出来，且不能回滚。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8F%92%E5%85%A5%E4%B8%80%E6%9D%A1%E6%95%B0%E6%8D%AE%E5%90%8E%E5%B0%B1%E7%AB%8B%E9%A9%AC%E7%94%9F%E6%95%88%E4%BA%86%EF%BC%8C%E4%B8%8D%E8%83%BD%E5%9B%9E%E6%BB%9A%EF%BC%8C%E7%9B%B8%E5%BD%93%E4%BA%8E%E9%BB%98%E8%AE%A4%E5%B0%B1%E6%8F%90%E4%BA%A4%E4%BA%86"><span class="toc-number">1.1.0.6.</span> <span class="toc-text">插入一条数据后就立马生效了，不能回滚，相当于默认就提交了</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8B%E5%8A%A1%E5%9B%9E%E6%BB%9A%EF%BC%9A%E6%92%A4%E9%94%80sql%E8%AF%AD%E5%8F%A5%E6%89%A7%E8%A1%8C%E6%95%88%E6%9E%9C"><span class="toc-number">1.1.0.7.</span> <span class="toc-text">事务回滚：撤销sql语句执行效果</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#rollback%EF%BC%9B"><span class="toc-number">1.1.0.8.</span> <span class="toc-text">rollback；</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%AF%E4%BB%A5%E8%BF%9B%E8%A1%8C%E5%9B%9E%E6%BB%9A%E7%9A%84%E8%AF%9D%EF%BC%8C%E9%9C%80%E8%A6%81%E8%AE%BE%E7%BD%AEmysql%E8%87%AA%E5%8A%A8%E6%8F%90%E4%BA%A4%E4%B8%BAfalse"><span class="toc-number">1.1.0.9.</span> <span class="toc-text">可以进行回滚的话，需要设置mysql自动提交为false</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#set-autocommit-0"><span class="toc-number">1.1.0.10.</span> <span class="toc-text">set autocommit &#x3D; 0;</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B3%E9%97%AD%E4%BA%86mysql%E7%9A%84%E8%87%AA%E5%8A%A8%E6%8F%90%E4%BA%A4%EF%BC%88commit%EF%BC%89"><span class="toc-number">1.1.0.11.</span> <span class="toc-text">关闭了mysql的自动提交（commit）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#select-autocommit-1"><span class="toc-number">1.1.0.12.</span> <span class="toc-text">select @@autocommit;</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%99%E9%87%8C%E7%9C%8B%E5%88%B0%E7%9A%84%E6%95%88%E6%9E%9C%E6%98%AF%E4%B8%80%E4%B8%AA%E4%B8%B4%E6%97%B6%E7%9A%84%E6%95%88%E6%9E%9C%EF%BC%8C%E8%BF%98%E6%B2%A1%E6%9C%89%E7%9C%9F%E5%AE%9E%E5%9C%B0%E5%8F%91%E7%94%9F%E5%9C%A8%E6%95%B0%E6%8D%AE%E5%BA%93%E9%87%8C%E9%9D%A2%EF%BC%8C%E5%8F%AA%E6%98%AF%E5%9C%A8%E4%B8%80%E4%B8%AA%E8%99%9A%E6%8B%9F%E7%9A%84%E8%A1%A8%E9%87%8C"><span class="toc-number">1.1.0.13.</span> <span class="toc-text">这里看到的效果是一个临时的效果，还没有真实地发生在数据库里面，只是在一个虚拟的表里</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#rollback"><span class="toc-number">1.1.0.14.</span> <span class="toc-text">rollback;</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A6%82%E6%9E%9C%E6%83%B3%E8%A6%81%E8%AE%A9%E8%99%9A%E6%8B%9F%E7%9A%84%E8%A1%A8%E6%8F%90%E4%BA%A4%E6%80%8E%E4%B9%88%E5%81%9A%EF%BC%9F%E7%94%A8commit%E8%AF%AD%E5%8F%A5"><span class="toc-number">1.1.0.15.</span> <span class="toc-text">如果想要让虚拟的表提交怎么做？用commit语句</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9B%A0%E4%B8%BA%E6%8A%8A%E8%87%AA%E5%8A%A8%E6%8F%90%E4%BA%A4%E5%85%B3%E9%97%AD%E4%BA%86%EF%BC%8C%E8%BF%99%E9%87%8C%E6%98%AF%E6%89%8B%E5%8A%A8%E6%8F%90%E4%BA%A4%E6%95%B0%E6%8D%AE"><span class="toc-number">1.1.0.16.</span> <span class="toc-text">因为把自动提交关闭了，这里是手动提交数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#commit"><span class="toc-number">1.1.0.17.</span> <span class="toc-text">commit;</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%86%8D%E6%92%A4%E9%94%80%E6%98%AF%E4%B8%8D%E5%8F%AF%E4%BB%A5%E6%92%A4%E9%94%80%E7%9A%84%EF%BC%88%E4%BA%8B%E5%8A%A1%E7%9A%84%E6%8C%81%E4%B9%85%E6%80%A7%EF%BC%8C%E5%B0%B1%E6%98%AF%E4%B8%80%E6%97%A6%E4%B9%8B%E5%89%8D%E6%8F%90%E4%BA%A4%E4%BA%86commit%EF%BC%8C%E5%B0%B1%E4%BC%9A%E6%8C%81%E4%B9%85%E5%9C%B0%E4%BA%A7%E7%94%9F%E6%95%88%E6%9E%9C%EF%BC%8C%E4%B8%8B%E9%9D%A2%E7%9A%84rollback%E5%B0%B1%E4%B8%8D%E4%BC%9A%E4%BA%A7%E7%94%9F%E6%95%88%E6%9E%9C%EF%BC%89"><span class="toc-number">1.1.0.18.</span> <span class="toc-text">再撤销是不可以撤销的（事务的持久性，就是一旦之前提交了commit，就会持久地产生效果，下面的rollback就不会产生效果）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%87%AA%E5%8A%A8%E6%8F%90%E4%BA%A4%EF%BC%9F-autocommit-1"><span class="toc-number">1.1.0.19.</span> <span class="toc-text">自动提交？@@autocommit &#x3D; 1;</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%89%8B%E5%8A%A8%E6%8F%90%E4%BA%A4%EF%BC%9Fcommit"><span class="toc-number">1.1.0.20.</span> <span class="toc-text">手动提交？commit;</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8B%E5%8A%A1%E5%9B%9E%E6%BB%9A-rollback"><span class="toc-number">1.1.0.21.</span> <span class="toc-text">事务回滚?rollback;</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E6%96%B9%E5%BC%8F%EF%BC%9A"><span class="toc-number">1.2.</span> <span class="toc-text">其他方式：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%89%8B%E5%8A%A8%E5%BC%80%E5%90%AF%E4%BA%8B%E5%8A%A1"><span class="toc-number">1.2.0.1.</span> <span class="toc-text">手动开启事务</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#begin%EF%BC%9B%E6%88%96start-transaction%EF%BC%9B%E8%BF%99%E4%B8%A4%E4%B8%AAsql%E8%AF%AD%E5%8F%A5%E9%83%BD%E5%8F%AF%E4%BB%A5%E5%B8%AE%E6%88%91%E4%BB%AC%E6%89%8B%E5%8A%A8%E5%BC%80%E5%90%AF%E4%B8%80%E4%B8%AA%E4%BA%8B%E5%8A%A1%EF%BC%9B"><span class="toc-number">1.2.0.2.</span> <span class="toc-text">begin；或start transaction；这两个sql语句都可以帮我们手动开启一个事务；</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#begin"><span class="toc-number">1.2.0.3.</span> <span class="toc-text">begin;</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#start-transaction"><span class="toc-number">1.2.0.4.</span> <span class="toc-text">start transaction;</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#commit-1"><span class="toc-number">1.2.0.5.</span> <span class="toc-text">commit;</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8B%E5%8A%A1%E7%9A%84%E5%9B%9B%E5%A4%A7%E7%89%B9%E5%BE%81%EF%BC%9AACID"><span class="toc-number">1.2.1.</span> <span class="toc-text">事务的四大特征：ACID</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#A%E5%8E%9F%E5%AD%90%E6%80%A7%EF%BC%9A%E4%BA%8B%E5%8A%A1%E6%98%AF%E6%9C%80%E5%B0%8F%E7%9A%84%E5%8D%95%E4%BD%8D%EF%BC%8C%E4%B8%8D%E5%8F%AF%E4%BB%A5%E5%86%8D%E5%88%86%E5%89%B2"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">A原子性：事务是最小的单位，不可以再分割</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#C%E4%B8%80%E8%87%B4%E6%80%A7%EF%BC%9A%E4%BA%8B%E5%8A%A1%E8%A6%81%E6%B1%82%EF%BC%8C%E5%90%8C%E4%B8%80%E4%BA%8B%E5%8A%A1%E4%B8%AD%E7%9A%84sql%E8%AF%AD%E5%8F%A5%EF%BC%8C%E5%BF%85%E9%A1%BB%E4%BF%9D%E8%AF%81%E5%90%8C%E6%97%B6%E6%88%90%E5%8A%9F%E6%88%96%E8%80%85%E5%90%8C%E6%97%B6%E5%A4%B1%E8%B4%A5"><span class="toc-number">1.2.1.2.</span> <span class="toc-text">C一致性：事务要求，同一事务中的sql语句，必须保证同时成功或者同时失败</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#I%E9%9A%94%E7%A6%BB%E6%80%A7%EF%BC%9A%E4%BA%8B%E5%8A%A11%E5%92%8C%E4%BA%8B%E5%8A%A12%E4%B9%8B%E9%97%B4%E6%98%AF%E5%85%B7%E6%9C%89%E9%9A%94%E7%A6%BB%E6%80%A7%E7%9A%84"><span class="toc-number">1.2.1.3.</span> <span class="toc-text">I隔离性：事务1和事务2之间是具有隔离性的</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#D%E6%8C%81%E4%B9%85%E6%80%A7%EF%BC%9A%E4%BA%8B%E5%8A%A1%E4%B8%80%E6%97%A6%E7%BB%93%E6%9D%9F%EF%BC%88commit%EF%BC%8Crollback%E4%BA%8C%E9%80%89%E4%B8%80%EF%BC%89%EF%BC%8C%E5%B0%B1%E4%B8%8D%E5%8F%AF%E4%BB%A5%E8%BF%94%E5%9B%9E%E3%80%82"><span class="toc-number">1.2.1.4.</span> <span class="toc-text">D持久性：事务一旦结束（commit，rollback二选一），就不可以返回。</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8B%E5%8A%A1%E5%BC%80%E5%90%AF%EF%BC%9A"><span class="toc-number">1.2.2.</span> <span class="toc-text">事务开启：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%89%E7%A7%8D%E6%96%B9%E5%BC%8F"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">三种方式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E4%BF%AE%E6%94%B9%E9%BB%98%E8%AE%A4%E6%8F%90%E4%BA%A4-set-autocommit-0"><span class="toc-number">1.2.2.2.</span> <span class="toc-text">1.修改默认提交 set autocommit &#x3D; 0;</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-begin%EF%BC%9B"><span class="toc-number">1.2.2.3.</span> <span class="toc-text">2.begin；</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-start-transaction%EF%BC%9B"><span class="toc-number">1.2.2.4.</span> <span class="toc-text">3.start transaction；</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8B%E5%8A%A1%E6%89%8B%E5%8A%A8%E6%8F%90%E4%BA%A4%EF%BC%9A"><span class="toc-number">1.2.3.</span> <span class="toc-text">事务手动提交：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#commit%EF%BC%9B"><span class="toc-number">1.2.3.1.</span> <span class="toc-text">commit；</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8B%E5%8A%A1%E6%89%8B%E5%8A%A8%E5%9B%9E%E6%BB%9A"><span class="toc-number">1.2.4.</span> <span class="toc-text">事务手动回滚:</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#rollback-1"><span class="toc-number">1.2.4.1.</span> <span class="toc-text">rollback;</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8B%E5%8A%A1%E7%9A%84%E9%9A%94%E7%A6%BB%E6%80%A7%EF%BC%9A"><span class="toc-number">1.3.</span> <span class="toc-text">事务的隔离性：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-read-uncommtited-%E2%80%94-%E8%AF%BB%E6%9C%AA%E6%8F%90%E4%BA%A4%E7%9A%84"><span class="toc-number">1.3.0.1.</span> <span class="toc-text">1.read uncommtited;—-读未提交的</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-read-committed-%E2%80%94-%E8%AF%BB%E5%B7%B2%E7%BB%8F%E6%8F%90%E4%BA%A4%E7%9A%84"><span class="toc-number">1.3.0.2.</span> <span class="toc-text">2.read committed;—-读已经提交的</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-repeatable-read-%E2%80%94-%E5%8F%AF%E4%BB%A5%E9%87%8D%E5%A4%8D%E8%AF%BB"><span class="toc-number">1.3.0.3.</span> <span class="toc-text">3.repeatable read;—-可以重复读</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-serializable-%E2%80%94-%E4%B8%B2%E8%A1%8C%E5%8C%96"><span class="toc-number">1.3.0.4.</span> <span class="toc-text">4.serializable;—-串行化</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-read-uncommitted-%E2%80%94-%E8%AF%BB%E6%9C%AA%E6%8F%90%E4%BA%A4%E7%9A%84"><span class="toc-number">1.3.1.</span> <span class="toc-text">1.read uncommitted;—-读未提交的</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A6%82%E6%9E%9C%E6%9C%89%E4%BA%8B%E5%8A%A1a%E5%92%8C%E4%BA%8B%E5%8A%A1b%EF%BC%8Ca%E4%BA%8B%E5%8A%A1%E5%AF%B9%E6%95%B0%E6%8D%AE%E8%BF%9B%E8%A1%8C%E6%93%8D%E4%BD%9C%EF%BC%8C%E5%9C%A8%E6%93%8D%E4%BD%9C%E7%9A%84%E8%BF%87%E7%A8%8B%E4%B8%AD%EF%BC%8C%E4%BA%8B%E5%8A%A1%E6%B2%A1%E6%9C%89%E8%A2%AB%E6%8F%90%E4%BA%A4%EF%BC%8C%E4%BD%86b%E5%8F%AF%E4%BB%A5%E7%9C%8B%E5%88%B0a%E6%93%8D%E4%BD%9C%E7%9A%84%E7%BB%93%E6%9E%9C%E3%80%82"><span class="toc-number">1.3.1.1.</span> <span class="toc-text">如果有事务a和事务b，a事务对数据进行操作，在操作的过程中，事务没有被提交，但b可以看到a操作的结果。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E6%9F%A5%E7%9C%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%EF%BC%9F%EF%BC%88%E7%B3%BB%E7%BB%9F%E4%B8%8D%E5%90%8C%E8%AF%AD%E5%8F%A5%E4%B8%8D%E5%90%8C%EF%BC%89"><span class="toc-number">1.3.1.2.</span> <span class="toc-text">如何查看数据库的隔离级别？（系统不同语句不同）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#select-global-transaction-isolation-%E7%B3%BB%E7%BB%9F%E7%BA%A7%E5%88%AB%E7%9A%84"><span class="toc-number">1.3.1.3.</span> <span class="toc-text">select @@global.transaction_isolation; &#x2F;&#x2F;系统级别的</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#select-transaction-isolation-%E4%BC%9A%E8%AF%9D%E7%BA%A7%E5%88%AB%E7%9A%84"><span class="toc-number">1.3.1.4.</span> <span class="toc-text">select @@transaction_isolation; &#x2F;&#x2F;会话级别的</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#mysql%E9%BB%98%E8%AE%A4%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%ABREPEATABLE-READ"><span class="toc-number">1.3.1.5.</span> <span class="toc-text">mysql默认隔离级别REPEATABLE-READ</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#select-global-tx-isolation-%E7%B3%BB%E7%BB%9F%E7%BA%A7%E5%88%AB%E7%9A%84"><span class="toc-number">1.3.1.6.</span> <span class="toc-text">select @@global.tx_isolation; &#x2F;&#x2F;系统级别的</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#select-tx-isolation-%E4%BC%9A%E8%AF%9D%E7%BA%A7%E5%88%AB%E7%9A%84"><span class="toc-number">1.3.1.7.</span> <span class="toc-text">select @@tx_isolation; &#x2F;&#x2F;会话级别的</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E4%BF%AE%E6%94%B9%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%EF%BC%9F"><span class="toc-number">1.3.1.8.</span> <span class="toc-text">如何修改隔离级别？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#set-global-transaction-isolation-level-read-uncommitted"><span class="toc-number">1.3.1.9.</span> <span class="toc-text">set global transaction isolation level read uncommitted;</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-read-committed-%E2%80%94-%E8%AF%BB%E5%B7%B2%E7%BB%8F%E6%8F%90%E4%BA%A4%E7%9A%84-1"><span class="toc-number">1.3.1.10.</span> <span class="toc-text">2.read committed;—-读已经提交的</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#set-global-transaction-isolation-level-read-committed"><span class="toc-number">1.3.1.11.</span> <span class="toc-text">set global transaction isolation level read committed;</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%80%E4%B8%AA%E4%BA%8B%E5%8A%A1%E5%8F%AA%E8%83%BD%E8%AF%BB%E5%8F%96%E5%8F%A6%E4%B8%80%E4%B8%AA%E4%BA%8B%E5%8A%A1%E5%B7%B2%E7%BB%8F%E6%8F%90%E4%BA%A4%E7%9A%84%E6%95%B0%E6%8D%AE"><span class="toc-number">1.3.1.12.</span> <span class="toc-text">一个事务只能读取另一个事务已经提交的数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%99%BD%E7%84%B6%E6%88%91%E5%8F%AA%E8%83%BD%E8%AF%BB%E5%88%B0%E5%8F%A6%E4%B8%80%E4%B8%AA%E4%BA%8B%E5%8A%A1%E6%8F%90%E4%BA%A4%E7%9A%84%E6%95%B0%E6%8D%AE%EF%BC%8C%E4%BD%86%E6%98%AF%E8%BF%98%E6%98%AF%E4%BC%9A%E5%87%BA%E7%8E%B0%E9%97%AE%E9%A2%98%EF%BC%8C%E5%B0%B1%E6%98%AF%E8%AF%BB%E5%8F%96%E5%90%8C%E4%B8%80%E4%B8%AA%E8%A1%A8%E7%9A%84%E6%95%B0%E6%8D%AE%EF%BC%8C%E5%8F%91%E7%8E%B0%E5%89%8D%E5%90%8E%E4%B8%8D%E4%B8%80%E8%87%B4%EF%BC%8C%E8%BF%99%E5%B0%B1%E6%98%AF%E4%B8%8D%E5%8F%AF%E9%87%8D%E5%A4%8D%E8%AF%BB%E7%8E%B0%E8%B1%A1%EF%BC%88read-committed%EF%BC%89"><span class="toc-number">1.3.1.13.</span> <span class="toc-text">虽然我只能读到另一个事务提交的数据，但是还是会出现问题，就是读取同一个表的数据，发现前后不一致，这就是不可重复读现象（read committed）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-repeatable-read-%E2%80%94-%E5%8F%AF%E4%BB%A5%E9%87%8D%E5%A4%8D%E8%AF%BB%EF%BC%88%E8%BF%99%E6%98%AFmysql%E9%BB%98%E8%AE%A4%E6%A8%A1%E5%BC%8F%EF%BC%89"><span class="toc-number">1.3.1.14.</span> <span class="toc-text">3.repeatable read;—-可以重复读（这是mysql默认模式）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#set-global-transaction-isolation-level-repeatable-read"><span class="toc-number">1.3.1.15.</span> <span class="toc-text">set global transaction isolation level repeatable read;</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%99%E7%A7%8D%E7%8E%B0%E8%B1%A1%E5%8F%AB%E5%81%9A%E5%B9%BB%E8%AF%BB%EF%BC%8C%E5%B0%B1%E6%98%AF%E4%BA%8B%E5%8A%A1a%E5%92%8C%E4%BA%8B%E5%8A%A1b%E5%90%8C%E6%97%B6%E6%93%8D%E4%BD%9C%E4%B8%80%E5%BC%A0%E8%A1%A8%EF%BC%8C%E4%BA%8B%E5%8A%A1a%E6%8F%90%E4%BA%A4%E7%9A%84%E6%95%B0%E6%8D%AE%E4%B9%9F%E4%B8%8D%E8%83%BD%E8%A2%AB%E4%BA%8B%E5%8A%A1b%E8%AF%BB%E5%88%B0%EF%BC%8C%E5%B0%B1%E9%80%A0%E6%88%90%E4%BA%86%E5%B9%BB%E8%AF%BB"><span class="toc-number">1.3.1.16.</span> <span class="toc-text">这种现象叫做幻读，就是事务a和事务b同时操作一张表，事务a提交的数据也不能被事务b读到，就造成了幻读</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-serializable-%E2%80%94-%E4%B8%B2%E8%A1%8C%E5%8C%96-1"><span class="toc-number">1.3.1.17.</span> <span class="toc-text">4.serializable;—-串行化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#set-global-transaction-isolation-level-serializable"><span class="toc-number">1.3.1.18.</span> <span class="toc-text">set global transaction isolation level serializable;</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BD%93user%E8%A1%A8%E8%A2%AB%E5%8F%A6%E5%A4%96%E4%B8%80%E4%B8%AA%E4%BA%8B%E5%8A%A1%E6%93%8D%E4%BD%9C%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E5%85%B6%E4%BB%96%E4%BA%8B%E5%8A%A1%E9%87%8C%E9%9D%A2%E7%9A%84%E5%86%99%E6%93%8D%E4%BD%9C%E6%98%AF%E4%B8%8D%E5%8F%AF%E4%BB%A5%E8%BF%9B%E8%A1%8C%E7%9A%84%EF%BC%8C%E5%9B%A0%E4%B8%BA%E7%8E%8B%E5%B0%BC%E7%8E%9B%E2%80%93%E5%8C%97%E4%BA%ACstart-transaction-%E5%BC%80%E5%90%AF%E4%BA%86%E4%BA%8B%E5%8A%A1%E5%90%8E%EF%BC%8C%E7%8E%8B%E5%B0%BC%E7%8E%9B%E8%BF%9B%E8%A1%8C%E4%BA%86user%E8%A1%A8%E7%9A%84%E6%93%8D%E4%BD%9Cselect-from-user-%E8%BF%99%E4%B8%A4%E4%B8%AA%E4%BA%8B%E5%8A%A1%E6%98%AF%E4%B8%B2%E8%A1%8C%E7%9A%84%EF%BC%8C%E5%BF%85%E9%A1%BB%E7%AD%89%E7%8E%8B%E5%B0%BC%E7%8E%9B%E8%BF%99%E8%BE%B9committed%EF%BC%9B%E6%8F%90%E4%BA%A4%E4%BA%86%EF%BC%8C%E5%BC%A0%E5%85%A8%E8%9B%8B%E8%BF%99%E8%BE%B9%E6%89%8D%E5%8F%AF%E4%BB%A5%E7%BB%A7%E7%BB%AD%E6%93%8D%E4%BD%9C%EF%BC%88%E5%89%8D%E6%8F%90%E6%98%AF%E7%8E%8B%E5%B0%BC%E7%8E%9B%E6%89%A7%E8%A1%8C%E7%9A%84%E8%AF%AD%E5%8F%A5%E6%B2%A1%E6%9C%89%E7%AD%89%E5%BE%85%E8%B6%85%E6%97%B6%EF%BC%89"><span class="toc-number">1.3.1.19.</span> <span class="toc-text">当user表被另外一个事务操作的时候，其他事务里面的写操作是不可以进行的，因为王尼玛–北京start transaction;开启了事务后，王尼玛进行了user表的操作select * from user;这两个事务是串行的，必须等王尼玛这边committed；提交了，张全蛋这边才可以继续操作（前提是王尼玛执行的语句没有等待超时）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%B2%E8%A1%8C%E5%8C%96%E7%9A%84%E9%97%AE%E9%A2%98%EF%BC%9A%E6%80%A7%E8%83%BD%E7%89%B9%E5%B7%AE"><span class="toc-number">1.3.1.20.</span> <span class="toc-text">串行化的问题：性能特差</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%80%A7%E8%83%BD%E6%AF%94%E8%BE%83%EF%BC%9A%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%E8%B6%8A%E9%AB%98%E6%80%A7%E8%83%BD%E8%B6%8A%E5%B7%AE%EF%BC%8Cmysql%E9%BB%98%E8%AE%A4%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%E6%98%AFrepeatable-read"><span class="toc-number">1.3.1.21.</span> <span class="toc-text">性能比较：隔离级别越高性能越差，mysql默认隔离级别是repeatable read;</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#read-uncommtited-gt-read-committed-gt-repeatable-read-gt-serializable-%E2%80%94-%E4%B8%B2%E8%A1%8C%E5%8C%96"><span class="toc-number">1.3.1.22.</span> <span class="toc-text">read uncommtited;&gt;read committed&gt;repeatable read;&gt;serializable;—-串行化</span></a></li></ol></li></ol></li></ol></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
@@ -1785,83 +1785,9 @@ top:50vh;
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 72
+        Total : 76
         </div>
         <!-- search  -->
         
@@ -1871,6 +1797,35 @@ top:50vh;
     
     
     
+    
+    <div class="archive-year"> 2022 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/16</span><a class="archive-post-title" href= "/2022/01/16/Ajax/" >Ajax</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/16</span><a class="archive-post-title" href= "/2022/01/16/Express%E6%A1%86%E6%9E%B6/" >Express框架</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/16</span><a class="archive-post-title" href= "/2022/01/16/node-js/" >node.js</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/16</span><a class="archive-post-title" href= "/2022/01/16/%E5%88%9B%E5%BB%BAUmiJS%E9%A1%B9%E7%9B%AE%E6%97%B6%E6%8A%A5%E9%94%99-%E6%96%87%E4%BB%B6%E5%90%8D%E3%80%81%E7%9B%AE%E5%BD%95%E5%90%8D%E6%88%96%E5%8D%B7%E6%A0%87%E8%AF%AD%E6%B3%95%E4%B8%8D%E6%AD%A3%E7%A1%AE/" >创建UmiJS项目时报错--文件名、目录名或卷标语法不正确</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
     
     <div class="archive-year"> 2021 </div>
     <ul class="year-list">
@@ -1882,22 +1837,22 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/21</span><a class="archive-post-title" href= "/2021/11/21/%E6%95%B0%E6%8D%AE%E5%BA%93-mysql%E6%9F%A5%E8%AF%A2%E7%BB%83%E4%B9%A0/" >数据库-mysql查询练习</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
             <span class="archive-post-date">11/21</span><a class="archive-post-title" href= "/2021/11/21/%E6%95%B0%E6%8D%AE%E5%BA%93-MySQL%E7%9A%84%E4%BA%8B%E5%8A%A1/" >数据库-MySQL的事务</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/14</span><a class="archive-post-title" href= "/2021/11/14/%E6%95%B0%E6%8D%AE%E5%BA%93-%E4%BD%BF%E7%94%A8%E7%BB%88%E7%AB%AF%E6%93%8D%E4%BD%9C%E6%95%B0%E6%8D%AE%E5%BA%93/" >数据库-使用终端操作数据库</a>
+            <span class="archive-post-date">11/21</span><a class="archive-post-title" href= "/2021/11/21/%E6%95%B0%E6%8D%AE%E5%BA%93-mysql%E6%9F%A5%E8%AF%A2%E7%BB%83%E4%B9%A0/" >数据库-mysql查询练习</a>
         </li>
     
     
         <li class="archive-post-item">
             <span class="archive-post-date">11/14</span><a class="archive-post-title" href= "/2021/11/14/%E6%95%B0%E6%8D%AE%E5%BA%93-%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%89%E5%A4%A7%E8%AE%BE%E8%AE%A1%E8%8C%83%E5%BC%8F/" >数据库-数据库三大设计范式</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/14</span><a class="archive-post-title" href= "/2021/11/14/%E6%95%B0%E6%8D%AE%E5%BA%93-%E4%BD%BF%E7%94%A8%E7%BB%88%E7%AB%AF%E6%93%8D%E4%BD%9C%E6%95%B0%E6%8D%AE%E5%BA%93/" >数据库-使用终端操作数据库</a>
         </li>
     
     
@@ -1912,17 +1867,7 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">10/24</span><a class="archive-post-title" href= "/2021/10/24/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E5%9B%BE%EF%BC%88Graph%EF%BC%89-JS/" >数据结构与算法-图（Graph）-JS</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">10/24</span><a class="archive-post-title" href= "/2021/10/24/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98%E6%80%BB%E7%BB%93/" >前端面试题总结</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">10/24</span><a class="archive-post-title" href= "/2021/10/24/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E9%9B%86%E5%90%88%EF%BC%88Set%EF%BC%89-JS/" >数据结构与算法--集合（Set）--JS</a>
+            <span class="archive-post-date">10/24</span><a class="archive-post-title" href= "/2021/10/24/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95--%E9%98%9F%E5%88%97%EF%BC%88Queue%EF%BC%89-JS/" >数据结构与算法--队列（Queue）--JS</a>
         </li>
     
     
@@ -1932,7 +1877,7 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">10/24</span><a class="archive-post-title" href= "/2021/10/24/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95--%E9%98%9F%E5%88%97%EF%BC%88Queue%EF%BC%89-JS/" >数据结构与算法--队列（Queue）--JS</a>
+            <span class="archive-post-date">10/24</span><a class="archive-post-title" href= "/2021/10/24/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E5%9B%BE%EF%BC%88Graph%EF%BC%89-JS/" >数据结构与算法-图（Graph）-JS</a>
         </li>
     
     
@@ -1942,7 +1887,17 @@ top:50vh;
     
     
         <li class="archive-post-item">
+            <span class="archive-post-date">10/24</span><a class="archive-post-title" href= "/2021/10/24/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98%E6%80%BB%E7%BB%93/" >前端面试题总结</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
             <span class="archive-post-date">10/24</span><a class="archive-post-title" href= "/2021/10/24/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E6%A0%91%EF%BC%88Tree%EF%BC%89-JS/" >数据结构与算法-树（Tree）-JS</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/24</span><a class="archive-post-title" href= "/2021/10/24/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E9%9B%86%E5%90%88%EF%BC%88Set%EF%BC%89-JS/" >数据结构与算法--集合（Set）--JS</a>
         </li>
     
     
@@ -1957,12 +1912,12 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">06/08</span><a class="archive-post-title" href= "/2021/06/08/%E4%BA%8C%E4%B8%89%E9%9D%A2-%E6%B8%B2%E6%9F%93%E6%9C%BA%E5%88%B6%E7%B1%BB/" >二三面_渲染机制类</a>
+            <span class="archive-post-date">06/08</span><a class="archive-post-title" href= "/2021/06/08/%E4%B8%89%E5%9B%9B%E9%9D%A2-%E4%B8%9A%E5%8A%A1%E8%83%BD%E5%8A%9B%E5%9B%A2%E9%98%9F%E5%8D%8F%E4%BD%9C%E8%83%BD%E5%8A%9B%E4%B8%8E%E5%B8%A6%E4%BA%BA%E8%83%BD%E5%8A%9B/" >三四面_业务能力团队协作能力与带人能力</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">06/08</span><a class="archive-post-title" href= "/2021/06/08/%E7%BB%88%E9%9D%A2%EF%BC%88HR%E9%9D%A2%EF%BC%89-%E8%81%8C%E4%B8%9A%E7%AB%9E%E4%BA%89%E5%8A%9B%E5%92%8C%E8%81%8C%E4%B8%9A%E8%A7%84%E5%88%92/" >终面（HR面）_职业竞争力和职业规划</a>
+            <span class="archive-post-date">06/08</span><a class="archive-post-title" href= "/2021/06/08/%E4%BA%8C%E4%B8%89%E9%9D%A2-%E6%B8%B2%E6%9F%93%E6%9C%BA%E5%88%B6%E7%B1%BB/" >二三面_渲染机制类</a>
         </li>
     
     
@@ -1972,12 +1927,17 @@ top:50vh;
     
     
         <li class="archive-post-item">
+            <span class="archive-post-date">06/08</span><a class="archive-post-title" href= "/2021/06/08/%E4%BA%8C%E4%B8%89%E9%9D%A2-%E9%94%99%E8%AF%AF%E7%9B%91%E6%8E%A7%E7%B1%BB/" >二三面_错误监控类</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
             <span class="archive-post-date">06/08</span><a class="archive-post-title" href= "/2021/06/08/%E4%BA%8C%E4%B8%89%E9%9D%A2-%E9%A1%B5%E9%9D%A2%E6%80%A7%E8%83%BD/" >二三面_页面性能</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">06/08</span><a class="archive-post-title" href= "/2021/06/08/%E4%BA%8C%E4%B8%89%E9%9D%A2-%E9%94%99%E8%AF%AF%E7%9B%91%E6%8E%A7%E7%B1%BB/" >二三面_错误监控类</a>
+            <span class="archive-post-date">06/08</span><a class="archive-post-title" href= "/2021/06/08/%E7%BB%88%E9%9D%A2%EF%BC%88HR%E9%9D%A2%EF%BC%89-%E8%81%8C%E4%B8%9A%E7%AB%9E%E4%BA%89%E5%8A%9B%E5%92%8C%E8%81%8C%E4%B8%9A%E8%A7%84%E5%88%92/" >终面（HR面）_职业竞争力和职业规划</a>
         </li>
     
     
@@ -1987,12 +1947,27 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">06/08</span><a class="archive-post-title" href= "/2021/06/08/%E4%B8%89%E5%9B%9B%E9%9D%A2-%E4%B8%9A%E5%8A%A1%E8%83%BD%E5%8A%9B%E5%9B%A2%E9%98%9F%E5%8D%8F%E4%BD%9C%E8%83%BD%E5%8A%9B%E4%B8%8E%E5%B8%A6%E4%BA%BA%E8%83%BD%E5%8A%9B/" >三四面_业务能力团队协作能力与带人能力</a>
+            <span class="archive-post-date">06/07</span><a class="archive-post-title" href= "/2021/06/07/%E7%AE%97%E6%B3%95%E9%A2%98%E6%80%BB%E7%BB%93/" >算法题总结</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">06/07</span><a class="archive-post-title" href= "/2021/06/07/%E7%AE%97%E6%B3%95%E9%A2%98%E6%80%BB%E7%BB%93/" >算法题总结</a>
+            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/%E4%B8%80%E4%BA%8C%E9%9D%A2-%E5%8E%9F%E5%9E%8B%E9%93%BE/" >一二面_原型链</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/%E4%B8%80%E4%BA%8C%E9%9D%A2-%E5%AE%89%E5%85%A8%E7%B1%BB/" >一二面_安全类</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/%E4%B8%80%E4%BA%8C%E9%9D%A2-%E7%AE%97%E6%B3%95%E7%B1%BB/" >一二面_算法类</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/%E4%B8%80%E4%BA%8C%E9%9D%A2-%E9%80%9A%E8%AE%AF%E7%B1%BB/" >一二面_通讯类</a>
         </li>
     
     
@@ -2007,32 +1982,7 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/%E4%B8%80%E4%BA%8C%E9%9D%A2-%E7%AE%97%E6%B3%95%E7%B1%BB/" >一二面_算法类</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/%E4%B8%80%E4%BA%8C%E9%9D%A2-%E5%AE%89%E5%85%A8%E7%B1%BB/" >一二面_安全类</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/%E4%B8%80%E4%BA%8C%E9%9D%A2-%E5%8E%9F%E5%9E%8B%E9%93%BE/" >一二面_原型链</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/%E4%B8%80%E4%BA%8C%E9%9D%A2-%E9%80%9A%E8%AE%AF%E7%B1%BB/" >一二面_通讯类</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/%E4%B8%80%E4%BA%8C%E9%9D%A2-%E9%A1%B5%E9%9D%A2%E5%B8%83%E5%B1%80/" >一二面_页面布局</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/%E4%B8%80%E4%BA%8C%E9%9D%A2-HTTP%E5%8D%8F%E8%AE%AE%E7%B1%BB/" >一二面_HTTP协议类</a>
+            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/%E4%B8%80%E4%BA%8C%E9%9D%A2-CSS%E7%9B%92%E6%A8%A1%E5%9E%8B/" >一二面_CSS盒模型</a>
         </li>
     
     
@@ -2042,12 +1992,17 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/%E4%B8%80%E4%BA%8C%E9%9D%A2-CSS%E7%9B%92%E6%A8%A1%E5%9E%8B/" >一二面_CSS盒模型</a>
+            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/%E4%B8%80%E4%BA%8C%E9%9D%A2-HTTP%E5%8D%8F%E8%AE%AE%E7%B1%BB/" >一二面_HTTP协议类</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">02/20</span><a class="archive-post-title" href= "/2021/02/20/%E4%BD%BF%E7%94%A8styled-components%E6%8A%A5%E9%94%99-Attempted-import-error-injectGlobal-is-not-exported-from-styled-components/" >使用styled-components报错 Attempted import error: injectGlobal is not exported from styled-components</a>
+            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/%E4%B8%80%E4%BA%8C%E9%9D%A2-%E9%A1%B5%E9%9D%A2%E5%B8%83%E5%B1%80/" >一二面_页面布局</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/20</span><a class="archive-post-title" href= "/2021/02/20/VUE%E9%A1%B9%E7%9B%AE%E6%8C%89%E9%9C%80%E5%BC%95%E5%85%A5ELEMENT-UI%EF%BC%8C%E4%BF%AE%E6%94%B9-BABELRC%E6%96%87%E4%BB%B6%E4%B9%8B%E5%90%8E%E6%8A%A5%E9%94%99/" >VUE项目按需引入ELEMENT-UI，修改.BABELRC文件之后报错</a>
         </li>
     
     
@@ -2062,12 +2017,12 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">02/20</span><a class="archive-post-title" href= "/2021/02/20/VUE%E9%A1%B9%E7%9B%AE%E6%8C%89%E9%9C%80%E5%BC%95%E5%85%A5ELEMENT-UI%EF%BC%8C%E4%BF%AE%E6%94%B9-BABELRC%E6%96%87%E4%BB%B6%E4%B9%8B%E5%90%8E%E6%8A%A5%E9%94%99/" >VUE项目按需引入ELEMENT-UI，修改.BABELRC文件之后报错</a>
+            <span class="archive-post-date">02/20</span><a class="archive-post-title" href= "/2021/02/20/yarn-command-not-found/" >yarn: command not found</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">02/20</span><a class="archive-post-title" href= "/2021/02/20/yarn-command-not-found/" >yarn: command not found</a>
+            <span class="archive-post-date">02/20</span><a class="archive-post-title" href= "/2021/02/20/%E4%BD%BF%E7%94%A8styled-components%E6%8A%A5%E9%94%99-Attempted-import-error-injectGlobal-is-not-exported-from-styled-components/" >使用styled-components报错 Attempted import error: injectGlobal is not exported from styled-components</a>
         </li>
     
     
@@ -2082,17 +2037,12 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">02/09</span><a class="archive-post-title" href= "/2021/02/09/%E4%BD%BF%E7%94%A8swiper%E6%8F%92%E4%BB%B6%E6%97%B6%EF%BC%8C%E6%8A%A5%E9%94%99did-you-register-the-component-correctly-For-recursive-components-make-sure-to-provide-the-name-option/" >使用swiper插件时，报错did you register the component correctly? For recursive components, make sure to provide the name option</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
             <span class="archive-post-date">02/09</span><a class="archive-post-title" href= "/2021/02/09/%E4%BD%BF%E7%94%A8swiper%E6%8F%92%E4%BB%B6%E6%97%B6%EF%BC%8C%E6%8A%A5%E9%94%99Can-t-resolve-swiper-dist-css-swiper-css-in/" >使用swiper插件时，报错Can't resolve 'swiper/dist/css/swiper.css' in</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">02/09</span><a class="archive-post-title" href= "/2021/02/09/Vue%E9%A1%B9%E7%9B%AE%E6%B5%8F%E8%A7%88%E5%99%A8%E5%86%85Console%E4%B8%AD%E6%98%BE%E7%A4%BA-HMR-Waiting-for-update-signal-from-WDS%E2%80%A6%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" >Vue项目浏览器内Console中显示[HMR] Waiting for update signal from WDS…的解决方案</a>
+            <span class="archive-post-date">02/09</span><a class="archive-post-title" href= "/2021/02/09/%E4%BD%BF%E7%94%A8swiper%E6%8F%92%E4%BB%B6%E6%97%B6%EF%BC%8C%E6%8A%A5%E9%94%99did-you-register-the-component-correctly-For-recursive-components-make-sure-to-provide-the-name-option/" >使用swiper插件时，报错did you register the component correctly? For recursive components, make sure to provide the name option</a>
         </li>
     
     
@@ -2102,12 +2052,7 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">02/05</span><a class="archive-post-title" href= "/2021/02/05/%E8%BF%90%E8%A1%8Cvue%E9%A1%B9%E7%9B%AE%E6%97%B6%E6%8A%A5%E9%94%99The-template-root-requires-exactly-one-element/" >运行vue项目时报错The template root requires exactly one element</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">02/05</span><a class="archive-post-title" href= "/2021/02/05/vue%E9%A1%B9%E7%9B%AE%E4%B8%AD%E9%83%A8%E5%88%86%E5%8A%9F%E8%83%BD%E5%9C%A8vscode%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/" >vue项目中部分功能在vscode中的使用方法</a>
+            <span class="archive-post-date">02/09</span><a class="archive-post-title" href= "/2021/02/09/Vue%E9%A1%B9%E7%9B%AE%E6%B5%8F%E8%A7%88%E5%99%A8%E5%86%85Console%E4%B8%AD%E6%98%BE%E7%A4%BA-HMR-Waiting-for-update-signal-from-WDS%E2%80%A6%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" >Vue项目浏览器内Console中显示[HMR] Waiting for update signal from WDS…的解决方案</a>
         </li>
     
     
@@ -2117,17 +2062,27 @@ top:50vh;
     
     
         <li class="archive-post-item">
+            <span class="archive-post-date">02/05</span><a class="archive-post-title" href= "/2021/02/05/vue%E9%A1%B9%E7%9B%AE%E4%B8%AD%E9%83%A8%E5%88%86%E5%8A%9F%E8%83%BD%E5%9C%A8vscode%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/" >vue项目中部分功能在vscode中的使用方法</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/05</span><a class="archive-post-title" href= "/2021/02/05/%E8%BF%90%E8%A1%8Cvue%E9%A1%B9%E7%9B%AE%E6%97%B6%E6%8A%A5%E9%94%99The-template-root-requires-exactly-one-element/" >运行vue项目时报错The template root requires exactly one element</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
             <span class="archive-post-date">02/05</span><a class="archive-post-title" href= "/2021/02/05/vscode%E7%9A%84%E4%BB%A3%E7%A0%81%E4%B8%8A%E4%BC%A0%E5%88%B0%E6%85%95%E8%AF%BE%E7%BD%91%E4%BB%93%E5%BA%93%E6%97%B6%E4%B8%8A%E4%BC%A0%E4%B8%8D%E6%88%90%E5%8A%9F-%E6%85%95%E8%AF%BE%E7%BD%91%E9%AB%98%E4%BB%BF%E5%B0%8F%E7%B1%B3%E5%95%86%E5%9F%8E%E9%A1%B9%E7%9B%AE/" >vscode的代码上传到慕课网仓库时上传不成功--慕课网高仿小米商城项目</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">02/04</span><a class="archive-post-title" href= "/2021/02/04/vscode%E8%BD%AF%E4%BB%B6%E4%B8%AD%E7%9A%84html%E6%96%87%E4%BB%B6%E7%9A%84%E5%B8%B8%E7%94%A8%E7%9A%84%E5%BF%AB%E6%8D%B7%E6%96%B9%E5%BC%8F/" >vscode软件中的html文件的常用的快捷方式</a>
+            <span class="archive-post-date">02/04</span><a class="archive-post-title" href= "/2021/02/04/vscode%E3%80%81sublime%E6%80%8E%E4%B9%88%E5%9C%A8%E7%A9%BA%E7%99%BD%E8%84%9A%E6%9C%AC%E4%B8%AD%E5%BF%AB%E9%80%9F%E7%94%9F%E6%88%90html5%E6%A0%87%E5%87%86%E6%A8%A1%E6%9D%BF%E6%A0%BC%E5%BC%8F/" >vscode、sublime怎么在空白脚本中快速生成html5标准模板格式</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">02/04</span><a class="archive-post-title" href= "/2021/02/04/vscode%E3%80%81sublime%E6%80%8E%E4%B9%88%E5%9C%A8%E7%A9%BA%E7%99%BD%E8%84%9A%E6%9C%AC%E4%B8%AD%E5%BF%AB%E9%80%9F%E7%94%9F%E6%88%90html5%E6%A0%87%E5%87%86%E6%A8%A1%E6%9D%BF%E6%A0%BC%E5%BC%8F/" >vscode、sublime怎么在空白脚本中快速生成html5标准模板格式</a>
+            <span class="archive-post-date">02/04</span><a class="archive-post-title" href= "/2021/02/04/vscode%E8%BD%AF%E4%BB%B6%E4%B8%AD%E7%9A%84html%E6%96%87%E4%BB%B6%E7%9A%84%E5%B8%B8%E7%94%A8%E7%9A%84%E5%BF%AB%E6%8D%B7%E6%96%B9%E5%BC%8F/" >vscode软件中的html文件的常用的快捷方式</a>
         </li>
     
     
@@ -2147,12 +2102,12 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">01/04</span><a class="archive-post-title" href= "/2021/01/04/js%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%8E%E6%95%B0%E5%AD%97%E7%9B%B8%E5%8A%A0%E5%87%8F%E4%B9%98%E9%99%A4/" >js字符串与数字相加减</a>
+            <span class="archive-post-date">01/04</span><a class="archive-post-title" href= "/2021/01/04/CSS%E4%B8%AD%E6%96%87%E5%AD%97%E5%9C%A8%E6%B0%B4%E5%B9%B3%E5%92%8C%E7%AB%96%E7%9B%B4%E6%96%B9%E5%90%91%E4%B8%8A%E9%87%8D%E5%8F%A0/" >CSS中文字在水平和竖直方向上重叠</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">01/04</span><a class="archive-post-title" href= "/2021/01/04/CSS%E4%B8%AD%E6%96%87%E5%AD%97%E5%9C%A8%E6%B0%B4%E5%B9%B3%E5%92%8C%E7%AB%96%E7%9B%B4%E6%96%B9%E5%90%91%E4%B8%8A%E9%87%8D%E5%8F%A0/" >CSS中文字在水平和竖直方向上重叠</a>
+            <span class="archive-post-date">01/04</span><a class="archive-post-title" href= "/2021/01/04/js%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%8E%E6%95%B0%E5%AD%97%E7%9B%B8%E5%8A%A0%E5%87%8F%E4%B9%98%E9%99%A4/" >js字符串与数字相加减</a>
         </li>
     
     
@@ -2186,35 +2141,37 @@ top:50vh;
     
     
         <li class="archive-post-item">
+            <span class="archive-post-date">12/15</span><a class="archive-post-title" href= "/2020/12/15/JS%E4%B8%AD%E7%9A%84%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%B5%85%E6%B5%85%E4%BA%86%E8%A7%A3/" >JS中的面向对象浅浅了解</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/13</span><a class="archive-post-title" href= "/2020/12/13/JavaScript%E7%9F%A5%E8%AF%86%E7%82%B9%E6%89%A9%E5%B1%95/" >JavaScript知识点扩展</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/06</span><a class="archive-post-title" href= "/2020/12/06/ES6%E6%80%BB%E7%BB%93%E6%95%B4%E7%90%86/" >ES6总结整理</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/08</span><a class="archive-post-title" href= "/2020/11/08/Sass%E6%80%BB%E7%BB%93/" >Sass总结</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/28</span><a class="archive-post-title" href= "/2020/09/28/hexo%E5%8D%9A%E5%AE%A2%E4%B8%AD%E6%8F%92%E5%85%A5%E7%9A%84%E5%9B%BE%E7%89%87%E4%B8%8D%E6%98%BE%E7%A4%BA/" >hexo博客中插入的图片不显示</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
             <span class="archive-post-date">09/27</span><a class="archive-post-title" href= "/2020/09/27/JavaScript%E5%8E%9F%E5%9E%8B%E9%93%BE/" >JavaScript原型链</a>
         </li>
     
     
-    
-    
-    
-        </ul>
-    
-    <div class="archive-year"> Invalid date </div>
-    <ul class="year-list">
-    
-    
         <li class="archive-post-item">
-            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/09/27/hexo%E4%B8%BB%E9%A2%98%E4%BF%AE%E6%94%B9/" >hexo主题修改</a>
-        </li>
-    
-    
-    
-    
-    
-        </ul>
-    
-    <div class="archive-year"> 2020 </div>
-    <ul class="year-list">
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">12/15</span><a class="archive-post-title" href= "/2020/12/15/JS%E4%B8%AD%E7%9A%84%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%B5%85%E6%B5%85%E4%BA%86%E8%A7%A3/" >JS中的面向对象浅浅了解</a>
+            <span class="archive-post-date">09/27</span><a class="archive-post-title" href= "/2020/09/27/HEXO%E5%8D%9A%E5%AE%A2%E7%9A%84%E6%90%AD%E5%BB%BA%E5%8F%8A%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%EF%BC%88%E4%B8%80%EF%BC%89/" >HEXO博客的搭建及环境配置（一）</a>
         </li>
     
     
@@ -2242,37 +2199,35 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">12/13</span><a class="archive-post-title" href= "/2020/12/13/JavaScript%E7%9F%A5%E8%AF%86%E7%82%B9%E6%89%A9%E5%B1%95/" >JavaScript知识点扩展</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">12/06</span><a class="archive-post-title" href= "/2020/12/06/ES6%E6%80%BB%E7%BB%93%E6%95%B4%E7%90%86/" >ES6总结整理</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/08</span><a class="archive-post-title" href= "/2020/11/08/Sass%E6%80%BB%E7%BB%93/" >Sass总结</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">09/28</span><a class="archive-post-title" href= "/2020/09/28/hexo%E5%8D%9A%E5%AE%A2%E4%B8%AD%E6%8F%92%E5%85%A5%E7%9A%84%E5%9B%BE%E7%89%87%E4%B8%8D%E6%98%BE%E7%A4%BA/" >hexo博客中插入的图片不显示</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">09/27</span><a class="archive-post-title" href= "/2020/09/27/hexo%E7%82%B9%E5%87%BB%E5%8D%9A%E5%AE%A2%E5%90%8E%E6%A0%87%E9%A2%98%E4%B8%8D%E6%98%BE%E7%A4%BA/" >hexo点击博客后标题不显示</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
             <span class="archive-post-date">09/27</span><a class="archive-post-title" href= "/2020/09/27/Typora%E3%80%81Makedown/" >Typora、Makedown</a>
         </li>
     
     
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> Invalid date </div>
+    <ul class="year-list">
+    
+    
         <li class="archive-post-item">
-            <span class="archive-post-date">09/27</span><a class="archive-post-title" href= "/2020/09/27/HEXO%E5%8D%9A%E5%AE%A2%E7%9A%84%E6%90%AD%E5%BB%BA%E5%8F%8A%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%EF%BC%88%E4%B8%80%EF%BC%89/" >HEXO博客的搭建及环境配置（一）</a>
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/09/27/hexo%E4%B8%BB%E9%A2%98%E4%BF%AE%E6%94%B9/" >hexo主题修改</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2020 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/27</span><a class="archive-post-title" href= "/2020/09/27/hexo%E7%82%B9%E5%87%BB%E5%8D%9A%E5%AE%A2%E5%90%8E%E6%A0%87%E9%A2%98%E4%B8%8D%E6%98%BE%E7%A4%BA/" >hexo点击博客后标题不显示</a>
         </li>
     
     

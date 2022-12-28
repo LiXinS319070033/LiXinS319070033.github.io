@@ -28,7 +28,7 @@
 <meta property="og:description" content="JavaScript知识点扩展作用域作用域作用： 1.定义：变量 函数 或者成员在整个程序内可以被访问的范围； 2.也可用于信息隐藏 块作用域：{…}包含的代码就是一个块作用域，JS没有块级作用域； 动态作用域：函数内的成员是否可以被访问只有在运行的时候才能确定 1234567891011121314function f()&amp;#123;	alert(x);&amp;#125;function f1()&amp;#">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-12-13T13:26:12.000Z">
-<meta property="article:modified_time" content="2021-03-10T14:43:22.610Z">
+<meta property="article:modified_time" content="2022-04-11T12:57:37.928Z">
 <meta property="article:author" content="Nice">
 <meta name="twitter:card" content="summary">
     <meta http-equiv="Cache-control" content="no-cache">
@@ -457,7 +457,7 @@ height:50vh;
 
 <h2 id="伪类"><a href="#伪类" class="headerlink" title="伪类"></a>伪类</h2><p>对象的_ _ <em>proto</em> _ _与函数无关，直接指向函数的prototype</p>
 <p>//函数有prototype属性，对象有_ _ <em>proto</em> _ <em>属性，函数也是对象，所以函数也有</em> _ <em>proto</em> _ _属性</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">function Person()&#123;</span><br><span class="line">	var age &#x3D; 30;</span><br><span class="line">	this.age &#x3D; 22;</span><br><span class="line">	this.name &#x3D; “nice”;</span><br><span class="line">&#125;</span><br><span class="line">Person.prototype.headCount &#x3D; 1;</span><br><span class="line">var p &#x3D; new Person();</span><br><span class="line">		&#x2F;&#x2F;此时Person()相当于伪类，对象p内部有age和name属性，p也可通过__proto__指向</span><br><span class="line">		&#x2F;&#x2F;Person.protptype,p完全与Person()无关了。</span><br><span class="line">Person.prototype &#x3D; &#123;xx:”xx”&#125;;&#x2F;&#x2F;将Person的prototype完全改写</span><br><span class="line">console.log(p.xx);&#x2F;&#x2F;undefined&#x2F;&#x2F;此时p已经不能取到新的Person.prototype了</span><br><span class="line">console.log(p.headcount);&#x2F;&#x2F;1&#x2F;&#x2F;但是原来的p.__proto__指向的Person.prototype还存在着</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">function Person()&#123;</span><br><span class="line">	var age &#x3D; 30;</span><br><span class="line">	this.age &#x3D; 22;</span><br><span class="line">	this.name &#x3D; “nice”;</span><br><span class="line">&#125;</span><br><span class="line">Person.prototype.headCount &#x3D; 1;</span><br><span class="line">var p &#x3D; new Person();</span><br><span class="line">		&#x2F;&#x2F;此时Person()相当于伪类，对象p内部有age和name属性，p也可通过__proto__指向Person.protptype,p完全与Person()无关了。</span><br><span class="line">Person.prototype &#x3D; &#123;xx:”xx”&#125;;&#x2F;&#x2F;将Person的prototype完全改写</span><br><span class="line">console.log(p.xx);&#x2F;&#x2F;undefined&#x2F;&#x2F;此时p已经不能取到新的Person.prototype了</span><br><span class="line">console.log(p.headcount);&#x2F;&#x2F;1&#x2F;&#x2F;但是原来的p.__proto__指向的Person.prototype还存在着</span><br></pre></td></tr></table></figure>
 
 <h1 id="this"><a href="#this" class="headerlink" title="this"></a>this</h1><p>this永远指向对象</p>
 <p>this可以直接写在全局里面，并且此时永远指向window对象；this也可以写在函数里面，此时氛围三种情况：</p>
@@ -504,7 +504,7 @@ height:50vh;
 
 <p>上面的代码有系统自带的Object.create()</p>
 <p>还可以进行属性的增强，例如</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var c2 &#x3D; Object.create(p,&#123;age:&#123;value:20&#125;,salary:&#123;value:1000000&#125;&#125;);&#x2F;&#x2F;p是父类继承的，</span><br><span class="line">																  &#x2F;&#x2F;后面是子类增强的</span><br><span class="line">console.log(name);&#x2F;&#x2F;“cj”</span><br><span class="line">console.log(age);&#x2F;&#x2F;20</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var c2 &#x3D; Object.create(p,&#123;age:&#123;value:20&#125;,salary:&#123;value:1000000&#125;&#125;);&#x2F;&#x2F;p是父类继承的，</span><br><span class="line">																  &#x2F;&#x2F;后面是子类增强的</span><br><span class="line">console.log(c2.name);&#x2F;&#x2F;“cj”</span><br><span class="line">console.log(c2.value);&#x2F;&#x2F;20</span><br></pre></td></tr></table></figure>
 
 <h2 id="再谈instanceof"><a href="#再谈instanceof" class="headerlink" title="再谈instanceof"></a>再谈instanceof</h2><p>左边是对象，右边是函数</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var f &#x3D; new F();</span><br><span class="line">console.log(f instanceof F);&#x2F;&#x2F;true&#x2F;&#x2F;判断时相当于判断是否f.constructor &#x3D;&#x3D; F，是对的</span><br><span class="line">console.log(f instanceof Object);&#x2F;&#x2F;true</span><br><span class="line">&#x2F;&#x2F;很显然像上面一样判断是否f.constructor &#x3D;&#x3D; Object不成立</span><br><span class="line">&#x2F;&#x2F;但是上面的那个成立，所以还可以进一步判断</span><br><span class="line">&#x2F;&#x2F;是否F.prototype.__proto__&#x3D;&#x3D; Object.prototype,成立</span><br></pre></td></tr></table></figure>
@@ -530,7 +530,7 @@ height:50vh;
 <p>//举例</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">function Person()&#123;&#125;&#x2F;&#x2F;创建父类</span><br><span class="line">Person.prototype.headCount &#x3D; 1;&#x2F;&#x2F;添加父类属性</span><br><span class="line">Person.prototype.eat &#x3D; function()&#123;&#x2F;&#x2F;添加父类方法</span><br><span class="line">	console.log(”eating...”);</span><br><span class="line">&#125;</span><br><span class="line">function Programmer()&#123;&#125;&#x2F;&#x2F;创建子类</span><br><span class="line">Programmer.prototype &#x3D; Object.create(Person.prototype);&#x2F;&#x2F;继承a</span><br><span class="line">Programmer.prototype.constructor &#x3D; Programmer;&#x2F;&#x2F;将子类原型的constructor修正回来（本能）a</span><br><span class="line">Programmer.prototype.language &#x3D; “Javascript”;&#x2F;&#x2F;添加子类属性</span><br><span class="line">Programmer.prototype.work &#x3D; function()&#123;&#x2F;&#x2F;添加子类方法</span><br><span class="line">	console.log(”i am writing code in” + this.language);</span><br><span class="line">&#125;</span><br><span class="line">var js &#x3D; new Programmer();</span><br><span class="line">console.log(js.eat());&#x2F;&#x2F;eating...</span><br><span class="line">console.log(js.language);&#x2F;&#x2F;“Javascript”</span><br><span class="line">js.language &#x3D; “JS”;</span><br><span class="line">console.log(js.language);&#x2F;&#x2F;“JS”</span><br><span class="line">console.log(js.work());&#x2F;&#x2F;i am writing code in JS</span><br></pre></td></tr></table></figure>
 
-<p>还可以将上面即成的代码（注释里有a）改为下面的代码</p>
+<p>还可以将上面继承的代码（注释里有a）改为下面的代码</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">createEx(Programmer, Person);</span><br><span class="line">......</span><br><span class="line">function createEx(Child, Parent)&#123;</span><br><span class="line">	function F()&#123;&#125;;</span><br><span class="line">	F.prototype &#x3D; P.prototype;</span><br><span class="line">	Child.prototype &#x3D; new F();</span><br><span class="line">	Child.prototype.constructor &#x3D; Child;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">function Person(name, age)&#123;&#x2F;&#x2F;创建父类</span><br><span class="line">	this.name &#x3D; name;&#x2F;&#x2F;父类有实例级别的成员，才写aaaa行代码</span><br><span class="line">	this.age &#x3D; age;</span><br><span class="line">&#125;</span><br><span class="line">Person.prototype.headCount &#x3D; 1;&#x2F;&#x2F;添加父类属性</span><br><span class="line">Person.prototype.eat &#x3D; function()&#123;&#x2F;&#x2F;添加父类方法</span><br><span class="line">	console.log(”eating...”);</span><br><span class="line">&#125;</span><br><span class="line">function Programmer(name, age, title)&#123;&#x2F;&#x2F;创建子类</span><br><span class="line">	Person.apply(this, arguments);&#x2F;&#x2F;把父类实例级别的成员继承了过来aaaa</span><br><span class="line">&#125;</span><br><span class="line">createEx(Programmer, Person);</span><br><span class="line">Programmer.prototype.language &#x3D; “Javascript”;&#x2F;&#x2F;添加子类属性</span><br><span class="line">Programmer.prototype.work &#x3D; function()&#123;&#x2F;&#x2F;添加子类方法</span><br><span class="line">	console.log(”i am writing code in” + this.language);</span><br><span class="line">&#125;</span><br><span class="line">function createEx(Child, Parent)&#123;</span><br><span class="line">	function F()&#123;&#125;;</span><br><span class="line">	F.prototype &#x3D; P.prototype;</span><br><span class="line">	Child.prototype &#x3D; new F();</span><br><span class="line">	Child.prototype.constructor &#x3D; Child;</span><br><span class="line">&#125;</span><br><span class="line">var person &#x3D; new Person(“cj”, 20);</span><br><span class="line">console.log(person.name);&#x2F;&#x2F;”cj”</span><br><span class="line">var p &#x3D; new Programmer(”nice”, 22, “coder”);</span><br><span class="line">console.log(p.name);&#x2F;&#x2F;“nice”</span><br><span class="line">person.name &#x3D; “haha”</span><br><span class="line">console.log(”p.name”);&#x2F;&#x2F;“nice”&#x2F;&#x2F;没有影响</span><br></pre></td></tr></table></figure>
@@ -541,7 +541,7 @@ height:50vh;
 <h2 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h2><p>拥有</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function F()&#123;&#125;;</span><br><span class="line">var f &#x3D; new F();</span><br><span class="line">f.name &#x3D; “cj”;</span><br><span class="line">console.log(f.hasOwnProperty(”name”));&#x2F;&#x2F;true&#x2F;&#x2F;是否有</span><br><span class="line">F.prototype.age &#x3D; 22;</span><br><span class="line">console.log(f.hasOwnProperty(”age”));&#x2F;&#x2F;false&#x2F;&#x2F;f对象和原型对象是两个对象，不存在拥有</span><br><span class="line">console.log(Object.hasOwnProperty(f, ”name”));&#x2F;&#x2F;false</span><br><span class="line">&#x2F;&#x2F;不要这么用，因为是对象级别的hasOwnPorperty</span><br><span class="line">console.log(F.prototype.isPrototypeOf(f));&#x2F;&#x2F;true&#x2F;&#x2F;是否是...的原型</span><br><span class="line">console.log(Object.getPrototypeOf(f));&#x2F;&#x2F;F&#123;&#125;&#x2F;&#x2F;找f的原型</span><br></pre></td></tr></table></figure>
 
-<h3 id="方法重载"><a href="#方法重载" class="headerlink" title="方法重载"></a>方法重载</h3><p>编译时的多态，典型的代表是方法重载（大概意思就是调用一个参数时，就是一个参数的//A方法，调用两个参数时就是两个参数的A方法），编译时就确定了</p>
+<h3 id="方法重载"><a href="#方法重载" class="headerlink" title="方法重载"></a>方法重载</h3><p>编译时的多态，典型的代表是方法重载（大概意思就是调用一个参数时，就是一个参数的A方法，调用两个参数时就是两个参数的A方法），编译时就确定了</p>
 <p>JS中不允许同名的方法，后者会覆盖前者</p>
 <p>arguments，实参的个数，在函数里才会有这个对象，是类似数组的对象</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">fucntion demo(a, b)&#123;</span><br><span class="line">	console.log(demo.length);&#x2F;&#x2F;形参的个数</span><br><span class="line">	console.log(arguments.length);&#x2F;&#x2F;实参的个数</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -559,7 +559,7 @@ height:50vh;
 <p>下面的例子算一种</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">function demo(o)&#123;</span><br><span class="line">	o.run();</span><br><span class="line">&#125;</span><br><span class="line">var o &#x3D; &#123;run:function()&#123;</span><br><span class="line">	console.log(”o is running...”);</span><br><span class="line">&#125;&#125;;</span><br><span class="line">demo(o);&#x2F;&#x2F;o is running...</span><br><span class="line">var p &#x3D; &#123;run:function()&#123;</span><br><span class="line">console.log(”p is running...”);</span><br><span class="line">&#125;&#125;;</span><br><span class="line">demo(p);&#x2F;&#x2F;p is running...</span><br><span class="line">&#x2F;&#x2F;依据原型链的特点，在实例上重写一个与构造函数一样的方法，实例使用自己的方法</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">var f &#x3D; new F();</span><br><span class="line">F.prototype.run &#x3D; function()&#123;</span><br><span class="line">	coslole.log(”FFF”);</span><br><span class="line">&#125;</span><br><span class="line">f.run();&#x2F;&#x2F;FFF</span><br><span class="line">f.run &#x3D; function()&#123;&#x2F;&#x2F;重写</span><br><span class="line">	console.log(”fff”);</span><br><span class="line">&#125;</span><br><span class="line">f.run();&#x2F;&#x2F;fff</span><br><span class="line">		&#x2F;&#x2F;重写的过程中还可以调用父的东西</span><br><span class="line">f.run &#x3D; function()&#123;</span><br><span class="line">	console.log(”ffff”);</span><br><span class="line">	F.prototype.run();</span><br><span class="line">&#125;</span><br><span class="line">f.run();&#x2F;&#x2F;ffff</span><br><span class="line">		&#x2F;&#x2F;FFF</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">var f &#x3D; new F();</span><br><span class="line">F.prototype.run &#x3D; function()&#123;</span><br><span class="line">	coslole.log(”FFF”);</span><br><span class="line">&#125;</span><br><span class="line">f.run();&#x2F;&#x2F;FFF</span><br><span class="line">f.run &#x3D; function()&#123;&#x2F;&#x2F;重写</span><br><span class="line">	console.log(”fff”);</span><br><span class="line">&#125;</span><br><span class="line">f.run();&#x2F;&#x2F;fff</span><br><span class="line">&#x2F;&#x2F;重写的过程中还可以调用父的东西</span><br><span class="line">f.run &#x3D; function()&#123;</span><br><span class="line">	console.log(”ffff”);</span><br><span class="line">	F.prototype.run();</span><br><span class="line">&#125;</span><br><span class="line">f.run();&#x2F;&#x2F;ffff</span><br><span class="line">		&#x2F;&#x2F;FFF</span><br></pre></td></tr></table></figure>
 
 <p>其他情况</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">function Parent()&#123;</span><br><span class="line">	this.run &#x3D; function()&#123;</span><br><span class="line">		console.log(”parent is running”);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">function Child()&#123;</span><br><span class="line">	Parent.call(this);&#x2F;&#x2F;继承父类</span><br><span class="line">	var parentRun &#x3D; this.run;&#x2F;&#x2F;保留父的方法的引用，看看以后是否需要调用父的方法</span><br><span class="line">	this.run &#x3D; function()&#123;&#x2F;&#x2F;子类重写run方法</span><br><span class="line">		console.log(”child is running”);</span><br><span class="line">		parentRun();&#x2F;&#x2F;调用父刚刚记录的东西</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">var c &#x3D; new Child();</span><br><span class="line">c.run();&#x2F;&#x2F;child is running</span><br><span class="line">		&#x2F;&#x2F;parent is running</span><br></pre></td></tr></table></figure>
@@ -575,7 +575,7 @@ height:50vh;
             <p>Author：<a href="https://lixins319070033.github.io">Nice</a>
             <p>原文链接：<a href="https://lixins319070033.github.io/2020/12/13/JavaScript%E7%9F%A5%E8%AF%86%E7%82%B9%E6%89%A9%E5%B1%95/">https://lixins319070033.github.io/2020/12/13/JavaScript%E7%9F%A5%E8%AF%86%E7%82%B9%E6%89%A9%E5%B1%95/</a>
             <p>发表日期：<a href="https://lixins319070033.github.io/2020/12/13/JavaScript%E7%9F%A5%E8%AF%86%E7%82%B9%E6%89%A9%E5%B1%95/">December 13th 2020, 9:26:12 pm</a>
-            <p>更新日期：<a href="https://lixins319070033.github.io/2020/12/13/JavaScript%E7%9F%A5%E8%AF%86%E7%82%B9%E6%89%A9%E5%B1%95/">March 10th 2021, 10:43:22 pm</a>
+            <p>更新日期：<a href="https://lixins319070033.github.io/2020/12/13/JavaScript%E7%9F%A5%E8%AF%86%E7%82%B9%E6%89%A9%E5%B1%95/">April 11th 2022, 8:57:37 pm</a>
             <p>版权声明：本文采用<a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
@@ -1829,83 +1829,9 @@ top:50vh;
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 72
+        Total : 76
         </div>
         <!-- search  -->
         
@@ -1915,6 +1841,35 @@ top:50vh;
     
     
     
+    
+    <div class="archive-year"> 2022 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/16</span><a class="archive-post-title" href= "/2022/01/16/Ajax/" >Ajax</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/16</span><a class="archive-post-title" href= "/2022/01/16/Express%E6%A1%86%E6%9E%B6/" >Express框架</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/16</span><a class="archive-post-title" href= "/2022/01/16/node-js/" >node.js</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/16</span><a class="archive-post-title" href= "/2022/01/16/%E5%88%9B%E5%BB%BAUmiJS%E9%A1%B9%E7%9B%AE%E6%97%B6%E6%8A%A5%E9%94%99-%E6%96%87%E4%BB%B6%E5%90%8D%E3%80%81%E7%9B%AE%E5%BD%95%E5%90%8D%E6%88%96%E5%8D%B7%E6%A0%87%E8%AF%AD%E6%B3%95%E4%B8%8D%E6%AD%A3%E7%A1%AE/" >创建UmiJS项目时报错--文件名、目录名或卷标语法不正确</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
     
     <div class="archive-year"> 2021 </div>
     <ul class="year-list">
@@ -1926,22 +1881,22 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/21</span><a class="archive-post-title" href= "/2021/11/21/%E6%95%B0%E6%8D%AE%E5%BA%93-mysql%E6%9F%A5%E8%AF%A2%E7%BB%83%E4%B9%A0/" >数据库-mysql查询练习</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
             <span class="archive-post-date">11/21</span><a class="archive-post-title" href= "/2021/11/21/%E6%95%B0%E6%8D%AE%E5%BA%93-MySQL%E7%9A%84%E4%BA%8B%E5%8A%A1/" >数据库-MySQL的事务</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/14</span><a class="archive-post-title" href= "/2021/11/14/%E6%95%B0%E6%8D%AE%E5%BA%93-%E4%BD%BF%E7%94%A8%E7%BB%88%E7%AB%AF%E6%93%8D%E4%BD%9C%E6%95%B0%E6%8D%AE%E5%BA%93/" >数据库-使用终端操作数据库</a>
+            <span class="archive-post-date">11/21</span><a class="archive-post-title" href= "/2021/11/21/%E6%95%B0%E6%8D%AE%E5%BA%93-mysql%E6%9F%A5%E8%AF%A2%E7%BB%83%E4%B9%A0/" >数据库-mysql查询练习</a>
         </li>
     
     
         <li class="archive-post-item">
             <span class="archive-post-date">11/14</span><a class="archive-post-title" href= "/2021/11/14/%E6%95%B0%E6%8D%AE%E5%BA%93-%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%89%E5%A4%A7%E8%AE%BE%E8%AE%A1%E8%8C%83%E5%BC%8F/" >数据库-数据库三大设计范式</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/14</span><a class="archive-post-title" href= "/2021/11/14/%E6%95%B0%E6%8D%AE%E5%BA%93-%E4%BD%BF%E7%94%A8%E7%BB%88%E7%AB%AF%E6%93%8D%E4%BD%9C%E6%95%B0%E6%8D%AE%E5%BA%93/" >数据库-使用终端操作数据库</a>
         </li>
     
     
@@ -1956,17 +1911,7 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">10/24</span><a class="archive-post-title" href= "/2021/10/24/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E5%9B%BE%EF%BC%88Graph%EF%BC%89-JS/" >数据结构与算法-图（Graph）-JS</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">10/24</span><a class="archive-post-title" href= "/2021/10/24/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98%E6%80%BB%E7%BB%93/" >前端面试题总结</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">10/24</span><a class="archive-post-title" href= "/2021/10/24/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E9%9B%86%E5%90%88%EF%BC%88Set%EF%BC%89-JS/" >数据结构与算法--集合（Set）--JS</a>
+            <span class="archive-post-date">10/24</span><a class="archive-post-title" href= "/2021/10/24/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95--%E9%98%9F%E5%88%97%EF%BC%88Queue%EF%BC%89-JS/" >数据结构与算法--队列（Queue）--JS</a>
         </li>
     
     
@@ -1976,7 +1921,7 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">10/24</span><a class="archive-post-title" href= "/2021/10/24/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95--%E9%98%9F%E5%88%97%EF%BC%88Queue%EF%BC%89-JS/" >数据结构与算法--队列（Queue）--JS</a>
+            <span class="archive-post-date">10/24</span><a class="archive-post-title" href= "/2021/10/24/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E5%9B%BE%EF%BC%88Graph%EF%BC%89-JS/" >数据结构与算法-图（Graph）-JS</a>
         </li>
     
     
@@ -1986,7 +1931,17 @@ top:50vh;
     
     
         <li class="archive-post-item">
+            <span class="archive-post-date">10/24</span><a class="archive-post-title" href= "/2021/10/24/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98%E6%80%BB%E7%BB%93/" >前端面试题总结</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
             <span class="archive-post-date">10/24</span><a class="archive-post-title" href= "/2021/10/24/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E6%A0%91%EF%BC%88Tree%EF%BC%89-JS/" >数据结构与算法-树（Tree）-JS</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/24</span><a class="archive-post-title" href= "/2021/10/24/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E9%9B%86%E5%90%88%EF%BC%88Set%EF%BC%89-JS/" >数据结构与算法--集合（Set）--JS</a>
         </li>
     
     
@@ -2001,12 +1956,12 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">06/08</span><a class="archive-post-title" href= "/2021/06/08/%E4%BA%8C%E4%B8%89%E9%9D%A2-%E6%B8%B2%E6%9F%93%E6%9C%BA%E5%88%B6%E7%B1%BB/" >二三面_渲染机制类</a>
+            <span class="archive-post-date">06/08</span><a class="archive-post-title" href= "/2021/06/08/%E4%B8%89%E5%9B%9B%E9%9D%A2-%E4%B8%9A%E5%8A%A1%E8%83%BD%E5%8A%9B%E5%9B%A2%E9%98%9F%E5%8D%8F%E4%BD%9C%E8%83%BD%E5%8A%9B%E4%B8%8E%E5%B8%A6%E4%BA%BA%E8%83%BD%E5%8A%9B/" >三四面_业务能力团队协作能力与带人能力</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">06/08</span><a class="archive-post-title" href= "/2021/06/08/%E7%BB%88%E9%9D%A2%EF%BC%88HR%E9%9D%A2%EF%BC%89-%E8%81%8C%E4%B8%9A%E7%AB%9E%E4%BA%89%E5%8A%9B%E5%92%8C%E8%81%8C%E4%B8%9A%E8%A7%84%E5%88%92/" >终面（HR面）_职业竞争力和职业规划</a>
+            <span class="archive-post-date">06/08</span><a class="archive-post-title" href= "/2021/06/08/%E4%BA%8C%E4%B8%89%E9%9D%A2-%E6%B8%B2%E6%9F%93%E6%9C%BA%E5%88%B6%E7%B1%BB/" >二三面_渲染机制类</a>
         </li>
     
     
@@ -2016,12 +1971,17 @@ top:50vh;
     
     
         <li class="archive-post-item">
+            <span class="archive-post-date">06/08</span><a class="archive-post-title" href= "/2021/06/08/%E4%BA%8C%E4%B8%89%E9%9D%A2-%E9%94%99%E8%AF%AF%E7%9B%91%E6%8E%A7%E7%B1%BB/" >二三面_错误监控类</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
             <span class="archive-post-date">06/08</span><a class="archive-post-title" href= "/2021/06/08/%E4%BA%8C%E4%B8%89%E9%9D%A2-%E9%A1%B5%E9%9D%A2%E6%80%A7%E8%83%BD/" >二三面_页面性能</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">06/08</span><a class="archive-post-title" href= "/2021/06/08/%E4%BA%8C%E4%B8%89%E9%9D%A2-%E9%94%99%E8%AF%AF%E7%9B%91%E6%8E%A7%E7%B1%BB/" >二三面_错误监控类</a>
+            <span class="archive-post-date">06/08</span><a class="archive-post-title" href= "/2021/06/08/%E7%BB%88%E9%9D%A2%EF%BC%88HR%E9%9D%A2%EF%BC%89-%E8%81%8C%E4%B8%9A%E7%AB%9E%E4%BA%89%E5%8A%9B%E5%92%8C%E8%81%8C%E4%B8%9A%E8%A7%84%E5%88%92/" >终面（HR面）_职业竞争力和职业规划</a>
         </li>
     
     
@@ -2031,12 +1991,27 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">06/08</span><a class="archive-post-title" href= "/2021/06/08/%E4%B8%89%E5%9B%9B%E9%9D%A2-%E4%B8%9A%E5%8A%A1%E8%83%BD%E5%8A%9B%E5%9B%A2%E9%98%9F%E5%8D%8F%E4%BD%9C%E8%83%BD%E5%8A%9B%E4%B8%8E%E5%B8%A6%E4%BA%BA%E8%83%BD%E5%8A%9B/" >三四面_业务能力团队协作能力与带人能力</a>
+            <span class="archive-post-date">06/07</span><a class="archive-post-title" href= "/2021/06/07/%E7%AE%97%E6%B3%95%E9%A2%98%E6%80%BB%E7%BB%93/" >算法题总结</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">06/07</span><a class="archive-post-title" href= "/2021/06/07/%E7%AE%97%E6%B3%95%E9%A2%98%E6%80%BB%E7%BB%93/" >算法题总结</a>
+            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/%E4%B8%80%E4%BA%8C%E9%9D%A2-%E5%8E%9F%E5%9E%8B%E9%93%BE/" >一二面_原型链</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/%E4%B8%80%E4%BA%8C%E9%9D%A2-%E5%AE%89%E5%85%A8%E7%B1%BB/" >一二面_安全类</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/%E4%B8%80%E4%BA%8C%E9%9D%A2-%E7%AE%97%E6%B3%95%E7%B1%BB/" >一二面_算法类</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/%E4%B8%80%E4%BA%8C%E9%9D%A2-%E9%80%9A%E8%AE%AF%E7%B1%BB/" >一二面_通讯类</a>
         </li>
     
     
@@ -2051,32 +2026,7 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/%E4%B8%80%E4%BA%8C%E9%9D%A2-%E7%AE%97%E6%B3%95%E7%B1%BB/" >一二面_算法类</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/%E4%B8%80%E4%BA%8C%E9%9D%A2-%E5%AE%89%E5%85%A8%E7%B1%BB/" >一二面_安全类</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/%E4%B8%80%E4%BA%8C%E9%9D%A2-%E5%8E%9F%E5%9E%8B%E9%93%BE/" >一二面_原型链</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/%E4%B8%80%E4%BA%8C%E9%9D%A2-%E9%80%9A%E8%AE%AF%E7%B1%BB/" >一二面_通讯类</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/%E4%B8%80%E4%BA%8C%E9%9D%A2-%E9%A1%B5%E9%9D%A2%E5%B8%83%E5%B1%80/" >一二面_页面布局</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/%E4%B8%80%E4%BA%8C%E9%9D%A2-HTTP%E5%8D%8F%E8%AE%AE%E7%B1%BB/" >一二面_HTTP协议类</a>
+            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/%E4%B8%80%E4%BA%8C%E9%9D%A2-CSS%E7%9B%92%E6%A8%A1%E5%9E%8B/" >一二面_CSS盒模型</a>
         </li>
     
     
@@ -2086,12 +2036,17 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/%E4%B8%80%E4%BA%8C%E9%9D%A2-CSS%E7%9B%92%E6%A8%A1%E5%9E%8B/" >一二面_CSS盒模型</a>
+            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/%E4%B8%80%E4%BA%8C%E9%9D%A2-HTTP%E5%8D%8F%E8%AE%AE%E7%B1%BB/" >一二面_HTTP协议类</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">02/20</span><a class="archive-post-title" href= "/2021/02/20/%E4%BD%BF%E7%94%A8styled-components%E6%8A%A5%E9%94%99-Attempted-import-error-injectGlobal-is-not-exported-from-styled-components/" >使用styled-components报错 Attempted import error: injectGlobal is not exported from styled-components</a>
+            <span class="archive-post-date">06/05</span><a class="archive-post-title" href= "/2021/06/05/%E4%B8%80%E4%BA%8C%E9%9D%A2-%E9%A1%B5%E9%9D%A2%E5%B8%83%E5%B1%80/" >一二面_页面布局</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/20</span><a class="archive-post-title" href= "/2021/02/20/VUE%E9%A1%B9%E7%9B%AE%E6%8C%89%E9%9C%80%E5%BC%95%E5%85%A5ELEMENT-UI%EF%BC%8C%E4%BF%AE%E6%94%B9-BABELRC%E6%96%87%E4%BB%B6%E4%B9%8B%E5%90%8E%E6%8A%A5%E9%94%99/" >VUE项目按需引入ELEMENT-UI，修改.BABELRC文件之后报错</a>
         </li>
     
     
@@ -2106,12 +2061,12 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">02/20</span><a class="archive-post-title" href= "/2021/02/20/VUE%E9%A1%B9%E7%9B%AE%E6%8C%89%E9%9C%80%E5%BC%95%E5%85%A5ELEMENT-UI%EF%BC%8C%E4%BF%AE%E6%94%B9-BABELRC%E6%96%87%E4%BB%B6%E4%B9%8B%E5%90%8E%E6%8A%A5%E9%94%99/" >VUE项目按需引入ELEMENT-UI，修改.BABELRC文件之后报错</a>
+            <span class="archive-post-date">02/20</span><a class="archive-post-title" href= "/2021/02/20/yarn-command-not-found/" >yarn: command not found</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">02/20</span><a class="archive-post-title" href= "/2021/02/20/yarn-command-not-found/" >yarn: command not found</a>
+            <span class="archive-post-date">02/20</span><a class="archive-post-title" href= "/2021/02/20/%E4%BD%BF%E7%94%A8styled-components%E6%8A%A5%E9%94%99-Attempted-import-error-injectGlobal-is-not-exported-from-styled-components/" >使用styled-components报错 Attempted import error: injectGlobal is not exported from styled-components</a>
         </li>
     
     
@@ -2126,17 +2081,12 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">02/09</span><a class="archive-post-title" href= "/2021/02/09/%E4%BD%BF%E7%94%A8swiper%E6%8F%92%E4%BB%B6%E6%97%B6%EF%BC%8C%E6%8A%A5%E9%94%99did-you-register-the-component-correctly-For-recursive-components-make-sure-to-provide-the-name-option/" >使用swiper插件时，报错did you register the component correctly? For recursive components, make sure to provide the name option</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
             <span class="archive-post-date">02/09</span><a class="archive-post-title" href= "/2021/02/09/%E4%BD%BF%E7%94%A8swiper%E6%8F%92%E4%BB%B6%E6%97%B6%EF%BC%8C%E6%8A%A5%E9%94%99Can-t-resolve-swiper-dist-css-swiper-css-in/" >使用swiper插件时，报错Can't resolve 'swiper/dist/css/swiper.css' in</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">02/09</span><a class="archive-post-title" href= "/2021/02/09/Vue%E9%A1%B9%E7%9B%AE%E6%B5%8F%E8%A7%88%E5%99%A8%E5%86%85Console%E4%B8%AD%E6%98%BE%E7%A4%BA-HMR-Waiting-for-update-signal-from-WDS%E2%80%A6%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" >Vue项目浏览器内Console中显示[HMR] Waiting for update signal from WDS…的解决方案</a>
+            <span class="archive-post-date">02/09</span><a class="archive-post-title" href= "/2021/02/09/%E4%BD%BF%E7%94%A8swiper%E6%8F%92%E4%BB%B6%E6%97%B6%EF%BC%8C%E6%8A%A5%E9%94%99did-you-register-the-component-correctly-For-recursive-components-make-sure-to-provide-the-name-option/" >使用swiper插件时，报错did you register the component correctly? For recursive components, make sure to provide the name option</a>
         </li>
     
     
@@ -2146,12 +2096,7 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">02/05</span><a class="archive-post-title" href= "/2021/02/05/%E8%BF%90%E8%A1%8Cvue%E9%A1%B9%E7%9B%AE%E6%97%B6%E6%8A%A5%E9%94%99The-template-root-requires-exactly-one-element/" >运行vue项目时报错The template root requires exactly one element</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">02/05</span><a class="archive-post-title" href= "/2021/02/05/vue%E9%A1%B9%E7%9B%AE%E4%B8%AD%E9%83%A8%E5%88%86%E5%8A%9F%E8%83%BD%E5%9C%A8vscode%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/" >vue项目中部分功能在vscode中的使用方法</a>
+            <span class="archive-post-date">02/09</span><a class="archive-post-title" href= "/2021/02/09/Vue%E9%A1%B9%E7%9B%AE%E6%B5%8F%E8%A7%88%E5%99%A8%E5%86%85Console%E4%B8%AD%E6%98%BE%E7%A4%BA-HMR-Waiting-for-update-signal-from-WDS%E2%80%A6%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" >Vue项目浏览器内Console中显示[HMR] Waiting for update signal from WDS…的解决方案</a>
         </li>
     
     
@@ -2161,17 +2106,27 @@ top:50vh;
     
     
         <li class="archive-post-item">
+            <span class="archive-post-date">02/05</span><a class="archive-post-title" href= "/2021/02/05/vue%E9%A1%B9%E7%9B%AE%E4%B8%AD%E9%83%A8%E5%88%86%E5%8A%9F%E8%83%BD%E5%9C%A8vscode%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/" >vue项目中部分功能在vscode中的使用方法</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/05</span><a class="archive-post-title" href= "/2021/02/05/%E8%BF%90%E8%A1%8Cvue%E9%A1%B9%E7%9B%AE%E6%97%B6%E6%8A%A5%E9%94%99The-template-root-requires-exactly-one-element/" >运行vue项目时报错The template root requires exactly one element</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
             <span class="archive-post-date">02/05</span><a class="archive-post-title" href= "/2021/02/05/vscode%E7%9A%84%E4%BB%A3%E7%A0%81%E4%B8%8A%E4%BC%A0%E5%88%B0%E6%85%95%E8%AF%BE%E7%BD%91%E4%BB%93%E5%BA%93%E6%97%B6%E4%B8%8A%E4%BC%A0%E4%B8%8D%E6%88%90%E5%8A%9F-%E6%85%95%E8%AF%BE%E7%BD%91%E9%AB%98%E4%BB%BF%E5%B0%8F%E7%B1%B3%E5%95%86%E5%9F%8E%E9%A1%B9%E7%9B%AE/" >vscode的代码上传到慕课网仓库时上传不成功--慕课网高仿小米商城项目</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">02/04</span><a class="archive-post-title" href= "/2021/02/04/vscode%E8%BD%AF%E4%BB%B6%E4%B8%AD%E7%9A%84html%E6%96%87%E4%BB%B6%E7%9A%84%E5%B8%B8%E7%94%A8%E7%9A%84%E5%BF%AB%E6%8D%B7%E6%96%B9%E5%BC%8F/" >vscode软件中的html文件的常用的快捷方式</a>
+            <span class="archive-post-date">02/04</span><a class="archive-post-title" href= "/2021/02/04/vscode%E3%80%81sublime%E6%80%8E%E4%B9%88%E5%9C%A8%E7%A9%BA%E7%99%BD%E8%84%9A%E6%9C%AC%E4%B8%AD%E5%BF%AB%E9%80%9F%E7%94%9F%E6%88%90html5%E6%A0%87%E5%87%86%E6%A8%A1%E6%9D%BF%E6%A0%BC%E5%BC%8F/" >vscode、sublime怎么在空白脚本中快速生成html5标准模板格式</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">02/04</span><a class="archive-post-title" href= "/2021/02/04/vscode%E3%80%81sublime%E6%80%8E%E4%B9%88%E5%9C%A8%E7%A9%BA%E7%99%BD%E8%84%9A%E6%9C%AC%E4%B8%AD%E5%BF%AB%E9%80%9F%E7%94%9F%E6%88%90html5%E6%A0%87%E5%87%86%E6%A8%A1%E6%9D%BF%E6%A0%BC%E5%BC%8F/" >vscode、sublime怎么在空白脚本中快速生成html5标准模板格式</a>
+            <span class="archive-post-date">02/04</span><a class="archive-post-title" href= "/2021/02/04/vscode%E8%BD%AF%E4%BB%B6%E4%B8%AD%E7%9A%84html%E6%96%87%E4%BB%B6%E7%9A%84%E5%B8%B8%E7%94%A8%E7%9A%84%E5%BF%AB%E6%8D%B7%E6%96%B9%E5%BC%8F/" >vscode软件中的html文件的常用的快捷方式</a>
         </li>
     
     
@@ -2191,12 +2146,12 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">01/04</span><a class="archive-post-title" href= "/2021/01/04/js%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%8E%E6%95%B0%E5%AD%97%E7%9B%B8%E5%8A%A0%E5%87%8F%E4%B9%98%E9%99%A4/" >js字符串与数字相加减</a>
+            <span class="archive-post-date">01/04</span><a class="archive-post-title" href= "/2021/01/04/CSS%E4%B8%AD%E6%96%87%E5%AD%97%E5%9C%A8%E6%B0%B4%E5%B9%B3%E5%92%8C%E7%AB%96%E7%9B%B4%E6%96%B9%E5%90%91%E4%B8%8A%E9%87%8D%E5%8F%A0/" >CSS中文字在水平和竖直方向上重叠</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">01/04</span><a class="archive-post-title" href= "/2021/01/04/CSS%E4%B8%AD%E6%96%87%E5%AD%97%E5%9C%A8%E6%B0%B4%E5%B9%B3%E5%92%8C%E7%AB%96%E7%9B%B4%E6%96%B9%E5%90%91%E4%B8%8A%E9%87%8D%E5%8F%A0/" >CSS中文字在水平和竖直方向上重叠</a>
+            <span class="archive-post-date">01/04</span><a class="archive-post-title" href= "/2021/01/04/js%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%8E%E6%95%B0%E5%AD%97%E7%9B%B8%E5%8A%A0%E5%87%8F%E4%B9%98%E9%99%A4/" >js字符串与数字相加减</a>
         </li>
     
     
@@ -2230,35 +2185,37 @@ top:50vh;
     
     
         <li class="archive-post-item">
+            <span class="archive-post-date">12/15</span><a class="archive-post-title" href= "/2020/12/15/JS%E4%B8%AD%E7%9A%84%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%B5%85%E6%B5%85%E4%BA%86%E8%A7%A3/" >JS中的面向对象浅浅了解</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/13</span><a class="archive-post-title" href= "/2020/12/13/JavaScript%E7%9F%A5%E8%AF%86%E7%82%B9%E6%89%A9%E5%B1%95/" >JavaScript知识点扩展</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/06</span><a class="archive-post-title" href= "/2020/12/06/ES6%E6%80%BB%E7%BB%93%E6%95%B4%E7%90%86/" >ES6总结整理</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/08</span><a class="archive-post-title" href= "/2020/11/08/Sass%E6%80%BB%E7%BB%93/" >Sass总结</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/28</span><a class="archive-post-title" href= "/2020/09/28/hexo%E5%8D%9A%E5%AE%A2%E4%B8%AD%E6%8F%92%E5%85%A5%E7%9A%84%E5%9B%BE%E7%89%87%E4%B8%8D%E6%98%BE%E7%A4%BA/" >hexo博客中插入的图片不显示</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
             <span class="archive-post-date">09/27</span><a class="archive-post-title" href= "/2020/09/27/JavaScript%E5%8E%9F%E5%9E%8B%E9%93%BE/" >JavaScript原型链</a>
         </li>
     
     
-    
-    
-    
-        </ul>
-    
-    <div class="archive-year"> Invalid date </div>
-    <ul class="year-list">
-    
-    
         <li class="archive-post-item">
-            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/09/27/hexo%E4%B8%BB%E9%A2%98%E4%BF%AE%E6%94%B9/" >hexo主题修改</a>
-        </li>
-    
-    
-    
-    
-    
-        </ul>
-    
-    <div class="archive-year"> 2020 </div>
-    <ul class="year-list">
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">12/15</span><a class="archive-post-title" href= "/2020/12/15/JS%E4%B8%AD%E7%9A%84%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%B5%85%E6%B5%85%E4%BA%86%E8%A7%A3/" >JS中的面向对象浅浅了解</a>
+            <span class="archive-post-date">09/27</span><a class="archive-post-title" href= "/2020/09/27/HEXO%E5%8D%9A%E5%AE%A2%E7%9A%84%E6%90%AD%E5%BB%BA%E5%8F%8A%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%EF%BC%88%E4%B8%80%EF%BC%89/" >HEXO博客的搭建及环境配置（一）</a>
         </li>
     
     
@@ -2286,37 +2243,35 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">12/13</span><a class="archive-post-title" href= "/2020/12/13/JavaScript%E7%9F%A5%E8%AF%86%E7%82%B9%E6%89%A9%E5%B1%95/" >JavaScript知识点扩展</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">12/06</span><a class="archive-post-title" href= "/2020/12/06/ES6%E6%80%BB%E7%BB%93%E6%95%B4%E7%90%86/" >ES6总结整理</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/08</span><a class="archive-post-title" href= "/2020/11/08/Sass%E6%80%BB%E7%BB%93/" >Sass总结</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">09/28</span><a class="archive-post-title" href= "/2020/09/28/hexo%E5%8D%9A%E5%AE%A2%E4%B8%AD%E6%8F%92%E5%85%A5%E7%9A%84%E5%9B%BE%E7%89%87%E4%B8%8D%E6%98%BE%E7%A4%BA/" >hexo博客中插入的图片不显示</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">09/27</span><a class="archive-post-title" href= "/2020/09/27/hexo%E7%82%B9%E5%87%BB%E5%8D%9A%E5%AE%A2%E5%90%8E%E6%A0%87%E9%A2%98%E4%B8%8D%E6%98%BE%E7%A4%BA/" >hexo点击博客后标题不显示</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
             <span class="archive-post-date">09/27</span><a class="archive-post-title" href= "/2020/09/27/Typora%E3%80%81Makedown/" >Typora、Makedown</a>
         </li>
     
     
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> Invalid date </div>
+    <ul class="year-list">
+    
+    
         <li class="archive-post-item">
-            <span class="archive-post-date">09/27</span><a class="archive-post-title" href= "/2020/09/27/HEXO%E5%8D%9A%E5%AE%A2%E7%9A%84%E6%90%AD%E5%BB%BA%E5%8F%8A%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%EF%BC%88%E4%B8%80%EF%BC%89/" >HEXO博客的搭建及环境配置（一）</a>
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2020/09/27/hexo%E4%B8%BB%E9%A2%98%E4%BF%AE%E6%94%B9/" >hexo主题修改</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2020 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/27</span><a class="archive-post-title" href= "/2020/09/27/hexo%E7%82%B9%E5%87%BB%E5%8D%9A%E5%AE%A2%E5%90%8E%E6%A0%87%E9%A2%98%E4%B8%8D%E6%98%BE%E7%A4%BA/" >hexo点击博客后标题不显示</a>
         </li>
     
     
