@@ -367,6 +367,34 @@ height:50vh;
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2020/09/28/hexo%E5%8D%9A%E5%AE%A2%E4%B8%AD%E6%8F%92%E5%85%A5%E7%9A%84%E5%9B%BE%E7%89%87%E4%B8%8D%E6%98%BE%E7%A4%BA/" >
+            
+                <span>hexo博客中插入的图片不显示</span>
+        </a>
+        <div class="abstract-content">
+            图片不显示是个头疼的问题，试了好久才成功，我的解决过程是：
+1、在cmd终端调到你自己的hexo的文件夹路径下，安装一个图片路径转换的插件
+npm install https://github.com/CodeFalling/hexo-asset-image --save
+但是这个插件的内容需要修改，不然可能会出问题
+2、打开/node_modules/hexo-asset-image/index.js，将内容更换为下面的代码
+123456789101112131415161718192021222324252627282930313233343536373839404142434445...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/09/28</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2020/09/27/hexo%E7%82%B9%E5%87%BB%E5%8D%9A%E5%AE%A2%E5%90%8E%E6%A0%87%E9%A2%98%E4%B8%8D%E6%98%BE%E7%A4%BA/" >
             
                 <span>hexo点击博客后标题不显示</span>
@@ -1793,9 +1821,26 @@ hexo -v
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 77
+        Total : 78
         </div>
         <!-- search  -->
         
@@ -2056,6 +2101,11 @@ hexo -v
     
         <li class="archive-post-item">
             <span class="archive-post-date">12/28</span><a class="archive-post-title" href= "/2022/12/28/%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96/" >代码优化</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/28</span><a class="archive-post-title" href= "/2022/12/28/ts/" >ts</a>
         </li>
     
     
